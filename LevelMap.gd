@@ -14,7 +14,6 @@ func _ready():
 func generate_level():
 	var start = Location.instance()
 	add_child(start)
-	print(screen_height)
 	start.position.x = 120
 	start.position.y = screen_height / 2
 	# Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -1,7 +1,8 @@
 extends Node2D
 
-var counter = 1000
+var turn_counter = 1
 var card_id_counter = 0
+const MAX_TURNS = 10
 
 var Card = preload("res://Card.tscn")
 var Stack = preload("res://Stack.tscn")
@@ -14,9 +15,6 @@ onready var Count = $Background/Count
 func _ready():
 	randomize()
 	initial_state()
-	
-func _on_HitButton_pressed():
-	$Background.add_child(deck.draw_card())
 
 func assign_card_id():
 	card_id_counter += 1
@@ -34,3 +32,21 @@ func initial_state():
 			card.load_texture(my_filename)
 			deck.add_card(card)
 	deck.shuffle()
+
+func update_turn():
+	turn_counter += 1
+	$Background/TurnCounter.set_text(str(turn_counter))
+
+func check_turn_limit():
+	if turn_counter >= MAX_TURNS:
+		exit_battle()
+
+func exit_battle():
+	get_tree().change_scene("res://LevelMap.tscn")
+
+func _on_TurnButton_pressed():
+	update_turn()
+	$Background.add_child(deck.draw_card())
+	
+func _process(delta):
+	check_turn_limit()
