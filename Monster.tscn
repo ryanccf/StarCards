@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://monster1.png" type="Texture" id=1]
+
+[node name="Monster" type="Node2D"]
+position = Vector2( 5.36047, 21.7219 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0.36821, 0.321342 )
+scale = Vector2( 0.131966, 0.24499 )
+texture = ExtResource( 1 )

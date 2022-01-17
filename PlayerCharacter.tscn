@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Terra.png" type="Texture" id=1]
+
+[node name="PlayerCharacter" type="Node2D"]
+position = Vector2( 34.1143, 22.9653 )
+scale = Vector2( 1, 1.2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0.491764, 0.517677 )
+scale = Vector2( 0.171412, 0.24499 )
+texture = ExtResource( 1 )
