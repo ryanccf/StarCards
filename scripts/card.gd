@@ -1,8 +1,9 @@
 extends Node2D
 
-var destination
-
 var cardID = ""
+var front_image
+var back_image
+var flipped = true
 
 func set_id(value):
 	self.cardID = value
@@ -10,33 +11,20 @@ func set_id(value):
 func get_id():
 	return self.cardID
 
-func load_texture(texture):
-	$Icon.texture = load(texture)
+func set_front_image(texture):
+	front_image = texture
+	update_texture()
+	
+func set_back_image(texture):
+	back_image = texture
+	update_texture()
+
+func update_texture():
+	if flipped == true:
+		$Icon.texture = load(front_image)
+	else:
+		$Icon.texture = load(back_image)
 
 func _physics_process(delta):
 	pass
-	#global_position = lerp(global_position, destination, 10 * delta)
 
-
-
-
-"""var selected = false
-	if selected:
-		global_position = lerp(global_position, get_global_mouse_position(), 25 * delta)"""
-
-""" func _input(event):
-	if event is InputEventMouseButton:
-		if event.button_index == BUTTON_LEFT and not event.pressed:
-			selected = false
-			var shortest_dist = 75
-			for child in rest_nodes:
-				var distance = global_position.distance_to(child.global_position)
-				if distance < shortest_dist:
-					child.select()
-					rest_point = child.global_position
-					shortest_dist = distance
-"""
-
-"""func _on_Area2D_input_event(viewport, event, shape_idx):
-	if Input.is_action_just_pressed("click"):
-		selected = true"""
