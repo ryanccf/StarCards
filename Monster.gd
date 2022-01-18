@@ -19,7 +19,6 @@ func check_death():
 		print("The Death of a Player Character. ;'-(")
 		queue_free()
 
-# This guy is temporary.
 func _on_Poison_timeout():
 	currentHP -= 1
 	update_health_bar_size()
