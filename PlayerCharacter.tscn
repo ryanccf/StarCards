@@ -29,6 +29,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="SpeedBar" type="ColorRect" parent="."]
+margin_left = -4.23764
+margin_top = -6.09736
+margin_right = 5.76236
+margin_bottom = -5.39736
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Poison" type="Timer" parent="."]
 autostart = true
 

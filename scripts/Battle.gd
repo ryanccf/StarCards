@@ -1,10 +1,11 @@
 extends Node2D
 
-const MAX_TURNS = 10
+const MAX_TURNS = 100
 
 var turn_counter = 1
 var card_id_counter = 0
-var CardBack =  "res://card-images/pokemoncard.png"
+var CardBack =  load("res://card-images/pokemoncard.png")
+var playerOneGraphic = load("res://psylocke_standing.png")
 
 var Card = preload("res://Card.tscn")
 var Stack = preload("res://Stack.tscn")
@@ -36,11 +37,15 @@ func initialize_monsters():
 func initialize_players():
 	players.append(PlayerCharacter.instance())
 	players.append(PlayerCharacter.instance())
+	players[0].increase_speed(25)
+	players[0].update_graphic(playerOneGraphic)
+	players[0].scale_sprite(Vector2(0.1, 0.15))
 	players[0].position.x = 35
 	players[0].position.y = 18
 	players[1].position.x = 34
 	players[1].position.y = 22
 	for player in players:
+		player.connect("turn_complete", self, "_on_PlayerCharacter_turn_over")
 		$Background.add_child(player)
 
 func assign_card_id():
@@ -62,6 +67,9 @@ func initial_state():
 			$Deck.add_card(card)
 	$Deck.shuffle()
 
+func draw_card():
+	$Hand.add_card($Deck.draw_card())
+
 func update_turn():
 	turn_counter += 1
 	$Background/TurnCounter.set_text(str(turn_counter))
@@ -75,8 +83,10 @@ func exit_battle():
 
 func _on_TurnButton_pressed():
 	update_turn()
-	$Hand.add_card($Deck.draw_card())
-	print($Hand.position)
+	draw_card()
+
+func _on_PlayerCharacter_turn_over():
+	draw_card()
 
 func _process(delta):
 	check_turn_limit()
