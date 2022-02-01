@@ -1,19 +1,23 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scripts/Battle.gd" type="Script" id=1]
 [ext_resource path="res://Stack.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Goldie Boxing.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://button3.png" type="Texture" id=3]
 [ext_resource path="res://the artisan.otf" type="DynamicFontData" id=4]
-[ext_resource path="res://icon.png" type="Texture" id=5]
+[ext_resource path="res://button2.png" type="Texture" id=5]
+[ext_resource path="res://button1.png" type="Texture" id=6]
+[ext_resource path="res://Bungee-Regular.ttf" type="DynamicFontData" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 size = 300
 font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=2]
-size = 60
+size = 40
 outline_color = Color( 0.0509804, 0.0470588, 0.0470588, 1 )
-font_data = ExtResource( 3 )
+font_data = ExtResource( 7 )
+
+[sub_resource type="Theme" id=3]
 
 [node name="Battle" type="Node2D"]
 script = ExtResource( 1 )
@@ -23,20 +27,20 @@ margin_top = -8.0
 margin_right = 40.0
 margin_bottom = 32.0
 rect_scale = Vector2( 25.84, 15.28 )
-color = Color( 0.0980392, 0.286275, 0.192157, 1 )
+color = Color( 0.376471, 0.360784, 0.360784, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Title" type="Label" parent="Background"]
-margin_left = 6.32013
-margin_top = 4.34753
-margin_right = 2740.32
-margin_bottom = 602.348
+margin_left = 12.0
+margin_top = 2.0
+margin_right = 1595.0
+margin_bottom = 2781.0
 rect_scale = Vector2( 0.01, 0.01 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 1 )
-text = "Battle Scene"
+text = "Fight Scene!"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -47,20 +51,19 @@ position = Vector2( 21.638, 19.5473 )
 scale = Vector2( 0.0776838, 0.0776838 )
 
 [node name="Divider2" type="ColorRect" parent="Background"]
-margin_left = -0.0258714
-margin_top = 35.926
-margin_right = 39.9741
-margin_bottom = 39.926
-color = Color( 0.937255, 0.937255, 0.937255, 1 )
+margin_top = 36.0
+margin_right = 40.0
+margin_bottom = 40.0
+color = Color( 0.627451, 0.627451, 0.627451, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="TurnLabel" type="Label" parent="Background"]
-margin_left = 0.576108
-margin_top = 36.9279
-margin_right = 353.576
-margin_bottom = 90.9279
+margin_left = 0.928792
+margin_top = 36.6492
+margin_right = 353.929
+margin_bottom = 90.6492
 rect_scale = Vector2( 0.05, 0.05 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 2 )
@@ -70,10 +73,10 @@ __meta__ = {
 }
 
 [node name="TurnCounter" type="Label" parent="Background"]
-margin_left = 8.0
-margin_top = 37.0
-margin_right = 152.0
-margin_bottom = 91.0
+margin_left = 8.12694
+margin_top = 36.911
+margin_right = 152.127
+margin_bottom = 90.911
 rect_scale = Vector2( 0.05, 0.05 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 2 )
@@ -83,24 +86,28 @@ __meta__ = {
 }
 
 [node name="Label Hit" type="Label" parent="Background"]
-margin_left = 32.845
-margin_top = 36.738
-margin_right = 121.845
-margin_bottom = 90.738
+margin_left = 24.0325
+margin_top = 36.7801
+margin_right = 149.033
+margin_bottom = 97.7801
 rect_scale = Vector2( 0.05, 0.05 )
+theme = SubResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 2 )
-text = "Hit"
+text = "Draw"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="TurnButton" type="TextureButton" parent="."]
-margin_left = 974.165
-margin_top = 549.72
-margin_right = 1023.17
-margin_bottom = 598.72
+margin_left = 793.0
+margin_top = 524.0
+margin_right = 1093.0
+margin_bottom = 724.0
+rect_scale = Vector2( 0.75, 0.5 )
 texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 3 )
+texture_hover = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

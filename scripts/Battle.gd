@@ -74,9 +74,31 @@ func update_turn():
 	turn_counter += 1
 	$Background/TurnCounter.set_text(str(turn_counter))
 
-func check_turn_limit():
-	if turn_counter >= MAX_TURNS:
-		exit_battle()
+func check_battle_end():
+	if monsters.size() == 0:
+		get_tree().change_scene("res://Victory.tscn")
+	elif players.size() == 0:
+		get_tree().change_scene("res://Defeat.tscn")
+
+func update_battle_arrays():
+	for monster in monsters:
+		if !is_instance_valid(monster):
+			monsters.erase(monster)
+	for player in players:
+		if !is_instance_valid(player):
+			players.erase(player)
+
+func monsters_exist():
+	if monsters.size() <= 0:
+		return false
+	else:
+		return true
+
+func players_exist():
+	if players.size() <= 0:
+		return false
+	else:
+		return true
 
 func exit_battle():
 	get_tree().change_scene("res://LevelMap.tscn")
@@ -89,4 +111,5 @@ func _on_PlayerCharacter_turn_over():
 	draw_card()
 
 func _process(delta):
-	check_turn_limit()
+	update_battle_arrays()
+	check_battle_end()
