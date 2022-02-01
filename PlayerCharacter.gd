@@ -1,6 +1,6 @@
 extends Node2D
 
-var maxHP = 10 
+var maxHP = 10
 var currentHP = maxHP
 var maxSpeed = 10000
 var playerSpeed = 50
