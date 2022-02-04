@@ -76,10 +76,11 @@ margin_left = -1.37549
 margin_top = 36.7604
 margin_right = 1982.62
 margin_bottom = 905.76
+rect_rotation = 0.0164731
 theme = SubResource( 4 )
 custom_fonts/font = SubResource( 5 )
-text = "INTARGALACTIC
-STARNAGE"
+text = "SPACE STAR:
+GALACTIC UNIVERSE"
 align = 1
 valign = 1
 __meta__ = {
