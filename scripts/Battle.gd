@@ -16,8 +16,6 @@ var selected = false
 var players = []
 var monsters = []
 
-onready var Count = $Background/Count
-
 func _ready():
 	randomize()
 	initial_state()
@@ -27,10 +25,10 @@ func _ready():
 func initialize_monsters():
 	monsters.append(Monster.instance())
 	monsters.append(Monster.instance())
-	monsters[0].position.x = 4
-	monsters[0].position.y = 18
-	monsters[1].position.x = 5
-	monsters[1].position.y = 22
+	monsters[0].position.x = 200
+	monsters[0].position.y = 300
+	monsters[1].position.x = 200
+	monsters[1].position.y = 200
 	for monster in monsters:
 		$Background.add_child(monster)
 
@@ -39,11 +37,8 @@ func initialize_players():
 	players.append(PlayerCharacter.instance())
 	players[0].increase_speed(25)
 	players[0].update_graphic(playerOneGraphic)
-	players[0].scale_sprite(Vector2(0.1, 0.15))
-	players[0].position.x = 35
-	players[0].position.y = 18
-	players[1].position.x = 34
-	players[1].position.y = 22
+	players[0].position = Vector2(800, 300)
+	players[1].position = Vector2(800, 200)
 	for player in players:
 		player.connect("turn_complete", self, "_on_PlayerCharacter_turn_over")
 		$Background.add_child(player)
@@ -53,7 +48,7 @@ func assign_card_id():
 	return card_id_counter
 
 func initial_state():
-	$Hand.set_x_offset(105)
+	$Background/Hand.set_x_offset(105)
 	var suits = ["clubs", "diamonds", "hearts", "spades"]
 	var ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "ace", "jack", "king", "queen"]
 	for suit in suits:
@@ -64,11 +59,11 @@ func initial_state():
 			var my_filename = "res://card-images/" + card.get_id() + ".png"
 			card.set_front_image(my_filename)
 			card.set_back_image(CardBack)
-			$Deck.add_card(card)
-	$Deck.shuffle()
+			$Background/Deck.add_card(card)
+	$Background/Deck.shuffle()
 
 func draw_card():
-	$Hand.add_card($Deck.draw_card())
+	$Background/Hand.add_card($Background/Deck.draw_card())
 
 func update_turn():
 	turn_counter += 1

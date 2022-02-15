@@ -10,30 +10,28 @@
 font_data = ExtResource( 3 )
 
 [node name="PlayerCharacter" type="Node2D"]
-position = Vector2( 34.1143, 22.9653 )
-scale = Vector2( 1, 1.2 )
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0.491764, 0.517677 )
-scale = Vector2( 0.171412, 0.24499 )
 texture = ExtResource( 1 )
 
 [node name="HealthBar" type="ColorRect" parent="."]
-margin_left = -4.2649
-margin_top = -5.08638
-margin_right = 5.7351
-margin_bottom = -4.38638
+margin_left = -20.0
+margin_top = -74.427
+margin_right = -10.0
+margin_bottom = -73.727
+rect_scale = Vector2( 4, 10 )
 color = Color( 0.72549, 0.0823529, 0.0823529, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="SpeedBar" type="ColorRect" parent="."]
-margin_left = -4.23764
-margin_top = -6.09736
-margin_right = 5.76236
-margin_bottom = -5.39736
+margin_left = -20.0
+margin_top = -81.335
+margin_right = -10.0
+margin_bottom = -80.635
+rect_scale = Vector2( 4, 10 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -42,11 +40,11 @@ __meta__ = {
 autostart = true
 
 [node name="HP" type="Label" parent="."]
-margin_left = -3.99213
-margin_top = -4.67191
-margin_right = 136.008
-margin_bottom = 23.3281
-rect_scale = Vector2( 0.05, 0.05 )
+margin_left = -20.5074
+margin_top = -73.1288
+margin_right = 119.493
+margin_bottom = -45.1288
+rect_scale = Vector2( 0.5, 0.5 )
 theme = SubResource( 2 )
 custom_fonts/font = SubResource( 1 )
 text = "0/0"

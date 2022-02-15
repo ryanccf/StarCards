@@ -28,3 +28,8 @@ func update_texture():
 func _physics_process(delta):
 	pass
 
+func _on_Area2D_input_event(viewport, event, shape_idx):
+	print("Event Fired!")
+	if (event is InputEventMouseButton && event.pressed):
+		print("Clickaroo!!")
+		queue_free()

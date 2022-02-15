@@ -30,7 +30,7 @@ scale_curve = SubResource( 2 )
 [sub_resource type="Theme" id=4]
 
 [sub_resource type="DynamicFont" id=5]
-size = 80
+size = 60
 outline_size = 2
 outline_color = Color( 0.298039, 0.196078, 0.815686, 1 )
 font_data = ExtResource( 4 )
@@ -72,15 +72,15 @@ scale = Vector2( 1.42222, 1.42222 )
 texture = ExtResource( 2 )
 
 [node name="Title" type="Label" parent="ColorRect"]
-margin_left = -1.37549
-margin_top = 36.7604
-margin_right = 1982.62
-margin_bottom = 905.76
+margin_left = -121.0
+margin_top = 343.0
+margin_right = 1316.0
+margin_bottom = 775.0
 rect_rotation = 0.0164731
 theme = SubResource( 4 )
 custom_fonts/font = SubResource( 5 )
-text = "SPACE STAR:
-GALACTIC UNIVERSE"
+text = "Pirate Star:
+Deckcrafter Infinite"
 align = 1
 valign = 1
 __meta__ = {

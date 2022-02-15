@@ -1,16 +1,18 @@
-extends Node2D
+extends Control
 
 var cards = []
-var x_offset = 1
-var y_offset = 0
+var offset = Vector2(1, 1)
 var face_down = true
 
 func _draw():
 	pass
 	#draw_circle(Vector2.ZERO, 5, Color.blanchedalmond)
 
-func set_x_offset(x):
-	x_offset = x
+func set_x_offset(x_offset):
+	offset = Vector2(x_offset, offset.y)
+
+func last_card_position():
+	return cards.back().position
 
 func select():
 	for child in get_tree().get_nodes_in_group("zone"):
@@ -21,18 +23,16 @@ func deselect():
 	modulate = Color.white
 
 func add_card(card):
-	card.scale.x = 0.2#0.01
-	card.scale.y = 0.2#0.014
-	cards.push_front(card)
+	card.scale = Vector2(0.5, 0.5)
+	cards.append(card)
 	refresh_scene(card)
 
 func refresh_scene(card):
-	card.position.x = position.x + (x_offset * cards.size())
-	card.position.y = position.y
+	card.position = rect_position
 	add_child(card)
 
 func draw_card():
-	return cards.pop_front()
+	return cards.pop_front().duplicate()
 
 func card_count():
 	return cards.size()
