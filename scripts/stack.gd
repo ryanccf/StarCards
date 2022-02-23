@@ -1,5 +1,6 @@
 extends Control
 
+var stack_scale = Vector2(0.2, 0.2)
 var cards = []
 var offset = Vector2(1, 1)
 var face_down = true
@@ -23,7 +24,7 @@ func deselect():
 	modulate = Color.white
 
 func add_card(card):
-	card.scale = Vector2(0.5, 0.5)
+	card.scale = stack_scale
 	cards.append(card)
 	refresh_scene(card)
 
@@ -32,7 +33,10 @@ func refresh_scene(card):
 	add_child(card)
 
 func draw_card():
-	return cards.pop_front().duplicate()
+	if cards.size() > 0:
+		return cards.pop_back().duplicate()
+	else:
+		return null
 
 func card_count():
 	return cards.size()

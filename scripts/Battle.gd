@@ -64,6 +64,7 @@ func initial_state():
 
 func draw_card():
 	$Background/Hand.add_card($Background/Deck.draw_card())
+	print("Card Drawn!")
 
 func update_turn():
 	turn_counter += 1
