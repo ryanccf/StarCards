@@ -1,4 +1,4 @@
-extends Control
+extends Node2D
 
 var stack_scale = Vector2(0.2, 0.2)
 var cards = []
@@ -6,11 +6,11 @@ var offset = Vector2(1, 1)
 var face_down = true
 
 func _draw():
-	pass
-	#draw_circle(Vector2.ZERO, 5, Color.blanchedalmond)
+	draw_circle(Vector2.ZERO, 25, Color.blanchedalmond)
 
 func set_x_offset(x_offset):
-	offset = Vector2(x_offset, offset.y)
+	pass
+	#offset = Vector2(x_offset, offset.y)
 
 func last_card_position():
 	return cards.back().position
@@ -29,12 +29,15 @@ func add_card(card):
 	refresh_scene(card)
 
 func refresh_scene(card):
-	card.position = rect_position
+	card.position = position
 	add_child(card)
 
 func draw_card():
 	if cards.size() > 0:
-		return cards.pop_back().duplicate()
+		var card = cards.pop_back()
+		remove_child(card)
+		return card
+		#return cards.pop_back().duplicate()
 	else:
 		return null
 
