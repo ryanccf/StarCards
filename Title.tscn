@@ -78,8 +78,7 @@ margin_right = 1596.0
 margin_bottom = 935.0
 theme = SubResource( 4 )
 custom_fonts/font = SubResource( 5 )
-text = "SUPER CARDSTARS 2:
-GAME OF THE YEAR EDITION"
+text = " CaRdStaRs: DecKLoRd"
 align = 1
 valign = 1
 __meta__ = {

@@ -17,16 +17,18 @@ func set_image(front_texture, back_texture):
 	update_texture()
 
 func update_texture():
-	if flipped == true:
-		$Area2D/Icon.texture = load(front_image)
+	if flipped:
+		$Area2D/Icon.texture = front_image #load(front_image)
 	else:
-		$Area2D/Icon.texture = load(back_image)
+		$Area2D/Icon.texture = back_image #load(back_image)
 
 func _physics_process(delta):
 	pass
 
+func flip():
+	flipped = !flipped
+	update_texture()
+
 func _on_Area2D_input_event(viewport, event, shape_idx):
-	#print("Event Fired!")
 	if event is InputEventMouseButton and event.pressed:
 		print("Clicked!")
-		get_tree().set_input_as_handled()

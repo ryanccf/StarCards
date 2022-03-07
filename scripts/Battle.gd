@@ -4,7 +4,7 @@ const MAX_TURNS = 100
 
 var turn_counter = 1
 var card_id_counter = 0
-var CardBack =  load("res://card-images/pokemoncard.png")
+var CardBack =  load("res://card-images/card_back.png")
 var playerOneGraphic = load("res://psylocke_standing.png")
 
 var Card = preload("res://Card.tscn")
@@ -13,13 +13,13 @@ var PlayerCharacter = preload("res://PlayerCharacter.tscn")
 var Monster = preload("res://Monster.tscn")
 
 var selected = false 
-var players = []
+var player = PlayerCharacter.instance()
 var monsters = []
 
 func _ready():
 	randomize()
 	initialize_cards()
-	initialize_players()
+	initialize_player()
 	initialize_monsters()
 
 func initialize_monsters():
@@ -32,17 +32,13 @@ func initialize_monsters():
 	for monster in monsters:
 		$Background.add_child(monster)
 
-func initialize_players():
-	players.append(PlayerCharacter.instance())
-	players.append(PlayerCharacter.instance())
-	players[0].increase_speed(25)
-	players[0].update_graphic(playerOneGraphic)
-	players[0].position = Vector2(800, 300)
-	$Hand.position = Vector2(400, 20)
-	players[1].position = Vector2(800, 200)
-	for player in players:
-		player.connect("turn_complete", self, "_on_PlayerCharacter_turn_over")
-		$Background.add_child(player)
+func initialize_player():
+	player.increase_speed(25)
+	player.update_graphic(playerOneGraphic)
+	player.position = Vector2(800, 300)
+	$Hand.position = Vector2(200, 300)
+	player.connect("turn_complete", self, "_on_PlayerCharacter_turn_over")
+	$Background.add_child(player)
 
 func assign_card_id():
 	card_id_counter += 1
@@ -58,12 +54,16 @@ func initialize_cards():
 			var card_name = rank + "_of_" + suit
 			card.set_id(card_name)
 			var my_filename = "res://card-images/" + card.get_id() + ".png"
-			card.set_image(my_filename, CardBack)
+			var card_texture = load(my_filename)
+			card.set_image(card_texture, CardBack)
+			card.flip()
 			$Deck.add_card(card)
 	$Deck.shuffle()
 
 func draw_card():
-	$Hand.add_card($Deck.draw_card())
+	var card = $Deck.draw_card()
+	card.flip()
+	$Hand.add_card(card)
 	print("Card Drawn!")
 
 func update_turn():
@@ -73,16 +73,13 @@ func update_turn():
 func check_battle_end():
 	if monsters.size() == 0:
 		get_tree().change_scene("res://Victory.tscn")
-	elif players.size() == 0:
+	elif !players_exist():
 		get_tree().change_scene("res://Defeat.tscn")
 
 func update_battle_arrays():
 	for monster in monsters:
 		if !is_instance_valid(monster):
 			monsters.erase(monster)
-	for player in players:
-		if !is_instance_valid(player):
-			players.erase(player)
 
 func monsters_exist():
 	if monsters.size() <= 0:
@@ -91,7 +88,7 @@ func monsters_exist():
 		return true
 
 func players_exist():
-	if players.size() <= 0:
+	if player == null:
 		return false
 	else:
 		return true

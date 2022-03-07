@@ -9,8 +9,7 @@ func _draw():
 	draw_circle(Vector2.ZERO, 25, Color.blanchedalmond)
 
 func set_x_offset(x_offset):
-	pass
-	#offset = Vector2(x_offset, offset.y)
+	offset = Vector2(x_offset, 0)
 
 func last_card_position():
 	return cards.back().position
@@ -25,6 +24,7 @@ func deselect():
 
 func add_card(card):
 	card.scale = stack_scale
+	card.position += (offset * cards.size())
 	cards.append(card)
 	refresh_scene(card)
 
