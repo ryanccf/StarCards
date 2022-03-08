@@ -24,5 +24,5 @@ func _on_Poison_timeout():
 	update_health_bar_size()
 
 func update_health_bar_size():
-	$HealthBar.rect_size.x = float(float(currentHP)/float(maxHP) * 10.0)
+	$HealthBar.rect_size.x = float(float(currentHP)/float(maxHP) * 100)
 	update_hp()

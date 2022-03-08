@@ -72,14 +72,13 @@ scale = Vector2( 1.42222, 1.42222 )
 texture = ExtResource( 2 )
 
 [node name="Title" type="Label" parent="ColorRect"]
-margin_left = -1.37549
-margin_top = 36.7604
-margin_right = 1982.62
-margin_bottom = 905.76
+margin_left = -388.0
+margin_top = 66.0
+margin_right = 1596.0
+margin_bottom = 935.0
 theme = SubResource( 4 )
 custom_fonts/font = SubResource( 5 )
-text = "INTARGALACTIC
-STARNAGE"
+text = " CaRd StaRs"
 align = 1
 valign = 1
 __meta__ = {

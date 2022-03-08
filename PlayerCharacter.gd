@@ -8,7 +8,6 @@ var currentSpeed = 0
 
 signal turn_complete
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	update_hp()
 
@@ -38,7 +37,6 @@ func _process(delta):
 
 func check_death():
 	if currentHP <= 0:
-		print("The Death of a Player Character. ;'-(")
 		queue_free()
 
 # This guy is temporary.

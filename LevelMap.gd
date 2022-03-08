@@ -1,21 +1,44 @@
 extends Node2D
 
 var screen_height = OS.get_real_window_size().y
-var Location = preload("res://Location.tscn") 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+var START_POSITION = Vector2(120, screen_height / 2)
 
+var Location = preload("res://Location.tscn")
+var GamePiece = preload("res://GamePiece.tscn") 
+var player = GamePiece.instance()
+var start = Location.instance()
+var end = Location.instance()
+var first = Location.instance()
+var second = Location.instance()
+var third = Location.instance()
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	generate_level()
 
 func generate_level():
-	var start = Location.instance()
 	add_child(start)
-	start.position.x = 120
-	start.position.y = screen_height / 2
-	# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+	add_child(first)
+	add_child(second)
+	add_child(third)
+	add_child(end)
+	add_child(player)
+	player.position = START_POSITION
+	player.turn_camera_on()
+	start.position = START_POSITION
+	first.position = Vector2(start.position.x + 200, start.position.y + 200)
+	second.position = Vector2(first.position.x + 200, first.position.y)
+	third.position = Vector2(second.position.x + 160, second.position.y + 200)
+	end.position = Vector2(third.position.x + 100, third.position.y + 200)
+	start.connect("beacon", self, "_on_beacon")
+	first.connect("beacon", self, "_on_beacon")
+	second.connect("beacon", self, "_on_beacon")
+	third.connect("beacon", self, "_on_beacon")
+	end.connect("beacon", self, "_on_beacon")
+	player.set_target_location(start.position)
+
+func _on_beacon(locX, locY):
+	if (player.position.distance_to(Vector2(locX, locY)) <= 4):
+		get_tree().change_scene("res://Battle.tscn")
+	else:
+		player.look_at(Vector2(locX, locY))
+		player.set_target_location(Vector2(locX, locY))
