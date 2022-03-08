@@ -1,4 +1,4 @@
 Star Cards Project Outline
-Designer/Developer: Ryan Culbertson-Faegre
+Designer/Developers: Ryan Culbertson-Faegre and Nick Lombardi
 Created with: Godot 3
 Game Genre: CCG RTS Roguelite
