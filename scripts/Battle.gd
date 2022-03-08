@@ -45,7 +45,8 @@ func assign_card_id():
 	return card_id_counter
 
 func initialize_cards():
-	$Hand.set_x_offset(105)
+	$Hand.set_offset(Vector2(105, 0))
+	$Deck.set_offset(Vector2(0, 0))
 	var suits = ["clubs", "diamonds", "hearts", "spades"]
 	var ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "ace", "jack", "king", "queen"]
 	for suit in suits:

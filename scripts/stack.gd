@@ -2,14 +2,17 @@ extends Node2D
 
 var stack_scale = Vector2(0.2, 0.2)
 var cards = []
-var offset = Vector2(1, 1)
+var offset = Vector2(1, 0)
 var face_down = true
 
 func _draw():
 	draw_circle(Vector2.ZERO, 25, Color.blanchedalmond)
 
-func set_x_offset(x_offset):
-	offset = Vector2(x_offset, 0)
+func _process(_delta):
+	refresh_card_positions()
+
+func set_offset(new_offset):
+	offset = new_offset
 
 func last_card_position():
 	return cards.back().position
@@ -26,18 +29,20 @@ func add_card(card):
 	card.scale = stack_scale
 	card.position += (offset * cards.size())
 	cards.append(card)
-	refresh_scene(card)
-
-func refresh_scene(card):
 	card.position = position
 	add_child(card)
+
+func refresh_card_positions():
+	var counter = 0
+	for card in cards:
+		counter += 1
+		card.position = position + (offset * counter)
 
 func draw_card():
 	if cards.size() > 0:
 		var card = cards.pop_back()
 		remove_child(card)
 		return card
-		#return cards.pop_back().duplicate()
 	else:
 		return null
 
