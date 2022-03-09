@@ -1,18 +1,14 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scripts/Battle.gd" type="Script" id=1]
 [ext_resource path="res://Stack.tscn" type="PackedScene" id=2]
-[ext_resource path="res://button3.png" type="Texture" id=3]
-[ext_resource path="res://button2.png" type="Texture" id=5]
-[ext_resource path="res://button1.png" type="Texture" id=6]
+[ext_resource path="res://images/game_background_4.png" type="Texture" id=4]
 [ext_resource path="res://Bungee-Regular.ttf" type="DynamicFontData" id=7]
 
 [sub_resource type="DynamicFont" id=2]
 size = 40
 outline_color = Color( 0.0509804, 0.0470588, 0.0470588, 1 )
 font_data = ExtResource( 7 )
-
-[sub_resource type="Theme" id=3]
 
 [node name="Battle" type="Node2D"]
 script = ExtResource( 1 )
@@ -32,6 +28,12 @@ color = Color( 0.376471, 0.360784, 0.360784, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Sprite" type="Sprite" parent="Background"]
+position = Vector2( 599, 148 )
+scale = Vector2( 0.312355, 0.312355 )
+z_as_relative = false
+texture = ExtResource( 4 )
 
 [node name="Background Image" type="Sprite" parent="Background"]
 visible = false
@@ -71,32 +73,3 @@ text = "1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Label Hit" type="Label" parent="Background"]
-margin_left = 1002.0
-margin_top = 677.0
-margin_right = 1127.0
-margin_bottom = 738.0
-theme = SubResource( 3 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = SubResource( 2 )
-text = "Draw"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TurnButton" type="TextureButton" parent="."]
-margin_left = 951.0
-margin_top = 686.0
-margin_right = 1251.0
-margin_bottom = 886.0
-rect_scale = Vector2( 0.75, 0.5 )
-mouse_filter = 2
-texture_normal = ExtResource( 5 )
-texture_pressed = ExtResource( 3 )
-texture_hover = ExtResource( 6 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[connection signal="pressed" from="TurnButton" to="." method="_on_TurnButton_pressed"]

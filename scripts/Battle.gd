@@ -46,12 +46,14 @@ func assign_card_id():
 
 func initialize_cards():
 	$Hand.set_offset(Vector2(105, 0))
+	$Hand.set_selectable(true)
 	$Deck.set_offset(Vector2(0, 0))
 	var suits = ["clubs", "diamonds", "hearts", "spades"]
 	var ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "ace", "jack", "king", "queen"]
 	for suit in suits:
 		for rank in ranks:
 			var card = Card.instance()
+			card.connect("new_card_selected", self, "unselect_cards")
 			var card_name = rank + "_of_" + suit
 			card.set_id(card_name)
 			var my_filename = "res://card-images/" + card.get_id() + ".png"

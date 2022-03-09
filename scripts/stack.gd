@@ -4,6 +4,7 @@ var stack_scale = Vector2(0.2, 0.2)
 var cards = []
 var offset = Vector2(1, 0)
 var face_down = true
+var selectable = false
 
 func _draw():
 	draw_circle(Vector2.ZERO, 25, Color.blanchedalmond)
@@ -11,11 +12,21 @@ func _draw():
 func _process(_delta):
 	refresh_card_positions()
 
+func unselect_cards():
+	for card in cards:
+		card.unselect()
+
 func set_offset(new_offset):
 	offset = new_offset
 
+func all_cards():
+	return cards
+
 func last_card_position():
 	return cards.back().position
+
+func set_selectable(truthiness):
+	selectable = truthiness
 
 func select():
 	for child in get_tree().get_nodes_in_group("zone"):
@@ -26,6 +37,8 @@ func deselect():
 	modulate = Color.white
 
 func add_card(card):
+	if selectable:
+		card.set_selectable(true) 
 	card.scale = stack_scale
 	card.position += (offset * cards.size())
 	cards.append(card)
