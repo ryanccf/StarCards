@@ -41,6 +41,7 @@ func add_card(card):
 		card.set_selectable(true) 
 	card.scale = stack_scale
 	card.position += (offset * cards.size())
+	card.set_on_select(funcref(self, "unselect_cards"))
 	cards.append(card)
 	card.position = position
 	add_child(card)
