@@ -22,6 +22,22 @@ func _ready():
 	initialize_player()
 	initialize_monsters()
 
+func _on_TurnButton_pressed():
+	update_turn()
+	draw_card()
+
+func _on_PlayerCharacter_turn_over():
+	draw_card()
+
+func _process(delta):
+	update_battle_arrays()
+	check_battle_end()
+
+func _on_Field_input_event(viewport, event, shape_idx):
+	if event is InputEventMouseButton and event.pressed:
+		if $Hand.has_selected():
+			$Discard.add_card($Hand.pop_selected())
+
 func initialize_monsters():
 	monsters.append(Monster.instance())
 	monsters.append(Monster.instance())
@@ -29,6 +45,8 @@ func initialize_monsters():
 	monsters[0].position.y = 300
 	monsters[1].position.x = 200
 	monsters[1].position.y = 200
+	monsters[0].set_monster_type("base")
+	monsters[1].set_monster_type("spearman")
 	for monster in monsters:
 		$Background.add_child(monster)
 
@@ -68,6 +86,9 @@ func draw_card():
 	card.flip()
 	$Hand.add_card(card)
 
+func discard_selected():
+	$Discard.add_card($Hand.pop_selected())
+
 func update_turn():
 	turn_counter += 1
 	$TurnCounter.set_text(str(turn_counter))
@@ -97,14 +118,3 @@ func players_exist():
 
 func exit_battle():
 	get_tree().change_scene("res://LevelMap.tscn")
-
-func _on_TurnButton_pressed():
-	update_turn()
-	draw_card()
-
-func _on_PlayerCharacter_turn_over():
-	draw_card()
-
-func _process(delta):
-	update_battle_arrays()
-	check_battle_end()

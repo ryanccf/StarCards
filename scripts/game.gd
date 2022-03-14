@@ -11,7 +11,7 @@ var Monster = preload("res://Monster.tscn")
 
 var selected = false
 var deck = Stack.instance()
-var hand = Stack.instance()  
+var hand = Stack.instance()
 var players = []
 var monsters = []
 

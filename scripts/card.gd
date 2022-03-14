@@ -10,15 +10,23 @@ var on_select
 var card_scale = Vector2(0.2, 0.2)
 var card_large_scale = Vector2(0.3, 0.3)
 
+signal declare_selected(card_id)
+signal unselect()
+
 func _on_Area2D_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.pressed:
 		if selectable:
 			if !selected:
-				if on_select:
-					on_select.call_func()
+				print(event)
+				print_stack()
+				print(get_signal_connection_list("declare_selected"))
+				emit_signal("declare_selected", get_instance_id())
+#				if on_select:
+#					on_select.call_func()
 				selected = true
 			else:
 				selected = false
+				emit_signal("unselect")
 
 func _process(delta):
 	if selected:
@@ -34,8 +42,8 @@ func unselect():
 func set_id(value):
 	self.cardID = value
 
-func set_on_select(function_reference):
-	on_select = function_reference
+#func set_on_select(function_reference):
+#	on_select = function_reference
 
 func get_id():
 	return self.cardID
