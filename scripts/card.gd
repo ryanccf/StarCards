@@ -1,5 +1,8 @@
 extends Node2D
 
+const Monster = preload("res://Monster.tscn")
+
+var monster = Monster.instance()
 var cardID = ""
 var front_image
 var back_image
@@ -12,6 +15,9 @@ var card_large_scale = Vector2(0.3, 0.3)
 
 signal declare_selected(card_id)
 signal unselect()
+
+func _ready():
+	print(monster)
 
 func _on_Area2D_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.pressed:
@@ -68,3 +74,9 @@ func set_selected(truthiness):
 func flip():
 	flipped = !flipped
 	update_texture()
+
+func set_monster(new_monster):
+	monster = new_monster
+
+func get_monster():
+	return monster

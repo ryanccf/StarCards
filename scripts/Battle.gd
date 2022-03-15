@@ -36,7 +36,11 @@ func _process(delta):
 func _on_Field_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.pressed:
 		if $Hand.has_selected():
-			$Discard.add_card($Hand.pop_selected())
+			var card = $Hand.pop_selected()
+			$Discard.add_card(card)
+			var monster = card.get_monster()
+			monster.set_friendly()
+			$Background/Field.add_monster(monster, event.position)
 
 func initialize_monsters():
 	monsters.append(Monster.instance())

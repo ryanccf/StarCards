@@ -4,6 +4,7 @@ var maxHP = 10
 var currentHP = maxHP
 var monster_name = "base";
 var monster_type;
+var friendly = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -12,6 +13,15 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	check_death()
+	
+func set_friendly(friendliness = true):
+	friendly = friendliness
+
+func is_friendly():
+	return friendly
+	
+func is_aligned_with(monster):
+	return is_friendly() == monster.is_friendly()
 
 func set_monster_type(the_type):
 	monster_type = the_type
