@@ -4,6 +4,7 @@ var stack_scale = Vector2(0.2, 0.2)
 var cards = []
 var offset = Vector2(1, 0)
 var face_down = true
+var selectable = false
 
 func _draw():
 	draw_circle(Vector2.ZERO, 25, Color.blanchedalmond)
@@ -14,6 +15,9 @@ func _process(_delta):
 func all_cards():
 	return cards
 
+func set_selectable(truthiness):
+	selectable = truthiness
+
 func set_offset(new_offset):
 	offset = new_offset
 
@@ -21,6 +25,7 @@ func last_card_position():
 	return cards.back().position
 
 func add_card(card):
+	card.set_selectable(selectable)
 	card.scale = stack_scale
 	card.position += (offset * cards.size())
 	cards.append(card)

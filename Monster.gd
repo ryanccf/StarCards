@@ -21,7 +21,7 @@ func update_hp():
 
 func check_death():
 	if currentHP <= 0:
-		print("The Death of a Player Character. ;'-(")
+		print("An Enemy dies.")
 		queue_free()
 
 func _on_Poison_timeout():

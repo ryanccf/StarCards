@@ -5,7 +5,7 @@ const MAX_TURNS = 100
 var turn_counter = 1
 var card_id_counter = 0
 var CardBack =  load("res://card-images/card_back.png")
-var playerOneGraphic = load("res://psylocke_standing.png")
+var playerOneGraphic = load("res://images/ship.png")
 
 var Card = preload("res://Card.tscn")
 var Stack = preload("res://Stack.tscn")
@@ -41,19 +41,17 @@ func _on_Field_input_event(viewport, event, shape_idx):
 func initialize_monsters():
 	monsters.append(Monster.instance())
 	monsters.append(Monster.instance())
-	monsters[0].position.x = 200
-	monsters[0].position.y = 300
-	monsters[1].position.x = 200
-	monsters[1].position.y = 200
+	monsters[0].position = Vector2(950, 200)
+	monsters[1].position = Vector2(1000, 400)
 	monsters[0].set_monster_type("base")
-	monsters[1].set_monster_type("spearman")
+	monsters[1].set_monster_type("fighter")
 	for monster in monsters:
 		$Background.add_child(monster)
 
 func initialize_player():
 	player.increase_speed(25)
 	player.update_graphic(playerOneGraphic)
-	player.position = Vector2(800, 300)
+	player.position = Vector2(100, 300)
 	$Hand.position = Vector2(200, 300)
 	player.connect("turn_complete", self, "_on_PlayerCharacter_turn_over")
 	$Background.add_child(player)
