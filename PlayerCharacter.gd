@@ -1,12 +1,13 @@
 extends Node2D
 
-var maxHP = 100
+var maxHP = 10
 var currentHP = maxHP
 var maxSpeed = 10000
 var playerSpeed = 50
 var currentSpeed = 0
 
 signal turn_complete
+signal death
 
 func _ready():
 	update_hp()
@@ -37,6 +38,7 @@ func _process(delta):
 
 func check_death():
 	if currentHP <= 0:
+		emit_signal("death")
 		queue_free()
 
 # This guy is temporary.

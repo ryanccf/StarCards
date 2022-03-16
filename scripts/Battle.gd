@@ -54,6 +54,7 @@ func initialize_player():
 	player.position = Vector2(100, 300)
 	$Hand.position = Vector2(200, 300)
 	player.connect("turn_complete", self, "_on_PlayerCharacter_turn_over")
+	player.connect("death", self, "_clean_up_player")
 	$Background/Field.add_child(player)
 
 func assign_card_id():
@@ -100,3 +101,6 @@ func update_battle_arrays():
 
 func exit_battle():
 	get_tree().change_scene("res://LevelMap.tscn")
+
+func _clean_up_player():
+	player = null
