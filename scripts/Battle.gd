@@ -25,18 +25,6 @@ func _process(delta):
 	update_battle_arrays()
 	check_battle_end()
 
-func _on_Field_input_event(viewport, event, shape_idx):
-	if event is InputEventMouseButton and event.pressed:
-		if $Hand.has_selected():
-			var card = $Hand.pop_selected()
-			$Discard.add_card(card)
-			var monster = card.get_monster()
-			monster.set_friendly()
-			for enemy_monster in monsters:
-				if enemy_monster.monster_type == "base":
-					monster.set_target(enemy_monster.position)
-			$Background/Field.add_monster(monster, event.position)
-
 func initialize_monsters():
 	monsters.append(Monster.instance())
 	monsters.append(Monster.instance())
@@ -104,3 +92,17 @@ func exit_battle():
 
 func _clean_up_player():
 	player = null
+
+
+func _on_DeployZone_input_event(viewport, event, shape_idx):
+	print("lolololol")
+	if event is InputEventMouseButton and event.pressed:
+		if $Hand.has_selected():
+			var card = $Hand.pop_selected()
+			$Discard.add_card(card)
+			var monster = card.get_monster()
+			monster.set_friendly()
+			for enemy_monster in monsters:
+				if enemy_monster.monster_type == "base":
+					monster.set_target(enemy_monster.position)
+			$Background/Field.add_monster(monster, event.position)
