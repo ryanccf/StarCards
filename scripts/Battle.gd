@@ -45,7 +45,7 @@ func initialize_monsters():
 	monsters[1].set_monster_type("fighter")
 	monsters[1].set_target(player.position)
 	for monster in monsters:
-		$Background.add_child(monster)
+		$Background/Field.add_child(monster)
 
 func initialize_player():
 	player.increase_speed(25)
@@ -53,7 +53,7 @@ func initialize_player():
 	player.position = Vector2(100, 300)
 	$Hand.position = Vector2(200, 300)
 	player.connect("turn_complete", self, "_on_PlayerCharacter_turn_over")
-	$Background.add_child(player)
+	$Background/Field.add_child(player)
 
 func assign_card_id():
 	card_id_counter += 1
@@ -89,25 +89,13 @@ func discard_selected():
 func check_battle_end():
 	if monsters.size() == 0:
 		get_tree().change_scene("res://Victory.tscn")
-	elif !players_exist():
+	elif player == null:
 		get_tree().change_scene("res://Defeat.tscn")
 
 func update_battle_arrays():
 	for monster in monsters:
 		if !is_instance_valid(monster):
 			monsters.erase(monster)
-
-func monsters_exist():
-	if monsters.size() <= 0:
-		return false
-	else:
-		return true
-
-func players_exist():
-	if player == null:
-		return false
-	else:
-		return true
 
 func exit_battle():
 	get_tree().change_scene("res://LevelMap.tscn")
