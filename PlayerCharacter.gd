@@ -20,11 +20,11 @@ func scale_sprite(amount):
 func increase_speed(amount):
 	playerSpeed += amount
 
-func update_speed():
+func update_speed(delta):
 	if currentSpeed <= maxSpeed:
-		currentSpeed += playerSpeed
+		currentSpeed += playerSpeed * delta * 80
 	else:
-		currentSpeed = 0
+		currentSpeed = float(int(currentSpeed) % int(playerSpeed * delta * 80))
 		emit_signal("turn_complete")
 	update_speed_bar_size()
 
@@ -32,7 +32,7 @@ func update_graphic(new_graphic):
 	$Sprite.set_texture(new_graphic)
 
 func _process(delta):
-	update_speed()
+	update_speed(delta)
 	check_death()
 
 func check_death():
