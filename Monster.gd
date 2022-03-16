@@ -5,7 +5,8 @@ var currentHP = maxHP
 var monster_name = "base";
 var monster_type;
 var friendly = false
-var speed = 20
+var speed = 55
+var current_target
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -14,10 +15,15 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	check_death()
-	move()
+	move(delta)
 
-func move():
-	position.x += (speed * (1 if is_friendly() else -1)) 
+func set_target(target):
+	current_target = target
+
+func move(delta):
+	if monster_type != "base" and current_target:
+		look_at(current_target)
+		position += speed * delta * Vector2(cos(rotation), sin(rotation))
 	
 func set_friendly(friendliness = true):
 	friendly = friendliness

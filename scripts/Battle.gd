@@ -40,15 +40,19 @@ func _on_Field_input_event(viewport, event, shape_idx):
 			$Discard.add_card(card)
 			var monster = card.get_monster()
 			monster.set_friendly()
+			for enemy_monster in monsters:
+				if enemy_monster.monster_type == "base":
+					monster.set_target(enemy_monster.position)
 			$Background/Field.add_monster(monster, event.position)
 
 func initialize_monsters():
 	monsters.append(Monster.instance())
 	monsters.append(Monster.instance())
 	monsters[0].position = Vector2(950, 200)
-	monsters[1].position = Vector2(1000, 400)
+	monsters[1].position = Vector2(1100, 401)
 	monsters[0].set_monster_type("base")
 	monsters[1].set_monster_type("fighter")
+	monsters[1].set_target(player.position)
 	for monster in monsters:
 		$Background.add_child(monster)
 

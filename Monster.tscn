@@ -13,6 +13,7 @@ script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( -2.39117, -3.81775 )
+rotation = -1.57079
 texture = ExtResource( 1 )
 
 [node name="HealthBar" type="ColorRect" parent="."]
