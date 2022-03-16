@@ -45,6 +45,5 @@ func pop_selected():
 	cards.erase(card)
 	card.unselect()
 	unselect()
-	print(str(selected_card_id))
-	print(selected_card_id == null)
+	
 	return card

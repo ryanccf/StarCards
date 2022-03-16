@@ -51,10 +51,3 @@ func card_count():
 
 func shuffle():
 	cards.shuffle()
-
-func show_cards():
-	if(cards.size() == 0):
-		print(0)
-	else:
-		for card in cards:
-			print(card.get_id())

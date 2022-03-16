@@ -16,16 +16,10 @@ var card_large_scale = Vector2(0.3, 0.3)
 signal declare_selected(card_id)
 signal unselect()
 
-func _ready():
-	print(monster)
-
 func _on_Area2D_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.pressed:
 		if selectable:
 			if !selected:
-				print(event)
-				print_stack()
-				print(get_signal_connection_list("declare_selected"))
 				emit_signal("declare_selected", get_instance_id())
 #				if on_select:
 #					on_select.call_func()

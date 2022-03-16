@@ -9,6 +9,7 @@ var PlayerCharacter = preload("res://PlayerCharacter.tscn")
 var Monster = preload("res://Monster.tscn")
 var selected = false 
 var player = PlayerCharacter.instance()
+var enemy_base
 var monsters = []
 
 func _ready():
@@ -35,6 +36,7 @@ func initialize_monsters():
 	monsters[1].set_target(player.position)
 	for monster in monsters:
 		$Background/Field.add_child(monster)
+		monster.set_enemy_base(player.position)
 
 func initialize_player():
 	player.increase_speed(25)
@@ -95,7 +97,6 @@ func _clean_up_player():
 
 
 func _on_DeployZone_input_event(viewport, event, shape_idx):
-	print("lolololol")
 	if event is InputEventMouseButton and event.pressed:
 		if $Hand.has_selected():
 			var card = $Hand.pop_selected()
@@ -105,4 +106,5 @@ func _on_DeployZone_input_event(viewport, event, shape_idx):
 			for enemy_monster in monsters:
 				if enemy_monster.monster_type == "base":
 					monster.set_target(enemy_monster.position)
+					monster.set_enemy_base(enemy_monster.position)
 			$Background/Field.add_monster(monster, event.position)
