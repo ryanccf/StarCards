@@ -18,7 +18,8 @@ func _ready():
 	initialize_monsters()
 
 func _on_PlayerCharacter_turn_over():
-	draw_card()
+	if ($Hand.card_count() < 7):
+		draw_card()
 
 func _process(delta):
 	update_battle_arrays()
