@@ -1,17 +1,12 @@
 extends Node2D
 
-const MAX_TURNS = 100
-
-var turn_counter = 1
 var card_id_counter = 0
 var CardBack =  load("res://card-images/card_back.png")
 var playerOneGraphic = load("res://images/ship.png")
-
 var Card = preload("res://Card.tscn")
 var Stack = preload("res://Stack.tscn")
 var PlayerCharacter = preload("res://PlayerCharacter.tscn")
 var Monster = preload("res://Monster.tscn")
-
 var selected = false 
 var player = PlayerCharacter.instance()
 var monsters = []
@@ -21,10 +16,6 @@ func _ready():
 	initialize_cards()
 	initialize_player()
 	initialize_monsters()
-
-func _on_TurnButton_pressed():
-	update_turn()
-	draw_card()
 
 func _on_PlayerCharacter_turn_over():
 	draw_card()
@@ -94,10 +85,6 @@ func draw_card():
 
 func discard_selected():
 	$Discard.add_card($Hand.pop_selected())
-
-func update_turn():
-	turn_counter += 1
-	$TurnCounter.set_text(str(turn_counter))
 
 func check_battle_end():
 	if monsters.size() == 0:
