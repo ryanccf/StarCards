@@ -35,8 +35,8 @@ func initialize_monsters():
 	monsters[1].set_monster_type("fighter")
 	monsters[1].set_target(player.position)
 	for monster in monsters:
-		$Background/Field.add_child(monster)
 		monster.set_enemy_base(player.position)
+		$Background/Field.add_monster(monster, monster.position)
 
 func initialize_player():
 	player.increase_speed(25)
@@ -94,7 +94,6 @@ func exit_battle():
 
 func _clean_up_player():
 	player = null
-
 
 func _on_DeployZone_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.pressed:

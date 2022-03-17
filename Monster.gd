@@ -9,6 +9,10 @@ var speed = 55
 var current_target
 var enemy_base
 var enemy_trackers = [$ShootingZone, $SensingZone]
+var laser_charge = 0
+var laser_max = 10000
+
+signal spawn_laser(laser)
 
 func _ready():
 	update_hp()
@@ -18,6 +22,11 @@ func _ready():
 func _process(delta):
 	check_death()
 	move(delta)
+	if laser_charge <= laser_max:
+		laser_charge += 100 * delta * 80
+	else:
+		laser_charge = float(int(laser_charge) % int(100 * delta * 80))
+		emit_signal("spawn_laser", position, rotation)
 
 func set_target(target):
 	current_target = target
@@ -52,7 +61,6 @@ func update_hp():
 
 func check_death():
 	if currentHP <= 0:
-		print("An Enemy dies.")
 		queue_free()
 
 func _on_Poison_timeout():
