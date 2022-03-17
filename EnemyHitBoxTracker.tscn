@@ -15,5 +15,5 @@ script = ExtResource( 2 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SensingZone"]
 shape = SubResource( 1 )
 
-[connection signal="area_entered" from="SensingZone" to="." method="_on_SensingZone_area_entered"]
-[connection signal="area_exited" from="SensingZone" to="." method="_on_SensingZone_area_exited"]
+[connection signal="area_entered" from="SensingZone" to="SensingZone" method="_on_SensingZone_area_entered"]
+[connection signal="area_exited" from="SensingZone" to="SensingZone" method="_on_SensingZone_area_exited"]
