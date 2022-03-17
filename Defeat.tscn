@@ -14,7 +14,7 @@ font_data = SubResource( 1 )
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 782.078, 380.5 )
+position = Vector2( 745, 382 )
 scale = Vector2( 0.709459, 0.709459 )
 texture = ExtResource( 1 )
 
