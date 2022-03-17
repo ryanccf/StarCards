@@ -17,15 +17,11 @@ func is_friendly():
 func _on_SensingZone_area_entered(area):
 	if area.has_method("take_damage") and not _is_aligned_with(area):
 		_targets += [area]
-#		print("NEW TARGET:" + str(area))
-#		print("BELONGS TO PLAYER: " + str(area.is_friendly()))
-		
 
 func _on_SensingZone_area_exited(area):
 	_targets.erase(area)
 	if area == _nearest_target:
 		_nearest_target = null
-#		print("TARGETS: " + str(_targets))
 	emit_signal("target_leaves", area)
 
 func get_nearest_target():

@@ -29,7 +29,6 @@ func _process(delta):
 		emit_signal("spawn_laser", position, rotation, current_target, friendly)
 
 func set_target(target):
-	#print(str(self) + " SETTING TARGET TO " + str(target))
 	current_target = target
 	
 func set_enemy_base(base):
@@ -65,10 +64,6 @@ func check_death():
 		get_parent().remove_child(self)
 		queue_free()
 
-#func _on_Poison_timeout():
-#	currentHP -= 1
-#	update_health_bar_size()
-
 func update_health_bar_size():
 	$HealthBar.rect_size.x = float(float(currentHP)/float(maxHP) * 100)
 	update_hp()
@@ -77,16 +72,7 @@ func _point_to_locked_target():
 	set_target(_find_locked_target() if _has_target() and not $ShootingZone.has_specific_target(enemy_base) else enemy_base)
 
 func _find_locked_target():
-	#print("Shooting: " + str($ShootingZone.get_locked_target()))
-	#print("Sensing: " + str($SensingZone.get_locked_target()))
-	
-	#return ($ShootingZone.get_locked_target() if $ShootingZone.has_target() else $SensingZone.get_locked_target())
-	if $ShootingZone.has_target():
-		return $ShootingZone.get_locked_target()
-	elif $SensingZone.get_locked_target():
-		return $SensingZone.get_locked_target()
-	else:
-		return enemy_base
+	return ($ShootingZone.get_locked_target() if $ShootingZone.has_target() else $SensingZone.get_locked_target())
 
 func _has_target():
 	return $SensingZone.has_target()

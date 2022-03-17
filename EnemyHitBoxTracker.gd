@@ -16,7 +16,6 @@ func _reaffirm_focus(target_leaving_SensingZone):
 		_focus()
 
 func _focus():
-	#print("FOCUS")
 	if $SensingZone.has_target():
 		target = $SensingZone.get_nearest_target()
 

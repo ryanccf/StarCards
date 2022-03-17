@@ -7,6 +7,7 @@ var Card = preload("res://Card.tscn")
 var Stack = preload("res://Stack.tscn")
 var PlayerCharacter = preload("res://PlayerCharacter.tscn")
 var Monster = preload("res://Monster.tscn")
+var opponent = preload("res://Opponent.tscn").instance()
 var selected = false 
 var player = PlayerCharacter.instance()
 var enemy_base
@@ -34,6 +35,10 @@ func initialize_monsters():
 	monsters[0].set_monster_type("base")
 	monsters[1].set_monster_type("fighter")
 	monsters[1].set_target(player.position)
+	opponent.set_base(monsters[0])
+	opponent.set_enemy_base(player.position)
+	opponent.connect("spawn_monster", $Background/Field, "add_monster")
+	add_child(opponent)
 	for monster in monsters:
 		monster.set_enemy_base(player.position)
 		$Background/Field.add_monster(monster, monster.position)
