@@ -38,3 +38,8 @@ func has_target():
 
 func _get_distance(target):
 	return global_position.distance_to(target.global_position)
+	
+func has_specific_target(target):
+	for current_target in _targets:
+		if current_target.global_position == target:
+			return true

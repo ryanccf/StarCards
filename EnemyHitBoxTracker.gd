@@ -30,3 +30,6 @@ func has_target():
 
 func _get_distance(target):
 	return global_position.distance_to(target.global_position)
+
+func has_specific_target(target):
+	return $SensingZone.has_specific_target(target)
