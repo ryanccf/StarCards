@@ -1,6 +1,6 @@
 extends Node2D
 
-var maxHP = 100
+var maxHP = 10
 var currentHP = maxHP
 var maxSpeed = 10000
 var playerSpeed = 50
@@ -11,6 +11,7 @@ signal death
 
 func _ready():
 	update_hp()
+	$PlayerHitBox.connect("damage", self, "take_damage")
 
 func update_hp():
 	$HP.text = String(currentHP) + "/" + String(maxHP)	
@@ -42,8 +43,9 @@ func check_death():
 		queue_free()
 
 # This guy is temporary.
-func _on_Poison_timeout():
-	currentHP -= 1
+#func _on_Poison_timeout():
+func take_damage(damage):
+	currentHP -= damage
 	update_health_bar_size()
 
 func update_health_bar_size():

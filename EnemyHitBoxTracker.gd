@@ -16,6 +16,7 @@ func _reaffirm_focus(target_leaving_SensingZone):
 		_focus()
 
 func _focus():
+	#print("FOCUS")
 	if $SensingZone.has_target():
 		target = $SensingZone.get_nearest_target()
 
@@ -23,7 +24,7 @@ func set_friendly(friendliness = true):
 	$SensingZone.set_friendly(friendliness)
 
 func get_locked_target():
-	return target
+	return target.global_position
 
 func has_target():
 	return target != null
