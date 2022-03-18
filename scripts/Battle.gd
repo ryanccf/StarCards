@@ -77,8 +77,10 @@ func initialize_cards():
 
 func draw_card():
 	var card = $Deck.draw_card()
-	card.flip()
-	$Hand.add_card(card)
+	if card:
+		card.flip()
+		$Hand.add_card(card)
+		#else: reshuffle deck
 
 func discard_selected():
 	$Discard.add_card($Hand.pop_selected())
