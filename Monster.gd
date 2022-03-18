@@ -27,6 +27,10 @@ func _process(delta):
 	elif $ShootingZone.has_target():
 		laser_charge = float(int(laser_charge) % int(100 * delta * 80))
 		emit_signal("spawn_laser", position, rotation, current_target, friendly)
+	$HealthBarHolder.rotation = -1 * rotation
+	var angle = (-1 * rotation) - 0.5 * PI
+	$HealthBarHolder.global_position.x = global_position.x
+	$HealthBarHolder.global_position.y = global_position.y - 45
 
 func set_target(target):
 	current_target = target
@@ -65,7 +69,7 @@ func check_death():
 		queue_free()
 
 func update_health_bar_size():
-	$HealthBar.rect_size.x = float(float(currentHP)/float(maxHP) * 100)
+	$HealthBarHolder/HealthBar.rect_size.x = float(float(currentHP)/float(maxHP) * 100)
 	update_hp()
 
 func _point_to_locked_target():
