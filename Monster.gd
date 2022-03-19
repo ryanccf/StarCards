@@ -87,3 +87,6 @@ func _has_target():
 func take_damage(damage):
 	currentHP -= damage
 	update_health_bar_size()
+
+func update_graphic(new_graphic):
+	$Sprite.set_texture(new_graphic)

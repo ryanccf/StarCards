@@ -15,6 +15,7 @@ height = 53.5302
 
 [node name="Monster" type="Node2D"]
 position = Vector2( 2.2324, 13.9975 )
+scale = Vector2( 0.35, 0.35 )
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]

@@ -110,6 +110,7 @@ func _on_DeployZone_input_event(viewport, event, shape_idx):
 			$Discard.add_card(card)
 			var monster = card.get_monster()
 			monster.set_friendly()
+			monster.update_graphic(playerOneGraphic)
 			for enemy_monster in monsters:
 				if enemy_monster.monster_type == "base":
 					monster.set_target(enemy_monster.position)
