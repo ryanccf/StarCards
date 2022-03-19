@@ -37,7 +37,13 @@ func initialize_monsters():
 	monsters[1].set_target(player.position)
 	opponent.set_base(monsters[0])
 	opponent.set_enemy_base(player.position)
+	
+	#Want to see the enemy ships spawn without immediately colliding 
+	#with another object? It actually becomes less playable, but
+	#consider using the starting position for the first ship instead:
+	#opponent.set_enemy_base(Vector2(1100, 401))
 	opponent.connect("spawn_monster", $Background/Field, "add_monster")
+	
 	add_child(opponent)
 	for monster in monsters:
 		monster.set_enemy_base(player.position)

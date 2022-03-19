@@ -5,7 +5,7 @@ var currentHP = maxHP
 var monster_name = "base";
 var monster_type;
 var friendly = false
-var speed = 55
+var speed = 75 * (0.25)
 var current_target
 var enemy_base
 var enemy_trackers = [$ShootingZone, $SensingZone]
@@ -19,7 +19,7 @@ func _ready():
 	$HitZone.connect("damage_taken", self, "take_damage")
 	$HitZone.set_friendly(is_friendly())
 
-func _process(delta):
+func _physics_process(delta):
 	check_death()
 	move(delta)
 	if laser_charge <= laser_max:
@@ -43,7 +43,10 @@ func move(delta):
 	if monster_type != "base" and current_target:
 		look_at(current_target)
 		if not $ShootingZone.has_target():
-			position += speed * delta * Vector2(cos(rotation), sin(rotation))
+			$KinematicBody2D.move_and_slide(speed * delta * Vector2(cos(rotation), sin(rotation)))
+			global_position = $KinematicBody2D.global_position
+			$KinematicBody2D.rotation = 0
+			#position += speed * delta * Vector2(cos(rotation), sin(rotation))
 	
 func set_friendly(friendliness = true):
 	friendly = friendliness
