@@ -5,7 +5,7 @@ var currentHP = maxHP
 var monster_name = "base";
 var monster_type;
 var friendly = false
-var speed = 75 * (0.25)
+var speed = 55
 var current_target
 var enemy_base
 var enemy_trackers = [$ShootingZone, $SensingZone]
@@ -43,10 +43,10 @@ func move(delta):
 	if monster_type != "base" and current_target:
 		look_at(current_target)
 		if not $ShootingZone.has_target():
-			$KinematicBody2D.move_and_slide(speed * delta * Vector2(cos(rotation), sin(rotation)))
+			var collision = $KinematicBody2D.move_and_collide(speed * delta * Vector2(cos(rotation), sin(rotation)))
 			global_position = $KinematicBody2D.global_position
+			$KinematicBody2D.position = Vector2(0, 0)
 			$KinematicBody2D.rotation = 0
-			#position += speed * delta * Vector2(cos(rotation), sin(rotation))
 	
 func set_friendly(friendliness = true):
 	friendly = friendliness

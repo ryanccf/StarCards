@@ -19,7 +19,19 @@ func _process(delta):
 	else:
 		spawn_charge = float(int(spawn_charge) % int(100 * delta * 80))
 		var monster = Monster.instance()
+#		print("PLAYER BASE: " + str(player_base))
+#		print("OPPONENT BASE: " + str(base))
 		monster.set_target(player_base)
 		monster.set_enemy_base(player_base)
 		if is_instance_valid(base):
 			emit_signal("spawn_monster", monster, base.position)
+
+
+
+#			var monster = card.get_monster()
+#			monster.set_friendly()
+#			for enemy_monster in monsters:
+#				if enemy_monster.monster_type == "base":
+#					monster.set_target(enemy_monster.position)
+#					monster.set_enemy_base(enemy_monster.position)
+#			$Background/Field.add_monster(monster, event.position)
