@@ -42,6 +42,7 @@ func initialize_monsters():
 	add_child(opponent)
 	for monster in monsters:
 		monster.set_enemy_base(player.position)
+		monster.set_navigation($Background/Field/Navigation2D)
 		$Background/Field.add_monster(monster, monster.position)
 
 func initialize_player():
@@ -111,6 +112,7 @@ func _on_DeployZone_input_event(viewport, event, shape_idx):
 			var monster = card.get_monster()
 			monster.set_friendly()
 			monster.update_graphic(playerOneGraphic)
+			monster.set_navigation($Background/Field/Navigation2D)
 			for enemy_monster in monsters:
 				if enemy_monster.monster_type == "base":
 					monster.set_target(enemy_monster.position)

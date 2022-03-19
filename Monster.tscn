@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://images/ship9.png" type="Texture" id=1]
 [ext_resource path="res://Monster.gd" type="Script" id=2]
@@ -12,6 +12,11 @@ font_data = ExtResource( 3 )
 [sub_resource type="CapsuleShape2D" id=4]
 radius = 30.0025
 height = 53.5302
+
+[sub_resource type="NavigationPolygon" id=5]
+vertices = PoolVector2Array( -6.37828, -31.4214, 56.4789, -31.4214, 56.4789, 31.4357, -57.8069, 31.4357, -57.8069, -31.4214 )
+polygons = [ PoolIntArray( 0, 1, 2, 3, 4 ) ]
+outlines = [ PoolVector2Array( -6.37828, -31.4214, 56.4789, -31.4214, 56.4789, 31.4357, -57.8069, 31.4357, -57.8069, -31.4214 ) ]
 
 [node name="Monster" type="Node2D"]
 position = Vector2( 2.2324, 13.9975 )
@@ -73,5 +78,11 @@ modulate = Color( 1, 0, 0, 1 )
 self_modulate = Color( 1, 0, 0, 1 )
 rotation = 1.5708
 shape = SubResource( 4 )
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="."]
+navpoly = SubResource( 5 )
+enabled = false
+
+[node name="Line2D" type="Line2D" parent="."]
 
 [connection signal="timeout" from="Poison" to="." method="_on_Poison_timeout"]

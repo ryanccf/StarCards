@@ -11,6 +11,7 @@ var enemy_base
 var enemy_trackers = [$ShootingZone, $SensingZone]
 var laser_charge = 0
 var laser_max = 10000
+var navigation
 
 signal spawn_laser(laser)
 
@@ -42,7 +43,18 @@ func move(delta):
 	_point_to_locked_target()
 	if monster_type != "base" and current_target:
 		look_at(current_target)
+
 		if not $ShootingZone.has_target():
+			print(navigation)
+			print(is_friendly())
+			print(position)
+			var path = navigation.get_simple_path(position, current_target)
+			look_at(path[0])
+			print(path)
+
+			$Line2D.points = path
+			#$Player.path = path
+			
 			var collision = $KinematicBody2D.move_and_collide(speed * delta * Vector2(cos(rotation), sin(rotation)))
 			global_position = $KinematicBody2D.global_position
 			$KinematicBody2D.position = Vector2(0, 0)
@@ -90,3 +102,6 @@ func take_damage(damage):
 
 func update_graphic(new_graphic):
 	$Sprite.set_texture(new_graphic)
+
+func set_navigation(terrain):
+	navigation = terrain

@@ -5,8 +5,9 @@ var Laser = preload("res://Laser.tscn")
 
 
 func add_monster(monster, position):
-	add_child(monster)
+	$Navigation2D.add_child(monster)
 	monster.set_position(position)
+	monster.set_navigation($Navigation2D)
 	monster.connect("spawn_laser", self, "_handle_laser_spawn")
 	
 func _handle_laser_spawn(laser_position, laser_rotation, laser_target, is_friendly):
