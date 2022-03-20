@@ -41,12 +41,14 @@ func set_enemy_base(base):
 func move(delta):
 	_point_to_locked_target()
 	if monster_type != "base" and current_target:
-		look_at(current_target)
-		if not $ShootingZone.has_target():
-			var collision = $KinematicBody2D.move_and_collide(speed * delta * Vector2(cos(rotation), sin(rotation)))
-			global_position = $KinematicBody2D.global_position
-			$KinematicBody2D.position = Vector2(0, 0)
-			$KinematicBody2D.rotation = 0
+		var path = $PathPicker.pick_path()
+		if path:
+			look_at(path)
+			if not $ShootingZone.has_target():
+				var collision = $KinematicBody2D.move_and_collide(speed * delta * Vector2(cos(rotation), sin(rotation)))
+				global_position = $KinematicBody2D.global_position
+				$KinematicBody2D.position = Vector2(0, 0)
+				$KinematicBody2D.rotation = 0
 	
 func set_friendly(friendliness = true):
 	friendly = friendliness
