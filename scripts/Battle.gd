@@ -35,7 +35,7 @@ func initialize_monsters():
 	monsters[0].set_monster_type("base")
 	monsters[1].set_monster_type("fighter")
 	monsters[1].set_target(player.position)
-	opponent.set_base(monsters[0])
+	opponent.set_base({"position" : Vector2(1100, 401)})
 	opponent.set_enemy_base(player.position)
 	opponent.connect("spawn_monster", $Background/Field, "add_monster")
 	

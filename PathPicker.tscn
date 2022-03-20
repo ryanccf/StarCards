@@ -7,20 +7,16 @@ scale = Vector2( 4, 4 )
 script = ExtResource( 1 )
 
 [node name="FarLeftRay" type="RayCast2D" parent="."]
-rotation = -1.0472
-cast_to = Vector2( 30, 0 )
+cast_to = Vector2( 15, -25.981 )
 
 [node name="NearLeftRay" type="RayCast2D" parent="."]
-rotation = -0.523599
-cast_to = Vector2( 30, 0 )
+cast_to = Vector2( 25.981, -15 )
 
 [node name="CenterRay" type="RayCast2D" parent="."]
 cast_to = Vector2( 30, 0 )
 
 [node name="NearRightRay" type="RayCast2D" parent="."]
-rotation = 0.523599
-cast_to = Vector2( 30, 0 )
+cast_to = Vector2( 25.981, 15 )
 
 [node name="FarRightRay" type="RayCast2D" parent="."]
-rotation = 1.0472
-cast_to = Vector2( 30, 0 )
+cast_to = Vector2( 15, 25.981 )

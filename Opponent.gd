@@ -23,8 +23,7 @@ func _process(delta):
 #		print("OPPONENT BASE: " + str(base))
 		monster.set_target(player_base)
 		monster.set_enemy_base(player_base)
-		if is_instance_valid(base):
-			emit_signal("spawn_monster", monster, base.position)
+		emit_signal("spawn_monster", monster, base.position)
 
 
 

@@ -1,15 +1,25 @@
 extends Node2D
 
-var best_path
-var rays = [$CenterRay, $NearLeftRay, $NearRightRay, $FarLeftRay, $FarRightRay]
+func set_body(body):
+	for ray in [$CenterRay, $NearLeftRay, $NearRightRay, $FarLeftRay, $FarRightRay]:
+		ray.add_exception(body)
 
 func pick_path():
-	best_path = null
-	for ray in rays:
-		_check_ray(ray)
-	return best_path
+	var best_rotation = null
+	
+	if _check_ray($CenterRay):
+		best_rotation = 0
+	elif _check_ray($NearLeftRay):
+		best_rotation = -30
+	elif _check_ray($NearRightRay):
+		best_rotation = 30
+	elif _check_ray($FarLeftRay):
+		best_rotation = -60
+	elif _check_ray($FarRightRay):
+		best_rotation = 60
+
+	return best_rotation
 
 func _check_ray(ray):
-	if not best_path:
-		ray.force_raycast_update()
-		best_path = ray.get_cast_to() if not ray.get_collider() else false
+	ray.force_raycast_update()
+	return not ray.get_collider()

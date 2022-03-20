@@ -14,10 +14,14 @@ var laser_max = 10000
 
 signal spawn_laser(laser)
 
+func get_body():
+	return $KinematicBody2D
+
 func _ready():
 	update_hp()
 	$HitZone.connect("damage_taken", self, "take_damage")
 	$HitZone.set_friendly(is_friendly())
+	$PathPicker.set_body($KinematicBody2D)
 
 func _physics_process(delta):
 	check_death()
@@ -41,9 +45,10 @@ func set_enemy_base(base):
 func move(delta):
 	_point_to_locked_target()
 	if monster_type != "base" and current_target:
-		var path = $PathPicker.pick_path()
-		if path:
-			look_at(path)
+		look_at(current_target)
+		var path_rotation = $PathPicker.pick_path()
+		if path_rotation != null:
+			rotation += path_rotation
 			if not $ShootingZone.has_target():
 				var collision = $KinematicBody2D.move_and_collide(speed * delta * Vector2(cos(rotation), sin(rotation)))
 				global_position = $KinematicBody2D.global_position
