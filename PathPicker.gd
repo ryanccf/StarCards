@@ -10,13 +10,13 @@ func pick_path():
 	if _check_ray($CenterRay):
 		best_rotation = 0
 	elif _check_ray($NearLeftRay):
-		best_rotation = -30
+		best_rotation = -1/float(3)*PI
 	elif _check_ray($NearRightRay):
-		best_rotation = 30
+		best_rotation = 1/float(3)*PI
 	elif _check_ray($FarLeftRay):
-		best_rotation = -60
+		best_rotation = -2/float(3)*PI
 	elif _check_ray($FarRightRay):
-		best_rotation = 60
+		best_rotation = 2/float(3)*PI
 
 	return best_rotation
 
