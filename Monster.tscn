@@ -74,7 +74,6 @@ __meta__ = {
 modulate = Color( 1, 0, 0, 1 )
 self_modulate = Color( 1, 0, 0, 1 )
 rotation = 1.5708
-scale = Vector2( 1, 1 )
 shape = SubResource( 4 )
 
 [node name="PathPicker" parent="." instance=ExtResource( 6 )]

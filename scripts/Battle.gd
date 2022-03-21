@@ -6,7 +6,8 @@ var playerOneGraphic = load("res://images/ship.png")
 var Card = preload("res://Card.tscn")
 var Stack = preload("res://Stack.tscn")
 var PlayerCharacter = preload("res://PlayerCharacter.tscn")
-var Monster = preload("res://Monster.tscn")
+var Warrior = preload("res://Warrior.tscn")
+var Defender = preload("res://Defender.tscn")
 var opponent = preload("res://Opponent.tscn").instance()
 var selected = false 
 var player = PlayerCharacter.instance()
@@ -28,8 +29,8 @@ func _process(delta):
 	check_battle_end()
 
 func initialize_monsters():
-	monsters.append(Monster.instance())
-	monsters.append(Monster.instance())
+	monsters.append(Warrior.instance())
+	monsters.append(Warrior.instance())
 	monsters[0].position = Vector2(950, 200)
 	monsters[1].position = Vector2(1100, 401)
 	monsters[0].set_monster_type("base")
@@ -73,6 +74,7 @@ func initialize_cards():
 			var card_texture = load(my_filename)
 			card.set_image(card_texture, CardBack)
 			card.flip()
+			card.set_monster(Defender.instance() if suit == "diamonds" or suit == "hearts" else Warrior.instance())
 			$Deck.add_card(card)
 	$Deck.shuffle()
 
