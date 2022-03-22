@@ -1,4 +1,10 @@
 extends Node2D
+onready var _rays = $Rays
+
+func _ready():
+	
+	for ray in $Rays.get_children():
+		print(ray)
 
 func set_body(body):
 	for ray in _get_rays():

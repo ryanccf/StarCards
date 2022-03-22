@@ -23,6 +23,7 @@ func _ready():
 	$HitZone.connect("damage_taken", self, "take_damage")
 	$HitZone.set_friendly(is_friendly())
 	$PathPicker.set_body($KinematicBody2D)
+	$ObstacleAvoider.add_exception($KinematicBody2D)
 	
 
 func _physics_process(delta):
@@ -42,8 +43,10 @@ func set_enemy_base(base):
 func _rotate():
 	_point_to_locked_target()
 	look_at(current_target)
-	var path_rotation = $PathPicker.pick_path()
+#	var path_rotation = $PathPicker.pick_path()
+	var path_rotation = $ObstacleAvoider.get_viable_rotation()
 	if path_rotation != null:
+		#print(path_rotation)
 		rotation += path_rotation
 
 func _should_move():

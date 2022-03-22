@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://images/ship9.png" type="Texture" id=1]
 [ext_resource path="res://Monster.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://HitZone.gd" type="Script" id=4]
 [ext_resource path="res://EnemyHitBoxTracker.tscn" type="PackedScene" id=5]
 [ext_resource path="res://PathPicker.tscn" type="PackedScene" id=6]
+[ext_resource path="res://ObstacleAvoider.tscn" type="PackedScene" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 3 )
@@ -50,9 +51,11 @@ rotation = 1.5708
 shape = SubResource( 4 )
 
 [node name="ShootingZone" parent="." instance=ExtResource( 5 )]
+visible = false
 scale = Vector2( 2, 2 )
 
 [node name="SensingZone" parent="." instance=ExtResource( 5 )]
+visible = false
 scale = Vector2( 2.667, 2.667 )
 
 [node name="HealthBarHolder" type="Node2D" parent="."]
@@ -77,4 +80,7 @@ rotation = 1.5708
 shape = SubResource( 4 )
 
 [node name="PathPicker" parent="." instance=ExtResource( 6 )]
+visible = false
 scale = Vector2( 4.5, 4.5 )
+
+[node name="ObstacleAvoider" parent="." instance=ExtResource( 7 )]
