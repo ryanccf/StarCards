@@ -8,9 +8,10 @@ var friendly = false
 var speed = 55
 var current_target
 var enemy_base
-var enemy_trackers = [$ShootingZone, $SensingZone]
 var laser_charge = 0
 var laser_max = 10000
+onready var sensing_zone = $SensingZone
+onready var shooting_zone = $ShootingZone
 
 signal spawn_laser(laser)
 
@@ -22,6 +23,7 @@ func _ready():
 	$HitZone.connect("damage_taken", self, "take_damage")
 	$HitZone.set_friendly(is_friendly())
 	$PathPicker.set_body($KinematicBody2D)
+	
 
 func _physics_process(delta):
 	_check_death()
