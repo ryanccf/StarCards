@@ -4,6 +4,9 @@ var card_id_counter = 0
 var CardBack =  load("res://card-images/card_back.png")
 var playerOneGraphic = load("res://images/ship.png")
 var Card = preload("res://Card.tscn")
+var DefenderCard = preload("res://cards/Defender.tscn")
+var WarriorCard = preload("res://cards/Warrior.tscn")
+var ArcherCard = preload("res://cards/Archer.tscn")
 var Stack = preload("res://Stack.tscn")
 var PlayerCharacter = preload("res://PlayerCharacter.tscn")
 var Warrior = preload("res://Warrior.tscn")
@@ -68,7 +71,13 @@ func initialize_cards():
 	var ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "ace", "jack", "king", "queen"]
 	for suit in suits:
 		for rank in ranks:
-			var card = Card.instance()
+			var card
+			if suit == "hearts":
+				card = WarriorCard.instance()
+			elif suit == "spades" or suit == "clubs":
+				card = DefenderCard.instance()
+			else:
+				card = ArcherCard.instance()
 			card.connect("new_card_selected", self, "unselect_cards")
 			var card_name = rank + "_of_" + suit
 			card.set_id(card_name)
@@ -76,12 +85,7 @@ func initialize_cards():
 			var card_texture = load(my_filename)
 			card.set_image(card_texture, CardBack)
 			card.flip()
-			if suit == "hearts":
-				card.set_monster(Warrior.instance())
-			elif suit == "spades" or suit == "clubs":
-				card.set_monster(Defender.instance())
-			else:
-				card.set_monster(Archer.instance())
+
 			
 			$Deck.add_card(card)
 	$Deck.shuffle()
