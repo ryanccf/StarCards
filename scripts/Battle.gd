@@ -7,6 +7,7 @@ var Card = preload("res://Card.tscn")
 var Stack = preload("res://Stack.tscn")
 var PlayerCharacter = preload("res://PlayerCharacter.tscn")
 var Warrior = preload("res://Warrior.tscn")
+var Archer = preload("res://monsters/Archer.tscn")
 var Defender = preload("res://Defender.tscn")
 var opponent = preload("res://Opponent.tscn").instance()
 var selected = false 
@@ -75,7 +76,13 @@ func initialize_cards():
 			var card_texture = load(my_filename)
 			card.set_image(card_texture, CardBack)
 			card.flip()
-			card.set_monster(Defender.instance() if suit == "diamonds" or suit == "hearts" else Warrior.instance())
+			if suit == "hearts":
+				card.set_monster(Warrior.instance())
+			elif suit == "spades" or suit == "clubs":
+				card.set_monster(Defender.instance())
+			else:
+				card.set_monster(Archer.instance())
+			
 			$Deck.add_card(card)
 	$Deck.shuffle()
 

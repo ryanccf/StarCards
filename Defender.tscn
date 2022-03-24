@@ -1,12 +1,26 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Monster.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Defender.gd" type="Script" id=2]
 [ext_resource path="res://EnemyHitBoxTracker.tscn" type="PackedScene" id=3]
+[ext_resource path="res://SensingZone.gd" type="Script" id=4]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 100.125
 
 [node name="Defender" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
+[node name="ShootingZone" parent="." index="4"]
+scale = Vector2( 1.5, 1.5 )
+
+[node name="SensingZone" type="Area2D" parent="ShootingZone" index="0"]
+script = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShootingZone/SensingZone" index="0"]
+shape = SubResource( 1 )
+
 [node name="DefendingZone" parent="." index="9" instance=ExtResource( 3 )]
 
-[editable path="ShootingZone"]
+[connection signal="area_entered" from="ShootingZone/SensingZone" to="ShootingZone/SensingZone" method="_on_SensingZone_area_entered"]
+[connection signal="area_exited" from="ShootingZone/SensingZone" to="ShootingZone/SensingZone" method="_on_SensingZone_area_exited"]

@@ -51,11 +51,9 @@ rotation = 1.5708
 shape = SubResource( 4 )
 
 [node name="ShootingZone" parent="." instance=ExtResource( 5 )]
-visible = false
 scale = Vector2( 2, 2 )
 
 [node name="SensingZone" parent="." instance=ExtResource( 5 )]
-visible = false
 scale = Vector2( 2.667, 2.667 )
 
 [node name="HealthBarHolder" type="Node2D" parent="."]

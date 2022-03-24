@@ -3,7 +3,8 @@ var defenderGraphic = load("res://images/ship7.png")
 
 func _ready():
 	._ready()
-	maxHP = 100 
+	maxHP = 100
+	speed = 40
 	currentHP = maxHP
 	update_hp()
 	update_graphic(defenderGraphic)
