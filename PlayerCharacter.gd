@@ -40,7 +40,6 @@ func _process(delta):
 func check_death():
 	if currentHP <= 0:
 		emit_signal("death")
-		queue_free()
 
 # This guy is temporary.
 #func _on_Poison_timeout():

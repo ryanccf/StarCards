@@ -12,6 +12,7 @@ var opponent = preload("res://Opponent.tscn").instance()
 var selected = false 
 var player = PlayerCharacter.instance()
 var enemy_base
+var game_over = false
 var monsters = []
 
 func _ready():
@@ -91,7 +92,7 @@ func discard_selected():
 func check_battle_end():
 	if monsters.size() == 0:
 		get_tree().change_scene("res://Victory.tscn")
-	elif player == null:
+	elif game_over:
 		get_tree().change_scene("res://Defeat.tscn")
 
 func update_battle_arrays():
@@ -103,7 +104,7 @@ func exit_battle():
 	get_tree().change_scene("res://LevelMap.tscn")
 
 func _clean_up_player():
-	player = null
+	game_over = true;
 
 func _on_DeployZone_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.pressed:

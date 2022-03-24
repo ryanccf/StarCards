@@ -12,7 +12,7 @@ script = ExtResource( 1 )
 [node name="TrackedArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D6" type="CollisionShape2D" parent="TrackedArea"]
-position = Vector2( 21, 0 )
+position = Vector2( 64.2326, -0.573883 )
 rotation = 1.5708
 shape = SubResource( 1 )
 
