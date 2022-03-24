@@ -7,6 +7,7 @@ var Card = preload("res://Card.tscn")
 var DefenderCard = preload("res://cards/Defender.tscn")
 var WarriorCard = preload("res://cards/Warrior.tscn")
 var ArcherCard = preload("res://cards/Archer.tscn")
+var BarbarianCard = preload("res://cards/Barbarian.tscn")
 var Stack = preload("res://Stack.tscn")
 var PlayerCharacter = preload("res://PlayerCharacter.tscn")
 var Warrior = preload("res://Warrior.tscn")
@@ -74,7 +75,9 @@ func initialize_cards():
 			var card
 			if suit == "hearts":
 				card = WarriorCard.instance()
-			elif suit == "spades" or suit == "clubs":
+			elif suit == "spades":
+				card = BarbarianCard.instance()
+			elif suit == "clubs":
 				card = DefenderCard.instance()
 			else:
 				card = ArcherCard.instance()

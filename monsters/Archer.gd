@@ -1,9 +1,11 @@
 extends "res://Monster.gd"
+var graphic = load("res://images/ship11.png")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	speed = 45
 	laser_max = 8000
+	update_graphic(graphic)
 
 func _has_target():
 	return $ShootingZone.has_target()
