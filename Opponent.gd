@@ -4,7 +4,7 @@ var spawn_charge = 0
 var spawn_max = 30000
 var base
 var player_base
-var Monster = preload("res://Monster.tscn")
+var Warrior = preload("res://Warrior.tscn")
 signal spawn_monster(monster, position)
 
 func set_base(cpu_base):
@@ -18,7 +18,7 @@ func _process(delta):
 		spawn_charge += 100 * delta * 80
 	else:
 		spawn_charge = float(int(spawn_charge) % int(100 * delta * 80))
-		var monster = Monster.instance()
+		var monster = Warrior.instance()
 #		print("PLAYER BASE: " + str(player_base))
 #		print("OPPONENT BASE: " + str(base))
 		monster.set_target(player_base)
