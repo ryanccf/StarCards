@@ -1,7 +1,6 @@
 extends "res://Monster.gd"
 var graphic = load("res://images/ship_L.png")
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	speed = 45
 	laser_max = 8000 

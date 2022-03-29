@@ -30,6 +30,7 @@ func _physics_process(delta):
 	_check_death()
 	_rotate()
 	if _should_move():
+		_avoid_obstacles()
 		move(delta)
 	_check_lasers(delta)
 	_stabilize_health_bar()
@@ -44,13 +45,16 @@ func _rotate():
 	_point_to_locked_target()
 	look_at(current_target)
 #	var path_rotation = $PathPicker.pick_path()
+
+func _should_move():
+	return monster_type != "base" and current_target and not $ShootingZone.has_target()
+	
+func _avoid_obstacles():
 	var path_rotation = $ObstacleAvoider.get_viable_rotation()
 	if path_rotation != null:
 		#print(path_rotation)
 		rotation += path_rotation
 
-func _should_move():
-	return monster_type != "base" and current_target and not $ShootingZone.has_target()
 
 func move(delta):
 	var collision = $KinematicBody2D.move_and_collide(speed * delta * Vector2(cos(rotation), sin(rotation)))

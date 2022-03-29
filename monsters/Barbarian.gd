@@ -4,7 +4,6 @@ var graphic = load("res://images/ship_k.png")
 func _has_target():
 	return $ShootingZone.has_target()
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	update_graphic(graphic)
 	speed = 80
