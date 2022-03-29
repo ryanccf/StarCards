@@ -4,7 +4,7 @@ var spawn_charge = 0
 var spawn_max = 30000
 var base
 var player_base
-var Warrior = preload("res://Warrior.tscn")
+var Warrior = preload("res://monsters/Warrior.tscn")
 signal spawn_monster(monster, position)
 
 func set_base(cpu_base):
