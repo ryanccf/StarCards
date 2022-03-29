@@ -68,6 +68,8 @@ func set_selected(truthiness):
 func flip():
 	flipped = !flipped
 	update_texture()
+	$Header/Title.visible = flipped
+	$Area2D/Icon/Graphic.visible = flipped
 
 func set_monster(new_monster):
 	monster = new_monster
