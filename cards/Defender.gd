@@ -1,5 +1,5 @@
 extends "res://scripts/card.gd"
-const Defender = preload("res://Defender.tscn")
+const Defender = preload("res://monsters/Defender.tscn")
 
 func _ready():
 #	.ready()
