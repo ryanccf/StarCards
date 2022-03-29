@@ -27,7 +27,7 @@ position = Vector2( 0.376221, 0.583374 )
 shape = SubResource( 1 )
 
 [node name="Header" type="Node2D" parent="."]
-z_index = 180
+z_index = 9
 
 [node name="Title" type="Label" parent="Header"]
 modulate = Color( 0, 0, 0, 1 )

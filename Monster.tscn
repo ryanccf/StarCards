@@ -33,9 +33,6 @@ margin_bottom = -5.0139
 rect_scale = Vector2( 0.05, 0.05 )
 custom_fonts/font = SubResource( 1 )
 text = "0/0"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Poison" type="Timer" parent="."]
 wait_time = 2.0

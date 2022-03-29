@@ -84,12 +84,10 @@ func initialize_cards():
 			card.connect("new_card_selected", self, "unselect_cards")
 			var card_name = rank + "_of_" + suit
 			card.set_id(card_name)
-			var my_filename = "res://card-images/" + card.get_id() + ".png"
+			var my_filename = "res://card-images/card_front.png"
 			var card_texture = load(my_filename)
 			card.set_image(card_texture, CardBack)
 			card.flip()
-
-			
 			$Deck.add_card(card)
 	$Deck.shuffle()
 
