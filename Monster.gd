@@ -64,6 +64,9 @@ func set_friendly(friendliness = true):
 	$ShootingZone.set_friendly(friendliness)
 	$SensingZone.set_friendly(friendliness)
 
+func set_color(color):
+	$Sprite.modulate = color
+
 func is_friendly():
 	return friendly
 	

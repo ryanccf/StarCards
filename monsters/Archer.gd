@@ -1,5 +1,5 @@
 extends "res://Monster.gd"
-var graphic = load("res://images/ship11.png")
+var graphic = load("res://images/ship_L.png")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

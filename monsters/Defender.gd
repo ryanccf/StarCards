@@ -1,8 +1,10 @@
 extends "res://Monster.gd"
-var defenderGraphic = load("res://images/ship7.png")
+var defenderGraphic = load("res://images/station_C.png")
+var graphic = load("res://images/ship_L.png")
 
 func _ready():
 	._ready()
+	update_graphic(graphic)
 	maxHP = 100
 	speed = 40
 	currentHP = maxHP

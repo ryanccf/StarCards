@@ -1,5 +1,5 @@
 extends "res://Monster.gd"
-var graphic = load("res://images/ship9.png")
+var graphic = load("res://images/ship_k.png")
 
 func _has_target():
 	return $ShootingZone.has_target()

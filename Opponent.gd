@@ -23,6 +23,7 @@ func _process(delta):
 #		print("OPPONENT BASE: " + str(base))
 		monster.set_target(player_base)
 		monster.set_enemy_base(player_base)
+		monster.set_color(Color(20,0,0))
 		emit_signal("spawn_monster", monster, base.position)
 
 
