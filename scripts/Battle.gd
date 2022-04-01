@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 var card_id_counter = 0
 var CardBack =  load("res://card-images/card_back.png")
@@ -44,12 +44,12 @@ func initialize_monsters():
 	monsters[1].set_target(player.position)
 	opponent.set_base({"position" : Vector2(1100, 401)})
 	opponent.set_enemy_base(player.position)
-	opponent.connect("spawn_monster", $Background/Field, "add_monster")
+	opponent.connect("spawn_monster", $Background/BackgroundAnchor/Field, "add_monster")
 	
 	add_child(opponent)
 	for monster in monsters:
 		monster.set_enemy_base(player.position)
-		$Background/Field.add_monster(monster, monster.position)
+		$Background/BackgroundAnchor/Field.add_monster(monster, monster.position)
 
 func initialize_player():
 	player.increase_speed(25)
@@ -58,7 +58,7 @@ func initialize_player():
 	$Hand.position = Vector2(200, 300)
 	player.connect("turn_complete", self, "_on_PlayerCharacter_turn_over")
 	player.connect("death", self, "_clean_up_player")
-	$Background/Field.add_child(player)
+	$Background/BackgroundAnchor/Field.add_child(player)
 
 func assign_card_id():
 	card_id_counter += 1
@@ -129,4 +129,4 @@ func _on_DeployZone_input_event(viewport, event, shape_idx):
 				if enemy_monster.monster_type == "base":
 					monster.set_target(enemy_monster.position)
 					monster.set_enemy_base(enemy_monster.position)
-			$Background/Field.add_monster(monster, event.position)
+			$Background/BackgroundAnchor/Field.add_monster(monster, event.position)
