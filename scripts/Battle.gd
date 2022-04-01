@@ -27,7 +27,7 @@ func _ready():
 	initialize_monsters()
 
 func _on_PlayerCharacter_turn_over():
-	if ($Hand.card_count() < 7):
+	if ($Background/BackgroundAnchor/Hand.card_count() < 7):
 		draw_card()
 
 func _process(delta):
@@ -55,7 +55,7 @@ func initialize_player():
 	player.increase_speed(25)
 	player.update_graphic(playerOneGraphic)
 	player.position = Vector2(100, 300)
-	$Hand.position = Vector2(200, 300)
+	$Background/BackgroundAnchor/Hand.position = Vector2(200, 300)
 	player.connect("turn_complete", self, "_on_PlayerCharacter_turn_over")
 	player.connect("death", self, "_clean_up_player")
 	$Background/BackgroundAnchor/Field.add_child(player)
@@ -65,9 +65,9 @@ func assign_card_id():
 	return card_id_counter
 
 func initialize_cards():
-	$Hand.set_offset(Vector2(105, 0))
-	$Hand.set_selectable(true)
-	$Deck.set_offset(Vector2(0, 0))
+	$Background/BackgroundAnchor/Hand.set_offset(Vector2(105, 0))
+	$Background/BackgroundAnchor/Hand.set_selectable(true)
+	$Background/BackgroundAnchor/Deck.set_offset(Vector2(0, 0))
 	var suits = ["clubs", "diamonds", "hearts", "spades"]
 	var ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "ace", "jack", "king", "queen"]
 	for suit in suits:
@@ -88,18 +88,18 @@ func initialize_cards():
 			var card_texture = load(my_filename)
 			card.set_image(card_texture, CardBack)
 			card.flip()
-			$Deck.add_card(card)
-	$Deck.shuffle()
+			$Background/BackgroundAnchor/Deck.add_card(card)
+	$Background/BackgroundAnchor/Deck.shuffle()
 
 func draw_card():
-	var card = $Deck.draw_card()
+	var card = $Background/BackgroundAnchor/Deck.draw_card()
 	if card:
 		card.flip()
-		$Hand.add_card(card)
+		$Background/BackgroundAnchor/Hand.add_card(card)
 		#else: reshuffle deck
 
 func discard_selected():
-	$Discard.add_card($Hand.pop_selected())
+	$Background/BackgroundAnchor/Discard.add_card($Background/BackgroundAnchor/Hand.pop_selected())
 
 func check_battle_end():
 	if monsters.size() == 0:
@@ -120,9 +120,9 @@ func _clean_up_player():
 
 func _on_DeployZone_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.pressed:
-		if $Hand.has_selected():
-			var card = $Hand.pop_selected()
-			$Discard.add_card(card)
+		if $Background/BackgroundAnchor/Hand.has_selected():
+			var card = $Background/BackgroundAnchor/Hand.pop_selected()
+			$Background/BackgroundAnchor/Discard.add_card(card)
 			var monster = card.get_monster()
 			monster.set_friendly()
 			for enemy_monster in monsters:
