@@ -39,7 +39,7 @@ func set_target(target):
 	current_target = target
 	
 func get_target():
-	 return current_target + global_position - position
+	 return current_target + global_position - position if current_target else global_position
 	
 func set_enemy_base(base):
 	enemy_base = base
