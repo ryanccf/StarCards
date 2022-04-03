@@ -38,12 +38,15 @@ func _physics_process(delta):
 func set_target(target):
 	current_target = target
 	
+func get_target():
+	 return current_target + global_position - position
+	
 func set_enemy_base(base):
 	enemy_base = base
 
 func _rotate():
 	_point_to_locked_target()
-	look_at(current_target)
+	look_at(get_target())
 #	var path_rotation = $PathPicker.pick_path()
 
 func _should_move():

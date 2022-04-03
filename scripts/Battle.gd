@@ -33,11 +33,6 @@ func _on_PlayerCharacter_turn_over():
 func _process(delta):
 	update_battle_arrays()
 	check_battle_end()
-#	print("field pos:")
-#	print($Background/BackgroundAnchor/Field.position)
-#	print("field extents:")
-#	print($Background/BackgroundAnchor/Field/Field.shape.extents)
-	
 
 func initialize_monsters():
 	monsters.append(Warrior.instance())
@@ -135,4 +130,3 @@ func _on_DeployZone_input_event(viewport, event, shape_idx):
 					monster.set_target(enemy_monster.position)
 					monster.set_enemy_base(enemy_monster.position)
 			$Background/BackgroundAnchor/Field.add_monster(monster, event.position - $Background/BackgroundAnchor/DeployZone.global_position)
-		print(event.position)

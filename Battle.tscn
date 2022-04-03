@@ -167,7 +167,7 @@ script = ExtResource( 3 )
 position = Vector2( -555, 321 )
 
 [node name="Discard" parent="Background/BackgroundAnchor" instance=ExtResource( 2 )]
-position = Vector2( -1075, 349 )
+position = Vector2( -504, 314 )
 script = ExtResource( 5 )
 
 [connection signal="input_event" from="Background/BackgroundAnchor/DeployZone" to="." method="_on_DeployZone_input_event"]
