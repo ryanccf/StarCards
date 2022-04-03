@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scripts/Battle.gd" type="Script" id=1]
 [ext_resource path="res://Stack.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://images/space_battle_background.png" type="Texture" id=4]
 [ext_resource path="res://scripts/Discard.gd" type="Script" id=5]
 [ext_resource path="res://Field.gd" type="Script" id=6]
+[ext_resource path="res://GalaxyAnchor.gd" type="Script" id=7]
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 598, 240 )
@@ -38,6 +39,38 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="GalaxyAnchor" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 40.0
+margin_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Galaxy" type="Sprite" parent="GalaxyAnchor"]
+modulate = Color( 0.376471, 0.376471, 0.376471, 1 )
+position = Vector2( 611, 256 )
+z_as_relative = false
+texture = ExtResource( 4 )
+
+[node name="Divider" type="ColorRect" parent="GalaxyAnchor"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -1183.0
+margin_top = 482.0
+margin_right = 2407.0
+margin_bottom = 1620.0
+grow_vertical = 2
+mouse_filter = 2
+color = Color( 0.627451, 0.627451, 0.627451, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Background" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -48,7 +81,7 @@ grow_vertical = 2
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-color = Color( 0, 0, 0, 1 )
+color = Color( 0, 0, 0, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -64,9 +97,9 @@ __meta__ = {
 }
 
 [node name="Sprite" type="Sprite" parent="Background/BackgroundAnchor"]
+visible = false
 modulate = Color( 0.376471, 0.376471, 0.376471, 1 )
 position = Vector2( -598, 268 )
-scale = Vector2( 0.333449, 0.333449 )
 z_as_relative = false
 texture = ExtResource( 4 )
 
@@ -74,16 +107,6 @@ texture = ExtResource( 4 )
 visible = false
 position = Vector2( -1178.36, 19.5473 )
 scale = Vector2( 0.0776838, 0.0776838 )
-
-[node name="Divider2" type="ColorRect" parent="Background/BackgroundAnchor"]
-margin_left = -1200.0
-margin_top = 487.0
-margin_bottom = 802.0
-mouse_filter = 2
-color = Color( 0.627451, 0.627451, 0.627451, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ColorRect" type="ColorRect" parent="Background/BackgroundAnchor"]
 margin_left = -1200.0
