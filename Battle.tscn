@@ -160,7 +160,7 @@ position = Vector2( 300, 247 )
 shape = SubResource( 4 )
 
 [node name="Hand" parent="Background/BackgroundAnchor" instance=ExtResource( 2 )]
-position = Vector2( -1107, 77 )
+position = Vector2( -435, 321 )
 script = ExtResource( 3 )
 
 [node name="Deck" parent="Background/BackgroundAnchor" instance=ExtResource( 2 )]

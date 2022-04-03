@@ -55,7 +55,7 @@ func initialize_player():
 	player.increase_speed(25)
 	player.update_graphic(playerOneGraphic)
 	player.position = Vector2(100, 300)
-	$Background/BackgroundAnchor/Hand.position = Vector2(200, 300)
+#	$Background/BackgroundAnchor/Hand.position = Vector2(200, 300)
 	player.connect("turn_complete", self, "_on_PlayerCharacter_turn_over")
 	player.connect("death", self, "_clean_up_player")
 	$Background/BackgroundAnchor/Field.add_child(player)

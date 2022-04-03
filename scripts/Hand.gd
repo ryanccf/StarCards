@@ -32,7 +32,7 @@ func add_card(card):
 	card.connect("declare_selected", self, "handle_selection")
 	card.connect("unselect", self, "unselect")
 	cards.append(card)
-	card.position = position
+	#card.position = position
 	add_child(card)
 	
 func unselect():
