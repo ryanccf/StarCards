@@ -6,9 +6,6 @@ var offset = Vector2(1, 0)
 var face_down = true
 var selectable = false
 
-func _draw():
-	draw_circle(Vector2.ZERO, 25, Color.blanchedalmond)
-
 func _process(_delta):
 	refresh_card_positions()
 
