@@ -16,5 +16,7 @@ func _should_move():
 func _point_to_locked_target():
 	if ($ShootingZone.has_target() and laser_charge > laser_max):
 		._point_to_locked_target()
+	elif enemy_base:
+		current_target = enemy_base.global_position
 	else:
-		current_target = enemy_base
+		current_target = global_position

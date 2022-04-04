@@ -39,7 +39,7 @@ func set_target(target):
 	current_target = target
 	
 func get_target():
-	 return current_target + global_position - position if current_target else global_position
+	return current_target if current_target else global_position
 	
 func set_enemy_base(base):
 	enemy_base = base
@@ -63,6 +63,7 @@ func move(delta):
 	var collision = $KinematicBody2D.move_and_collide(speed * delta * Vector2(cos(rotation), sin(rotation)))
 	global_position = $KinematicBody2D.global_position
 	$KinematicBody2D.position = Vector2(0, 0)
+	rotation += $KinematicBody2D.rotation 
 	$KinematicBody2D.rotation = 0
 
 func set_friendly(friendliness = true):
@@ -103,7 +104,7 @@ func update_health_bar_size():
 	update_hp()
 
 func _point_to_locked_target():
-	set_target(_find_locked_target() if _has_target() and not $ShootingZone.has_specific_target(enemy_base) else enemy_base)
+	set_target(_find_locked_target() if _has_target() and not $ShootingZone.has_specific_target(enemy_base) else enemy_base.global_position)
 
 func _find_locked_target():
 	return ($ShootingZone.get_locked_target() if $ShootingZone.has_target() else $SensingZone.get_locked_target())

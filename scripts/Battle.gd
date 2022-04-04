@@ -41,14 +41,14 @@ func initialize_monsters():
 	monsters[1].position = Vector2(1100, 401)
 	monsters[0].set_monster_type("base")
 	monsters[1].set_monster_type("fighter")
-	monsters[1].set_target(player.position)
+	monsters[1].set_target(player)
 	opponent.set_base({"position" : Vector2(1100, 401)})
-	opponent.set_enemy_base(player.position)
+	opponent.set_enemy_base(player)
 	opponent.connect("spawn_monster", $Background/BackgroundAnchor/Field, "add_monster")
 	
 	add_child(opponent)
 	for monster in monsters:
-		monster.set_enemy_base(player.position)
+		monster.set_enemy_base(player)
 		$Background/BackgroundAnchor/Field.add_monster(monster, monster.position)
 
 func initialize_player():
@@ -127,6 +127,6 @@ func _on_DeployZone_input_event(viewport, event, shape_idx):
 			monster.set_friendly()
 			for enemy_monster in monsters:
 				if enemy_monster.monster_type == "base":
-					monster.set_target(enemy_monster.position)
-					monster.set_enemy_base(enemy_monster.position)
+					monster.set_target(enemy_monster)
+					monster.set_enemy_base(enemy_monster)
 			$Background/BackgroundAnchor/Field.add_monster(monster, event.position - $Background/BackgroundAnchor/DeployZone.global_position)
