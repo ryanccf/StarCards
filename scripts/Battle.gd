@@ -55,7 +55,6 @@ func initialize_player():
 	player.increase_speed(25)
 	player.update_graphic(playerOneGraphic)
 	player.position = Vector2(100, 300)
-#	$Background/BackgroundAnchor/Hand.position = Vector2(200, 300)
 	player.connect("turn_complete", self, "_on_PlayerCharacter_turn_over")
 	player.connect("death", self, "_clean_up_player")
 	$Background/BackgroundAnchor/Field.add_child(player)
@@ -81,7 +80,6 @@ func initialize_cards():
 				card = DefenderCard.instance()
 			else:
 				card = ArcherCard.instance()
-			card.connect("new_card_selected", self, "unselect_cards")
 			var card_name = rank + "_of_" + suit
 			card.set_id(card_name)
 			var my_filename = "res://card-images/card_front.png"
@@ -102,7 +100,11 @@ func discard_selected():
 	$Background/BackgroundAnchor/Discard.add_card($Background/BackgroundAnchor/Hand.pop_selected())
 
 func check_battle_end():
-	if monsters.size() == 0:
+	var base_found
+	for enemy_monster in monsters:
+		if weakref(enemy_monster).get_ref() and enemy_monster.monster_type == "base":
+			base_found = true
+	if not base_found:
 		get_tree().change_scene("res://Victory.tscn")
 	elif game_over:
 		get_tree().change_scene("res://Defeat.tscn")

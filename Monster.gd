@@ -104,7 +104,8 @@ func update_health_bar_size():
 	update_hp()
 
 func _point_to_locked_target():
-	set_target(_find_locked_target() if _has_target() and not $ShootingZone.has_specific_target(enemy_base) else enemy_base.global_position)
+	if weakref(enemy_base).get_ref():
+		set_target(_find_locked_target() if _has_target() and not $ShootingZone.has_specific_target(enemy_base) else enemy_base.global_position)
 
 func _find_locked_target():
 	return ($ShootingZone.get_locked_target() if $ShootingZone.has_target() else $SensingZone.get_locked_target())

@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 const MIN_COLOR = 0
 const MAX_COLOR = 60
