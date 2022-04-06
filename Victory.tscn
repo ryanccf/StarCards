@@ -10,8 +10,16 @@ font_path = "res://Bungee-Regular.ttf"
 size = 40
 font_data = SubResource( 1 )
 
-[node name="Victory" type="Node2D"]
+[node name="Victory" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Sprite" type="Sprite" parent="."]
 modulate = Color( 1, 1, 1, 0.184314 )

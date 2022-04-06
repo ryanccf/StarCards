@@ -1,4 +1,4 @@
-extends Node2D
+extends "res://TextureStretcher.gd"
 
 func _ready():
 	pass # Replace with function body.

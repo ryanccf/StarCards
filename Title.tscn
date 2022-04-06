@@ -1,9 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Title.gd" type="Script" id=1]
 [ext_resource path="res://302-3025250_cockpit2-airplane-cockpit-transparent.png" type="Texture" id=2]
 [ext_resource path="res://StarSpeck.png" type="Texture" id=3]
 [ext_resource path="res://HennyPenny-Regular.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://TextureStretcher.tscn" type="PackedScene" id=5]
+[ext_resource path="res://cockpit.png" type="Texture" id=6]
 
 [sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 0.0602021 ), 0.0, 0.0, 0, 0, Vector2( 0.996914, 1 ), 0.0, 0.0, 0, 0 ]
@@ -38,6 +40,8 @@ font_data = ExtResource( 4 )
 [node name="Title" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_top = 6.0
+margin_bottom = 6.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -58,7 +62,17 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="Particles2D" type="Particles2D" parent="ColorRect"]
+[node name="Particles2D2" type="Particles2D" parent="."]
+position = Vector2( 933.492, 577.093 )
+rotation = -3.13216
+amount = 100
+lifetime = 100.0
+speed_scale = 7.88
+randomness = 0.28
+process_material = SubResource( 3 )
+texture = ExtResource( 3 )
+
+[node name="Particles2D" type="Particles2D" parent="."]
 position = Vector2( 1188.49, 581.49 )
 rotation = 0.153655
 amount = 100
@@ -68,22 +82,15 @@ randomness = 0.28
 process_material = SubResource( 3 )
 texture = ExtResource( 3 )
 
-[node name="Particles2D2" type="Particles2D" parent="ColorRect"]
-position = Vector2( 933.492, 577.093 )
-rotation = 3.15103
-amount = 100
-lifetime = 100.0
-speed_scale = 7.88
-randomness = 0.28
-process_material = SubResource( 3 )
-texture = ExtResource( 3 )
+[node name="TextureStretcher" parent="." instance=ExtResource( 5 )]
 
-[node name="Sprite" type="Sprite" parent="ColorRect"]
+[node name="Sprite" type="Sprite" parent="TextureStretcher"]
+visible = false
 position = Vector2( 967.432, 602.02 )
 scale = Vector2( 1.42222, 1.42222 )
 texture = ExtResource( 2 )
 
-[node name="Title" type="Label" parent="ColorRect"]
+[node name="Title" type="Label" parent="TextureStretcher"]
 margin_left = -388.0
 margin_top = 66.0
 margin_right = 1596.0
@@ -96,3 +103,8 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Cockpit" type="Sprite" parent="TextureStretcher"]
+position = Vector2( 602.75, 393.75 )
+scale = Vector2( 1.42444, 1.38468 )
+texture = ExtResource( 6 )
