@@ -103,8 +103,9 @@ func check_battle_end():
 		if weakref(enemy_monster).get_ref() and enemy_monster.monster_type == "base":
 			base_found = true
 	if not base_found:
+		Global.add_card("Archer")
 		get_tree().change_scene("res://Victory.tscn")
-	elif game_over:
+	elif game_over:		
 		get_tree().change_scene("res://Defeat.tscn")
 
 func update_battle_arrays():
