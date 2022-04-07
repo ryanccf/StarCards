@@ -38,5 +38,8 @@ margin_bottom = -197.077
 theme = ExtResource( 4 )
 text = "Default
 "
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="input_event" from="Area2D" to="." method="_on_Area2D_input_event"]

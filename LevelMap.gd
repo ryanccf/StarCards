@@ -42,3 +42,10 @@ func _on_beacon(locX, locY):
 	else:
 		player.look_at(Vector2(locX, locY))
 		player.set_target_location(Vector2(locX, locY))
+
+func _process(delta):
+	$DeckButtonAnchor.position = player.position - Vector2(300, 0)
+
+func _on_Area2D_input_event(viewport, event, shape_idx):
+	if "button_index" in event and event.button_index == BUTTON_LEFT and event.pressed:
+		print("Edit deck.")
