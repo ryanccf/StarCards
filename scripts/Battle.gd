@@ -67,26 +67,24 @@ func initialize_cards():
 	$Background/BackgroundAnchor/Hand.set_offset(Vector2(105, 0))
 	$Background/BackgroundAnchor/Hand.set_selectable(true)
 	$Background/BackgroundAnchor/Deck.set_offset(Vector2(0, 0))
-	var suits = ["clubs", "diamonds", "hearts", "spades"]
-	var ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "ace", "jack", "king", "queen"]
-	for suit in suits:
-		for rank in ranks:
-			var card
-			if suit == "hearts":
+	var deck = Global.get_decks()[0].get_cards()
+	var card
+	for card_name in deck:
+		match card_name:
+			"Warrior":
 				card = WarriorCard.instance()
-			elif suit == "spades":
-				card = BarbarianCard.instance()
-			elif suit == "clubs":
+			"Defender":
 				card = DefenderCard.instance()
-			else:
+			"Archer":
 				card = ArcherCard.instance()
-			var card_name = rank + "_of_" + suit
-			card.set_id(card_name)
-			var my_filename = "res://card-images/card_front.png"
-			var card_texture = load(my_filename)
-			card.set_image(card_texture, CardBack)
-			card.flip()
-			$Background/BackgroundAnchor/Deck.add_card(card)
+			"Barbarian":
+				card = BarbarianCard.instance()
+		card.set_id(card_name)
+		var my_filename = "res://card-images/card_front.png"
+		var card_texture = load(my_filename)
+		card.set_image(card_texture, CardBack)
+		card.flip()
+		$Background/BackgroundAnchor/Deck.add_card(card)
 	$Background/BackgroundAnchor/Deck.shuffle()
 
 func draw_card():
