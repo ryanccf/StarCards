@@ -22,6 +22,7 @@ func generate_level():
 	add_child(third)
 	add_child(end)
 	add_child(player)
+	Global.set_player_name("Hero Protagonist")
 	player.position = START_POSITION
 	player.turn_camera_on()
 	start.position = START_POSITION
