@@ -87,7 +87,7 @@ func initialize_cards():
 		$Background/BackgroundAnchor/Deck.add_card(card)
 	$Background/BackgroundAnchor/Deck.shuffle()
 
-func draw_card():	
+func draw_card():
 	var card = $Background/BackgroundAnchor/Deck.draw_card()
 	if not card:
 		reshuffle()
@@ -102,6 +102,7 @@ func reshuffle():
 		$Background/BackgroundAnchor/Hand.remove_child(discarded_card)
 		discarded_card.flip()
 		$Background/BackgroundAnchor/Deck.add_card(discarded_card)
+	$Background/BackgroundAnchor/Deck.shuffle()
 
 func discard_selected():
 	$Background/BackgroundAnchor/Discard.add_card($Background/BackgroundAnchor/Hand.pop_selected())
