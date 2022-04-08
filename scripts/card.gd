@@ -2,7 +2,7 @@ extends Node2D
 
 const Monster = preload("res://Monster.tscn")
 
-var monster = Monster.instance()
+var monster
 var cardID = ""
 var front_image
 var back_image
@@ -28,6 +28,9 @@ func _on_Area2D_input_event(viewport, event, shape_idx):
 				selected = false
 				emit_signal("unselect")
 
+func _ready():
+	reset_monster()
+
 func _process(delta):
 	if selected:
 		scale = card_large_scale
@@ -35,6 +38,9 @@ func _process(delta):
 	else:
 		scale = card_scale
 		z_index = 1
+
+func reset_monster():
+	monster = Monster.instance()
 
 func unselect():
 	selected = false
@@ -76,3 +82,5 @@ func set_monster(new_monster):
 
 func get_monster():
 	return monster
+
+

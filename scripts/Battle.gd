@@ -89,6 +89,11 @@ func initialize_cards():
 
 func draw_card():
 	var card = $Background/BackgroundAnchor/Deck.draw_card()
+	if not card:
+		for i in range($Background/BackgroundAnchor/Discard.card_count()):
+			var discarded_card = $Background/BackgroundAnchor/Discard.draw_card()
+			discarded_card.flip()
+			$Background/BackgroundAnchor/Deck.add_card(discarded_card)
 	if card:
 		card.flip()
 		$Background/BackgroundAnchor/Hand.add_card(card)
@@ -124,6 +129,7 @@ func _on_DeployZone_input_event(viewport, event, shape_idx):
 		if $Background/BackgroundAnchor/Hand.has_selected():
 			var card = $Background/BackgroundAnchor/Hand.pop_selected()
 			$Background/BackgroundAnchor/Discard.add_card(card)
+			card.reset_monster()
 			var monster = card.get_monster()
 			monster.set_friendly()
 			for enemy_monster in monsters:
