@@ -90,14 +90,17 @@ func initialize_cards():
 func draw_card():
 	var card = $Background/BackgroundAnchor/Deck.draw_card()
 	if not card:
-		for i in range($Background/BackgroundAnchor/Discard.card_count()):
-			var discarded_card = $Background/BackgroundAnchor/Discard.draw_card()
-			discarded_card.flip()
-			$Background/BackgroundAnchor/Deck.add_card(discarded_card)
+		reshuffle()
+		card = $Background/BackgroundAnchor/Deck.draw_card()
 	if card:
 		card.flip()
 		$Background/BackgroundAnchor/Hand.add_card(card)
-		#else: reshuffle deck
+
+func reshuffle():
+	for _i in range($Background/BackgroundAnchor/Discard.card_count()):
+		var discarded_card = $Background/BackgroundAnchor/Discard.draw_card()
+		discarded_card.flip()
+		$Background/BackgroundAnchor/Deck.add_card(discarded_card)
 
 func discard_selected():
 	$Background/BackgroundAnchor/Discard.add_card($Background/BackgroundAnchor/Hand.pop_selected())
