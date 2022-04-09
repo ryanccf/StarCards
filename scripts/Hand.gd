@@ -45,5 +45,6 @@ func pop_selected():
 	cards.erase(card)
 	card.unselect()
 	unselect()
-	
+	remove_child(card)
+
 	return card

@@ -99,7 +99,6 @@ func draw_card():
 func reshuffle():
 	for _i in range($Background/BackgroundAnchor/Discard.card_count()):
 		var discarded_card = $Background/BackgroundAnchor/Discard.draw_card()
-		$Background/BackgroundAnchor/Hand.remove_child(discarded_card)
 		discarded_card.flip()
 		$Background/BackgroundAnchor/Deck.add_card(discarded_card)
 	$Background/BackgroundAnchor/Deck.shuffle()
