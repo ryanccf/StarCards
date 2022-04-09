@@ -35,21 +35,10 @@ margin_bottom = 873.0
 custom_fonts/font = SubResource( 2 )
 text = "You Win The Battle!
 
-
-
-You find a cache of
-weapons in the enemy's cargo hold.
-
-AK-47s: 1,500
-30 round magazines: 4,500
-
+You find 0 gold coins.
 You get 0 experience points.
-You find 10 space credits.
-
+You find 1 Star Card!
 
 
 Clickaroo to continue your journey!"
 align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
