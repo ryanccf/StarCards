@@ -49,6 +49,7 @@ func initialize_monsters():
 	add_child(opponent)
 	for monster in monsters:
 		monster.set_enemy_base(player)
+		monster.set_color(Color(20,0,0))
 		$Background/BackgroundAnchor/Field.add_monster(monster, monster.position)
 
 func initialize_player():
