@@ -1,6 +1,44 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scripts/DeckEditor.gd" type="Script" id=1]
 
-[node name="DeckEditor" type="Node2D"]
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 4.4451, 4.63068 )
+
+[node name="DeckEditor" type="Control"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_right = 1200.0
+grow_horizontal = 2
+mouse_filter = 2
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Navigation" type="Control" parent="."]
+margin_right = 1200.0
+margin_bottom = 120.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ExitLabel" type="Label" parent="Navigation"]
+margin_left = 483.0
+margin_top = 34.0
+margin_right = 492.0
+margin_bottom = 48.0
+rect_scale = Vector2( 9.44861, 5.41539 )
+text = "X"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ExitArea" type="Area2D" parent="Navigation/ExitLabel"]
+
+[node name="ExitCollision" type="CollisionShape2D" parent="Navigation/ExitLabel/ExitArea"]
+position = Vector2( 4.33926, 5.36932 )
+shape = SubResource( 1 )
+
+[connection signal="input_event" from="Navigation/ExitLabel/ExitArea" to="." method="_on_ExitArea_input_event"]

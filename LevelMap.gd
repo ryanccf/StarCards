@@ -49,4 +49,4 @@ func _process(delta):
 
 func _on_Area2D_input_event(viewport, event, shape_idx):
 	if "button_index" in event and event.button_index == BUTTON_LEFT and event.pressed:
-		print("Edit deck.")
+		get_tree().change_scene("res://Scenes/DeckEditor.tscn")
