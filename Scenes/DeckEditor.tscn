@@ -1,9 +1,10 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scripts/DeckEditor.gd" type="Script" id=1]
+[ext_resource path="res://images/icon_crossLarge.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 4.4451, 4.63068 )
+extents = Vector2( 5.00001, 5.13068 )
 
 [node name="DeckEditor" type="Control"]
 anchor_left = 0.5
@@ -17,28 +18,24 @@ __meta__ = {
 }
 
 [node name="Navigation" type="Control" parent="."]
-margin_right = 1200.0
-margin_bottom = 120.0
+margin_left = -115.0
+margin_top = -58.0
+margin_right = 1085.0
+margin_bottom = 62.0
 mouse_filter = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="ExitLabel" type="Label" parent="Navigation"]
-margin_left = 483.0
-margin_top = 34.0
-margin_right = 492.0
-margin_bottom = 48.0
-rect_scale = Vector2( 9.44861, 5.41539 )
-text = "X"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Sprite" type="Sprite" parent="Navigation"]
+position = Vector2( 668, 93 )
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 2 )
 
-[node name="ExitArea" type="Area2D" parent="Navigation/ExitLabel"]
+[node name="ExitArea" type="Area2D" parent="Navigation/Sprite"]
+position = Vector2( -40, -60 )
+scale = Vector2( 10, 10 )
 
-[node name="ExitCollision" type="CollisionShape2D" parent="Navigation/ExitLabel/ExitArea"]
-position = Vector2( 4.33926, 5.36932 )
+[node name="ExitCollision" type="CollisionShape2D" parent="Navigation/Sprite/ExitArea"]
+position = Vector2( 4, 5.86932 )
+scale = Vector2( 1, 1 )
 shape = SubResource( 1 )
 
-[connection signal="input_event" from="Navigation/ExitLabel/ExitArea" to="." method="_on_ExitArea_input_event"]
+[connection signal="input_event" from="Navigation/Sprite/ExitArea" to="." method="_on_ExitArea_input_event"]
