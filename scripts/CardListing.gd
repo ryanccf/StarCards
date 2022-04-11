@@ -1,7 +1,34 @@
 extends Control
 
-func set_available(in_deck, total):
-	$HBoxContainer/Available.text = String(in_deck)  + "/" + String(total)
+var used = 0
+var total = 4
 
 func _ready():
-	pass
+	update_text()
+
+func _on_UpArrowArea_input_event(viewport, event, shape_idx):
+	if "button_index" in event and event.button_index == BUTTON_LEFT and event.pressed:
+		increment_used()
+		update_text()
+
+func _on_DownArrowArea_input_event(viewport, event, shape_idx):
+	if "button_index" in event and event.button_index == BUTTON_LEFT and event.pressed:
+		decrement_used()
+		update_text()
+
+func increment_used():
+	if used < total:
+		used += 1
+	
+func decrement_used():
+	if used > 0:
+		used -=1
+
+func update_text():
+	$HBoxContainer/Available.text = String(used)  + "/" + String(total)
+
+func set_used(count):
+	used = count
+	
+func set_total(count):
+	total = count
