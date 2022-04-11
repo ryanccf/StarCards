@@ -62,8 +62,10 @@ func set_image(front_texture, back_texture):
 func update_texture():
 	if flipped:
 		$Area2D/Icon.texture = front_image #load(front_image)
+		$Area2D/Icon/ColorRect.visible = true
 	else:
 		$Area2D/Icon.texture = back_image #load(back_image)
+		$Area2D/Icon/ColorRect.visible = false
 
 func set_selectable(truthiness):
 	selectable = truthiness
