@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Victory.gd" type="Script" id=1]
 [ext_resource path="res://weaponscache.jpeg" type="Texture" id=2]
+[ext_resource path="res://images/icons/arrow_right.png" type="Texture" id=3]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://Bungee-Regular.ttf"
@@ -17,9 +18,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Sprite" type="Sprite" parent="."]
 modulate = Color( 1, 1, 1, 0.184314 )
@@ -42,3 +40,12 @@ You find 1 Star Card!
 
 Clickaroo to continue your journey!"
 align = 1
+
+[node name="Button" type="Button" parent="."]
+margin_left = 637.0
+margin_top = 517.0
+margin_right = 777.0
+margin_bottom = 651.0
+icon = ExtResource( 3 )
+
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

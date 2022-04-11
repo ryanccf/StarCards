@@ -20,6 +20,9 @@ func get_cards():
 
 func add_card(card_name):
 	cards.add_card(card_name)
+	
+func get_canonical_card_list():
+	return ["Archer", "Barbarian", "Defender", "Warrior"]
 
 func initialize():
 	var new_decklist = Decklist.instance()
