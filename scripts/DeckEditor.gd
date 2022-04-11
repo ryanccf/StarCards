@@ -1,7 +1,10 @@
 extends Control
 
 var CardListing = preload("res://Scenes/CardListing.tscn")
+var ArcherCardListing = preload("res://Scenes/ArcherCardListing.tscn")
 var BarbarianCardListing = preload("res://Scenes/BarbarianCardListing.tscn")
+var DefenderCardListing = preload("res://Scenes/DefenderCardListing.tscn")
+
 
 func _ready():
 	var deck = Global.get_decks()[0].get_cards()
@@ -19,9 +22,15 @@ func _ready():
 	
 	for card_name in card_count_map:
 		if card_count_map[card_name] > 0:
-			var card_listing = CardListing.instance()
-			if card_name == "Barbarian":
+			var card_listing
+			if card_name == "Archer":
+				card_listing = ArcherCardListing.instance()
+			elif card_name == "Barbarian":
 				card_listing = BarbarianCardListing.instance()
+			elif card_name == "Defender":
+				card_listing = DefenderCardListing.instance()
+			elif card_name == "Warrior":
+				card_listing = CardListing.instance()
 			card_listing.set_used(0)
 			card_listing.set_total(card_count_map[card_name])
 			
