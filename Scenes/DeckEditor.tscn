@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scripts/DeckEditor.gd" type="Script" id=1]
 [ext_resource path="res://images/icon_crossLarge.png" type="Texture" id=2]
-[ext_resource path="res://Scenes/CardListing.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5.00001, 5.13068 )
@@ -48,39 +47,7 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
-margin_right = 1200.0
-margin_bottom = 144.0
 grow_horizontal = 2
 mouse_filter = 2
-
-[node name="ColorRect" type="ColorRect" parent="ScrollContainer/VBoxContainer"]
-margin_right = 1200.0
-grow_horizontal = 2
-mouse_filter = 2
-color = Color( 1, 0, 0, 1 )
-
-[node name="CardListing" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 3 )]
-anchor_right = 0.0
-margin_top = 4.0
-margin_right = 1200.0
-margin_bottom = 36.0
-
-[node name="CardListing2" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 3 )]
-anchor_right = 0.0
-margin_top = 40.0
-margin_right = 1200.0
-margin_bottom = 72.0
-
-[node name="CardListing3" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 3 )]
-anchor_right = 0.0
-margin_top = 76.0
-margin_right = 1200.0
-margin_bottom = 108.0
-
-[node name="CardListing4" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 3 )]
-anchor_right = 0.0
-margin_top = 112.0
-margin_right = 1200.0
-margin_bottom = 144.0
 
 [connection signal="input_event" from="Navigation/Sprite/ExitArea" to="." method="_on_ExitArea_input_event"]
