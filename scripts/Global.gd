@@ -20,8 +20,6 @@ func get_cards():
 
 func add_card(card_name):
 	cards.add_card(card_name)
-	#For testing:
-	decks[0].add_card(card_name)
 
 func initialize():
 	var new_decklist = Decklist.instance()
