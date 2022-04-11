@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://images/ship_E.png" type="Texture" id=1]
+[ext_resource path="res://scripts/CardListing.gd" type="Script" id=2]
+
+[node name="CardListing" type="Control"]
+anchor_right = 1.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 1200, 32 )
+script = ExtResource( 2 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_left = 35.0
+margin_top = 13.0
+margin_right = 107.0
+margin_bottom = 27.0
+alignment = 1
+
+[node name="Name" type="Label" parent="HBoxContainer"]
+margin_right = 47.0
+margin_bottom = 14.0
+text = "Warrior"
+
+[node name="Available" type="Label" parent="HBoxContainer"]
+margin_left = 51.0
+margin_right = 72.0
+margin_bottom = 14.0
+text = "4/4"
+
+[node name="Icon" type="Sprite" parent="HBoxContainer"]
+position = Vector2( -16, 5 )
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 1 )
