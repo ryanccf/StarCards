@@ -5,7 +5,6 @@ var ArcherCardListing = preload("res://Scenes/ArcherCardListing.tscn")
 var BarbarianCardListing = preload("res://Scenes/BarbarianCardListing.tscn")
 var DefenderCardListing = preload("res://Scenes/DefenderCardListing.tscn")
 
-
 func _ready():
 	var deck = Global.get_decks()[0].get_cards()
 	var cards = Global.get_cards()
@@ -43,6 +42,8 @@ func _ready():
 				card_listing = DefenderCardListing.instance()
 			elif card_name == "Warrior":
 				card_listing = CardListing.instance()
+			card_listing.connect("increment_used", self, "increment_used")
+			card_listing.connect("decrement_used", self, "decrement_used")
 			card_listing.set_used(used_card_count_map[card_name])
 			card_listing.set_total(total_card_count_map[card_name])
 			
@@ -54,3 +55,9 @@ func _process(delta):
 func _on_ExitArea_input_event(viewport, event, shape_idx):
 	if "button_index" in event and event.button_index == BUTTON_LEFT and event.pressed:
 		get_tree().change_scene("res://LevelMap.tscn")
+
+func increment_used(card_name):
+	Global.get_decks()[0].add_card(card_name)
+	
+func decrement_used(card_name):
+	Global.get_decks()[0].remove_card(card_name)
