@@ -9,8 +9,16 @@ var DefenderCardListing = preload("res://Scenes/DefenderCardListing.tscn")
 func _ready():
 	var deck = Global.get_decks()[0].get_cards()
 	var cards = Global.get_cards()
+	var used_cards = Global.get_decks()[0].get_cards()
 	
-	var card_count_map = {
+	var total_card_count_map = {
+		"Archer" : 0,
+		"Barbarian" : 0,
+		"Defender" : 0,
+		"Warrior" : 0
+	}
+	
+	var used_card_count_map = {
 		"Archer" : 0,
 		"Barbarian" : 0,
 		"Defender" : 0,
@@ -18,10 +26,14 @@ func _ready():
 	}
 
 	for card_name in cards:
-		card_count_map[card_name] += 1
+		total_card_count_map[card_name] += 1
+		
+	for card_name in used_cards:
+		used_card_count_map[card_name] += 1
+
 	
-	for card_name in card_count_map:
-		if card_count_map[card_name] > 0:
+	for card_name in total_card_count_map:
+		if total_card_count_map[card_name] > 0:
 			var card_listing
 			if card_name == "Archer":
 				card_listing = ArcherCardListing.instance()
@@ -31,8 +43,8 @@ func _ready():
 				card_listing = DefenderCardListing.instance()
 			elif card_name == "Warrior":
 				card_listing = CardListing.instance()
-			card_listing.set_used(0)
-			card_listing.set_total(card_count_map[card_name])
+			card_listing.set_used(used_card_count_map[card_name])
+			card_listing.set_total(total_card_count_map[card_name])
 			
 			$ScrollContainer/VBoxContainer.add_child(card_listing)
 
