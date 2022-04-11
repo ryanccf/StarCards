@@ -44,3 +44,8 @@ func initialize():
 
 func _ready():
 	initialize()
+
+func reset_progress():
+	decks = []
+	cards = Decklist.instance()
+	initialize()
