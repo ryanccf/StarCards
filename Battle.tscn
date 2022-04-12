@@ -24,9 +24,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="BattleAnchor" type="Control" parent="."]
 anchor_left = 0.5
@@ -72,9 +69,6 @@ mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 color = Color( 0, 0, 0, 0 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="BackgroundAnchor" type="Control" parent="Background"]
 anchor_left = 0.5
@@ -160,3 +154,4 @@ position = Vector2( -472, 322 )
 script = ExtResource( 5 )
 
 [connection signal="input_event" from="Background/BackgroundAnchor/DeployZone" to="." method="_on_DeployZone_input_event"]
+[connection signal="input_event" from="Background/BackgroundAnchor/ZoneOfInfluence" to="." method="_on_ZoneOfInfluence_input_event"]

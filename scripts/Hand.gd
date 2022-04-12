@@ -38,6 +38,9 @@ func add_card(card):
 func unselect():
 	selected_card_id = null
 
+func get_selected():
+	return instance_from_id(selected_card_id)
+
 func pop_selected():
 	var card = instance_from_id(selected_card_id)
 	card.disconnect("declare_selected", self, "handle_selection")

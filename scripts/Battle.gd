@@ -4,6 +4,7 @@ var card_id_counter = 0
 var CardBack =  load("res://card-images/card_back.png")
 var playerOneGraphic = load("res://images/ship.png")
 var Card = preload("res://Card.tscn")
+var DirectAttackCard = preload("res://cards/DirectAttack.tscn")
 var DefenderCard = preload("res://cards/Defender.tscn")
 var WarriorCard = preload("res://cards/Warrior.tscn")
 var ArcherCard = preload("res://cards/Archer.tscn")
@@ -72,6 +73,8 @@ func initialize_cards():
 	var card
 	for card_name in deck:
 		match card_name:
+			"DirectAttack":
+				card = DirectAttackCard.instance()
 			"Warrior":
 				card = WarriorCard.instance()
 			"Defender":
@@ -129,6 +132,15 @@ func _clean_up_player():
 	game_over = true;
 
 func _on_DeployZone_input_event(viewport, event, shape_idx):
+
+	if event is InputEventMouseButton and event.pressed:
+		if $Background/BackgroundAnchor/Hand.has_selected() and $Background/BackgroundAnchor/Hand.get_selected().has_method("utility_action"):
+			var card = $Background/BackgroundAnchor/Hand.pop_selected()
+			var action = card.utility_action()
+			$Background/BackgroundAnchor/Field.add_child(action)
+			action.set_position(event.position + $Background/BackgroundAnchor/ZoneOfInfluence.global_position)
+			$Background/BackgroundAnchor/Discard.add_card(card)
+			return
 	if event is InputEventMouseButton and event.pressed:
 		if $Background/BackgroundAnchor/Hand.has_selected():
 			var card = $Background/BackgroundAnchor/Hand.pop_selected()
@@ -141,3 +153,13 @@ func _on_DeployZone_input_event(viewport, event, shape_idx):
 					monster.set_target(enemy_monster)
 					monster.set_enemy_base(enemy_monster)
 			$Background/BackgroundAnchor/Field.add_monster(monster, event.position - $Background/BackgroundAnchor/DeployZone.global_position)
+
+func _on_ZoneOfInfluence_input_event(viewport, event, shape_idx):
+	if event is InputEventMouseButton and event.pressed:
+		if $Background/BackgroundAnchor/Hand.has_selected() and $Background/BackgroundAnchor/Hand.get_selected().has_method("utility_action"):
+			var card = $Background/BackgroundAnchor/Hand.pop_selected()
+			var action = card.utility_action()
+			$Background/BackgroundAnchor/Field.add_child(action)
+			action.set_position(event.position + $Background/BackgroundAnchor/ZoneOfInfluence.global_position)
+			$Background/BackgroundAnchor/Discard.add_card(card)
+			

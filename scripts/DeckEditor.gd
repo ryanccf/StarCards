@@ -4,6 +4,7 @@ var CardListing = preload("res://Scenes/CardListing.tscn")
 var ArcherCardListing = preload("res://Scenes/ArcherCardListing.tscn")
 var BarbarianCardListing = preload("res://Scenes/BarbarianCardListing.tscn")
 var DefenderCardListing = preload("res://Scenes/DefenderCardListing.tscn")
+var DirectAttackCardListing = preload("res://Scenes/DirectAttackCardListing.tscn")
 
 func _ready():
 	var deck = Global.get_decks()[0].get_cards()
@@ -14,14 +15,16 @@ func _ready():
 		"Archer" : 0,
 		"Barbarian" : 0,
 		"Defender" : 0,
-		"Warrior" : 0
+		"Warrior" : 0,
+		"DirectAttack" : 0
 	}
 	
 	var used_card_count_map = {
 		"Archer" : 0,
 		"Barbarian" : 0,
 		"Defender" : 0,
-		"Warrior" : 0
+		"Warrior" : 0,
+		"DirectAttack" : 0
 	}
 
 	for card_name in cards:
@@ -42,6 +45,9 @@ func _ready():
 				card_listing = DefenderCardListing.instance()
 			elif card_name == "Warrior":
 				card_listing = CardListing.instance()
+			elif card_name == "DirectAttack":
+				card_listing = DirectAttackCardListing.instance()
+
 			card_listing.connect("increment_used", self, "increment_used")
 			card_listing.connect("decrement_used", self, "decrement_used")
 			card_listing.set_used(used_card_count_map[card_name])

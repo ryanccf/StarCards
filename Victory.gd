@@ -3,6 +3,7 @@ var ArcherCard = preload("res://cards/Archer.tscn")
 var BarbarianCard = preload("res://cards/Barbarian.tscn")
 var DefenderCard = preload("res://cards/Defender.tscn")
 var WarriorCard = preload("res://cards/Warrior.tscn")
+var DirectAttackCard = preload("res://cards/DirectAttack.tscn")
 
 var rng = RandomNumberGenerator.new()
 
@@ -25,6 +26,8 @@ func _ready():
 				actual_card = DefenderCard.instance()
 			"Warrior" : 
 				actual_card = WarriorCard.instance()
+			"DirectAttack":
+				actual_card = DirectAttackCard.instance()
 		actual_prize_cards.push_back(actual_card)
 	var i = 0
 	for prize in $ContentAnchor/Prizes.get_children():

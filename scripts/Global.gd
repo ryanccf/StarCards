@@ -22,10 +22,11 @@ func add_card(card_name):
 	cards.add_card(card_name)
 	
 func get_canonical_card_list():
-	return ["Archer", "Barbarian", "Defender", "Warrior"]
+	return ["Archer", "Barbarian", "Defender", "Warrior", "DirectAttack"]
 
 func initialize():
 	var new_decklist = Decklist.instance()
+	new_decklist.add_card("DirectAttack")
 	new_decklist.add_card("Warrior")
 	new_decklist.add_card("Defender")
 	#new_decklist.add_card("Archer")
@@ -34,6 +35,7 @@ func initialize():
 	new_decklist.add_card("Warrior")
 	new_decklist.add_card("Warrior")
 	decks.push_back(new_decklist)
+	cards.add_card("DirectAttack")
 	cards.add_card("Warrior")
 	cards.add_card("Defender")
 	#cards.add_card("Archer")
