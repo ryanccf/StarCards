@@ -115,6 +115,8 @@ func _has_target():
 
 func take_damage(damage):
 	currentHP -= damage
+	if currentHP > maxHP:
+		currentHP = maxHP
 	update_health_bar_size()
 
 func update_graphic(new_graphic):
