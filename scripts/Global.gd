@@ -7,12 +7,14 @@ var BarbarianCard = preload("res://cards/Barbarian.tscn")
 var DefenderCard = preload("res://cards/Defender.tscn")
 var WarriorCard = preload("res://cards/Warrior.tscn")
 var DirectAttackCard = preload("res://cards/DirectAttack.tscn")
+var RepairCard = preload("res://cards/RepairCard.tscn")
 
 var CardListing = preload("res://Scenes/CardListing.tscn")
 var ArcherCardListing = preload("res://Scenes/ArcherCardListing.tscn")
 var BarbarianCardListing = preload("res://Scenes/BarbarianCardListing.tscn")
 var DefenderCardListing = preload("res://Scenes/DefenderCardListing.tscn")
 var DirectAttackCardListing = preload("res://Scenes/DirectAttackCardListing.tscn")
+var RepairCardListing = preload("res://Scenes/RepairCardListing.tscn")
 
 var canonicalCardMap = {
 	"Archer" : {
@@ -34,6 +36,10 @@ var canonicalCardMap = {
 	"DirectAttack" : {
 		"card" : DirectAttackCard,
 		"card_listing" : DirectAttackCardListing
+	},
+	"Repair" : {
+		"card" : RepairCard,
+		"card_listing" : RepairCardListing
 	}
 }
 
@@ -67,6 +73,7 @@ func get_card_listing(card_name):
 
 func initialize():
 	var new_decklist = Decklist.instance()
+	new_decklist.add_card("Repair")
 	new_decklist.add_card("DirectAttack")
 	new_decklist.add_card("Warrior")
 	new_decklist.add_card("Defender")
@@ -76,6 +83,7 @@ func initialize():
 	new_decklist.add_card("Warrior")
 	new_decklist.add_card("Warrior")
 	decks.push_back(new_decklist)
+	cards.add_card("Repair")
 	cards.add_card("DirectAttack")
 	cards.add_card("Warrior")
 	cards.add_card("Defender")
