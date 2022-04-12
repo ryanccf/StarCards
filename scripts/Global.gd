@@ -14,6 +14,29 @@ var BarbarianCardListing = preload("res://Scenes/BarbarianCardListing.tscn")
 var DefenderCardListing = preload("res://Scenes/DefenderCardListing.tscn")
 var DirectAttackCardListing = preload("res://Scenes/DirectAttackCardListing.tscn")
 
+var canonicalCardMap = {
+	"Archer" : {
+		"card" : ArcherCard,
+		"card_listing" : ArcherCardListing
+	},
+	"Barbarian" : {
+		"card" : BarbarianCard,
+		"card_listing" : BarbarianCardListing
+	},
+	"Defender" : {
+		"card" : DefenderCard,
+		"card_listing" : DefenderCardListing
+	},
+	"Warrior" : {
+		"card" : WarriorCard,
+		"card_listing" : CardListing
+	},
+	"DirectAttack" : {
+		"card" : DirectAttackCard,
+		"card_listing" : DirectAttackCardListing
+	}
+}
+
 var player_name = "Player 1"
 var decks = []
 var cards = Decklist.instance()
@@ -34,36 +57,13 @@ func add_card(card_name):
 	cards.add_card(card_name)
 	
 func get_canonical_card_list():
-	return ["Archer", "Barbarian", "Defender", "Warrior", "DirectAttack"]
+	return canonicalCardMap.keys()
 
 func get_card(card_name):
-	var card
-	match(card_name):
-		"Archer" :
-			card = ArcherCard.instance()
-		"Barbarian" :
-			card = BarbarianCard.instance()
-		"Defender" :
-			card = DefenderCard.instance()
-		"Warrior" : 
-			card = WarriorCard.instance()
-		"DirectAttack":
-			card = DirectAttackCard.instance()
-	return card
+	return canonicalCardMap[card_name].card.instance()
 
 func get_card_listing(card_name):
-	var card_listing
-	if card_name == "Archer":
-		card_listing = ArcherCardListing.instance()
-	elif card_name == "Barbarian":
-		card_listing = BarbarianCardListing.instance()
-	elif card_name == "Defender":
-		card_listing = DefenderCardListing.instance()
-	elif card_name == "Warrior":
-		card_listing = CardListing.instance()
-	elif card_name == "DirectAttack":
-		card_listing = DirectAttackCardListing.instance()
-	return card_listing
+	return canonicalCardMap[card_name].card_listing.instance()
 
 func initialize():
 	var new_decklist = Decklist.instance()
