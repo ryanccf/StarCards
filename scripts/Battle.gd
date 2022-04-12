@@ -72,17 +72,7 @@ func initialize_cards():
 	var deck = Global.get_decks()[0].get_cards()
 	var card
 	for card_name in deck:
-		match card_name:
-			"DirectAttack":
-				card = DirectAttackCard.instance()
-			"Warrior":
-				card = WarriorCard.instance()
-			"Defender":
-				card = DefenderCard.instance()
-			"Archer":
-				card = ArcherCard.instance()
-			"Barbarian":
-				card = BarbarianCard.instance()
+		card = Global.get_card(card_name)
 		card.set_id(card_name)
 		var my_filename = "res://card-images/card_front.png"
 		var card_texture = load(my_filename)

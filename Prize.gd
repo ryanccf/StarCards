@@ -9,8 +9,6 @@ var card_name
 func set_card(new_card):
 	$CardAnchor.add_child(new_card)
 	card = new_card
-	#card.position = Vector2.ZERO
-	
 
 func set_card_name(new_card_name):
 	card_name = new_card_name
