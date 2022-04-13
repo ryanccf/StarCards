@@ -130,13 +130,6 @@ func _on_DeployZone_input_event(viewport, event, shape_idx):
 func _on_ZoneOfInfluence_input_event(viewport, event, shape_idx):
 	if _is_utility_card_ready(event):
 		_play_utility_card_selected(event)
-	if event is InputEventMouseButton and event.pressed:
-		if $Background/BackgroundAnchor/Hand.has_selected() and $Background/BackgroundAnchor/Hand.get_selected().has_method("utility_action"):
-			var card = $Background/BackgroundAnchor/Hand.pop_selected()
-			var action = card.utility_action()
-			$Background/BackgroundAnchor/Field.add_child(action)
-			action.set_position(event.position + $Background/BackgroundAnchor/ZoneOfInfluence.global_position)
-			$Background/BackgroundAnchor/Discard.add_card(card)
 
 func _is_utility_card_ready(event):
 	return _is_clicked(event) and $Background/BackgroundAnchor/Hand.get_selected().has_method("utility_action")
