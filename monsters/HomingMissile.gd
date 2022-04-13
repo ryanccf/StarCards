@@ -7,7 +7,7 @@ func _ready():
 	update_graphic(graphic)
 	speed = 80
 	laser_max = 12000
-	maxHP = 3
+	maxHP = 2
 
 func _check_lasers(delta):
 	if laser_charge <= laser_max:
