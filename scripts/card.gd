@@ -84,5 +84,3 @@ func set_monster(new_monster):
 
 func get_monster():
 	return monster
-
-
