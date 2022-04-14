@@ -20,6 +20,7 @@ func get_body():
 
 func _ready():
 	update_hp()
+	$StabilizedAnchor/HealthBar.rect_position.y -= 45
 	$HitZone.connect("damage_taken", self, "take_damage")
 	$HitZone.set_friendly(is_friendly())
 	$PathPicker.set_body($KinematicBody2D)
@@ -100,7 +101,7 @@ func _check_lasers(delta):
 		emit_signal("spawn_laser", position, rotation, current_target, friendly)
 
 func update_health_bar_size():
-	$HealthBarHolder/HealthBar.rect_size.x = float(float(currentHP)/float(maxHP) * 100)
+	$StabilizedAnchor/HealthBar.rect_size.x = float(float(currentHP)/float(maxHP) * 100)
 	update_hp()
 
 func _point_to_locked_target():
@@ -123,6 +124,7 @@ func update_graphic(new_graphic):
 	$Sprite.set_texture(new_graphic)
 
 func _stabilize_health_bar():
-	$HealthBarHolder.rotation = -1 * rotation
-	$HealthBarHolder.global_position.x = global_position.x
-	$HealthBarHolder.global_position.y = global_position.y - 45
+	$StabilizedAnchor.rotation = -1 * rotation
+	$StabilizedAnchor.global_position.x = global_position.x
+	$StabilizedAnchor.global_position.y = global_position.y# - 45
+

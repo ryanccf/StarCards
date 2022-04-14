@@ -41,7 +41,6 @@ func _out_of_right_bounds():
 func _out_of_left_bounds():
 	return not _target_to_right and _target.x > global_position.x
 
-
 func _on_Area2D_area_entered(area):
 	if area.has_method("take_damage") and not is_aligned_with(area):
 		area.take_damage(1)

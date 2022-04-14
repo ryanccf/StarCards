@@ -53,18 +53,15 @@ scale = Vector2( 2, 2 )
 [node name="SensingZone" parent="." instance=ExtResource( 5 )]
 scale = Vector2( 2.667, 2.667 )
 
-[node name="HealthBarHolder" type="Node2D" parent="."]
+[node name="StabilizedAnchor" type="Node2D" parent="."]
 
-[node name="HealthBar" type="ColorRect" parent="HealthBarHolder"]
+[node name="HealthBar" type="ColorRect" parent="StabilizedAnchor"]
 margin_left = -34.2324
 margin_top = -6.99751
 margin_right = 105.768
 margin_bottom = 21.0024
 rect_scale = Vector2( 0.5, 0.5 )
 color = Color( 0.72549, 0.0823529, 0.0823529, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="KinematicBody2D" type="KinematicBody2D" parent="."]
 
