@@ -141,5 +141,6 @@ func _play_utility_card_selected(event):
 	var card = $Background/BackgroundAnchor/Hand.pop_selected()
 	var action = card.utility_action()
 	$Background/BackgroundAnchor/Field.add_child(action)
-	action.set_position(event.position + $Background/BackgroundAnchor/ZoneOfInfluence.global_position)
+	print(event.position)
+	action.set_position(event.position - $Background/BackgroundAnchor/ZoneOfInfluence.global_position)
 	$Background/BackgroundAnchor/Discard.add_card(card)
