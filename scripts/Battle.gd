@@ -91,24 +91,17 @@ func _clean_up_player():
 func _on_DeployZone_input_event(viewport, event, shape_idx):
 	if _is_utility_card_ready(event):
 		_play_utility_card_selected(event)
-	elif _is_clicked(event):
-		var card = $Background/BackgroundAnchor/Hand.pop_selected()
-		$Background/BackgroundAnchor/Discard.add_card(card)
-		card.reset_monster()
-		var monster = card.get_monster()
-		monster.set_friendly()
-		monster.set_target(opponent.get_base())
-		monster.set_enemy_base(opponent.get_base())
-		$Background/BackgroundAnchor/Field.add_monster(monster, event.position - $Background/BackgroundAnchor/DeployZone.global_position)
+	elif _is_card_ready(event):
+		_play_monster_card_selected(event)
 
 func _on_ZoneOfInfluence_input_event(viewport, event, shape_idx):
 	if _is_utility_card_ready(event):
 		_play_utility_card_selected(event)
 
 func _is_utility_card_ready(event):
-	return _is_clicked(event) and $Background/BackgroundAnchor/Hand.get_selected().has_method("utility_action")
+	return _is_card_ready(event) and $Background/BackgroundAnchor/Hand.get_selected().has_method("utility_action")
 
-func _is_clicked(event):
+func _is_card_ready(event):
 	return event is InputEventMouseButton and event.pressed and $Background/BackgroundAnchor/Hand.has_selected()
 
 func _play_utility_card_selected(event):
@@ -118,3 +111,13 @@ func _play_utility_card_selected(event):
 	print(event.position)
 	action.set_position(event.position - $Background/BackgroundAnchor/ZoneOfInfluence.global_position)
 	$Background/BackgroundAnchor/Discard.add_card(card)
+
+func _play_monster_card_selected(event):
+	var card = $Background/BackgroundAnchor/Hand.pop_selected()
+	$Background/BackgroundAnchor/Discard.add_card(card)
+	card.reset_monster()
+	var monster = card.get_monster()
+	monster.set_friendly()
+	monster.set_target(opponent.get_base())
+	monster.set_enemy_base(opponent.get_base())
+	$Background/BackgroundAnchor/Field.add_monster(monster, event.position - $Background/BackgroundAnchor/DeployZone.global_position)

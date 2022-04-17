@@ -6,7 +6,7 @@ func _ready():
 	$SensingZone.connect("target_leaves", self, "_reaffirm_focus")
 	_focus()
 
-func _process(delta):
+func _process(_delta):
 	if not has_target():
 		_focus()
 	
