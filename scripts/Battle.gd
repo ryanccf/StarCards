@@ -1,6 +1,5 @@
 extends Control
 
-var card_id_counter = 0
 var CardBack =  load("res://card-images/card_back.png")
 var playerOneGraphic = load("res://images/ship.png")
 var PlayerCharacter = preload("res://PlayerCharacter.tscn")

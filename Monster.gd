@@ -26,10 +26,8 @@ func _ready():
 	$HitZone.set_friendly(is_friendly())
 	$PathPicker.set_body($KinematicBody2D)
 	$ObstacleAvoider.add_exception($KinematicBody2D)
-	
 
 func _physics_process(delta):
-	print(out_of_bounds())
 	_check_death()
 	_rotate()
 	if _should_move():
@@ -50,7 +48,6 @@ func set_enemy_base(base):
 func _rotate():
 	_point_to_locked_target()
 	look_at(get_target())
-#	var path_rotation = $PathPicker.pick_path()
 
 func _should_move():
 	return monster_type != "base" and current_target and not $ShootingZone.has_target()
@@ -58,7 +55,6 @@ func _should_move():
 func _avoid_obstacles():
 	var path_rotation = $ObstacleAvoider.get_viable_rotation()
 	if path_rotation != null:
-		#print(path_rotation)
 		rotation += path_rotation
 
 func move(delta):
