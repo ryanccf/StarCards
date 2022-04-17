@@ -5,44 +5,23 @@ var CardBack =  load("res://card-images/card_back.png")
 var playerOneGraphic = load("res://images/ship.png")
 var PlayerCharacter = preload("res://PlayerCharacter.tscn")
 var opponent = preload("res://Opponent.tscn").instance()
-var Warrior = preload("res://monsters/Warrior.tscn")
 var selected = false 
 var player = PlayerCharacter.instance()
 var enemy_base
 var game_over = false
-var monsters = []
 
 func _ready():
 	randomize()
 	initialize_cards()
 	initialize_player()
-	initialize_monsters()
+	initialize_opponent()
 
 func _on_PlayerCharacter_turn_over():
 	if ($Background/BackgroundAnchor/Hand.card_count() < 7):
 		draw_card()
 
 func _process(delta):
-	update_battle_arrays()
 	check_battle_end()
-
-func initialize_monsters():
-	monsters.append(Warrior.instance())
-	monsters.append(Warrior.instance())
-	monsters[0].position = Vector2(950, 200)
-	monsters[1].position = Vector2(1100, 401)
-	monsters[0].set_monster_type("base")
-	monsters[1].set_monster_type("fighter")
-	monsters[1].set_target(player)
-	opponent.set_base({"position" : Vector2(1100, 401)})
-	opponent.set_enemy_base(player)
-	opponent.connect("spawn_monster", $Background/BackgroundAnchor/Field, "add_monster")
-	
-	add_child(opponent)
-	for monster in monsters:
-		monster.set_enemy_base(player)
-		monster.set_color(Color(20,0,0))
-		$Background/BackgroundAnchor/Field.add_monster(monster, monster.position)
 
 func initialize_player():
 	player.increase_speed(25)
@@ -51,6 +30,12 @@ func initialize_player():
 	player.connect("turn_complete", self, "_on_PlayerCharacter_turn_over")
 	player.connect("death", self, "_clean_up_player")
 	$Background/BackgroundAnchor/Field.add_child(player)
+
+func initialize_opponent():
+	opponent.set_spawn($Background/BackgroundAnchor/Field/SpawnPoint)
+	opponent.set_enemy_base(player)
+	opponent.connect("spawn_monster", $Background/BackgroundAnchor/Field, "add_monster")
+	add_child(opponent)
 
 func assign_card_id():
 	card_id_counter += 1
@@ -92,19 +77,10 @@ func discard_selected():
 	$Background/BackgroundAnchor/Discard.add_card($Background/BackgroundAnchor/Hand.pop_selected())
 
 func check_battle_end():
-	var base_found
-	for enemy_monster in monsters:
-		if weakref(enemy_monster).get_ref() and enemy_monster.monster_type == "base":
-			base_found = true
-	if not base_found:
+	if not opponent.has_base():
 		get_tree().change_scene("res://Victory.tscn")
 	elif game_over:
 		get_tree().change_scene("res://Defeat.tscn")
-
-func update_battle_arrays():
-	for monster in monsters:
-		if !is_instance_valid(monster):
-			monsters.erase(monster)
 
 func exit_battle():
 	get_tree().change_scene("res://LevelMap.tscn")
@@ -121,10 +97,8 @@ func _on_DeployZone_input_event(viewport, event, shape_idx):
 		card.reset_monster()
 		var monster = card.get_monster()
 		monster.set_friendly()
-		for enemy_monster in monsters:
-			if enemy_monster.monster_type == "base":
-				monster.set_target(enemy_monster)
-				monster.set_enemy_base(enemy_monster)
+		monster.set_target(opponent.get_base())
+		monster.set_enemy_base(opponent.get_base())
 		$Background/BackgroundAnchor/Field.add_monster(monster, event.position - $Background/BackgroundAnchor/DeployZone.global_position)
 
 func _on_ZoneOfInfluence_input_event(viewport, event, shape_idx):
