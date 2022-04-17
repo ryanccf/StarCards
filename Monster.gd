@@ -8,6 +8,7 @@ var friendly = false
 var speed = 55
 var current_target
 var enemy_base
+var bounds
 var laser_charge = 0
 var laser_max = 10000
 onready var sensing_zone = $SensingZone
@@ -28,6 +29,7 @@ func _ready():
 	
 
 func _physics_process(delta):
+	print(out_of_bounds())
 	_check_death()
 	_rotate()
 	if _should_move():
@@ -58,7 +60,6 @@ func _avoid_obstacles():
 	if path_rotation != null:
 		#print(path_rotation)
 		rotation += path_rotation
-
 
 func move(delta):
 	var collision = $KinematicBody2D.move_and_collide(speed * delta * Vector2(cos(rotation), sin(rotation)))
@@ -129,3 +130,8 @@ func _stabilize_health_bar():
 	$StabilizedAnchor.global_position.x = global_position.x
 	$StabilizedAnchor.global_position.y = global_position.y# - 45
 
+func set_bounds(bounds_area):
+	bounds = bounds_area
+
+func out_of_bounds():
+	return bounds in $HitZone.get_overlapping_areas()
