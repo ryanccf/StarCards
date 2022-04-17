@@ -10,6 +10,7 @@ func add_monster(monster, position):
 	monster.connect("spawn_laser", self, "_handle_laser_spawn")
 	monster.connect("boom", self, "_handle_boom")
 	
+	
 func _handle_laser_spawn(laser_position, laser_rotation, laser_target, is_friendly):
 	var laser = Laser.instance()
 	laser.position = laser_position

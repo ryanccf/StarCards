@@ -90,7 +90,8 @@ func update_hp():
 
 func _check_death():
 	if currentHP <= 0:
-		get_parent().remove_child(self)
+		if(get_parent()):
+			get_parent().remove_child(self)
 		queue_free()
 
 func _check_lasers(delta):
