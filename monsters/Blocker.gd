@@ -16,6 +16,7 @@ func _ready():
 	currentHP = maxHP
 	update_hp()
 	update_graphic(graphic)
+	_initialize_spawn_point_marker()
 
 func _physics_process(delta):
 	._physics_process(delta)
@@ -35,19 +36,26 @@ func _check_raycast():
 func _initialize_spawn_point_marker():
 	remove_child($SpawnPointMarker)
 	get_parent().add_child($SpawnPointMarker)
+	last_y_target = 9000
 
 func _point_to_locked_target():
 	var x
 	var y
-	if out_of_bounds() or not last_y_target:
-		if position.y > 500:
-			y = -9000
+	
+	if out_of_bounds():
+		print(position.y)
+		if position.y > 100:
+			y = 0
+			print("negative 9000")
 		else:
+			print("positive 9000")
 			y = 9000
 		last_y_target = y
 	else:
 		y = last_y_target
-	x = $SpawnPointMarker.global_position.x
+
+
+	x = global_position.x#$SpawnPointMarker.global_position.x
 	set_target(Vector2(x, y))
 
 func _check_death():
