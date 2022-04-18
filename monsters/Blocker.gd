@@ -2,6 +2,7 @@ extends "res://Monster.gd"
 var graphic = load("res://images/station_A.png")
 var RayCastDown = load("$StabilizedAnchor/RayCastDown")
 var RayCastUp = load("$StabilizedAnchor/RayCastUp")
+var last_y_target
 
 func _ready():
 	print($StabilizedAnchor/RayCastUp)
@@ -30,3 +31,28 @@ func _check_raycast():
 		print($StabilizedAnchor/RayCastDown.get_collider())
 	elif ($StabilizedAnchor/RayCastUp.is_colliding()):
 		print("Top of the screen")
+
+func _initialize_spawn_point_marker():
+	remove_child($SpawnPointMarker)
+	get_parent().add_child($SpawnPointMarker)
+
+func _point_to_locked_target():
+	var x
+	var y
+	if out_of_bounds() or not last_y_target:
+		if position.y > 500:
+			y = -9000
+		else:
+			y = 9000
+		last_y_target = y
+	else:
+		y = last_y_target
+	x = $SpawnPointMarker.global_position.x
+	set_target(Vector2(x, y))
+
+func _check_death():
+	if currentHP <= 0:
+		if(get_parent()):
+			get_parent().remove_child(self)
+			#get_parent().remove_child($SpawnPointMarker)
+		queue_free()

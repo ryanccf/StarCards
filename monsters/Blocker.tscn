@@ -38,5 +38,7 @@ visible = false
 [node name="ObstacleAvoider" parent="." index="10"]
 visible = false
 
+[node name="SpawnPointMarker" type="Node2D" parent="." index="11"]
+
 [connection signal="area_entered" from="ShootingZone/SensingZone" to="ShootingZone/SensingZone" method="_on_SensingZone_area_entered"]
 [connection signal="area_exited" from="ShootingZone/SensingZone" to="ShootingZone/SensingZone" method="_on_SensingZone_area_exited"]
