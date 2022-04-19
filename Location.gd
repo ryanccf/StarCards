@@ -7,8 +7,25 @@ signal beacon
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	set_sprite();
 	rng.randomize()
 	rotation_speed = rng.randf_range(-5.0, 5.0)
+
+func set_sprite():
+	var dir = Directory.new()
+	var planets = []
+	var base_planet_image_dir = 'res://images/planets'
+	dir.open(base_planet_image_dir)
+	dir.list_dir_begin()
+	var file_name = dir.get_next()
+	print(file_name)
+	while file_name != "":
+		if (!file_name.begins_with(".") and !file_name.ends_with(".import")):
+			planets.push_back(load(base_planet_image_dir + '/' + file_name))
+		file_name = dir.get_next()
+	planets.shuffle()
+	$Sprite.set_texture(planets.pop_back())
+
 
 func _process(delta):
 	rotation += delta * rotation_speed
