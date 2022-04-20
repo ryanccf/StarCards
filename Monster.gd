@@ -38,7 +38,7 @@ func _physics_process(delta):
 
 func set_target(target):
 	current_target = target
-	
+
 func get_target():
 	return current_target if current_target else global_position
 	

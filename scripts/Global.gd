@@ -55,7 +55,8 @@ var canonicalCardMap = {
 	}
 }
 
-var player_name = "Player 1"
+var player_name = "Player"
+var player_color = Color( 0.37, 0.62, 0.63, 1 )
 var decks = []
 var cards = Decklist.instance()
 
@@ -64,6 +65,12 @@ func set_player_name(new_name):
 
 func get_player_name():
 	return player_name
+
+func set_player_color(new_color):
+	player_color = new_color
+
+func get_player_color():
+	return player_color
 
 func get_decks():
 	return decks

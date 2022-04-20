@@ -13,6 +13,12 @@ func _ready():
 	update_hp()
 	$PlayerHitBox.connect("damage", self, "take_damage")
 
+func set_color(new_color):
+	$Sprite.modulate = new_color
+
+func get_color():
+	return $Sprite.modulate
+
 func update_hp():
 	$HP.text = String(currentHP) + "/" + String(maxHP)	
 

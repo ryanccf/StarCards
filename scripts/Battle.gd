@@ -35,6 +35,7 @@ func initialize_cards():
 	$Background/BackgroundAnchor/Deck.shuffle()
 
 func initialize_player():
+	player.set_color(Global.get_player_color())
 	player.increase_speed(25)
 	player.update_graphic(playerOneGraphic)
 	player.position = Vector2(100, 300)
@@ -104,6 +105,7 @@ func _play_monster_card_selected(event_position):
 	card.reset_monster()
 	var monster = card.get_monster()
 	monster.set_friendly()
+	monster.set_color(Global.get_player_color())
 	monster.set_target(opponent.get_base())
 	monster.set_enemy_base(opponent.get_base())
 	$Background/BackgroundAnchor/Field.add_monster(monster, event_position - $Background/BackgroundAnchor/DeployZone.global_position)

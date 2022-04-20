@@ -22,9 +22,10 @@ func generate_level():
 	add_child(third)
 	add_child(end)
 	add_child(player)
-	Global.set_player_name("Hero Protagonist")
+	#Global.set_player_name("Hero Protagonist")
 	player.position = START_POSITION
 	player.turn_camera_on()
+	player.set_color(Global.get_player_color())
 	start.position = START_POSITION
 	first.position = Vector2(start.position.x + 200, start.position.y + 200)
 	second.position = Vector2(first.position.x + 200, first.position.y)
