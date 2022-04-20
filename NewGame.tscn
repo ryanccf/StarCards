@@ -39,20 +39,20 @@ theme = ExtResource( 1 )
 align = 1
 placeholder_text = "Player"
 
-[node name="ColorPicker" type="ColorPicker" parent="VBoxContainer"]
-margin_top = 76.0
+[node name="Button" type="Button" parent="VBoxContainer"]
+margin_top = 85.0
 margin_right = 448.0
-margin_bottom = 488.0
+margin_bottom = 111.0
+theme = ExtResource( 1 )
+text = "Launch!"
+
+[node name="ColorPicker" type="ColorPicker" parent="VBoxContainer"]
+margin_top = 136.0
+margin_right = 448.0
+margin_bottom = 527.0
 color = Color( 0.239216, 0.796078, 0.0823529, 1 )
 edit_alpha = false
 presets_enabled = false
 presets_visible = false
-
-[node name="Button" type="Button" parent="VBoxContainer"]
-margin_top = 492.0
-margin_right = 448.0
-margin_bottom = 527.0
-theme = ExtResource( 1 )
-text = "Launch!"
 
 [connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_Button_pressed"]
