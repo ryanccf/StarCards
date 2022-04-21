@@ -8,5 +8,5 @@ func _process(_delta):
 
 func check_click():
 	if Input.is_action_pressed("click"):
-		Global.reset_progress()
+		Global.delete_save()
 		get_tree().change_scene("res://Title.tscn")

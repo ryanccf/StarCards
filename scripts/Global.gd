@@ -190,7 +190,6 @@ func store_save_data():
 	file.open(save_path, file.WRITE)
 	file.store_var(save_slots)
 	file.close()
-	print("The data haves a save!!")
 
 func retrieve_save_data():
 	var file = File.new()
@@ -198,8 +197,6 @@ func retrieve_save_data():
 		var error = file.open(save_path, File.READ)
 		if error == OK:
 			save_slots = file.get_var()
-			print("SAVE_SLOTS:")
-			print(save_slots)
 			file.close()
 	return save_slots
 
@@ -208,3 +205,10 @@ func set_save_index(new_index):
 
 func load_game():
 	load_save_data(save_slots[current_save_index])
+
+func delete_save():
+	save_slots.remove(current_save_index)
+	var file = File.new()
+	file.open(save_path, file.WRITE)
+	file.store_var(save_slots)
+	file.close()
