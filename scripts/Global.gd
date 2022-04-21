@@ -59,6 +59,8 @@ var player_name = "Player"
 var player_color = Color( 0.37, 0.62, 0.63, 1 )
 var decks = []
 var cards = Decklist.instance()
+var player_position
+var target_position
 
 func set_player_name(new_name):
 	player_name = new_name
@@ -123,3 +125,15 @@ func reset_progress():
 	decks = []
 	cards = Decklist.instance()
 	initialize()
+
+func set_player_position(new_player_position):
+	player_position = new_player_position
+
+func get_player_position():
+	return player_position
+
+func set_target_position(new_target_position):
+	target_position = new_target_position
+
+func get_target_position():
+	return target_position

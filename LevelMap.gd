@@ -23,9 +23,13 @@ func generate_level():
 	add_child(end)
 	add_child(player)
 	#Global.set_player_name("Hero Protagonist")
-	player.position = START_POSITION
+	if Global.get_player_position() == null:
+		Global.set_player_position(START_POSITION)
+	player.position = Global.get_player_position()
+	#player.position = START_POSITION
 	player.turn_camera_on()
 	player.set_color(Global.get_player_color())
+
 	start.position = START_POSITION
 	first.position = Vector2(start.position.x + 200, start.position.y + 200)
 	second.position = Vector2(first.position.x + 200, first.position.y)
@@ -36,18 +40,25 @@ func generate_level():
 	second.connect("beacon", self, "_on_beacon")
 	third.connect("beacon", self, "_on_beacon")
 	end.connect("beacon", self, "_on_beacon")
-	player.set_target_location(start.position)
+	if Global.get_target_position() == null:
+		Global.set_target_position(start.position)
+	player.set_target_location(Global.get_target_position())
 
 func _on_beacon(locX, locY):
 	if (player.position.distance_to(Vector2(locX, locY)) <= 4):
-		get_tree().change_scene("res://Battle.tscn")
+		_exit("res://Battle.tscn")
 	else:
 		player.look_at(Vector2(locX, locY))
 		player.set_target_location(Vector2(locX, locY))
+		Global.set_target_position(Vector2(locX, locY))
 
 func _process(delta):
 	$DeckButtonAnchor.position = player.position - Vector2(300, 0)
 
 func _on_Area2D_input_event(viewport, event, shape_idx):
 	if "button_index" in event and event.button_index == BUTTON_LEFT and event.pressed:
-		get_tree().change_scene("res://Scenes/DeckEditor.tscn")
+		_exit("res://Scenes/DeckEditor.tscn")
+
+func _exit(new_scene_path):
+	Global.set_player_position(player.position)
+	get_tree().change_scene(new_scene_path)
