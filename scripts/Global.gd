@@ -162,10 +162,13 @@ func load_save_data(data):
 	cards = data.cards
 	decks = data.decks
 
-func store_save_data(data):
+func store_save_data():
+	if save_slots.size() == current_save_index:
+		save_slots.push_back(null)
+	save_slots[current_save_index] = get_save_data()
 	var file = File.new()
 	file.open(save_path, file.WRITE)
-	file.store_var(get_save_data())
+	file.store_var(save_slots)
 	file.close()
 	print("The data haves a save!!")
 
@@ -174,5 +177,29 @@ func retrieve_save_data():
 	if file.file_exists(save_path):
 		var error = file.open(save_path, File.READ)
 		if error == OK:
-			var player_data
+			save_slots = file.get_var()
+			print("SAVE_SLOTS:")
+			print(save_slots)
 			file.close()
+	return save_slots
+
+var current_save_index = 0
+var save_slots = []
+
+func print_data():
+	var lines = []
+	var file = File.new()
+	if file.file_exists(save_path):
+		var error = file.open(save_path, File.READ)
+		if error == OK:
+			while file.get_position() < file.get_len():
+				print(file.get_line())
+				#lines.push_back(parse_json(file.get_line()))
+			file.close()
+	return lines
+
+func set_save_index(new_index):
+	current_save_index = new_index
+
+func load_game():
+	load_save_data(save_slots[current_save_index])

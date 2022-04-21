@@ -31,6 +31,7 @@ func _process(delta):
 
 func _on_ExitArea_input_event(viewport, event, shape_idx):
 	if "button_index" in event and event.button_index == BUTTON_LEFT and event.pressed:
+		Global.store_save_data()
 		get_tree().change_scene("res://LevelMap.tscn")
 
 func increment_used(card_name):

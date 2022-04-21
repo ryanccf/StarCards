@@ -1,11 +1,14 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Button.tres" type="Theme" id=1]
-[ext_resource path="res://scripts/Continue.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/ContinueGameButton.gd" type="Script" id=2]
 
-[node name="Continue" type="Control"]
+[node name="ContinueGameButton" type="Button"]
+anchor_left = -0.024
 anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_bottom = 0.247
+margin_left = 28.8
+margin_bottom = 0.399994
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -31,14 +34,12 @@ anchor_bottom = 0.2
 margin_right = 40.0
 margin_bottom = 70.0
 theme = ExtResource( 1 )
-text = "Load your game!"
+text = "New Game"
 align = 1
 valign = 1
 autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="VScrollBar" type="VScrollBar" parent="."]
-anchor_top = 0.4
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_right = 12.0
-margin_bottom = 12.0
+[connection signal="pressed" from="." to="." method="_on_ContinueGameButton_pressed"]
