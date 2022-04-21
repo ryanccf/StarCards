@@ -15,3 +15,4 @@ func _ready():
 	var new_game_button = New.instance()
 	new_game_button.set_save_index(lines.size())
 	$ContentAnchor/ScrollContainer/VBoxContainer.add_child(new_game_button)
+	#$ContentAnchor/ScrollContainer/VBoxContainer.separation

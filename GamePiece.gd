@@ -34,6 +34,7 @@ func move_to(target_pos,delta):
 	velocity += steering/mass
 	position += velocity*delta
 	rotation = velocity.angle() + deg2rad(90)
+	Global.set_player_position(position)
 	return position.distance_to(target_pos) < ArriveDistance
 
 func turn_camera_on():

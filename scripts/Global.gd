@@ -64,15 +64,20 @@ var decks = []
 var cards = Decklist.instance()
 var player_position
 var target_position
+var current_save_index = 0
+var save_slots = []
+
 
 func set_player_name(new_name):
 	player_name = new_name
+	store_save_data()
 
 func get_player_name():
 	return player_name
 
 func set_player_color(new_color):
 	player_color = new_color
+	store_save_data()
 
 func get_player_color():
 	return player_color
@@ -85,6 +90,7 @@ func get_cards():
 
 func add_card(card_name):
 	cards.add_card(card_name)
+	store_save_data()
 	
 func get_canonical_card_list():
 	return canonicalCardMap.keys()
@@ -134,24 +140,30 @@ func reset_progress():
 
 func set_player_position(new_player_position):
 	player_position = new_player_position
+	store_save_data()
 
 func get_player_position():
 	return player_position
 
 func set_target_position(new_target_position):
 	target_position = new_target_position
+	store_save_data()
 
 func get_target_position():
 	return target_position
 
 func get_save_data():
+	var cards_data = cards.get_cards()
+	var decks_data = []
+	for deck in decks:
+		decks_data.push_back(deck.get_cards())
 	return {
 		"player_name" : player_name,
 		"player_color" : player_color,
 		"player_position" : player_position,
 		"target_position" : target_position,
-		"cards" : cards,
-		"decks" : decks
+		"cards" : cards_data,
+		"decks" : decks_data
 	}
 
 func load_save_data(data):
@@ -159,8 +171,16 @@ func load_save_data(data):
 	set_player_color(data.player_color)
 	set_player_position(data.player_position)
 	set_target_position(data.target_position)
-	cards = data.cards
-	decks = data.decks
+	
+	cards = Decklist.instance()
+	for card_name in data.cards:
+		cards.add_card(card_name)
+	decks = []
+	for deck in data.decks:
+		var decklist = Decklist.instance()
+		for card_name in deck:
+			decklist.add_card(card_name)
+		decks.push_back(decklist)
 
 func store_save_data():
 	if save_slots.size() == current_save_index:
@@ -182,21 +202,6 @@ func retrieve_save_data():
 			print(save_slots)
 			file.close()
 	return save_slots
-
-var current_save_index = 0
-var save_slots = []
-
-func print_data():
-	var lines = []
-	var file = File.new()
-	if file.file_exists(save_path):
-		var error = file.open(save_path, File.READ)
-		if error == OK:
-			while file.get_position() < file.get_len():
-				print(file.get_line())
-				#lines.push_back(parse_json(file.get_line()))
-			file.close()
-	return lines
 
 func set_save_index(new_index):
 	current_save_index = new_index

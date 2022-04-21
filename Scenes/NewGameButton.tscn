@@ -1,45 +1,38 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://Button.tres" type="Theme" id=1]
 [ext_resource path="res://Scenes/NewGameButton.gd" type="Script" id=2]
 
 [node name="NewGameButton" type="Button"]
-anchor_left = -0.024
 anchor_right = 1.0
-anchor_bottom = 0.247
-margin_left = 28.8
-margin_bottom = 0.399994
+anchor_bottom = 1.0
+margin_bottom = -600.0
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ColorRect" type="ColorRect" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 2.74463
-margin_top = 2.74463
-margin_right = 2.74463
-margin_bottom = 2.74463
+margin_right = 1200.0
+margin_bottom = 200.0
 color = Color( 0.317647, 0.435294, 0.666667, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="."]
-anchor_left = 0.4
-anchor_top = 0.2
-anchor_right = 0.6
-anchor_bottom = 0.2
-margin_right = 40.0
-margin_bottom = 70.0
-theme = ExtResource( 1 )
-text = "New Game"
-align = 1
-valign = 1
-autowrap = true
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_left = 185.0
+margin_top = 17.0
+margin_right = 1025.0
+margin_bottom = 202.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+margin_top = 77.0
+margin_right = 70.0
+margin_bottom = 108.0
+text = "New Game
+"
 
 [connection signal="pressed" from="." to="." method="_on_NewGameButton_pressed"]

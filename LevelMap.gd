@@ -46,11 +46,13 @@ func generate_level():
 
 func _on_beacon(locX, locY):
 	if (player.position.distance_to(Vector2(locX, locY)) <= 4):
+		Global.set_player_position(Vector2(locX, locY))
 		_exit("res://Battle.tscn")
 	else:
 		player.look_at(Vector2(locX, locY))
 		player.set_target_location(Vector2(locX, locY))
 		Global.set_target_position(Vector2(locX, locY))
+		Global.store_save_data()
 
 func _process(delta):
 	$DeckButtonAnchor.position = player.position - Vector2(300, 0)

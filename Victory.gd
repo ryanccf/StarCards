@@ -19,4 +19,5 @@ func _ready():
 		i += 1
 
 func _on_Button_pressed():
+	Global.store_save_data()
 	get_tree().change_scene("res://LevelMap.tscn")
