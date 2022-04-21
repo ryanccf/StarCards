@@ -137,3 +137,21 @@ func set_target_position(new_target_position):
 
 func get_target_position():
 	return target_position
+
+func get_save_data():
+	return {
+		"player_name" : player_name,
+		"player_color" : player_color,
+		"player_position" : player_position,
+		"target_position" : target_position,
+		"cards" : cards,
+		"decks" : decks
+	}
+
+func load_save_data(data):
+	set_player_name(data.player_name)
+	set_player_color(data.player_color)
+	set_player_position(data.player_position)
+	set_target_position(data.target_position)
+	cards = data.cards
+	decks = data.decks
