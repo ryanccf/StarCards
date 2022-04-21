@@ -20,6 +20,9 @@ var HomingMissileCardListing = preload("res://Scenes/HomingMissileCardListing.ts
 var DirectAttackCardListing = preload("res://Scenes/DirectAttackCardListing.tscn")
 var RepairCardListing = preload("res://Scenes/RepairCardListing.tscn")
 
+var SAVE_DIR = "user://saves/"
+var save_path = SAVE_DIR + "save.dat"
+
 var canonicalCardMap = {
 	"Archer" : {
 		"card" : ArcherCard,
@@ -93,6 +96,9 @@ func get_card_listing(card_name):
 	return canonicalCardMap[card_name].card_listing.instance()
 
 func initialize():
+	var dir = Directory.new()
+	if !dir.dir_exists(SAVE_DIR):
+		dir.make_dir_recursive(SAVE_DIR)
 	var new_decklist = Decklist.instance()
 	new_decklist.add_card("Repair")
 	new_decklist.add_card("DirectAttack")
@@ -155,3 +161,18 @@ func load_save_data(data):
 	set_target_position(data.target_position)
 	cards = data.cards
 	decks = data.decks
+
+func store_save_data(data):
+	var file = File.new()
+	file.open(save_path, file.WRITE)
+	file.store_var(get_save_data())
+	file.close()
+	print("The data haves a save!!")
+
+func retrieve_save_data():
+	var file = File.new()
+	if file.file_exists(save_path):
+		var error = file.open(save_path, File.READ)
+		if error == OK:
+			var player_data
+			file.close()
