@@ -26,5 +26,6 @@ shape = SubResource( 1 )
 visible = false
 
 [node name="SolarSystem" parent="." instance=ExtResource( 4 )]
+scale = Vector2( 0.6, 0.6 )
 
 [connection signal="input_event" from="Area2D" to="." method="_on_Area2D_input_event"]
