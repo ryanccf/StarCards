@@ -11,12 +11,12 @@ var minimum_star_rotation_speed = 0
 var maximum_star_rotation_speed = 0
 var minimum_star_color = Color(1, 0.2, 0)
 var maximum_star_color = Color(0, 0.2, 1)
-var minimum_star_satellites = 0
-var maximum_star_satellites = 5
+var minimum_star_satellites = 1
+var maximum_star_satellites = 3
 
 var minimum_planet_radius = 5
 var maximum_planet_radius = 10
-var minimum_planet_rotation_speed = 1
+var minimum_planet_rotation_speed = 0.1
 var maximum_planet_rotation_speed = 2
 var minimum_planet_distance = 35
 var maximum_planet_distance = 40
@@ -27,7 +27,7 @@ var maximum_planet_satellites = 2
 
 var minimum_moon_radius = 1
 var maximum_moon_radius = 5
-var minimum_moon_rotation_speed = 1
+var minimum_moon_rotation_speed = 0.1
 var maximum_moon_rotation_speed = 2
 var minimum_moon_distance = 5
 var maximum_moon_distance = 10
