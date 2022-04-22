@@ -12,6 +12,7 @@ var rng = RandomNumberGenerator.new()
 var offset = 0
 var rotation_speed
 var radius
+var color
 
 func _ready():
 	rng.randomize()
@@ -31,7 +32,7 @@ func _draw():
 	var radius = get_radius()
 	var angle_from = 0#75
 	var angle_to = 360#195
-	var color = get_random_color()
+	var color = get_color()
 	_draw_circle_arc_poly(center, radius, angle_from, angle_to, color)
 
 func _draw_circle_arc_poly(center, radius, angle_to, angle_from, color):
@@ -85,4 +86,9 @@ func get_random_rotation_speed():
 	return rng.randf_range(minimum_rotation_speed, maximum_rotation_speed)
 
 func get_random_color():
-	return Color(rng.randf_range(minimum_color[0], maximum_color[0]), rng.randf_range(minimum_color[1], maximum_color[1]), rng.randf_range(minimum_color[2], maximum_color[2]))
+	return Color(rng.randf_range(minimum_color[0], maximum_color[0]), rng.randf_range(minimum_color[1], maximum_color[1]), rng.randf_range(minimum_color[2], maximum_color[2]), rng.randf_range(minimum_color[3], maximum_color[3]))
+
+func get_color():
+	if color == null:
+		color = get_random_color()
+	return color
