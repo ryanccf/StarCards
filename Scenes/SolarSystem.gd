@@ -18,19 +18,19 @@ var minimum_planet_radius = 5
 var maximum_planet_radius = 10
 var minimum_planet_rotation_speed = 1
 var maximum_planet_rotation_speed = 2
-var minimum_planet_distance = 10
-var maximum_planet_distance = 20
+var minimum_planet_distance = 20
+var maximum_planet_distance = 30
 var minimum_planet_color = Color(1, 1, 1)
 var maximum_planet_color = Color(0.2, 0.2, 0.2)
 var minimum_planet_satellites = 0
-var maximum_planet_satellites = 3
+var maximum_planet_satellites = 2
 
 var minimum_moon_radius = 1
-var maximum_moon_radius = 10
+var maximum_moon_radius = 5
 var minimum_moon_rotation_speed = 1
 var maximum_moon_rotation_speed = 2
-var minimum_moon_distance = 10
-var maximum_moon_distance = 20
+var minimum_moon_distance = 5
+var maximum_moon_distance = 10
 var minimum_moon_color = Color(1, 1, 1)
 var maximum_moon_color = Color(0.2, 0.2, 0.2)
 
