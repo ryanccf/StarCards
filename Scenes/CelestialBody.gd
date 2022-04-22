@@ -11,6 +11,7 @@ var maximum_color = Color(0, 0.2, 1)
 var rng = RandomNumberGenerator.new()
 var offset = 0
 var rotation_speed
+var radius
 
 func _ready():
 	rng.randomize()
@@ -27,7 +28,7 @@ func _process(delta):
 
 func _draw():
 	var center = Vector2(0, 0)
-	var radius = get_random_radius()
+	var radius = get_radius()
 	var angle_from = 0#75
 	var angle_to = 360#195
 	var color = get_random_color()
@@ -43,6 +44,12 @@ func _draw_circle_arc_poly(center, radius, angle_to, angle_from, color):
 		var angle_point = deg2rad(angle_from + i * (angle_to - angle_from) / nb_points - 90)
 		points_arc.push_back(center + Vector2(cos(angle_point), sin(angle_point)) * radius)
 	draw_polygon(points_arc, colors)
+
+func get_radius():
+	if radius == null:
+		rng.randomize()
+		radius = get_random_radius()
+	return radius
 
 func set_offset(new_offset):
 	offset = new_offset
