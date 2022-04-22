@@ -1,18 +1,18 @@
 extends Node2D
 
-var minimum_corona_radius = 20
+var minimum_corona_radius = 35
 var maximum_corona_radius = 40
 var minimum_corona_color = Color(1, 0.2, 0)
 var maximum_corona_color = Color(0, 0.2, 1)
 
 var minimum_star_radius = 20
-var maximum_star_radius = 40
-var minimum_star_rotation_speed = 1
-var maximum_star_rotation_speed = 2
+var maximum_star_radius = 35
+var minimum_star_rotation_speed = 0
+var maximum_star_rotation_speed = 0
 var minimum_star_color = Color(1, 0.2, 0)
 var maximum_star_color = Color(0, 0.2, 1)
 var minimum_star_satellites = 0
-var maximum_star_satellites = 12
+var maximum_star_satellites = 4
 
 var minimum_planet_radius = 5
 var maximum_planet_radius = 10
@@ -23,7 +23,7 @@ var maximum_planet_distance = 20
 var minimum_planet_color = Color(1, 1, 1)
 var maximum_planet_color = Color(0.2, 0.2, 0.2)
 var minimum_planet_satellites = 0
-var maximum_planet_satellites = 12
+var maximum_planet_satellites = 3
 
 var minimum_moon_radius = 1
 var maximum_moon_radius = 10
@@ -48,7 +48,7 @@ func _ready():
 	corona.set_minimum_rotation_speed(0)
 	corona.set_maximum_rotation_speed(0)
 	var star_satellite_count = rng.randi_range(minimum_star_satellites, maximum_star_satellites)
-	var last_planet_offset = 0
+	var last_planet_offset = maximum_corona_radius + maximum_planet_radius
 	star.set_minimum_radius(minimum_star_radius)
 	star.set_maximum_radius(maximum_star_radius)
 	star.set_minimum_rotation_speed(minimum_star_rotation_speed)
@@ -60,7 +60,7 @@ func _ready():
 	for i in range(star_satellite_count):
 		var planet = CelestialBody.instance()
 		var planet_satellite_count = rng.randi_range(minimum_planet_satellites, maximum_planet_satellites)
-		var last_moon_offset = 0
+		var last_moon_offset = maximum_planet_radius + maximum_moon_radius
 		last_planet_offset = last_planet_offset + rng.randf_range(minimum_planet_distance, maximum_planet_distance)
 		planet.set_offset(last_planet_offset)
 		planet.set_minimum_radius(minimum_planet_radius)
