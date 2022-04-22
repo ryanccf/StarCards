@@ -16,7 +16,7 @@ var color
 
 func _ready():
 	rng.randomize()
-	rotation = rng.randf_range(0, 1)
+	rotation = rng.randf_range(0, 2 * PI)
 	rotation_speed = get_random_rotation_speed()
 	_draw()
 	position.x += offset
