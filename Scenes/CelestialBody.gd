@@ -47,7 +47,7 @@ func _draw_circle_arc_poly(center, radius, angle_to, angle_from, color):
 
 func get_radius():
 	if radius == null:
-		rng.randomize()
+		
 		radius = get_random_radius()
 	return radius
 

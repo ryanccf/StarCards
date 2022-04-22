@@ -71,7 +71,6 @@ func _ready():
 		last_planet_offset += planet.get_radius() +  rng.randf_range(minimum_planet_distance, maximum_planet_distance)
 		last_planet_offset += last_moon_offset + last_moon_radius
 		planet.set_offset(last_planet_offset)
-		last_planet_offset += planet.get_radius()
 		star.add_child(planet)
 		last_moon_offset = planet.get_radius()
 		for j in range(planet_satellite_count):
@@ -87,3 +86,5 @@ func _ready():
 			moon.set_offset(last_moon_offset)
 			last_moon_offset += last_moon_radius
 			planet.add_child(moon)
+		planet.set_offset(last_planet_offset + last_moon_offset + last_moon_radius)
+		last_planet_offset += planet.get_radius()
