@@ -9,7 +9,7 @@ signal beacon
 func _ready():
 	set_sprite();
 	rng.randomize()
-	rotation_speed = rng.randf_range(-5.0, 5.0)
+	#rotation_speed = rng.randf_range(-5.0, 5.0)
 	$Sprite.set_scale(Vector2(1.2, 1.2))
 
 func set_sprite():
