@@ -20,7 +20,7 @@ func _ready():
 	rotation_speed = get_random_rotation_speed()
 	_draw()
 	position.x += offset
-	position = position.rotated(rng.randf_range(0, 1))
+	position = position.rotated(rng.randf_range(0, 2 * PI))
 
 func _process(delta):
 	#if minimum_radius == 1:
