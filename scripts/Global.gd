@@ -172,8 +172,7 @@ func load_save_data(data):
 	set_player_color(data.player_color)
 	set_player_position(data.player_position)
 	set_target_position(data.target_position)
-	if "map" in data:
-		set_map(data.map)
+	set_map(data.map)
 	
 	cards = Decklist.instance()
 	for card_name in data.cards:
