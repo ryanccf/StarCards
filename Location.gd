@@ -26,7 +26,6 @@ func set_sprite():
 	planets.shuffle()
 	$Sprite.set_texture(planets.pop_back())
 
-
 func _process(delta):
 	rotation += delta * rotation_speed
 
@@ -51,7 +50,7 @@ func dehydrate():
 func rehydrate(configuration):
 	position = configuration.position
 	$SolarSystem.rehydrate(configuration.solar_system)
-	$SolarSystem.initialize()
+#	$SolarSystem.initialize()
 
 func initialize():
 	$SolarSystem.initialize()
