@@ -11,17 +11,15 @@ var end = Location.instance()
 var first = Location.instance()
 var second = Location.instance()
 var third = Location.instance()
-var locations = [start, first, second, third, end]
+var locations = []#start, first, second, third, end]
 
 func _ready():
-	initialize_locations()
-	place_player()
-#	generate_level()
 	if Global.get_map() == null:
 		generate_level()
 		Global.set_map(dehydrate())
 	else:
 		rehydrate(Global.get_map())
+	place_player()
 
 func initialize_locations():
 	add_child(start)
@@ -47,13 +45,25 @@ func place_player():
 	player.set_target_location(Global.get_target_position())
 
 func generate_level():
-	start.position = START_POSITION
-	first.position = Vector2(start.position.x + 200, start.position.y + 200)
-	second.position = Vector2(first.position.x + 200, first.position.y)
-	third.position = Vector2(second.position.x + 160, second.position.y + 200)
-	end.position = Vector2(third.position.x + 100, third.position.y + 200)
-	for location in locations:
+	for position in generate_location_positions():
+		var location = Location.instance()
+		location.position = position
+		add_location(location)
 		location.initialize()
+
+func generate_location_positions():
+	return [
+		START_POSITION, 
+		Vector2(START_POSITION.x + 200, START_POSITION.y + 200), 
+		Vector2(START_POSITION.x + 400, START_POSITION.y + 200),
+		Vector2(START_POSITION.x + 560, START_POSITION.y + 400),
+		Vector2(START_POSITION.x + 660, START_POSITION.y + 600)
+	]
+
+func add_location(location):
+	add_child(location)
+	location.connect("beacon", self, "_on_beacon")
+	locations.push_back(location)
 
 func _on_beacon(locX, locY):
 	if (player.position.distance_to(Vector2(locX, locY)) <= 4):
@@ -83,7 +93,7 @@ func dehydrate():
 	return configuration
 
 func rehydrate(configuration):
-	var i = 0
 	for location_configuration in configuration:
-		locations[i].rehydrate(location_configuration)
-		i += 1
+		var location = Location.instance()
+		add_location(location)
+		location.rehydrate(location_configuration)
