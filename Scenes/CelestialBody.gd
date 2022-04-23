@@ -10,22 +10,25 @@ var minimum_color = Color(1, 0.2, 0)
 var maximum_color = Color(0, 0.2, 1)
 var rng = RandomNumberGenerator.new()
 var offset = 0
+var should_draw_orbit = false#true
 var rotation_speed
 var radius
 var color
 
 func _ready():
 	rng.randomize()
-	rotation = rng.randf_range(0, 2 * PI)
+	#rotation = rng.randf_range(0, 2 * PI)
 	rotation_speed = get_random_rotation_speed()
 	_draw()
 	position.x += offset
-	position = position.rotated(rng.randf_range(0, 2 * PI))
+	var rotation_amount = rng.randf_range(0, 2 * PI)
+	position = position.rotated(rotation_amount)
+	rotation = rotation_amount
 
 func _process(delta):
-	#if minimum_radius == 1:
 	rotation += delta * rotation_speed
 	position = position.rotated(delta * rotation_speed)
+	pass
 
 func _draw():
 	var center = Vector2(0, 0)
@@ -33,7 +36,12 @@ func _draw():
 	var angle_from = 0#75
 	var angle_to = 360#195
 	var color = get_color()
+	
+	if should_draw_orbit:
+		draw_orbit(Vector2(offset * -1, 0), offset, angle_from, angle_to, Color(1, 1, 1))
+	
 	_draw_circle_arc_poly(center, radius, angle_from, angle_to, color)
+
 
 func _draw_circle_arc_poly(center, radius, angle_to, angle_from, color):
 	var nb_points = 32
@@ -45,6 +53,17 @@ func _draw_circle_arc_poly(center, radius, angle_to, angle_from, color):
 		var angle_point = deg2rad(angle_from + i * (angle_to - angle_from) / nb_points - 90)
 		points_arc.push_back(center + Vector2(cos(angle_point), sin(angle_point)) * radius)
 	draw_polygon(points_arc, colors)
+
+func draw_orbit(center, radius, angle_from, angle_to, color):
+	var nb_points = 32
+	var points_arc = PoolVector2Array()
+
+	for i in range(nb_points + 1):
+		var angle_point = deg2rad(angle_from + i * (angle_to-angle_from) / nb_points - 90)
+		points_arc.push_back(center + Vector2(cos(angle_point), sin(angle_point)) * radius)
+
+	for index_point in range(nb_points):
+		draw_line(points_arc[index_point], points_arc[index_point + 1], color)
 
 func get_radius():
 	if radius == null:
