@@ -2,6 +2,7 @@ extends Node2D
 
 var screen_height = OS.get_real_window_size().y
 var START_POSITION = Vector2(120, screen_height / 2)
+var rng = RandomNumberGenerator.new()
 
 var Location = preload("res://Location.tscn")
 var GamePiece = preload("res://GamePiece.tscn") 
@@ -14,6 +15,7 @@ var third = Location.instance()
 var locations = []#start, first, second, third, end]
 
 func _ready():
+	rng.randomize()
 	if Global.get_map() == null:
 		generate_level()
 		Global.set_map(dehydrate())
@@ -52,13 +54,24 @@ func generate_level():
 		location.initialize()
 
 func generate_location_positions():
-	return [
-		START_POSITION, 
-		Vector2(START_POSITION.x + 200, START_POSITION.y + 200), 
-		Vector2(START_POSITION.x + 400, START_POSITION.y + 200),
-		Vector2(START_POSITION.x + 560, START_POSITION.y + 400),
-		Vector2(START_POSITION.x + 660, START_POSITION.y + 600)
-	]
+	var positions = []
+	var modifier = Vector2(0, 0)
+#	positions.push_back(START_POSITION)
+	for i in range(10):
+		positions.push_back(START_POSITION + modifier)
+		modifier += Vector2(rng.randf_range(100, 300), rng.randf_range(100, 300))
+	return positions
+#	while angle < 2 * PI:
+#		positions.push_back(START_POSITION * Vector2(sin(angle) * 4, tan(angle)))
+#		angle += 0.2 * PI
+#	return positions
+#	return [
+#		START_POSITION, 
+#		Vector2(START_POSITION.x + 200, START_POSITION.y + 200), 
+#		Vector2(START_POSITION.x + 400, START_POSITION.y + 200),
+#		Vector2(START_POSITION.x + 560, START_POSITION.y + 400),
+#		Vector2(START_POSITION.x + 660, START_POSITION.y + 600)
+#	]
 
 func add_location(location):
 	add_child(location)
