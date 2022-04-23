@@ -5,7 +5,6 @@ var RayCastUp = load("$StabilizedAnchor/RayCastUp")
 var last_y_target
 
 func _ready():
-	print($StabilizedAnchor/RayCastUp)
 	$StabilizedAnchor/RayCastUp.collide_with_areas = true;
 	$StabilizedAnchor/RayCastDown.collide_with_areas = true;
 	$StabilizedAnchor/RayCastUp.collide_with_bodies = true;
@@ -29,9 +28,7 @@ func _check_raycast():
 	$StabilizedAnchor/RayCastDown.force_raycast_update()
 	$StabilizedAnchor/RayCastUp.force_raycast_update()
 	if ($StabilizedAnchor/RayCastDown.is_colliding()):
-		print($StabilizedAnchor/RayCastDown.get_collider())
-	elif ($StabilizedAnchor/RayCastUp.is_colliding()):
-		print("Top of the screen")
+		$StabilizedAnchor/RayCastDown.get_collider()
 
 func _initialize_spawn_point_marker():
 	remove_child($SpawnPointMarker)
@@ -43,12 +40,9 @@ func _point_to_locked_target():
 	var y
 	
 	if out_of_bounds():
-		print(position.y)
 		if position.y > 100:
 			y = 0
-			print("negative 9000")
 		else:
-			print("positive 9000")
 			y = 9000
 		last_y_target = y
 	else:

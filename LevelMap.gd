@@ -11,38 +11,49 @@ var end = Location.instance()
 var first = Location.instance()
 var second = Location.instance()
 var third = Location.instance()
+var locations = [start, first, second, third, end]
 
 func _ready():
-	generate_level()
+	initialize_locations()
+	place_player()
+#	generate_level()
+	if Global.get_map() == null:
+		generate_level()
+		Global.set_map(dehydrate())
+	else:
+		rehydrate(Global.get_map())
 
-func generate_level():
+func initialize_locations():
 	add_child(start)
 	add_child(first)
 	add_child(second)
 	add_child(third)
 	add_child(end)
-	add_child(player)
-	#Global.set_player_name("Hero Protagonist")
-	if Global.get_player_position() == null:
-		Global.set_player_position(START_POSITION)
-	player.position = Global.get_player_position()
-	#player.position = START_POSITION
-	player.turn_camera_on()
-	player.set_color(Global.get_player_color())
-
-	start.position = START_POSITION
-	first.position = Vector2(start.position.x + 200, start.position.y + 200)
-	second.position = Vector2(first.position.x + 200, first.position.y)
-	third.position = Vector2(second.position.x + 160, second.position.y + 200)
-	end.position = Vector2(third.position.x + 100, third.position.y + 200)
 	start.connect("beacon", self, "_on_beacon")
 	first.connect("beacon", self, "_on_beacon")
 	second.connect("beacon", self, "_on_beacon")
 	third.connect("beacon", self, "_on_beacon")
 	end.connect("beacon", self, "_on_beacon")
+
+func place_player():
+	add_child(player)
+	if Global.get_player_position() == null:
+		Global.set_player_position(START_POSITION)
+	player.position = Global.get_player_position()
+	player.turn_camera_on()
+	player.set_color(Global.get_player_color())
 	if Global.get_target_position() == null:
-		Global.set_target_position(start.position)
+		Global.set_target_position(START_POSITION)
 	player.set_target_location(Global.get_target_position())
+
+func generate_level():
+	start.position = START_POSITION
+	first.position = Vector2(start.position.x + 200, start.position.y + 200)
+	second.position = Vector2(first.position.x + 200, first.position.y)
+	third.position = Vector2(second.position.x + 160, second.position.y + 200)
+	end.position = Vector2(third.position.x + 100, third.position.y + 200)
+	for location in locations:
+		location.initialize()
 
 func _on_beacon(locX, locY):
 	if (player.position.distance_to(Vector2(locX, locY)) <= 4):
@@ -64,3 +75,15 @@ func _on_Area2D_input_event(viewport, event, shape_idx):
 func _exit(new_scene_path):
 	Global.set_player_position(player.position)
 	get_tree().change_scene(new_scene_path)
+
+func dehydrate():
+	var configuration = []
+	for location in locations:
+		configuration.push_back(location.dehydrate())
+	return configuration
+
+func rehydrate(configuration):
+	var i = 0
+	for location_configuration in configuration:
+		locations[i].rehydrate(location_configuration)
+		i += 1

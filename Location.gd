@@ -19,7 +19,6 @@ func set_sprite():
 	dir.open(base_planet_image_dir)
 	dir.list_dir_begin()
 	var file_name = dir.get_next()
-	print(file_name)
 	while file_name != "":
 		if (!file_name.begins_with(".") and !file_name.ends_with(".import")):
 			planets.push_back(load(base_planet_image_dir + '/' + file_name))
@@ -42,3 +41,17 @@ func _on_Area2D_input_event(viewport, event, shape_idx):
 #func _on_Area2D_input_event(viewport, event, shape_idx):
 #	if (event is InputEventMouseButton && event.pressed):
 #		generate_battle()
+
+func dehydrate():
+	return {
+		"position" : position,
+		"solar_system" : $SolarSystem.dehydrate()
+	}
+
+func rehydrate(configuration):
+	position = configuration.position
+	$SolarSystem.rehydrate(configuration.solar_system)
+	$SolarSystem.initialize()
+
+func initialize():
+	$SolarSystem.initialize()

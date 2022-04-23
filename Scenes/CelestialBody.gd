@@ -15,20 +15,28 @@ var rotation_speed
 var radius
 var color
 
+var CelestialBody = load("res://Scenes/CelestialBody.tscn")
+
 func _ready():
+	pass
+
+func _process(delta):
+	if rotation_speed != null:
+		rotation += delta * rotation_speed
+		position = position.rotated(delta * rotation_speed)
+#	dehydrate()
+
+func initialize():
 	rng.randomize()
 	#rotation = rng.randf_range(0, 2 * PI)
-	rotation_speed = get_random_rotation_speed()
+	rotation_speed = get_rotation_speed()
 	_draw()
 	position.x += offset
 	var rotation_amount = rng.randf_range(0, 2 * PI)
 	position = position.rotated(rotation_amount)
 	rotation = rotation_amount
-
-func _process(delta):
-	rotation += delta * rotation_speed
-	position = position.rotated(delta * rotation_speed)
-	pass
+	for child in get_children():
+		child.initialize()
 
 func _draw():
 	var center = Vector2(0, 0)
@@ -67,12 +75,14 @@ func draw_orbit(center, radius, angle_from, angle_to, color):
 
 func get_radius():
 	if radius == null:
-		
 		radius = get_random_radius()
 	return radius
 
 func set_offset(new_offset):
 	offset = new_offset
+
+func get_offset():
+	return offset
 
 func set_minimum_radius(radius):
 	minimum_radius = radius
@@ -104,6 +114,12 @@ func get_random_radius():
 func get_random_rotation_speed():
 	return rng.randf_range(minimum_rotation_speed, maximum_rotation_speed)
 
+func get_rotation_speed():
+	if rotation_speed == null:
+		rotation_speed = get_random_rotation_speed()
+	return rotation_speed
+	
+
 func get_random_color():
 	return Color(rng.randf_range(minimum_color[0], maximum_color[0]), rng.randf_range(minimum_color[1], maximum_color[1]), rng.randf_range(minimum_color[2], maximum_color[2]), rng.randf_range(minimum_color[3], maximum_color[3]))
 
@@ -111,3 +127,27 @@ func get_color():
 	if color == null:
 		color = get_random_color()
 	return color
+
+func dehydrate():
+	var serialization = {
+		"radius" : get_radius(),
+		"offset" : get_offset(),
+		"color" : get_color(),
+		"rotation_speed" : get_rotation_speed(),
+		"children" : []
+	}
+	for child in get_children():
+		serialization.children.push_back(child.dehydrate())
+	
+	return serialization
+
+func rehydrate(serialization):
+	radius = serialization.radius
+	offset = serialization.offset
+	color = serialization.color
+	rotation_speed = serialization.rotation_speed
+	for configuration in serialization.children:
+		var node = CelestialBody.instance()
+		node.rehydrate(configuration)
+		add_child(node)
+	return self

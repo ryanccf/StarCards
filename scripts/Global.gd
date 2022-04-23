@@ -66,7 +66,7 @@ var player_position
 var target_position
 var current_save_index = 0
 var save_slots = []
-
+var map = null
 
 func set_player_name(new_name):
 	player_name = new_name
@@ -163,7 +163,8 @@ func get_save_data():
 		"player_position" : player_position,
 		"target_position" : target_position,
 		"cards" : cards_data,
-		"decks" : decks_data
+		"decks" : decks_data,
+		"map" : map
 	}
 
 func load_save_data(data):
@@ -171,6 +172,8 @@ func load_save_data(data):
 	set_player_color(data.player_color)
 	set_player_position(data.player_position)
 	set_target_position(data.target_position)
+	if "map" in data:
+		set_map(data.map)
 	
 	cards = Decklist.instance()
 	for card_name in data.cards:
@@ -212,3 +215,9 @@ func delete_save():
 	file.open(save_path, file.WRITE)
 	file.store_var(save_slots)
 	file.close()
+
+func set_map(map_data):
+	map = map_data
+
+func get_map():
+	return map

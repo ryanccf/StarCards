@@ -5,7 +5,6 @@ const New = preload("res://Scenes/NewGameButton.tscn")
 func _ready():
 	var lines = Global.retrieve_save_data()
 	var save_index = 0
-	print(lines)
 	for line in lines:
 		var button = Continue.instance()
 #		button.set_data(line)

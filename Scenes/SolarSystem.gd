@@ -36,10 +36,9 @@ var maximum_moon_color = Color(0.2, 0.2, 0.2)
 
 const CelestialBody = preload("res://Scenes/CelestialBody.tscn")
 var rng = RandomNumberGenerator.new()
+var configuration
 
-
-
-func _ready():
+func initialize():
 	var star = CelestialBody.instance()
 	rng.randomize()
 	var corona = CelestialBody.instance()
@@ -57,7 +56,9 @@ func _ready():
 	star.set_minimum_color(minimum_star_color)
 	star.set_maximum_color(maximum_star_color)
 	add_child(corona)
+	corona.initialize()
 	corona.add_child(star)
+	star.initialize()
 	$Flares.set_color(corona.get_color() if corona.get_radius() > star.get_radius() else star.get_color())
 	var last_planet_offset = corona.get_radius() if corona.get_radius() > star.get_radius() else star.get_radius()
 	var last_moon_offset = 0
@@ -93,6 +94,18 @@ func _ready():
 		planet.set_offset(last_planet_offset + last_moon_offset + last_moon_radius)
 		last_planet_offset += planet.get_radius()
 		star.add_child(planet)
+		planet.initialize()
 		for moon in moons:
 			planet.add_child(moon)
+			moon.initialize()
+	configuration = corona.dehydrate()
 
+func dehydrate():
+	return configuration
+
+func rehydrate(old_configuration):
+	var corona = CelestialBody.instance()
+	corona.rehydrate(old_configuration)
+	add_child(corona)
+	corona.initialize()
+	$Flares.set_color(corona.get_color())

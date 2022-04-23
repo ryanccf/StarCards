@@ -6,8 +6,6 @@ var velocity = Vector2()
 var target_point = Vector2()
 
 func set_color(new_color):
-	print(new_color)
-	print("something distinct")
 	$Sprite.modulate = new_color
 
 func get_location():
