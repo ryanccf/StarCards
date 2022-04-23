@@ -60,11 +60,15 @@ func generate_location_positions():
 	
 	positions.push_back(START_POSITION)
 	
-	for i in range(15):
+	for i in range(10):
 		offset = Vector2(Vector2(rng.randf_range(-25, 25), rng.randf_range(-25, 25)))
 		var t = float(i) / 20.0 * PI
 		var dx = (1 + 5 * t) * cos(t)
 		var dy = (1 + 5 * t) * sin(t)
+		positions.push_back(START_POSITION + (Vector2(dx, dy) * modifier) + offset)
+		dx *= -1
+		dy *= -1
+		offset = Vector2(Vector2(rng.randf_range(-25, 25), rng.randf_range(-25, 25)))
 		positions.push_back(START_POSITION + (Vector2(dx, dy) * modifier) + offset)
 	
 	Global.set_player_position(positions[-1])
