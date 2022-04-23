@@ -7,11 +7,6 @@ var rng = RandomNumberGenerator.new()
 var Location = preload("res://Location.tscn")
 var GamePiece = preload("res://GamePiece.tscn") 
 var player = GamePiece.instance()
-var start = Location.instance()
-var end = Location.instance()
-var first = Location.instance()
-var second = Location.instance()
-var third = Location.instance()
 var locations = []
 
 func _ready():
@@ -22,18 +17,6 @@ func _ready():
 	else:
 		rehydrate(Global.get_map())
 	place_player()
-
-func initialize_locations():
-	add_child(start)
-	add_child(first)
-	add_child(second)
-	add_child(third)
-	add_child(end)
-	start.connect("beacon", self, "_on_beacon")
-	first.connect("beacon", self, "_on_beacon")
-	second.connect("beacon", self, "_on_beacon")
-	third.connect("beacon", self, "_on_beacon")
-	end.connect("beacon", self, "_on_beacon")
 
 func place_player():
 	add_child(player)
