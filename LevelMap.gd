@@ -12,7 +12,7 @@ var end = Location.instance()
 var first = Location.instance()
 var second = Location.instance()
 var third = Location.instance()
-var locations = []#start, first, second, third, end]
+var locations = []
 
 func _ready():
 	rng.randomize()
@@ -55,23 +55,22 @@ func generate_level():
 
 func generate_location_positions():
 	var positions = []
-	var modifier = Vector2(0, 0)
-#	positions.push_back(START_POSITION)
-	for i in range(10):
-		positions.push_back(START_POSITION + modifier)
-		modifier += Vector2(rng.randf_range(100, 300), rng.randf_range(100, 300))
+	var offset 
+	var modifier = Vector2(rng.randf_range(150, 200), rng.randf_range(150, 200))
+	
+	positions.push_back(START_POSITION)
+	
+	for i in range(15):
+		offset = Vector2(Vector2(rng.randf_range(-25, 25), rng.randf_range(-25, 25)))
+		var t = float(i) / 20.0 * PI
+		var dx = (1 + 5 * t) * cos(t)
+		var dy = (1 + 5 * t) * sin(t)
+		positions.push_back(START_POSITION + (Vector2(dx, dy) * modifier) + offset)
+	
+	Global.set_player_position(positions[-1])
+	Global.set_target_position(positions[-1])
+	
 	return positions
-#	while angle < 2 * PI:
-#		positions.push_back(START_POSITION * Vector2(sin(angle) * 4, tan(angle)))
-#		angle += 0.2 * PI
-#	return positions
-#	return [
-#		START_POSITION, 
-#		Vector2(START_POSITION.x + 200, START_POSITION.y + 200), 
-#		Vector2(START_POSITION.x + 400, START_POSITION.y + 200),
-#		Vector2(START_POSITION.x + 560, START_POSITION.y + 400),
-#		Vector2(START_POSITION.x + 660, START_POSITION.y + 600)
-#	]
 
 func add_location(location):
 	add_child(location)
