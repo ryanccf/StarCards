@@ -4,6 +4,7 @@ var screen_height = OS.get_real_window_size().y
 var START_POSITION = Vector2(120, screen_height / 2)
 var rng = RandomNumberGenerator.new()
 
+var BlackHole = preload("res://BlackHole.tscn")
 var Location = preload("res://Location.tscn")
 var GamePiece = preload("res://GamePiece.tscn") 
 var player = GamePiece.instance()
@@ -16,6 +17,7 @@ func _ready():
 		Global.set_map(dehydrate())
 	else:
 		rehydrate(Global.get_map())
+	place_black_hole()
 	place_player()
 
 func place_player():
@@ -29,6 +31,12 @@ func place_player():
 		Global.set_target_position(START_POSITION)
 	player.set_target_location(Global.get_target_position())
 
+func place_black_hole():
+	var black_hole = BlackHole.instance()
+	add_child(black_hole)
+	black_hole.connect("boss_beacon", self, "_on_boss_beacon")
+	black_hole.position = START_POSITION
+
 func generate_level():
 	for position in generate_location_positions():
 		var location = Location.instance()
@@ -40,8 +48,6 @@ func generate_location_positions():
 	var positions = []
 	var offset 
 	var modifier = Vector2(rng.randf_range(150, 200), rng.randf_range(150, 200))
-	
-	positions.push_back(START_POSITION)
 	
 	for i in range(10):
 		offset = Vector2(Vector2(rng.randf_range(-25, 25), rng.randf_range(-25, 25)))
@@ -68,6 +74,16 @@ func _on_beacon(locX, locY):
 	if (player.position.distance_to(Vector2(locX, locY)) <= 4):
 		Global.set_player_position(Vector2(locX, locY))
 		_exit("res://Battle.tscn")
+	else:
+		player.look_at(Vector2(locX, locY))
+		player.set_target_location(Vector2(locX, locY))
+		Global.set_target_position(Vector2(locX, locY))
+		Global.store_save_data()
+
+func _on_boss_beacon(locX, locY):
+	if (player.position.distance_to(Vector2(locX, locY)) <= 4):
+		Global.set_player_position(Vector2(locX, locY))
+		_exit("res://BossBattle.tscn")
 	else:
 		player.look_at(Vector2(locX, locY))
 		player.set_target_location(Vector2(locX, locY))
