@@ -1,5 +1,5 @@
 extends "res://Monster.gd"
-var graphic = load("res://images/ship_E.png")
+var graphic = load("res://images/ship_J.png")
 
 func _ready():
 	._ready()
