@@ -4,6 +4,7 @@ var Decklist = preload("res://Scenes/Decklist.tscn")
 
 var ArcherCard = preload("res://cards/Archer.tscn")
 var BarbarianCard = preload("res://cards/Barbarian.tscn")
+var BishopCard = preload("res://cards/Bishop.tscn")
 var BlockerCard = preload("res://cards/Blocker.tscn")
 var DefenderCard = preload("res://cards/Defender.tscn")
 var HomingMissileCard = preload("res://cards/HomingMissile.tscn")
@@ -12,6 +13,7 @@ var DirectAttackCard = preload("res://cards/DirectAttack.tscn")
 var RepairCard = preload("res://cards/RepairCard.tscn")
 
 var CardListing = preload("res://Scenes/CardListing.tscn")
+var BishopCardListing = preload("res://Scenes/BishopCardListing.tscn")
 var ArcherCardListing = preload("res://Scenes/ArcherCardListing.tscn")
 var BarbarianCardListing = preload("res://Scenes/BarbarianCardListing.tscn")
 var BlockerCardListing = preload("res://Scenes/BlockerCardListing.tscn")
@@ -31,6 +33,10 @@ var canonicalCardMap = {
 	"Barbarian" : {
 		"card" : BarbarianCard,
 		"card_listing" : BarbarianCardListing
+	},
+	"Bishop": {
+		"card": BishopCard,
+		"card_listing": BishopCardListing
 	},
 	"Blocker" : {
 		"card" : BlockerCard,
