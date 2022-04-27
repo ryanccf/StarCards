@@ -1,6 +1,6 @@
 extends Control
 
-var CardBack =  load("res://card-images/card_back.png")
+var CardBack =  load("res://images/card_back.png")
 var playerOneGraphic = load("res://images/ship_H.png")
 var PlayerCharacter = preload("res://Battles/Utilities/PlayerCharacter.tscn")
 var opponent = preload("res://Opponents/Opponent.tscn").instance()
@@ -27,7 +27,7 @@ func initialize_cards():
 	for card_name in deck:
 		card = Global.get_card(card_name)
 		card.set_id(card_name)
-		var my_filename = "res://card-images/card_front.png"
+		var my_filename = "res://images/card_front.png"
 		var card_texture = load(my_filename)
 		card.set_image(card_texture, CardBack)
 		card.flip()
