@@ -93,10 +93,6 @@ func _on_boss_beacon(locX, locY):
 func _process(delta):
 	$DeckButtonAnchor.position = player.position - Vector2(300, 0)
 
-func _on_Area2D_input_event(viewport, event, shape_idx):
-	if "button_index" in event and event.button_index == BUTTON_LEFT and event.pressed:
-		_exit("res://Scenes/DeckEditor.tscn")
-
 func _exit(new_scene_path):
 	Global.set_player_position(player.position)
 	get_tree().change_scene(new_scene_path)
@@ -118,3 +114,7 @@ func _unhandled_input(event):
 		var target = get_global_mouse_position()
 		player.set_target_location(target)
 		Global.set_target_position(target)
+
+
+func _on_Button_pressed():
+	_exit("res://Scenes/DeckEditor.tscn")
