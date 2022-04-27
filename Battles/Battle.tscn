@@ -1,10 +1,8 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/Battle.gd" type="Script" id=1]
-[ext_resource path="res://Battles/Utilities/Stack.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scripts/Hand.gd" type="Script" id=3]
+[ext_resource path="res://Battles/Utilities/CardMat.tscn" type="PackedScene" id=2]
 [ext_resource path="res://images/space_battle_background.png" type="Texture" id=4]
-[ext_resource path="res://scripts/Discard.gd" type="Script" id=5]
 [ext_resource path="res://Battles/Utilities/Field.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Utilities/TextureStretcher.tscn" type="PackedScene" id=8]
 
@@ -33,57 +31,31 @@ position = Vector2( 611, 256 )
 z_as_relative = false
 texture = ExtResource( 4 )
 
-[node name="Divider" type="ColorRect" parent="TextureStretcher"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -1183.0
-margin_top = 489.0
-margin_right = 2407.0
-margin_bottom = 1627.0
-grow_vertical = 2
-mouse_filter = 2
-color = Color( 0.627451, 0.627451, 0.627451, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Background" type="ColorRect" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_right = 1200.0
-margin_bottom = 800.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-color = Color( 0, 0, 0, 0 )
-
-[node name="BackgroundAnchor" type="Control" parent="Background"]
+[node name="BackgroundAnchor" type="Control" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_right = 1200.0
+margin_left = -600.0
+margin_right = 600.0
 margin_bottom = 800.0
 mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Sprite" type="Sprite" parent="Background/BackgroundAnchor"]
+[node name="Sprite" type="Sprite" parent="BackgroundAnchor"]
 visible = false
 modulate = Color( 0.376471, 0.376471, 0.376471, 1 )
 position = Vector2( -598, 268 )
 z_as_relative = false
 texture = ExtResource( 4 )
 
-[node name="Background Image" type="Sprite" parent="Background/BackgroundAnchor"]
+[node name="Background Image" type="Sprite" parent="BackgroundAnchor"]
 visible = false
 position = Vector2( -1178.36, 19.5473 )
 scale = Vector2( 0.0776838, 0.0776838 )
 
-[node name="ColorRect" type="ColorRect" parent="Background/BackgroundAnchor"]
-margin_left = -1200.0
-margin_right = -986.0
+[node name="ColorRect" type="ColorRect" parent="BackgroundAnchor"]
+margin_right = 214.0
 margin_bottom = 487.0
 mouse_filter = 2
 color = Color( 0.67451, 0.419608, 0.419608, 0.478431 )
@@ -91,10 +63,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorRect2" type="ColorRect" parent="Background/BackgroundAnchor"]
-margin_left = -1200.0
+[node name="ColorRect2" type="ColorRect" parent="BackgroundAnchor"]
 margin_top = 6.0
-margin_right = -600.0
+margin_right = 600.0
 margin_bottom = 488.0
 mouse_filter = 2
 color = Color( 0.619608, 0.541176, 1, 0.211765 )
@@ -102,37 +73,27 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Field" parent="Background/BackgroundAnchor" instance=ExtResource( 6 )]
+[node name="Field" parent="BackgroundAnchor" instance=ExtResource( 6 )]
+position = Vector2( 0, 9 )
 
-[node name="DeployZone" type="Area2D" parent="Background/BackgroundAnchor"]
-position = Vector2( -1200, 0 )
+[node name="DeployZone" type="Area2D" parent="BackgroundAnchor"]
 z_index = 6
 z_as_relative = false
 
-[node name="DeployZone" type="CollisionShape2D" parent="Background/BackgroundAnchor/DeployZone"]
+[node name="DeployZone" type="CollisionShape2D" parent="BackgroundAnchor/DeployZone"]
 position = Vector2( 108, 246 )
 z_index = 6
 z_as_relative = false
 shape = SubResource( 5 )
 
-[node name="ZoneOfInfluence" type="Area2D" parent="Background/BackgroundAnchor"]
-position = Vector2( -1200, 0 )
+[node name="ZoneOfInfluence" type="Area2D" parent="BackgroundAnchor"]
 
-[node name="ZoneOfInfluence" type="CollisionShape2D" parent="Background/BackgroundAnchor/ZoneOfInfluence"]
+[node name="ZoneOfInfluence" type="CollisionShape2D" parent="BackgroundAnchor/ZoneOfInfluence"]
 modulate = Color( 0.403922, 0.443137, 1, 1 )
 position = Vector2( 300, 247 )
 shape = SubResource( 4 )
 
-[node name="Hand" parent="Background/BackgroundAnchor" instance=ExtResource( 2 )]
-position = Vector2( -435, 321 )
-script = ExtResource( 3 )
+[node name="CardMat" parent="BackgroundAnchor" instance=ExtResource( 2 )]
 
-[node name="Deck" parent="Background/BackgroundAnchor" instance=ExtResource( 2 )]
-position = Vector2( -555, 321 )
-
-[node name="Discard" parent="Background/BackgroundAnchor" instance=ExtResource( 2 )]
-position = Vector2( -472, 322 )
-script = ExtResource( 5 )
-
-[connection signal="input_event" from="Background/BackgroundAnchor/DeployZone" to="." method="_on_DeployZone_input_event"]
-[connection signal="input_event" from="Background/BackgroundAnchor/ZoneOfInfluence" to="." method="_on_ZoneOfInfluence_input_event"]
+[connection signal="input_event" from="BackgroundAnchor/DeployZone" to="." method="_on_DeployZone_input_event"]
+[connection signal="input_event" from="BackgroundAnchor/ZoneOfInfluence" to="." method="_on_ZoneOfInfluence_input_event"]
