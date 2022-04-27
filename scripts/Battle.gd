@@ -3,7 +3,7 @@ extends Control
 var CardBack =  load("res://card-images/card_back.png")
 var playerOneGraphic = load("res://images/ship_H.png")
 var PlayerCharacter = preload("res://PlayerCharacter.tscn")
-var opponent = preload("res://Opponent.tscn").instance()
+var opponent = preload("res://Opponents/Opponent.tscn").instance()
 var selected = false 
 var player = PlayerCharacter.instance()
 var enemy_base
@@ -51,9 +51,9 @@ func initialize_opponent():
 
 func check_battle_end():
 	if not opponent.has_base():
-		get_tree().change_scene("res://Victory.tscn")
+		get_tree().change_scene("res://Screens/Victory.tscn")
 	elif game_over:
-		get_tree().change_scene("res://Defeat.tscn")
+		get_tree().change_scene("res://Screens/Defeat.tscn")
 
 func _on_PlayerCharacter_turn_over():
 	if ($Background/BackgroundAnchor/Hand.card_count() < 7):

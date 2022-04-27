@@ -12,9 +12,6 @@ func _ready():
 func _process(delta):
 	rotation += delta * rotation_speed
 
-func generate_battle():
-	get_tree().change_scene("res://Battle.tscn")
-
 func _on_Area2D_input_event(viewport, event, shape_idx):
 	if (event is InputEventMouseButton && event.pressed):
 		emit_signal("beacon", position.x, position.y)

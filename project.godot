@@ -15,7 +15,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Card Stars"
-run/main_scene="res://Title.tscn"
+run/main_scene="res://Screens/Title.tscn"
 config/icon="res://icon.png"
 
 [autoload]

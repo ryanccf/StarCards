@@ -73,7 +73,7 @@ func add_location(location):
 func _on_beacon(locX, locY):
 	if (player.position.distance_to(Vector2(locX, locY)) <= 4):
 		Global.set_player_position(Vector2(locX, locY))
-		_exit("res://Battle.tscn")
+		_exit("res://Battles/Battle.tscn")
 	else:
 		player.look_at(Vector2(locX, locY))
 		player.set_target_location(Vector2(locX, locY))
@@ -83,7 +83,7 @@ func _on_beacon(locX, locY):
 func _on_boss_beacon(locX, locY):
 	if (player.position.distance_to(Vector2(locX, locY)) <= 4):
 		Global.set_player_position(Vector2(locX, locY))
-		_exit("res://BossBattle.tscn")
+		_exit("res://Battles/BossBattle.tscn")
 	else:
 		player.look_at(Vector2(locX, locY))
 		player.set_target_location(Vector2(locX, locY))

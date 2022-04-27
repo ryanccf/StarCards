@@ -69,7 +69,7 @@ func check_turn_limit():
 		exit_battle()
 
 func exit_battle():
-	get_tree().change_scene("res://LevelMap.tscn")
+	get_tree().change_scene("res://Screens/LevelMap.tscn")
 
 func _on_TurnButton_pressed():
 	update_turn()

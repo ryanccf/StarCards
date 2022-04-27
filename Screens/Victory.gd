@@ -20,4 +20,4 @@ func _ready():
 
 func _on_Button_pressed():
 	Global.store_save_data()
-	get_tree().change_scene("res://LevelMap.tscn")
+	get_tree().change_scene("res://Screens/LevelMap.tscn")

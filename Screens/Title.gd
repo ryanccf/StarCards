@@ -24,4 +24,4 @@ func _process(delta):
 			ascending = true
 	$ColorRect.set_frame_color(bg_color)
 	if Input.is_action_pressed("click"):
-		get_tree().change_scene("res://SaveSelect.tscn")
+		get_tree().change_scene("res://Screens/SaveSelect.tscn")

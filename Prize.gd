@@ -22,4 +22,4 @@ func _on_AddToDeck_pressed():
 
 func _add_to_library_and_exit():
 	Global.add_card(card_name)
-	get_tree().change_scene("res://LevelMap.tscn")
+	get_tree().change_scene("res://Screens/LevelMap.tscn")

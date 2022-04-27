@@ -9,4 +9,4 @@ func store_data():
 
 func _on_Button_pressed():
 	store_data()
-	get_tree().change_scene("res://LevelMap.tscn")
+	get_tree().change_scene("res://Screens/LevelMap.tscn")
