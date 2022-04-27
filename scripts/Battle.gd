@@ -9,9 +9,11 @@ var game_over = false
 
 func _ready():
 	randomize()
-	$BackgroundAnchor/CardMat.initialize()
+	$ContentAnchor/CardMat.initialize()
 	initialize_player()
 	initialize_opponent()
+	$ContentAnchor/BattleField.connect("deploy_zone_input", self, "_on_DeployZone_input")
+	$ContentAnchor/BattleField.connect("zone_of_influence_input", self, "_on_ZoneOfInfluence_input")
 
 func _process(delta):
 	check_battle_end()
@@ -21,14 +23,14 @@ func initialize_player():
 	player.increase_speed(25)
 	player.update_graphic(playerOneGraphic)
 	player.position = Vector2(100, 300)
-	player.connect("turn_complete", $BackgroundAnchor/CardMat, "attempt_draw")
+	player.connect("turn_complete", $ContentAnchor/CardMat, "attempt_draw")
 	player.connect("death", self, "_clean_up_player")
-	$BackgroundAnchor/Field.add_child(player)
+	$ContentAnchor/BattleField.add_player(player)
 
 func initialize_opponent():
-	opponent.set_spawn($BackgroundAnchor/Field/SpawnPoint)
+	opponent.set_spawn($ContentAnchor/BattleField.get_spawn())
 	opponent.set_enemy_base(player)
-	opponent.connect("spawn_monster", $BackgroundAnchor/Field, "add_monster")
+	opponent.connect("spawn_monster", $ContentAnchor/BattleField, "add_monster")
 	add_child(opponent)
 
 func check_battle_end():
@@ -41,30 +43,29 @@ func _clean_up_player():
 	game_over = true;
 
 func reshuffle():
-	$BackgroundAnchor/CardMat.reshuffle()
+	$ContentAnchor/CardMat.reshuffle()
 
-func _on_DeployZone_input_event(viewport, event, shape_idx):
-	if $BackgroundAnchor/CardMat.is_utility_card_ready(event):
+func _on_DeployZone_input(event):
+	if $ContentAnchor/CardMat.is_utility_card_ready(event):
 		_play_utility_card_selected(event.position)
-	elif $BackgroundAnchor/CardMat.is_card_ready(event):
+	elif $ContentAnchor/CardMat.is_card_ready(event):
 		_play_monster_card_selected(event.position)
 
-func _on_ZoneOfInfluence_input_event(viewport, event, shape_idx):
-	if $BackgroundAnchor/CardMat.is_utility_card_ready(event):
+func _on_ZoneOfInfluence_input(event):
+	if $ContentAnchor/CardMat.is_utility_card_ready(event):
 		_play_utility_card_selected(event.position)
 
 func _play_utility_card_selected(event_position):
-	var card = $BackgroundAnchor/CardMat.play_card()
+	var card = $ContentAnchor/CardMat.play_card()
 	var action = card.utility_action()
-	$BackgroundAnchor/Field.add_child(action)
-	action.set_position(event_position - $BackgroundAnchor/ZoneOfInfluence.global_position)
+	$ContentAnchor/BattleField.add_action(action, event_position)
 
 func _play_monster_card_selected(event_position):
-	var card = $BackgroundAnchor/CardMat.play_card()
+	var card = $ContentAnchor/CardMat.play_card()
 	card.reset_monster()
 	var monster = card.get_monster()
 	monster.set_friendly()
 	monster.set_color(Global.get_player_color())
 	monster.set_target(opponent.get_base())
 	monster.set_enemy_base(opponent.get_base())
-	$BackgroundAnchor/Field.add_monster(monster, event_position - $BackgroundAnchor/DeployZone.global_position)
+	$ContentAnchor/BattleField.monster_from_click(monster, event_position)
