@@ -1,4 +1,4 @@
-extends "res://scripts/TextureStretcher.gd"
+extends Control
 
 var playerOneGraphic = load("res://images/ship_H.png")
 var PlayerCharacter = preload("res://Battles/Utilities/PlayerCharacter.tscn")
