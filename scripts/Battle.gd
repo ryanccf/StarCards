@@ -1,4 +1,4 @@
-extends Control
+extends "res://scripts/TextureStretcher.gd"
 
 var playerOneGraphic = load("res://images/ship_H.png")
 var PlayerCharacter = preload("res://Battles/Utilities/PlayerCharacter.tscn")
@@ -41,9 +41,6 @@ func check_battle_end():
 
 func _clean_up_player():
 	game_over = true;
-
-func reshuffle():
-	$ContentAnchor/CardMat.reshuffle()
 
 func _on_DeployZone_input(event):
 	if $ContentAnchor/CardMat.is_utility_card_ready(event):
