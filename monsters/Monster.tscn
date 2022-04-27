@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://PressStart2P-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://fonts/PressStart2P-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Monsters/Utilities/ObstacleAvoider.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Monsters/Utilities/EnemyHitBoxTracker.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scripts/Monster.gd" type="Script" id=5]

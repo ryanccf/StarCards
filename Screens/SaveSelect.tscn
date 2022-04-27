@@ -6,7 +6,7 @@
 
 
 [sub_resource type="DynamicFontData" id=1]
-font_path = "res://Bungee-Regular.ttf"
+font_path = "res://fonts/Bungee-Regular.ttf"
 
 [sub_resource type="DynamicFont" id=2]
 size = 40
