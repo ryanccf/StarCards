@@ -3,7 +3,8 @@
 [ext_resource path="res://PressStart2P-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Battles/Utilities/PlayerCharacter.gd" type="Script" id=2]
 [ext_resource path="res://scripts/PlayerHitBox.gd" type="Script" id=3]
-[ext_resource path="res://Terra.png" type="Texture" id=4]
+[ext_resource path="res://images/Terra.png" type="Texture" id=4]
+
 
 [sub_resource type="Theme" id=2]
 
