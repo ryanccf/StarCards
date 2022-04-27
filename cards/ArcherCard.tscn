@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Cards/Card.tscn" type="PackedScene" id=1]
+[ext_resource path="res://images/ship_L.png" type="Texture" id=2]
+[ext_resource path="res://scripts/ArcherCard.gd" type="Script" id=3]
+
+[node name="Archer" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+
+[node name="Graphic" parent="Area2D/Icon" index="0"]
+modulate = Color( 0.145098, 0.207843, 0.87451, 1 )
+texture = ExtResource( 2 )
+
+[node name="Title" parent="Header" index="0"]
+text = "Archer
+"

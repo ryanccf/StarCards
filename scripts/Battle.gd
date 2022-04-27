@@ -2,7 +2,7 @@ extends Control
 
 var CardBack =  load("res://card-images/card_back.png")
 var playerOneGraphic = load("res://images/ship_H.png")
-var PlayerCharacter = preload("res://PlayerCharacter.tscn")
+var PlayerCharacter = preload("res://Battles/Utilities/PlayerCharacter.tscn")
 var opponent = preload("res://Opponents/Opponent.tscn").instance()
 var selected = false 
 var player = PlayerCharacter.instance()

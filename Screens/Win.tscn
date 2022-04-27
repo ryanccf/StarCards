@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://images/black_hole.jpg" type="Texture" id=1]
-[ext_resource path="res://Screens/Win.gd" type="Script" id=2]
+[ext_resource path="res://scripts/Win.gd" type="Script" id=2]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://Bungee-Regular.ttf"

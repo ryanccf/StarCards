@@ -1,21 +1,12 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scripts/Battle.gd" type="Script" id=1]
-[ext_resource path="res://Stack.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Battles/Utilities/Stack.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scripts/Hand.gd" type="Script" id=3]
 [ext_resource path="res://images/space_battle_background.png" type="Texture" id=4]
 [ext_resource path="res://scripts/Discard.gd" type="Script" id=5]
-[ext_resource path="res://Field.gd" type="Script" id=6]
+[ext_resource path="res://Battles/Utilities/Field.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Utilities/TextureStretcher.tscn" type="PackedScene" id=8]
-
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 598, 240 )
-
-[sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 659, 37.5 )
-
-[sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 37.5, 317.5 )
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 108, 240 )
@@ -30,17 +21,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="BattleAnchor" type="Control" parent="."]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = 600.0
-margin_right = 1800.0
-margin_bottom = 800.0
-mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -122,37 +102,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Field" type="Area2D" parent="Background/BackgroundAnchor"]
-position = Vector2( -1200, 9 )
-collision_layer = 2
-input_pickable = false
-monitoring = false
-script = ExtResource( 6 )
-
-[node name="Field" type="CollisionShape2D" parent="Background/BackgroundAnchor/Field"]
-position = Vector2( 598, 241 )
-shape = SubResource( 3 )
-
-[node name="SpawnPoint" type="Node2D" parent="Background/BackgroundAnchor/Field"]
-position = Vector2( 1083, 369 )
-
-[node name="Bounds" type="Area2D" parent="Background/BackgroundAnchor/Field"]
-
-[node name="Top" type="CollisionShape2D" parent="Background/BackgroundAnchor/Field/Bounds"]
-position = Vector2( 590, -40.5 )
-shape = SubResource( 6 )
-
-[node name="Bottom" type="CollisionShape2D" parent="Background/BackgroundAnchor/Field/Bounds"]
-position = Vector2( 601, 519 )
-shape = SubResource( 6 )
-
-[node name="Left" type="CollisionShape2D" parent="Background/BackgroundAnchor/Field/Bounds"]
-position = Vector2( -40.5, 237.5 )
-shape = SubResource( 7 )
-
-[node name="Right" type="CollisionShape2D" parent="Background/BackgroundAnchor/Field/Bounds"]
-position = Vector2( 1235.5, 237.5 )
-shape = SubResource( 7 )
+[node name="Field" parent="Background/BackgroundAnchor" instance=ExtResource( 6 )]
 
 [node name="DeployZone" type="Area2D" parent="Background/BackgroundAnchor"]
 position = Vector2( -1200, 0 )

@@ -1,10 +1,29 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://PathPicker.gd" type="Script" id=1]
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+onready var _rays = $Rays
+
+func set_body(body):
+	for ray in _get_rays():
+		ray.add_exception(body)
+
+func pick_path():
+	for ray in _get_rays():
+		if _check_ray(ray):
+			return ray.rotation
+
+func _get_rays():
+	return [$CenterRay, $NearLeftRay, $NearRightRay, $LeftRay, $RightRay, $FarLeftRay, $FarRightRay]
+
+func _check_ray(ray):
+	ray.force_raycast_update()
+	return not ray.get_collider()
+"
 
 [node name="PathPicker" type="Node2D"]
 scale = Vector2( 4, 4 )
-script = ExtResource( 1 )
+script = SubResource( 1 )
 
 [node name="FarLeftRay" type="RayCast2D" parent="."]
 rotation = -0.785398

@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Cards/Card.tscn" type="PackedScene" id=1]
+[ext_resource path="res://images/ship_J.png" type="Texture" id=2]
+[ext_resource path="res://scripts/BishopCard.gd" type="Script" id=3]
+
+[node name="Bishop" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+
+[node name="Graphic" parent="Area2D/Icon" index="1"]
+modulate = Color( 0.133333, 0.403922, 0.533333, 1 )
+texture = ExtResource( 2 )
+
+[node name="Title" parent="Header" index="0"]
+text = "Bishop
+"

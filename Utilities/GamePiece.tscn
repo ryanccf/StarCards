@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scripts/GamePiece.gd" type="Script" id=1]
+[ext_resource path="res://images/ship_H.png" type="Texture" id=2]
+
+[node name="GamePiece" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 16
+lifetime = 3.0
+local_coords = false
+gravity = Vector2( 0, 0 )
+scale_amount = 4.0
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 2 )
