@@ -112,3 +112,9 @@ func rehydrate(configuration):
 		var location = Location.instance()
 		add_location(location)
 		location.rehydrate(location_configuration)
+
+func _unhandled_input(event):
+	if "button_index" in event and event.button_index == BUTTON_LEFT and event.pressed:
+		var target = get_global_mouse_position()
+		player.set_target_location(target)
+		Global.set_target_position(target)
