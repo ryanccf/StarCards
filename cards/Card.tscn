@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Cards/CardTheme.tres" type="Theme" id=1]
+[ext_resource path="res://styles/CardTheme.tres" type="Theme" id=1]
 [ext_resource path="res://card-images/2_of_clubs.png" type="Texture" id=2]
 [ext_resource path="res://scripts/card.gd" type="Script" id=3]
 [ext_resource path="res://images/ship_A.png" type="Texture" id=4]
