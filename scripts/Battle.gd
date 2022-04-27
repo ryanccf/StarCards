@@ -12,8 +12,8 @@ func _ready():
 	$ContentAnchor/CardMat.initialize()
 	initialize_player()
 	initialize_opponent()
-	$ContentAnchor/BattleField.connect("deploy_zone_input", self, "_on_DeployZone_input")
-	$ContentAnchor/BattleField.connect("zone_of_influence_input", self, "_on_ZoneOfInfluence_input")
+	$ContentAnchor/Battlefield.connect("deploy_zone_input", self, "_on_DeployZone_input")
+	$ContentAnchor/Battlefield.connect("zone_of_influence_input", self, "_on_ZoneOfInfluence_input")
 
 func _process(delta):
 	check_battle_end()
@@ -25,12 +25,12 @@ func initialize_player():
 	player.position = Vector2(100, 300)
 	player.connect("turn_complete", $ContentAnchor/CardMat, "attempt_draw")
 	player.connect("death", self, "_clean_up_player")
-	$ContentAnchor/BattleField.add_player(player)
+	$ContentAnchor/Battlefield.add_player(player)
 
 func initialize_opponent():
-	opponent.set_spawn($ContentAnchor/BattleField.get_spawn())
+	opponent.set_spawn($ContentAnchor/Battlefield.get_spawn())
 	opponent.set_enemy_base(player)
-	opponent.connect("spawn_monster", $ContentAnchor/BattleField, "add_monster")
+	opponent.connect("spawn_monster", $ContentAnchor/Battlefield, "add_monster")
 	add_child(opponent)
 
 func check_battle_end():
@@ -55,7 +55,7 @@ func _on_ZoneOfInfluence_input(event):
 func _play_utility_card_selected(event_position):
 	var card = $ContentAnchor/CardMat.play_card()
 	var action = card.utility_action()
-	$ContentAnchor/BattleField.add_action(action, event_position)
+	$ContentAnchor/Battlefield.add_action(action, event_position)
 
 func _play_monster_card_selected(event_position):
 	var card = $ContentAnchor/CardMat.play_card()
@@ -65,4 +65,4 @@ func _play_monster_card_selected(event_position):
 	monster.set_color(Global.get_player_color())
 	monster.set_target(opponent.get_base())
 	monster.set_enemy_base(opponent.get_base())
-	$ContentAnchor/BattleField.monster_from_click(monster, event_position)
+	$ContentAnchor/Battlefield.monster_from_click(monster, event_position)

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scripts/Battle.gd" type="Script" id=1]
 [ext_resource path="res://Battles/Utilities/CardMat.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Battles/Utilities/BattleField.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Battles/Utilities/Battlefield.tscn" type="PackedScene" id=3]
 [ext_resource path="res://images/space_battle_background.png" type="Texture" id=4]
 [ext_resource path="res://Utilities/TextureStretcher.tscn" type="PackedScene" id=5]
 
@@ -36,6 +36,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BattleField" parent="ContentAnchor" instance=ExtResource( 3 )]
+[node name="Battlefield" parent="ContentAnchor" instance=ExtResource( 3 )]
 
 [node name="CardMat" parent="ContentAnchor" instance=ExtResource( 2 )]
