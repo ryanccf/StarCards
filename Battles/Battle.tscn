@@ -42,18 +42,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Sprite" type="Sprite" parent="BackgroundAnchor"]
-visible = false
-modulate = Color( 0.376471, 0.376471, 0.376471, 1 )
-position = Vector2( -598, 268 )
-z_as_relative = false
-texture = ExtResource( 4 )
-
-[node name="Background Image" type="Sprite" parent="BackgroundAnchor"]
-visible = false
-position = Vector2( -1178.36, 19.5473 )
-scale = Vector2( 0.0776838, 0.0776838 )
-
 [node name="ColorRect" type="ColorRect" parent="BackgroundAnchor"]
 margin_right = 214.0
 margin_bottom = 487.0
