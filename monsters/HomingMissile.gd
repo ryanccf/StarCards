@@ -1,4 +1,4 @@
-extends "res://Monster.gd"
+extends "res://Monsters/Monster.gd"
 var graphic = load("res://images/enemy_B.png")
 signal boom(position)
 

@@ -4,8 +4,8 @@ var screen_height = OS.get_real_window_size().y
 var START_POSITION = Vector2(120, screen_height / 2)
 var rng = RandomNumberGenerator.new()
 
-var BlackHole = preload("res://BlackHole.tscn")
-var Location = preload("res://Location.tscn")
+var BlackHole = preload("res://Locations/BlackHole.tscn")
+var Location = preload("res://Locations/Location.tscn")
 var GamePiece = preload("res://GamePiece.tscn") 
 var player = GamePiece.instance()
 var locations = []

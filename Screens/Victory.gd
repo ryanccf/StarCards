@@ -1,4 +1,4 @@
-extends "res://TextureStretcher.gd"
+extends "res://Utilities/TextureStretcher.gd"
 
 var rng = RandomNumberGenerator.new()
 

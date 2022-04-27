@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Screens/SaveSelect.gd" type="Script" id=1]
 [ext_resource path="res://weaponscache.jpeg" type="Texture" id=2]
+[ext_resource path="res://Utilities/TextureStretcher.tscn" type="PackedScene" id=3]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://Bungee-Regular.ttf"
@@ -21,7 +22,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="TextureStretcher" parent="." instance=ExtResource( 3 )]
+
+[node name="Sprite" type="Sprite" parent="TextureStretcher"]
 modulate = Color( 1, 1, 1, 0.184314 )
 position = Vector2( 726, 486 )
 scale = Vector2( 0.498558, 0.498557 )

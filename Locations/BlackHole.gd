@@ -1,4 +1,4 @@
-extends "res://Location.gd"
+extends "res://Locations/Location.gd"
 signal boss_beacon(x, y)
 
 func _ready():

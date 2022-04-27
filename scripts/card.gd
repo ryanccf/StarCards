@@ -1,6 +1,6 @@
 extends Node2D
 
-const Monster = preload("res://Monster.tscn")
+const Monster = preload("res://Monsters/Monster.tscn")
 
 var monster
 var cardID = ""

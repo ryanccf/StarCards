@@ -1,4 +1,4 @@
-extends "res://Monster.gd"
+extends "res://Monsters/Monster.gd"
 var defenderGraphic = load("res://images/station_C.png")
 var graphic = load("res://images/ship_L.png")
 

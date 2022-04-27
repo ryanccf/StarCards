@@ -1,4 +1,4 @@
-extends "res://Monster.gd"
+extends "res://Monsters/Monster.gd"
 var graphic = load("res://images/ship_k.png")
 
 func _has_target():

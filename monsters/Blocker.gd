@@ -1,4 +1,4 @@
-extends "res://Monster.gd"
+extends "res://Monsters/Monster.gd"
 var graphic = load("res://images/station_A.png")
 var RayCastDown = load("$StabilizedAnchor/RayCastDown")
 var RayCastUp = load("$StabilizedAnchor/RayCastUp")

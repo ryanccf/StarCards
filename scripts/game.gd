@@ -7,7 +7,7 @@ const MAX_TURNS = 10
 var Card = preload("res://Card.tscn")
 var Stack = preload("res://Stack.tscn")
 var PlayerCharacter = preload("res://PlayerCharacter.tscn")
-var Monster = preload("res://Monster.tscn")
+var Monster = preload("res://Monsters/Monster.tscn")
 
 var selected = false
 var deck = Stack.instance()
