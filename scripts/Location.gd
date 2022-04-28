@@ -19,9 +19,8 @@ func _process(delta):
 func _on_Area2D_input_event(viewport, event, shape_idx):
 	if (event is InputEventMouseButton && event.pressed):
 		emit_signal("beacon", position.x, position.y)
-		$ActivityMenu.rect_position = position
 		$ActivityMenu.popup()
-		
+		$ActivityMenu.rect_position = position
 
 func dehydrate():
 	return {
