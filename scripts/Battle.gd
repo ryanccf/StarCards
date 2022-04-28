@@ -53,15 +53,10 @@ func _on_ZoneOfInfluence_input(event):
 		_play_utility_card_selected(event.position)
 
 func _play_utility_card_selected(event_position):
-	var card = $ContentAnchor/CardMat.play_card()
-	var action = card.utility_action()
-	$ContentAnchor/Battlefield.add_action(action, event_position)
+	$ContentAnchor/Battlefield.add_action($ContentAnchor/CardMat.play_action_card(), event_position)
 
 func _play_monster_card_selected(event_position):
-	var card = $ContentAnchor/CardMat.play_card()
-	card.reset_monster()
-	var monster = card.get_monster()
-	monster.set_friendly()
+	var monster = $ContentAnchor/CardMat.play_monster_card()
 	monster.set_color(Global.get_player_color())
 	monster.set_target(opponent.get_base())
 	monster.set_enemy_base(opponent.get_base())

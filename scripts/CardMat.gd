@@ -31,6 +31,16 @@ func play_card():
 	$Discard.add_card(card)
 	return card
 
+func play_action_card():
+	return play_card().utility_action()
+
+func play_monster_card():
+	var card = play_card()
+	card.reset_monster()
+	var monster = card.get_monster()
+	monster.set_friendly()
+	return monster
+
 func is_utility_card_ready(event):
 	return is_card_ready(event) and $Hand.get_selected().has_method("utility_action")
 

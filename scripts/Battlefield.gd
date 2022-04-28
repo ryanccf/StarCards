@@ -37,7 +37,6 @@ func _handle_laser_spawn(laser_position, laser_rotation, laser_target, is_friend
 	laser.rotation = laser_rotation
 	laser.set_target(laser_target)
 	laser.set_friendly(is_friendly)
-	laser.connect("target_reached", self, "_clean_up_laser")
 	$Field.add_child(laser)
 
 func _handle_boom(position):
@@ -45,6 +44,3 @@ func _handle_boom(position):
 		var direct_attack = DirectAttack.instance()
 		direct_attack.position = position
 		$Field.add_child(direct_attack)
-
-func _clean_up_laser(laser):
-	pass
