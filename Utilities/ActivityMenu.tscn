@@ -3,6 +3,7 @@
 [ext_resource path="res://scripts/ActivityMenu.gd" type="Script" id=1]
 
 [node name="Node2D" type="Popup"]
+visible = true
 mouse_filter = 2
 script = ExtResource( 1 )
 __meta__ = {
@@ -16,7 +17,7 @@ margin_right = 161.0
 margin_bottom = 163.0
 rect_scale = Vector2( 0.379438, 0.339708 )
 mouse_filter = 2
-color = Color( 1, 0, 0, 1 )
+color = Color( 1, 0, 0, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

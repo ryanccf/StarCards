@@ -5,6 +5,8 @@ var speed = 100
 var velocity = Vector2()
 var target_point = Vector2()
 
+signal player_arrival
+
 func set_color(new_color):
 	$Sprite.modulate = new_color
 
@@ -23,6 +25,8 @@ func _ready():
 func _process(delta):
 	if target_point.distance_to(position) > 1: 
 		move_to(target_point, delta)
+	else:
+		emit_signal("player_arrival", position)
 
 func move_to(target_pos,delta):
 	var mass = 5

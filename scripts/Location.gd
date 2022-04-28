@@ -26,8 +26,8 @@ func activate_menu():
 	if not $ActivityMenu.visible:
 		$ActivityMenu.popup()
 		$ActivityMenu.rect_position = position
-	else:
-		$ActivityMenu.click_button()
+#	else:
+#		$ActivityMenu.click_button()
 
 func add_activity(name, event):
 	$ActivityMenu.add_activity(name, event)
