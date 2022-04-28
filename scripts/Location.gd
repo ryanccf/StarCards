@@ -35,12 +35,14 @@ func add_activity(name, event):
 func dehydrate():
 	return {
 		"position" : position,
-		"solar_system" : $SolarSystem.dehydrate()
+		"solar_system" : $SolarSystem.dehydrate(),
+		"activities" : $ActivityMenu.dehydrate()
 	}
 
 func rehydrate(configuration):
 	position = configuration.position
 	$SolarSystem.rehydrate(configuration.solar_system)
+	$ActivityMenu.rehydrate(configuration.activities)
 
 func initialize():
 	$SolarSystem.initialize()

@@ -20,6 +20,21 @@ func _on_Node2D_about_to_show():
 		activity_button.rect_position = Vector2(-1.5 * activity_button.get_size().x, y_offset)
 		y_offset += activity_button.get_size().y * 3 + BUTTON_SPACING
 
-#func click_button():
-#	for activity in $Box.get_children():
-#		activity.attempt_click()
+func dehydrate():
+	var dehydrated_activities = []
+	for activity in activities:
+		match activity.name:
+			"Battle" :
+				dehydrated_activities.push_back({"name" : activity.name})
+			"Boss Battle" :
+				dehydrated_activities.push_back({"name" : activity.name})
+	return dehydrated_activities
+
+func rehydrate(dehydrated_activities):
+	for activity in dehydrated_activities:
+		match activity.name:
+			"Battle" :
+				pass
+			"Boss Battle" :
+				pass
+
