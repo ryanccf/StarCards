@@ -1,21 +1,65 @@
 extends Control
 var Laser = preload("res://Actions/Laser.tscn")
 var DirectAttack = preload("res://Actions/DirectAttack.tscn")
+var playerOneGraphic = load("res://images/ship_H.png")
+var PlayerCharacter = preload("res://Battles/Utilities/PlayerCharacter.tscn")
+var opponent = preload("res://Opponents/Opponent.tscn").instance()
+var player = PlayerCharacter.instance()
+var game_over = false
 var monsters = []
+var victory_path = "res://Screens/Victory.tscn"
 signal deploy_zone_input(event)
 signal zone_of_influence_input(event)
+signal turn_complete
 
-func add_player(player):
+func set_opponent(new_opponent):
+	opponent = new_opponent
+
+func _process(delta):
+	check_battle_end()
+
+func set_victory_path(new_victory_path):
+	victory_path = new_victory_path
+
+func check_battle_end():
+	if not opponent.has_base():
+		get_tree().change_scene(victory_path)
+	elif game_over:
+		get_tree().change_scene("res://Screens/Defeat.tscn")
+
+func _ready():
+	initialize_player()
+	initialize_opponent()
+
+func initialize_player():
+	player.set_color(Global.get_player_color())
+	player.increase_speed(25)
+	player.update_graphic(playerOneGraphic)
+	player.position = Vector2(100, 300)
 	$Field.add_child(player)
+	player.connect("turn_complete", self, "_broadcast_turn_complete")
+	player.connect("death", self, "_on_player_death")
 
-func get_spawn():
-	return $Field/SpawnPoint
+func initialize_opponent():
+	opponent.set_spawn($Field/SpawnPoint)
+	opponent.set_enemy_base(player)
+	opponent.connect("spawn_monster", self, "add_monster")
+	add_child(opponent)
+
+func _broadcast_turn_complete():
+	emit_signal("turn_complete")
+
+func _on_player_death():
+	game_over = true;
 
 func add_action(action, event_position):
 	$Field.add_child(action)
 	action.set_position(event_position - $ZoneOfInfluence.global_position)
 
 func monster_from_click(monster, event_position):
+	monster.set_color(Global.get_player_color())
+	monster.set_target(opponent.get_base())
+	monster.set_enemy_base(opponent.get_base())
 	add_monster(monster, event_position - $DeployZone.global_position)
 
 func _on_DeployZone_input_event(viewport, event, shape_idx):

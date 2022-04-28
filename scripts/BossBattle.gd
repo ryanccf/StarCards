@@ -1,11 +1,6 @@
 extends "res://scripts/Battle.gd"
 
 func _ready():
-	#opponent = preload("res://Opponents/Boss.tscn").instance()
+	#$ContentAnchor/Battlefield.set_opponent(preload("res://Opponents/Boss.tscn").instance())
+	$ContentAnchor/Battlefield.set_victory_path("res://Screens/Win.tscn")
 	._ready()
-
-func check_battle_end():
-	if not opponent.has_base():
-		get_tree().change_scene("res://Screens/Win.tscn")
-	elif game_over:
-		get_tree().change_scene("res://Screens/Defeat.tscn")
