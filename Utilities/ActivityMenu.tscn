@@ -3,18 +3,19 @@
 [ext_resource path="res://scripts/ActivityMenu.gd" type="Script" id=1]
 
 [node name="Node2D" type="Popup"]
-visible = true
+mouse_filter = 2
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="Box" type="ColorRect" parent="."]
 margin_left = -39.0
 margin_top = -37.0
 margin_right = 161.0
 margin_bottom = 163.0
 rect_scale = Vector2( 0.379438, 0.339708 )
+mouse_filter = 2
 color = Color( 1, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -23,7 +24,8 @@ __meta__ = {
 [node name="Label" type="Label" parent="."]
 margin_right = 40.0
 margin_bottom = 14.0
-rect_scale = Vector2( 4.69263, 53.7311 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[connection signal="about_to_show" from="." to="." method="_on_Node2D_about_to_show"]

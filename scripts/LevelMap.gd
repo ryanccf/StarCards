@@ -35,6 +35,7 @@ func place_black_hole():
 	var black_hole = BlackHole.instance()
 	add_child(black_hole)
 	black_hole.connect("boss_beacon", self, "_on_boss_beacon")
+	black_hole.add_activity("Boss Battle", funcref(self, "_start_boss_battle"))
 	black_hole.position = START_POSITION
 
 func generate_level():
@@ -68,22 +69,29 @@ func generate_location_positions():
 func add_location(location):
 	add_child(location)
 	location.connect("beacon", self, "_on_beacon")
+	location.add_activity("Battle", funcref(self, "_start_battle"))
 	locations.push_back(location)
 
-func _on_beacon(locX, locY):
+func _start_battle():
+	_exit("res://Battles/Battle.tscn")
+
+func _start_boss_battle():
+	_exit("res://Battles/BossBattle.tscn")
+
+func _on_beacon(locX, locY, location):
 	if (player.position.distance_to(Vector2(locX, locY)) <= 4):
 		Global.set_player_position(Vector2(locX, locY))
-		_exit("res://Battles/Battle.tscn")
+		location.activate_menu()
 	else:
 		player.look_at(Vector2(locX, locY))
 		player.set_target_location(Vector2(locX, locY))
 		Global.set_target_position(Vector2(locX, locY))
 		Global.store_save_data()
 
-func _on_boss_beacon(locX, locY):
+func _on_boss_beacon(locX, locY, boss_location):
 	if (player.position.distance_to(Vector2(locX, locY)) <= 4):
 		Global.set_player_position(Vector2(locX, locY))
-		_exit("res://Battles/BossBattle.tscn")
+		boss_location.activate_menu()
 	else:
 		player.look_at(Vector2(locX, locY))
 		player.set_target_location(Vector2(locX, locY))
@@ -114,7 +122,6 @@ func _unhandled_input(event):
 		var target = get_global_mouse_position()
 		player.set_target_location(target)
 		Global.set_target_position(target)
-
 
 func _on_Button_pressed():
 	_exit("res://Screens/DeckEditor.tscn")

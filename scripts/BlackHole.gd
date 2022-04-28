@@ -18,4 +18,4 @@ func _ready():
 
 func _on_Area2D_input_event(viewport, event, shape_idx):
 	if (event is InputEventMouseButton && event.pressed):
-		emit_signal("boss_beacon", position.x, position.y)
+		emit_signal("boss_beacon", position.x, position.y, self)
