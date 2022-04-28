@@ -10,6 +10,7 @@ signal beacon
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	menu = ActivityMenu.instance()
+	add_child(menu)
 	rng.randomize()
 
 func _process(delta):
@@ -18,7 +19,9 @@ func _process(delta):
 func _on_Area2D_input_event(viewport, event, shape_idx):
 	if (event is InputEventMouseButton && event.pressed):
 		emit_signal("beacon", position.x, position.y)
-		menu.popup()
+		$ActivityMenu.rect_position = position
+		$ActivityMenu.popup()
+		
 
 func dehydrate():
 	return {
