@@ -15,6 +15,7 @@ func _on_Node2D_about_to_show():
 		activity_button.set_event(activity.event)
 		activity_button.connect("option_selected", self, "_on_option_selected")
 		$Box.add_child(activity_button)
+		activity_button.rect_position = Vector2(-1.5 * activity_button.get_size().x, 0)
 
 #func click_button():
 #	for activity in $Box.get_children():

@@ -3,8 +3,12 @@
 [ext_resource path="res://scripts/ActivityButton.gd" type="Script" id=1]
 
 [node name="ActivityButton" type="Button"]
-margin_right = 12.0
-margin_bottom = 20.0
+margin_left = -30.0
+margin_top = -30.0
+margin_right = -10.0
+margin_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
 rect_scale = Vector2( 3, 3 )
 input_pass_on_modal_close_click = false
 script = ExtResource( 1 )
