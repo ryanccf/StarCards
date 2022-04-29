@@ -37,13 +37,16 @@ func place_black_hole():
 	var black_hole = BlackHole.instance()
 	add_child(black_hole)
 	black_hole.connect("boss_beacon", self, "_on_beacon")
-	black_hole.add_activity("Boss Battle", funcref(self, "_start_boss_battle"))
+	black_hole.add_activity("Boss Battle", "battle")
 	black_hole.position = START_POSITION
-
+	black_hole.set_battle_path("res://Battles/BossBattle.tscn")
+	locations.push_back(black_hole)
+	
 func generate_level():
 	for position in generate_location_positions():
 		var location = Location.instance()
 		location.position = position
+		location.add_activity("Battle", "battle")
 		add_location(location)
 		location.initialize()
 
@@ -71,7 +74,6 @@ func generate_location_positions():
 func add_location(location):
 	add_child(location)
 	location.connect("beacon", self, "_on_beacon")
-	location.add_activity("Battle", funcref(self, "_start_battle"))
 	locations.push_back(location)
 
 func _start_battle():

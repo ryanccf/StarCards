@@ -19,3 +19,15 @@ func _ready():
 func _on_Area2D_input_event(viewport, event, shape_idx):
 	if (event is InputEventMouseButton && event.pressed):
 		emit_signal("boss_beacon", position.x, position.y, self)
+
+func dehydrate():
+	return {
+		"position" : position,
+		"solar_system" : $Aura.dehydrate(),
+		"activities" : $ActivityMenu.dehydrate()
+	}
+
+func rehydrate(configuration):
+	position = configuration.position
+	$Aura.rehydrate(configuration.solar_system)
+	$ActivityMenu.rehydrate(configuration.activities)

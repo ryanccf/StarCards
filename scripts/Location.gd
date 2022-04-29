@@ -29,8 +29,11 @@ func activate_menu():
 #	else:
 #		$ActivityMenu.click_button()
 
-func add_activity(name, event):
-	$ActivityMenu.add_activity(name, event)
+func add_activity(name, type):
+	$ActivityMenu.add_activity(name, type)
+
+func set_battle_path(battle_path):
+	$ActivityMenu.set_battle_path(battle_path)
 
 func dehydrate():
 	return {
