@@ -23,6 +23,12 @@ func _ready():
 	pass
 
 func _process(delta):
+	if Input.is_action_just_released("mouse_wheel_up"):
+		zoom_out()
+		print("scroll up")
+	elif Input.is_action_just_released("mouse_wheel_down"):
+		zoom_in()
+		print("scroll_down")
 	if target_point.distance_to(position) > 1: 
 		move_to(target_point, delta)
 	else:
@@ -41,3 +47,9 @@ func move_to(target_pos,delta):
 
 func turn_camera_on():
 	$Camera2D.current = true
+
+func zoom_out():
+	$Camera2D.zoom -= Vector2(0.1, 0.1)
+
+func zoom_in():
+	$Camera2D.zoom += Vector2(0.1, 0.1)
