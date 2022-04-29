@@ -4,6 +4,7 @@ var ActivityMenu = preload("res://Utilities/ActivityMenu.tscn")
 var rotation_speed = 0
 var rng = RandomNumberGenerator.new()
 var menu
+var location_name
 
 signal beacon
 
@@ -35,14 +36,19 @@ func add_activity(name, type):
 func set_battle_path(battle_path):
 	$ActivityMenu.set_battle_path(battle_path)
 
+func set_name(name):
+	$Label.text = name
+
 func dehydrate():
 	return {
+		"name" : $Label.text,
 		"position" : position,
 		"solar_system" : $SolarSystem.dehydrate(),
 		"activities" : $ActivityMenu.dehydrate()
 	}
 
 func rehydrate(configuration):
+	$Label.text = configuration.name
 	position = configuration.position
 	$SolarSystem.rehydrate(configuration.solar_system)
 	$ActivityMenu.rehydrate(configuration.activities)

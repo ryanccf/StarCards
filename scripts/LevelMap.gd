@@ -3,6 +3,7 @@ extends Node2D
 var screen_height = OS.get_real_window_size().y
 var START_POSITION = Vector2(120, screen_height / 2)
 var rng = RandomNumberGenerator.new()
+var name_generator = preload("res://Utilities/NameGenerator.tscn").instance()
 
 var BlackHole = preload("res://Locations/BlackHole.tscn")
 var Location = preload("res://Locations/Location.tscn")
@@ -40,13 +41,15 @@ func place_black_hole():
 	black_hole.add_activity("Boss Battle", "battle")
 	black_hole.position = START_POSITION
 	black_hole.set_battle_path("res://Battles/BossBattle.tscn")
-	locations.push_back(black_hole)
+	black_hole.set_name("Warp Gate")
+	locations.push_back(black_hole)	
 	
 func generate_level():
 	for position in generate_location_positions():
 		var location = Location.instance()
 		location.position = position
 		location.add_activity("Battle", "battle")
+		location.set_name(name_generator.get_name())
 		add_location(location)
 		location.initialize()
 

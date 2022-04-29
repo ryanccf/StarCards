@@ -22,4 +22,15 @@ scale = Vector2( 0.6, 0.6 )
 
 [node name="ActivityMenu" parent="." instance=ExtResource( 3 )]
 
+[node name="Label" type="Label" parent="."]
+margin_left = -70.0
+margin_top = -7.0
+margin_right = 70.0
+margin_bottom = 7.0
+text = "Name of System"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="input_event" from="Area2D" to="." method="_on_Area2D_input_event"]
