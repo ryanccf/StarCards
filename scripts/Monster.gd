@@ -13,6 +13,7 @@ var laser_charge = 0
 var laser_max = 10000
 onready var sensing_zone = $SensingZone
 onready var shooting_zone = $ShootingZone
+var middle
 
 signal spawn_laser(laser)
 
@@ -130,3 +131,6 @@ func set_bounds(bounds_area):
 
 func out_of_bounds():
 	return bounds in $HitZone.get_overlapping_areas()
+
+func set_middle(new_middle):
+	middle = new_middle

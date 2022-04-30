@@ -1,9 +1,16 @@
 extends "res://scripts/Monster.gd"
 var graphic = load("res://images/ship_J.png")
 
+var start_rotation = 0.25 * PI
+
 func _ready():
 	._ready()
 	update_graphic(graphic)
+	if position.y > middle:
+		rotation = start_rotation
+	else:
+		rotation = -1 * start_rotation
+	print(position)
 
 func _physics_process(delta):
 	_check_death()
@@ -13,7 +20,12 @@ func _physics_process(delta):
 		move(delta)
 	_check_lasers(delta)
 	_stabilize_health_bar()
-
+	if out_of_bounds():
+		if position.x > middle:
+			rotation = -1 * start_rotation
+		else:
+			rotation = start_rotation
+			
 func _rotate():
 	_point_to_locked_target()
 #	look_at(get_target())
@@ -30,3 +42,4 @@ func move(delta):
 	$KinematicBody2D.position = Vector2(0, 0)
 	rotation += $KinematicBody2D.rotation 
 	$KinematicBody2D.rotation = 0
+	
