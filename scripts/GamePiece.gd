@@ -4,8 +4,10 @@ var current_location = 1
 var speed = 100
 var velocity = Vector2()
 var target_point = Vector2()
+var moving = false
 
 signal player_arrival
+signal player_departure
 
 func set_color(new_color):
 	$Sprite.modulate = new_color
@@ -31,8 +33,10 @@ func _process(delta):
 		print("scroll_down")
 	if target_point.distance_to(position) > 1: 
 		move_to(target_point, delta)
-	else:
+		moving = true
+	elif moving == true:
 		emit_signal("player_arrival", position)
+		moving = false
 
 func move_to(target_pos,delta):
 	var mass = 5
@@ -53,3 +57,10 @@ func zoom_out():
 
 func zoom_in():
 	$Camera2D.zoom += Vector2(0.1, 0.1)
+
+func _unhandled_input(event):
+	if "button_index" in event and event.button_index == BUTTON_LEFT and event.pressed:
+		var target = get_global_mouse_position()
+		set_target_location(target)
+		Global.set_target_position(target)
+		emit_signal("player_departure")

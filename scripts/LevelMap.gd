@@ -32,7 +32,8 @@ func place_player():
 	if Global.get_target_position() == null:
 		Global.set_target_position(START_POSITION)
 	player.set_target_location(Global.get_target_position())
-	player.connect("player_arrival", self, "_activate_location_menu")
+	player.connect("player_departure", self, "_unpause_world")
+	player.connect("player_arrival", self, "_handle_player_arrival")
 
 func place_black_hole():
 	var black_hole = BlackHole.instance()
@@ -118,11 +119,15 @@ func rehydrate(configuration):
 		add_location(location)
 		location.rehydrate(location_configuration)
 
-func _unhandled_input(event):
-	if "button_index" in event and event.button_index == BUTTON_LEFT and event.pressed:
-		var target = get_global_mouse_position()
-		player.set_target_location(target)
-		Global.set_target_position(target)
-
 func _on_Button_pressed():
 	_exit("res://Screens/DeckEditor.tscn")
+
+func _pause_world():
+	print("pause")
+
+func _unpause_world():
+	print("unpause")
+
+func _handle_player_arrival(position):
+	_pause_world()
+	_activate_location_menu(position)
