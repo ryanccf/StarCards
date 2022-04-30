@@ -44,5 +44,13 @@ rect_scale = Vector2( 0.2, 0.2 )
 texture_normal = ExtResource( 2 )
 texture_pressed = ExtResource( 3 )
 
+[node name="PlayerName" type="Label" parent="."]
+margin_left = 190.0
+margin_top = 25.0
+margin_right = 271.0
+margin_bottom = 39.0
+grow_horizontal = 0
+text = "Player Name"
+
 [connection signal="pressed" from="." to="." method="_on_ContinueGameButton_pressed"]
 [connection signal="pressed" from="TextureButton" to="." method="_on_TextureButton_pressed"]
