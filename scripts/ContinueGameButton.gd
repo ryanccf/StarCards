@@ -5,6 +5,7 @@ signal delete
 func set_save_index(index):
 	save_index = index
 	Global.set_save_index(index)
+	Global.load_game()
 	$PlayerName.text = Global.get_player_name()
 
 func _on_ContinueGameButton_pressed():
