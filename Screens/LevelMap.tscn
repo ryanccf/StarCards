@@ -4,6 +4,7 @@
 [ext_resource path="res://images/icons/cards_stack_high.png" type="Texture" id=2]
 
 [node name="LevelMap" type="Node2D"]
+pause_mode = 2
 script = ExtResource( 1 )
 
 [node name="Background" type="ColorRect" parent="."]
@@ -21,6 +22,7 @@ __meta__ = {
 }
 
 [node name="DeckButtonAnchor" type="Node2D" parent="."]
+pause_mode = 2
 z_index = 100
 
 [node name="Button" type="Button" parent="DeckButtonAnchor"]

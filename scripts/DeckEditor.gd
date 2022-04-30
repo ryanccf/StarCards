@@ -1,6 +1,7 @@
 extends Control
 
 func _ready():
+	get_tree().paused = false
 	var deck = Global.get_decks()[0].get_cards()
 	var cards = Global.get_cards()
 	var used_cards = Global.get_decks()[0].get_cards()

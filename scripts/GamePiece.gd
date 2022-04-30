@@ -27,11 +27,11 @@ func _ready():
 func _process(delta):
 	if Input.is_action_just_released("mouse_wheel_up"):
 		zoom_out()
-		print("scroll up")
 	elif Input.is_action_just_released("mouse_wheel_down"):
 		zoom_in()
-		print("scroll_down")
-	if target_point.distance_to(position) > 1: 
+	if target_point.distance_to(position) > 1:
+		if moving == false:
+			emit_signal("player_departure")
 		move_to(target_point, delta)
 		moving = true
 	elif moving == true:
@@ -63,4 +63,3 @@ func _unhandled_input(event):
 		var target = get_global_mouse_position()
 		set_target_location(target)
 		Global.set_target_position(target)
-		emit_signal("player_departure")

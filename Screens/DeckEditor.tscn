@@ -7,6 +7,7 @@
 extents = Vector2( 5.00001, 5.13068 )
 
 [node name="DeckEditor" type="Control"]
+pause_mode = 2
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 1.0
@@ -15,9 +16,6 @@ margin_right = 600.0
 grow_horizontal = 2
 mouse_filter = 2
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Navigation" type="Control" parent="."]
 margin_right = 1200.0
@@ -42,9 +40,6 @@ margin_top = 120.0
 margin_right = 1200.0
 margin_bottom = 800.0
 mouse_filter = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
 grow_horizontal = 2
