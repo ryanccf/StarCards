@@ -31,6 +31,8 @@ func place_player():
 	player.set_color(Global.get_player_color())
 	if Global.get_target_position() == null:
 		Global.set_target_position(START_POSITION)
+	if Global.get_target_position() == Global.get_player_position():
+		get_tree().paused = true
 	player.set_target_location(Global.get_target_position())
 	player.connect("player_departure", self, "_unpause_world")
 	player.connect("player_arrival", self, "_handle_player_arrival")
@@ -123,10 +125,11 @@ func _on_Button_pressed():
 	_exit("res://Screens/DeckEditor.tscn")
 
 func _pause_world():
-	print("pause")
+	get_tree().paused = true
 
 func _unpause_world():
-	print("unpause")
+	get_tree().paused = false
+
 
 func _handle_player_arrival(position):
 	_pause_world()
