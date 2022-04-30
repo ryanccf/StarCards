@@ -24,7 +24,7 @@ func _physics_process(delta):
 			rotation = start_rotation
 		else:
 			rotation = -1 * start_rotation
-			
+
 func _rotate():
 	_point_to_locked_target()
 #	look_at(get_target())

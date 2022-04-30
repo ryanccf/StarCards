@@ -70,11 +70,11 @@ func _on_ZoneOfInfluence_input_event(viewport, event, shape_idx):
 
 func add_monster(monster, position):
 	monster.set_middle(300)#$Field/Field.shape.radius / 2)
-	$Field.add_child(monster)
 	monster.set_position(position)
 	monster.set_bounds($Field/Bounds)
 	monster.connect("spawn_laser", self, "_handle_laser_spawn")
 	monster.connect("boom", self, "_handle_boom")
+	$Field.add_child(monster)
 	
 	
 func _handle_laser_spawn(laser_position, laser_rotation, laser_target, is_friendly):
