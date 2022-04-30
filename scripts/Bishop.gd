@@ -10,7 +10,6 @@ func _ready():
 		rotation = start_rotation
 	else:
 		rotation = -1 * start_rotation
-	print(position)
 
 func _physics_process(delta):
 	_check_death()
@@ -22,9 +21,9 @@ func _physics_process(delta):
 	_stabilize_health_bar()
 	if out_of_bounds():
 		if position.x > middle:
-			rotation = -1 * start_rotation
-		else:
 			rotation = start_rotation
+		else:
+			rotation = -1 * start_rotation
 			
 func _rotate():
 	_point_to_locked_target()
