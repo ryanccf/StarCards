@@ -2,6 +2,7 @@ extends "res://scripts/Monster.gd"
 var graphic = load("res://images/ship_J.png")
 
 var start_rotation = 0.25 * PI
+var last_rotation = start_rotation
 
 func _ready():
 	._ready()
@@ -15,8 +16,11 @@ func _physics_process(delta):
 	_check_death()
 	_rotate()
 	if _should_move():
+		rotation = last_rotation
 		_avoid_obstacles()
 		move(delta)
+	else:
+		look_at(get_target())
 	_check_lasers(delta)
 	_stabilize_health_bar()
 	if out_of_bounds():
@@ -24,6 +28,7 @@ func _physics_process(delta):
 			rotation = start_rotation
 		else:
 			rotation = -1 * start_rotation
+		last_rotation = rotation
 
 func _rotate():
 	_point_to_locked_target()
