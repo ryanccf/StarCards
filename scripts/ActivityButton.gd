@@ -14,8 +14,7 @@ func _on_ActivityButton_mouse_entered():
 func _on_ActivityButton_mouse_exited():
 	mouse_over = false
 
-func _unhandled_input(event):
+func _input(event):
 	if "button_index" in event and event.button_index == BUTTON_LEFT and event.pressed and mouse_over:
 		mouse_over = false
 		activity_event.call_func()
-		
