@@ -140,6 +140,7 @@ func rehydrate(configuration):
 		add_location(location)
 		location.connect("quest", self, "_handle_quest")
 		location.connect("reward", self, "_handle_reward")
+		location.connect("save_map", self, "_save_map")
 
 func _on_Button_pressed():
 	_exit("res://Screens/DeckEditor.tscn")

@@ -12,9 +12,6 @@ grow_vertical = 2
 rect_scale = Vector2( 3, 3 )
 input_pass_on_modal_close_click = false
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [connection signal="gui_input" from="." to="." method="_on_ActivityButton_gui_input"]
 [connection signal="mouse_entered" from="." to="." method="_on_ActivityButton_mouse_entered"]

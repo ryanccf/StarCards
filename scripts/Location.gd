@@ -10,7 +10,7 @@ var location_name
 signal beacon
 signal quest(origin_name, destination_name)
 signal reward
-
+signal save_map
 
 func _process(delta):
 	rotation += delta * rotation_speed
@@ -70,6 +70,10 @@ func initialize():
 	menu.connect("quest", self, "_broadcast_quest")
 	menu.connect("reward", self, "_broadcast_reward")
 	menu.connect("rehydrate_reward", self, "rehydrate_quest_marker")
+	menu.connect("save_map", self, "_save_map")
+
+func _save_map():
+	emit_signal("save_map")
 
 func initialize_solar_system():
 	$SolarSystem.initialize()

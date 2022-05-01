@@ -1,5 +1,6 @@
 extends Popup
 var ActivityButton = preload("res://Utilities/ActivityButton.tscn")
+var Binder = preload("res://Utilities/Binder.tscn")
 var activities = []
 var battle_path = "res://Battles/Battle.tscn"
 var destination_name
@@ -8,6 +9,7 @@ const BUTTON_SPACING = 20
 signal quest(destination_name)
 signal rehydrate_reward(origin_name)
 signal reward
+signal save_map
 
 func add_activity(activity_name, type):
 	activities.push_back({
@@ -29,7 +31,7 @@ func add_quest_destination(origin_name):
 	activities.push_back({
 		"name" : "Delivery from " + origin_name,
 		"type" : "reward",
-		"event" : funcref(self, "_start_reward"),
+		"event" : _bind_reward_erasure(origin_name),
 		"origin_name" : origin_name
 	})
 
@@ -41,11 +43,6 @@ func _broadcast_quest():
 	_erase_activity("quest")
 	emit_signal("quest", destination_name)
 
-func _start_reward():
-	_erase_activity("reward")
-	emit_signal("reward")
-	get_tree().change_scene("res://Screens/QuestReward.tscn")
-
 func _erase_activity(activity_type):
 	var index = 0
 	for activity in activities:
@@ -53,6 +50,23 @@ func _erase_activity(activity_type):
 			activities.erase(activity)
 			$Box.remove_child($Box.get_children()[index])
 		index += 1
+
+func _bind_reward_erasure(origin_name):
+	return Binder.instance().bind(funcref(self, "_erase_reward"), [origin_name])
+
+func _erase_reward(origin_name):
+	var index = 0
+	for activity in activities:
+		if activity.type == "reward" and activity.origin_name == origin_name:
+			activities.erase(activity)
+			$Box.remove_child($Box.get_children()[index])
+		index += 1
+	for activity in activities:
+		if activity.type == "reward":
+			emit_signal("reward")
+	emit_signal("save_map")
+	get_tree().change_scene("res://Screens/QuestReward.tscn")
+	
 
 func _on_Node2D_about_to_show():
 	var y_offset = 0
