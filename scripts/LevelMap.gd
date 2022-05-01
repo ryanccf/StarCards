@@ -61,7 +61,12 @@ func generate_level():
 		unordered_locations.push_back(location)
 	for location in locations:
 		unordered_locations.shuffle()
-		location.add_quest(unordered_locations[0].get_name())
+		var destination = unordered_locations[0]
+		unordered_locations.shuffle()
+		while location == destination:
+			unordered_locations.shuffle()
+			destination = unordered_locations[0]
+		location.add_quest(destination.get_name())
 		location.connect("quest", self, "_handle_quest")
 		location.connect("reward", self, "_handle_quest")
 
