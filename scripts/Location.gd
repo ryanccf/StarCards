@@ -31,7 +31,6 @@ func add_activity(name, type):
 
 func add_quest(destination_name):
 	menu.add_quest(destination_name)
-	menu.connect("quest", self, "_broadcast_quest")
 
 func _broadcast_quest(destination_name):
 	emit_signal("quest", get_name(), destination_name)
@@ -60,9 +59,6 @@ func dehydrate():
 func rehydrate(configuration):
 	$Label.text = configuration.name
 	position = configuration.position
-	menu.connect("quest", self, "_broadcast_quest")
-	menu.connect("reward", self, "_broadcast_reward")
-	menu.connect("rehydrate_reward", self, "rehydrate_quest_marker")
 	$SolarSystem.rehydrate(configuration.solar_system)
 	menu.rehydrate(configuration.activities)
 	
@@ -71,6 +67,9 @@ func initialize():
 	menu = ActivityMenu.instance()
 	add_child(menu)
 	rng.randomize()
+	menu.connect("quest", self, "_broadcast_quest")
+	menu.connect("reward", self, "_broadcast_reward")
+	menu.connect("rehydrate_reward", self, "rehydrate_quest_marker")
 
 func initialize_solar_system():
 	$SolarSystem.initialize()

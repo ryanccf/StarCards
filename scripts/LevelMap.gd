@@ -59,7 +59,7 @@ func generate_level():
 		location.set_name(name_generator.get_name())
 		location.add_activity("Battle", "battle")
 		location.connect("quest", self, "_handle_quest")
-		location.connect("reward", self, "_handle_quest")
+		location.connect("reward", self, "_handle_reward")
 	var unordered_locations = []
 	for location in locations:
 		unordered_locations.push_back(location)
@@ -72,7 +72,6 @@ func generate_level():
 			unordered_locations.shuffle()
 			destination = unordered_locations[0]
 		location.add_quest(destination.get_name())
-
 
 func generate_location_positions():
 	var positions = []
