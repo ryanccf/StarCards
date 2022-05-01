@@ -13,4 +13,6 @@ When two delivery quests may be completed at the same location, or a delivery qu
 
 Sometimes, under unknown conditions, a location will continue allowing you to start a delivery mission. If you start this delivery mission four times (for example), there will be four deliveries to complete at the destination location. For some reason, accepting one of these seems to remove two of them. Not sure exactly how this scales with number, have had trouble reproducing this bug.
 
+Sometimes, under unknown conditions (only cited once while a new delivery quest was available at the location in question), a location with a delivery to complete will create two copies of the delivery instead of removing it. WHen one of these was selected, the other one also disappeared.
+
 Bishops don't always bounce off edges of Battlefield. It *seems* to depend upon what part of the edge the touch, but it's unclear why that would be.
