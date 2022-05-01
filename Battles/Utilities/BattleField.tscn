@@ -6,10 +6,10 @@
 extents = Vector2( 598, 240 )
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 659, 37.5 )
+extents = Vector2( 659, 138.875 )
 
 [sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 37.5, 317.5 )
+extents = Vector2( 152.5, 317.5 )
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 108, 240 )
@@ -63,19 +63,19 @@ position = Vector2( 1083, 369 )
 [node name="Bounds" type="Area2D" parent="Field"]
 
 [node name="Top" type="CollisionShape2D" parent="Field/Bounds"]
-position = Vector2( 590, -40.5 )
+position = Vector2( 602, -139 )
 shape = SubResource( 6 )
 
 [node name="Bottom" type="CollisionShape2D" parent="Field/Bounds"]
-position = Vector2( 601, 519 )
+position = Vector2( 601, 619.125 )
 shape = SubResource( 6 )
 
 [node name="Left" type="CollisionShape2D" parent="Field/Bounds"]
-position = Vector2( -40.5, 237.5 )
+position = Vector2( -155.5, 237.5 )
 shape = SubResource( 7 )
 
 [node name="Right" type="CollisionShape2D" parent="Field/Bounds"]
-position = Vector2( 1235.5, 237.5 )
+position = Vector2( 1350, 236 )
 shape = SubResource( 7 )
 
 [node name="DeployZone" type="Area2D" parent="."]
