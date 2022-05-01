@@ -150,4 +150,5 @@ func rehydrate(serialization):
 		var node = CelestialBody.instance()
 		node.rehydrate(configuration)
 		add_child(node)
+	#$ActivityMenu.rehydrate(serialization.activities)
 	return self

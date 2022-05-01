@@ -163,6 +163,7 @@ func get_save_data():
 	var decks_data = []
 	for deck in decks:
 		decks_data.push_back(deck.get_cards())
+	
 	return {
 		"player_name" : player_name,
 		"player_color" : player_color,
@@ -189,6 +190,18 @@ func load_save_data(data):
 		for card_name in deck:
 			decklist.add_card(card_name)
 		decks.push_back(decklist)
+	
+func get_clean_save_data():
+	load_save_data({
+		"player_name" : "Player",
+		"player_color" : Color( 0.37, 0.62, 0.63, 1 ),
+		"player_position" : player_position,
+		"target_position" : target_position,
+		"cards" : [],
+		"decks" : [],
+		"map" : null
+	})
+	initialize()
 
 func store_save_data():
 	if save_slots.size() == current_save_index:
@@ -211,6 +224,9 @@ func retrieve_save_data():
 func set_save_index(new_index):
 	current_save_index = new_index
 
+func get_next_save_index():
+	return save_slots.size()
+	
 func load_game():
 	load_save_data(save_slots[current_save_index])
 
@@ -223,6 +239,8 @@ func delete_save():
 
 func set_map(map_data):
 	map = map_data
+	store_save_data()
 
 func get_map():
-	return map
+	if "map" in save_slots[current_save_index] and save_slots[current_save_index].map != null:
+		return save_slots[current_save_index].map

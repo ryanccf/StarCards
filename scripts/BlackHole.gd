@@ -24,10 +24,16 @@ func dehydrate():
 	return {
 		"position" : position,
 		"solar_system" : $Aura.dehydrate(),
-		"activities" : $ActivityMenu.dehydrate()
+		"activities" : $ActivityMenu.dehydrate(),
+		"name" : get_name()
 	}
 
 func rehydrate(configuration):
 	position = configuration.position
 	$Aura.rehydrate(configuration.solar_system)
 	$ActivityMenu.rehydrate(configuration.activities)
+	
+func initialize():
+	menu = ActivityMenu.instance()
+	add_child(menu)
+#	rng.randomize()

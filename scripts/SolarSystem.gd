@@ -109,3 +109,4 @@ func rehydrate(old_configuration):
 	add_child(corona)
 	corona.initialize()
 	$Flares.set_color(corona.get_color())
+	configuration = old_configuration

@@ -3,8 +3,10 @@ var ActivityButton = preload("res://Utilities/ActivityButton.tscn")
 var activities = []
 var battle_path = "res://Battles/Battle.tscn"
 var destination_name
+var system_name
 const BUTTON_SPACING = 20
 signal quest(destination_name)
+signal rehydrate_reward(origin_name)
 
 func add_activity(activity_name, type):
 	activities.push_back({
@@ -40,6 +42,7 @@ func _broadcast_quest():
 
 func _start_reward():
 	_erase_activity("reward")
+	emit_signal("reward")
 	get_tree().change_scene("res://Screens/Victory.tscn")
 
 func _erase_activity(activity_type):
@@ -90,3 +93,4 @@ func rehydrate(dehydrated_activities):
 				add_quest(activity.destination_name)
 			"reward" :
 				add_quest_destination(activity.origin_name)
+				emit_signal("rehydrate_reward", activity.origin_name)

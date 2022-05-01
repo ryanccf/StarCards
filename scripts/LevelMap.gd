@@ -40,6 +40,7 @@ func place_black_hole():
 	var black_hole = BlackHole.instance()
 	add_child(black_hole)
 	black_hole.connect("boss_beacon", self, "_on_beacon")
+	black_hole.initialize()
 	black_hole.add_activity("Boss Battle", "battle")
 	black_hole.position = START_POSITION
 	black_hole.set_battle_path("res://Battles/BossBattle.tscn")
@@ -49,11 +50,12 @@ func place_black_hole():
 func generate_level():
 	for position in generate_location_positions():
 		var location = Location.instance()
-		location.position = position
-		location.add_activity("Battle", "battle")
-		location.set_name(name_generator.get_name())
 		add_location(location)
 		location.initialize()
+		location.initialize_solar_system()
+		location.position = position
+		location.set_name(name_generator.get_name())
+		location.add_activity("Battle", "battle")
 	var unordered_locations = []
 	for location in locations:
 		unordered_locations.push_back(location)
@@ -61,6 +63,7 @@ func generate_level():
 		unordered_locations.shuffle()
 		location.add_quest(unordered_locations[0].get_name())
 		location.connect("quest", self, "_handle_quest")
+		location.connect("reward", self, "_reward_quest")
 
 func generate_location_positions():
 	var positions = []
@@ -80,7 +83,6 @@ func generate_location_positions():
 	
 	Global.set_player_position(positions[-1])
 	Global.set_target_position(positions[-1])
-	
 	return positions
 
 func add_location(location):
@@ -113,21 +115,23 @@ func _process(delta):
 
 func _exit(new_scene_path):
 	Global.set_player_position(player.position)
+	_save_map()
 	get_tree().change_scene(new_scene_path)
 
 func dehydrate():
 	var configuration = []
-	print(locations)
 	for location in locations:
-		print(location.get_name())
 		configuration.push_back(location.dehydrate())
 	return configuration
 
 func rehydrate(configuration):
 	for location_configuration in configuration:
 		var location = Location.instance()
+		location.initialize()
 		location.rehydrate(location_configuration)
 		add_location(location)
+		location.connect("quest", self, "_handle_quest")
+		location.connect("reward", self, "_handle_reward")
 
 func _on_Button_pressed():
 	_exit("res://Screens/DeckEditor.tscn")
@@ -138,7 +142,6 @@ func _pause_world():
 func _unpause_world():
 	get_tree().paused = false
 
-
 func _handle_player_arrival(position):
 	_pause_world()
 	_activate_location_menu(position)
@@ -146,8 +149,15 @@ func _handle_player_arrival(position):
 func _handle_quest(origin_name, destination_name):
 	var destination = _get_location(destination_name)
 	destination.add_quest_marker(origin_name)
-		
+	_save_map()
+
+func _handle_reward():
+	_save_map()
+
 func _get_location(name):
 	for location in locations:
 		if location.get_name() == name:
 			return location
+
+func _save_map():
+	Global.set_map(dehydrate())
