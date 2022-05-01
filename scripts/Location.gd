@@ -25,8 +25,6 @@ func activate_menu():
 	if not menu.visible:
 		menu.popup()
 		menu.rect_position = position
-#	else:
-#		menu.click_button()
 
 func add_activity(name, type):
 	menu.add_activity(name, type)

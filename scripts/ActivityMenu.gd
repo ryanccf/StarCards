@@ -7,6 +7,7 @@ var system_name
 const BUTTON_SPACING = 20
 signal quest(destination_name)
 signal rehydrate_reward(origin_name)
+signal reward
 
 func add_activity(activity_name, type):
 	activities.push_back({
@@ -43,7 +44,7 @@ func _broadcast_quest():
 func _start_reward():
 	_erase_activity("reward")
 	emit_signal("reward")
-	get_tree().change_scene("res://Screens/Victory.tscn")
+	get_tree().change_scene("res://Screens/QuestReward.tscn")
 
 func _erase_activity(activity_type):
 	var index = 0
