@@ -16,6 +16,9 @@ margin_right = 600.0
 grow_horizontal = 2
 mouse_filter = 2
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Navigation" type="Control" parent="."]
 margin_right = 1200.0
