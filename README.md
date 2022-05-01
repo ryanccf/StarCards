@@ -12,3 +12,5 @@ When moving away from a location, doing it all at once makes the menu disappear,
 When two delivery quests may be completed at the same location, or a delivery quest may be started at the same location which another delivery quest may be completed, completing the first (higher in list) quest will cause the second delivery to show up twice when the menu is reopened. If the higher of these two options is selected, there will still be one left when the location is revisited. If the lower is selected, they will both disappear.
 
 Sometimes, under unknown conditions, a location will continue allowing you to start a delivery mission. If you start this delivery mission four times (for example), there will be four deliveries to complete at the destination location. For some reason, accepting one of these seems to remove two of them. Not sure exactly how this scales with number, have had trouble reproducing this bug.
+
+Bishops don't always bounce off edges of Battlefield. It *seems* to depend upon what part of the edge the touch, but it's unclear why that would be.
