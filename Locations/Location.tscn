@@ -31,4 +31,6 @@ margin_bottom = 7.0
 text = "Name of System"
 align = 1
 
+[node name="QuestMarkers" type="Node2D" parent="."]
+
 [connection signal="input_event" from="Area2D" to="." method="_on_Area2D_input_event"]

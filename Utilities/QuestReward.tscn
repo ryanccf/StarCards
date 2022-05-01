@@ -1,0 +1,142 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Screens/Victory.tscn" type="PackedScene" id=1]
+[ext_resource path="res://images/icons/cards_stack_high.png" type="Texture" id=2]
+[ext_resource path="res://scripts/Prize.gd" type="Script" id=3]
+[ext_resource path="res://images/icons/book_open.png" type="Texture" id=4]
+
+[node name="QuestReward" instance=ExtResource( 1 )]
+
+[node name="Label" parent="ContentAnchor" index="0"]
+text = "You Complete The Quest!
+
+You find 0 gold coins.
+You get 0 experience points.
+You find 1 Star Card!
+
+
+Clickaroo to continue your journey!"
+
+[node name="LeftPrize" parent="ContentAnchor/Prizes" index="0"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+
+[node name="CardAnchor" type="Node2D" parent="ContentAnchor/Prizes/LeftPrize" index="0"]
+position = Vector2( 129, 149 )
+scale = Vector2( 0.25, 0.25 )
+
+[node name="ButtonAnchor" type="Control" parent="ContentAnchor/Prizes/LeftPrize" index="1"]
+margin_top = 267.0
+margin_right = 250.0
+margin_bottom = 347.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AddToLibrary" type="Button" parent="ContentAnchor/Prizes/LeftPrize/ButtonAnchor" index="0"]
+margin_left = 25.0
+margin_top = 5.0
+margin_right = 105.0
+margin_bottom = 75.0
+icon = ExtResource( 4 )
+clip_text = true
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AddToDeck" type="Button" parent="ContentAnchor/Prizes/LeftPrize/ButtonAnchor" index="1"]
+margin_left = 145.0
+margin_top = 5.0
+margin_right = 225.0
+margin_bottom = 75.0
+icon = ExtResource( 2 )
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MiddlePrize" parent="ContentAnchor/Prizes" index="1"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+
+[node name="CardAnchor" type="Node2D" parent="ContentAnchor/Prizes/MiddlePrize" index="0"]
+position = Vector2( 129, 149 )
+scale = Vector2( 0.25, 0.25 )
+
+[node name="ButtonAnchor" type="Control" parent="ContentAnchor/Prizes/MiddlePrize" index="1"]
+margin_top = 269.0
+margin_right = 250.0
+margin_bottom = 349.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AddToLibrary" type="Button" parent="ContentAnchor/Prizes/MiddlePrize/ButtonAnchor" index="0"]
+margin_left = 25.0
+margin_top = 5.0
+margin_right = 105.0
+margin_bottom = 75.0
+icon = ExtResource( 4 )
+clip_text = true
+expand_icon = true
+
+[node name="AddToDeck" type="Button" parent="ContentAnchor/Prizes/MiddlePrize/ButtonAnchor" index="1"]
+margin_left = 145.0
+margin_top = 5.0
+margin_right = 225.0
+margin_bottom = 75.0
+icon = ExtResource( 2 )
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RightPrize" parent="ContentAnchor/Prizes" index="2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+
+[node name="CardAnchor" type="Node2D" parent="ContentAnchor/Prizes/RightPrize" index="0"]
+position = Vector2( 129, 149 )
+scale = Vector2( 0.25, 0.25 )
+
+[node name="ButtonAnchor" type="Control" parent="ContentAnchor/Prizes/RightPrize" index="1"]
+margin_top = 267.0
+margin_right = 250.0
+margin_bottom = 347.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AddToLibrary" type="Button" parent="ContentAnchor/Prizes/RightPrize/ButtonAnchor" index="0"]
+margin_left = 25.0
+margin_top = 5.0
+margin_right = 105.0
+margin_bottom = 75.0
+icon = ExtResource( 4 )
+clip_text = true
+expand_icon = true
+
+[node name="AddToDeck" type="Button" parent="ContentAnchor/Prizes/RightPrize/ButtonAnchor" index="1"]
+margin_left = 145.0
+margin_top = 5.0
+margin_right = 225.0
+margin_bottom = 75.0
+icon = ExtResource( 2 )
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="ContentAnchor/Prizes/LeftPrize/ButtonAnchor/AddToLibrary" to="ContentAnchor/Prizes/LeftPrize" method="_on_AddToLibrary_pressed"]
+[connection signal="pressed" from="ContentAnchor/Prizes/LeftPrize/ButtonAnchor/AddToDeck" to="ContentAnchor/Prizes/LeftPrize" method="_on_AddToDeck_pressed"]
+[connection signal="pressed" from="ContentAnchor/Prizes/MiddlePrize/ButtonAnchor/AddToLibrary" to="ContentAnchor/Prizes/MiddlePrize" method="_on_AddToLibrary_pressed"]
+[connection signal="pressed" from="ContentAnchor/Prizes/MiddlePrize/ButtonAnchor/AddToDeck" to="ContentAnchor/Prizes/MiddlePrize" method="_on_AddToDeck_pressed"]
+[connection signal="pressed" from="ContentAnchor/Prizes/RightPrize/ButtonAnchor/AddToLibrary" to="ContentAnchor/Prizes/RightPrize" method="_on_AddToLibrary_pressed"]
+[connection signal="pressed" from="ContentAnchor/Prizes/RightPrize/ButtonAnchor/AddToDeck" to="ContentAnchor/Prizes/RightPrize" method="_on_AddToDeck_pressed"]

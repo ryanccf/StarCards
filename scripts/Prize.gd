@@ -14,9 +14,11 @@ func set_card_name(new_card_name):
 	card_name = new_card_name
 
 func _on_AddToLibrary_pressed():
+	print("OTHER PRESS")
 	_add_to_library_and_exit()
 
 func _on_AddToDeck_pressed():
+	print("PRESS")
 	Global.get_decks()[0].add_card(card_name)
 	_add_to_library_and_exit()
 

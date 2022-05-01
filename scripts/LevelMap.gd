@@ -54,6 +54,13 @@ func generate_level():
 		location.set_name(name_generator.get_name())
 		add_location(location)
 		location.initialize()
+	var unordered_locations = []
+	for location in locations:
+		unordered_locations.push_back(location)
+	for location in locations:
+		unordered_locations.shuffle()
+		location.add_quest(unordered_locations[0].get_name())
+		location.connect("quest", self, "_handle_quest")
 
 func generate_location_positions():
 	var positions = []
@@ -110,7 +117,9 @@ func _exit(new_scene_path):
 
 func dehydrate():
 	var configuration = []
+	print(locations)
 	for location in locations:
+		print(location.get_name())
 		configuration.push_back(location.dehydrate())
 	return configuration
 
@@ -133,3 +142,12 @@ func _unpause_world():
 func _handle_player_arrival(position):
 	_pause_world()
 	_activate_location_menu(position)
+
+func _handle_quest(origin_name, destination_name):
+	var destination = _get_location(destination_name)
+	destination.add_quest_marker(origin_name)
+		
+func _get_location(name):
+	for location in locations:
+		if location.get_name() == name:
+			return location

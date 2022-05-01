@@ -1,12 +1,14 @@
 extends Node2D
 
 var ActivityMenu = preload("res://Utilities/ActivityMenu.tscn")
+var QuestMarker = preload("res://Utilities/QuestMarker.tscn")
 var rotation_speed = 0
 var rng = RandomNumberGenerator.new()
 var menu
 var location_name
 
 signal beacon
+signal quest(origin_name, destination_name)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -33,11 +35,28 @@ func activate_menu():
 func add_activity(name, type):
 	$ActivityMenu.add_activity(name, type)
 
+func add_quest(destination_name):
+	$ActivityMenu.add_quest(destination_name)
+	$ActivityMenu.connect("quest", self, "_broadcast_quest")
+#	print("added quest to...")
+#	print(get_name())
+
+func _broadcast_quest(destination_name):
+	print("Broadcasting quest from location")
+	print(get_name())
+	print(destination_name)
+	emit_signal("quest", get_name(), destination_name)
+
 func set_battle_path(battle_path):
 	$ActivityMenu.set_battle_path(battle_path)
 
 func set_name(name):
 	$Label.text = name
+
+func get_name():
+#	print("LOCAITON GANG")
+#	print($Label.text)
+	return $Label.text
 
 func dehydrate():
 	return {
@@ -55,3 +74,8 @@ func rehydrate(configuration):
 
 func initialize():
 	$SolarSystem.initialize()
+
+func add_quest_marker(origin_name):
+	var quest_marker = QuestMarker.instance()
+	$QuestMarkers.add_child(quest_marker)
+	$ActivityMenu.add_quest_destination(origin_name)

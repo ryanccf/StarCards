@@ -26,7 +26,6 @@ func _physics_process(delta):
 	if out_of_bounds():
 		_bounce()
 
-
 func _bounce():
 	if position.x > middle:
 		rotation = start_rotation
@@ -36,13 +35,9 @@ func _bounce():
 
 func _rotate():
 	_point_to_locked_target()
-#	look_at(get_target())
 
 func _avoid_obstacles():
 	pass
-#	var path_rotation = $ObstacleAvoider.get_viable_rotation()
-#	if path_rotation != null:
-#		rotation += path_rotation
 
 func move(delta):
 	var collision = $KinematicBody2D.move_and_collide(speed * delta * Vector2(cos(rotation), sin(rotation)))
