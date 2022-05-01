@@ -1,6 +1,7 @@
 extends Control
 
 func _ready():
+	get_tree().paused = false
 	randomize()
 	$ContentAnchor/CardMat.initialize()
 	$ContentAnchor/Battlefield.connect("deploy_zone_input", self, "_on_DeployZone_input")
