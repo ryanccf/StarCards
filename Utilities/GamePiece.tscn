@@ -10,6 +10,7 @@ script = ExtResource( 1 )
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+pause_mode = 1
 amount = 16
 lifetime = 3.0
 local_coords = false
