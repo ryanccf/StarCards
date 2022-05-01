@@ -12,6 +12,8 @@ var player = GamePiece.instance()
 var locations = []
 var target_location
 
+const QUEST_COUNT = 10
+
 func _ready():
 	rng.randomize()
 	if Global.get_map() == null:
@@ -56,19 +58,21 @@ func generate_level():
 		location.position = position
 		location.set_name(name_generator.get_name())
 		location.add_activity("Battle", "battle")
+		location.connect("quest", self, "_handle_quest")
+		location.connect("reward", self, "_handle_quest")
 	var unordered_locations = []
 	for location in locations:
 		unordered_locations.push_back(location)
-	for location in locations:
+	locations.shuffle()
+	for i in range(QUEST_COUNT):
+		var location = locations[i]
 		unordered_locations.shuffle()
 		var destination = unordered_locations[0]
-		unordered_locations.shuffle()
 		while location == destination:
 			unordered_locations.shuffle()
 			destination = unordered_locations[0]
 		location.add_quest(destination.get_name())
-		location.connect("quest", self, "_handle_quest")
-		location.connect("reward", self, "_handle_quest")
+
 
 func generate_location_positions():
 	var positions = []
