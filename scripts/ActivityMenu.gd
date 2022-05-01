@@ -41,6 +41,7 @@ func _start_battle():
 func _broadcast_quest():
 	var index = 0
 	_erase_activity("quest")
+	_rerender()
 	emit_signal("quest", destination_name)
 
 func _erase_activity(activity_type):
@@ -65,6 +66,7 @@ func _erase_reward(origin_name):
 		if activity.type == "reward":
 			emit_signal("reward")
 	emit_signal("save_map")
+	_rerender()
 	get_tree().change_scene("res://Screens/QuestReward.tscn")
 	
 
@@ -92,7 +94,6 @@ func dehydrate():
 				dehydrated_activities.push_back({"destination_name" : activity.destination_name, "type" : "quest"})
 			"reward":
 				dehydrated_activities.push_back({"origin_name" : activity.origin_name, "type" : "reward"})
-				
 	return dehydrated_activities
 
 func rehydrate(dehydrated_activities):
@@ -109,3 +110,11 @@ func rehydrate(dehydrated_activities):
 			"reward" :
 				add_quest_destination(activity.origin_name)
 				emit_signal("rehydrate_reward", activity.origin_name)
+
+func _rerender():
+	var dehydrated_activities = dehydrate()
+	activities = []
+	for child in $Box.get_children():
+		child.queue_free()
+	rehydrate(dehydrated_activities)
+	emit_signal("save_map")
