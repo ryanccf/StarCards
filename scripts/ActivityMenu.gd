@@ -1,4 +1,4 @@
-extends Popup
+extends ColorRect
 var ActivityButton = preload("res://Utilities/ActivityButton.tscn")
 var Binder = preload("res://Utilities/Binder.tscn")
 var activities = []
@@ -10,6 +10,20 @@ signal quest(destination_name)
 signal rehydrate_reward(origin_name)
 signal reward
 signal save_map
+
+func _ready():
+	visible = false
+
+func _unhandled_input(event):
+	if "button_index" in event and event.button_index == BUTTON_LEFT and event.pressed:
+		visible = false
+
+func popup():
+	print("popping up")
+	print(activities)
+	print($Box.get_children())
+	_on_Node2D_about_to_show()
+	visible = true
 
 func add_activity(activity_name, type):
 	activities.push_back({

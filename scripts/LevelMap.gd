@@ -108,7 +108,13 @@ func _start_boss_battle():
 	_exit("res://Battles/BossBattle.tscn")
 	
 func _activate_location_menu(position):
-	if target_location and position - target_location.position < Vector2(1, 1):
+	if target_location:
+		print("COMPARING:")
+		print(position)
+		print(target_location.position)
+		print(position - target_location.position)
+	if target_location and position.x - target_location.position.x < 1 and  position.y - target_location.position.y < 1:
+		print("menu")
 		target_location.activate_menu()
 
 func _on_beacon(locX, locY, location):

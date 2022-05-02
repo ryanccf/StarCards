@@ -24,7 +24,7 @@ func _on_Area2D_input_event(viewport, event, shape_idx):
 func activate_menu():
 	if not menu.visible:
 		menu.popup()
-		menu.rect_position = position
+		menu.rect_position = Vector2.ZERO#position
 
 func add_activity(name, type):
 	menu.add_activity(name, type)
