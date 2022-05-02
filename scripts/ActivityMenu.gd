@@ -19,9 +19,6 @@ func _unhandled_input(event):
 		visible = false
 
 func popup():
-	print("popping up")
-	print(activities)
-	print($Box.get_children())
 	_on_Node2D_about_to_show()
 	visible = true
 
@@ -108,15 +105,6 @@ func dehydrate():
 				dehydrated_activities.push_back({"destination_name" : activity.destination_name, "type" : "quest"})
 			"reward":
 				dehydrated_activities.push_back({"origin_name" : activity.origin_name, "type" : "reward"})
-	
-	var has_reward = false
-	for dehydrated_activity in dehydrated_activities:
-		if dehydrated_activity.type == "reward":
-			has_reward = true
-	if has_reward:
-		print("Dehydrating Menu including a reward:")
-		print(dehydrated_activities)
-	
 	return dehydrated_activities
 
 func rehydrate(dehydrated_activities):
