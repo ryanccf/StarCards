@@ -18,11 +18,14 @@ func _ready():
 	rng.randomize()
 	if Global.get_map() == null:
 		generate_level()
+		place_black_hole()
+		place_player()
 		Global.set_map(dehydrate())
+		_exit("res://Screens/LevelMap.tscn")
 	else:
 		rehydrate(Global.get_map())
-	place_black_hole()
-	place_player()
+		place_black_hole()
+		place_player()
 
 func place_player():
 	add_child(player)
