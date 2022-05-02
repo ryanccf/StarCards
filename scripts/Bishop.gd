@@ -35,6 +35,9 @@ func _bounce():
 func _rotate():
 	_point_to_locked_target()
 
+func _avoid_obstacles():
+	pass
+
 func move(delta):
 	var collision = $KinematicBody2D.move_and_collide(speed * delta * Vector2(cos(rotation), sin(rotation)))
 	if collision:
