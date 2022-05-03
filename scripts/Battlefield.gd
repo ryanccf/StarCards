@@ -41,7 +41,7 @@ func initialize_player():
 	player.connect("death", self, "_on_player_death")
 
 func initialize_opponent():
-	opponent.set_spawn($Field/SpawnPoint)
+	opponent.set_spawn($Field/SpawnPoint.position)
 	opponent.set_enemy_base(player)
 	opponent.connect("spawn_monster", self, "add_monster")
 	add_child(opponent)
@@ -75,7 +75,6 @@ func add_monster(monster, position):
 	monster.connect("spawn_laser", self, "_handle_laser_spawn")
 	monster.connect("boom", self, "_handle_boom")
 	$Field.add_child(monster)
-	
 	
 func _handle_laser_spawn(laser_position, laser_rotation, laser_target, is_friendly):
 	var laser = Laser.instance()

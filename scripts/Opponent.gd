@@ -1,5 +1,6 @@
 extends Node2D
 
+var rng = RandomNumberGenerator.new()
 var spawn_charge = 0
 var spawn_max = 30000
 var base
@@ -7,9 +8,11 @@ var player_base
 var spawn_point
 var Warrior = preload("res://monsters/Warrior.tscn")
 var monsters = []
+var monster_slots = 0
 signal spawn_monster(monster, position)
 
 func _ready():
+	rng.randomize()
 	initialize_monsters()
 
 func _process(delta):
@@ -42,11 +45,24 @@ func manage_monster_spawning(delta):
 		spawn_monster()
 
 func spawn_monster():
+	monster_slots += 1
+	try_to_spawn()
+
+func try_to_spawn():
 	var monster = Warrior.instance()
 	monster.set_target(player_base)
 	monster.set_enemy_base(player_base)
 	monster.set_color(Color(20,0,0))
-	emit_signal("spawn_monster", monster, spawn_point.position)
+	determine_spawn_point()
+	emit_signal("spawn_monster", monster, spawn_point)
+	set_spawn(monsters[0].position)
+
+func determine_spawn_point():
+	match (rng.randi_range(0, 1)):
+		0:
+			set_spawn(spawn_point + Vector2(0, 200))
+		1:
+			set_spawn(spawn_point + Vector2(0, -200))
 
 func set_spawn(target):
 	spawn_point = target

@@ -24,9 +24,6 @@ margin_right = 40.0
 margin_bottom = 40.0
 mouse_filter = 2
 script = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ColorRect" type="ColorRect" parent="."]
 margin_right = 214.0
@@ -58,7 +55,7 @@ position = Vector2( 598, 241 )
 shape = SubResource( 3 )
 
 [node name="SpawnPoint" type="Node2D" parent="Field"]
-position = Vector2( 1083, 369 )
+position = Vector2( 1050, 250 )
 
 [node name="Bounds" type="Area2D" parent="Field"]
 
