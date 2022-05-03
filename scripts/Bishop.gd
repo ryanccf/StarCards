@@ -44,5 +44,4 @@ func move(delta):
 		_bounce()
 	global_position = $KinematicBody2D.global_position
 	$KinematicBody2D.position = Vector2(0, 0)
-	rotation += $KinematicBody2D.rotation 
 	$KinematicBody2D.rotation = 0
