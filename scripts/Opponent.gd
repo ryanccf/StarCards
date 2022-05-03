@@ -50,14 +50,42 @@ func spawn_monster():
 
 func try_to_spawn():
 	var monster = Warrior.instance()
-	monster.set_target(player_base)
-	monster.set_enemy_base(player_base)
-	monster.set_color(Color(20,0,0))
-	determine_spawn_point()
-	emit_signal("spawn_monster", monster, spawn_point)
-	set_spawn(monsters[0].position)
+	match(decide_to_wait()):
+		"":
+			print("wait")
+			pass
+		"one":
+			print("one")
+			monster_slots -= 1
+			monster.set_target(player_base)
+			monster.set_enemy_base(player_base)
+			monster.set_color(Color(20,0,0))
+			determine_spawn_point()
+			emit_signal("spawn_monster", monster, spawn_point)
+		"all":
+			print("all")
+			for i in range(monster_slots):
+				print(i)
+				monster.set_target(player_base)
+				monster.set_enemy_base(player_base)
+				monster.set_color(Color(20,0,0))
+				determine_spawn_point()
+				emit_signal("spawn_monster", monster, spawn_point)
+			monster_slots = 0
+
+func decide_to_wait():
+	match (rng.randi_range(0, 3)):
+		0:
+			return ""
+		1:
+			return ""
+		2:
+			return "one"
+		3:
+			return "all"
 
 func determine_spawn_point():
+	set_spawn(monsters[0].position)
 	match (rng.randi_range(0, 1)):
 		0:
 			set_spawn(spawn_point + Vector2(0, 200))
