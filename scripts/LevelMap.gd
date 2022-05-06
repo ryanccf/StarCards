@@ -82,9 +82,12 @@ func generate_location_positions():
 	var cursor_position = START_POSITION + Vector2.ZERO
 	var cursor_rotation = 0
 	var j = 0
+	var SOLAR_SYSTEM_COUNT = 60
+	var START = 10
+	var STEP = 3
+	var END = SOLAR_SYSTEM_COUNT * STEP + START
 
-	# (190 - 10) / 3 = 60 positions generated
-	for i in range(10, 190 ,3):
+	for i in range(START, END, STEP):
 		offset = Vector2(Vector2(rng.randf_range(-25, 25), rng.randf_range(-25, 25)))
 		cursor_rotation += 1.03498025
 		j += 3
