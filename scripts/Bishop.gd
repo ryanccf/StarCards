@@ -1,6 +1,5 @@
 extends "res://scripts/Monster.gd"
 var graphic = load("res://images/ship_J.png")
-var was_shooting = false
 
 var start_rotation = 0.25 * PI
 var last_rotation = start_rotation
@@ -10,20 +9,19 @@ func _ready():
 	update_graphic(graphic)
 	if position.y > middle:
 		rotation = start_rotation
+		last_rotation = rotation
 	else:
 		rotation = -1 * start_rotation
+		last_rotation = rotation
 
 func _physics_process(delta):
 	_check_death()
 	_rotate()
 	if _should_move():
-		if was_shooting:
-			rotation = last_rotation
-		was_shooting = false
-		move_vertically_if_past_enemy_base()
+		rotation = last_rotation
+		point_vertically_if_past_enemy_base()
 		move(delta)
 	else:
-		was_shooting = true
 		look_at(get_target())
 	_check_lasers(delta)
 	_stabilize_health_bar()
@@ -67,7 +65,7 @@ func point_up():
 func point_down():
 	rotation = 0.5 * PI
 
-func move_vertically_if_past_enemy_base():
+func point_vertically_if_past_enemy_base():
 	if past_enemy_base():
 		if below_enemy_base():
 			point_up()
