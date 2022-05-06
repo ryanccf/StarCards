@@ -50,6 +50,14 @@ func move(delta):
 	$KinematicBody2D.position = Vector2(0, 0)
 	$KinematicBody2D.rotation = 0
 
+func point_vertically_if_past_enemy_base():
+	if past_enemy_base():
+		if below_enemy_base():
+			point_up()
+		elif above_enemy_base():
+			point_down()
+		last_rotation = rotation
+
 func past_enemy_base():
 	return position.x >= enemy_base.position.x
 
@@ -64,11 +72,3 @@ func point_up():
 
 func point_down():
 	rotation = 0.5 * PI
-
-func point_vertically_if_past_enemy_base():
-	if past_enemy_base():
-		if below_enemy_base():
-			point_up()
-		elif above_enemy_base():
-			point_down()
-		last_rotation = rotation
