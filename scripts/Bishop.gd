@@ -20,6 +20,7 @@ func _physics_process(delta):
 		if was_shooting:
 			rotation = last_rotation
 		was_shooting = false
+		move_vertically_if_past_enemy_base()
 		move(delta)
 	else:
 		was_shooting = true
@@ -28,6 +29,7 @@ func _physics_process(delta):
 	_stabilize_health_bar()
 	if out_of_bounds():
 		_bounce()
+	
 
 func _bounce():
 	if position.y > middle:
@@ -49,3 +51,26 @@ func move(delta):
 	global_position = $KinematicBody2D.global_position
 	$KinematicBody2D.position = Vector2(0, 0)
 	$KinematicBody2D.rotation = 0
+
+func past_enemy_base():
+	return position.x >= enemy_base.position.x
+
+func below_enemy_base():
+	return position.y > enemy_base.position.y
+
+func above_enemy_base():
+	return position.y < enemy_base.position.y
+
+func point_up():
+	rotation = 1.5 * PI
+
+func point_down():
+	rotation = 0.5 * PI
+
+func move_vertically_if_past_enemy_base():
+	if past_enemy_base():
+		if below_enemy_base():
+			point_up()
+		elif above_enemy_base():
+			point_down()
+		last_rotation = rotation
