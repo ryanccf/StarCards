@@ -1,5 +1,6 @@
 extends "res://scripts/Monster.gd"
 var graphic = load("res://images/ship_J.png")
+var was_shooting = false
 
 var start_rotation = 0.25 * PI
 var last_rotation = start_rotation
@@ -16,9 +17,12 @@ func _physics_process(delta):
 	_check_death()
 	_rotate()
 	if _should_move():
-		rotation = last_rotation
+		if was_shooting:
+			rotation = last_rotation
+		was_shooting = false
 		move(delta)
 	else:
+		was_shooting = true
 		look_at(get_target())
 	_check_lasers(delta)
 	_stabilize_health_bar()
@@ -26,10 +30,10 @@ func _physics_process(delta):
 		_bounce()
 
 func _bounce():
-	if position.x > middle:
-		rotation = start_rotation
-	else:
+	if position.y > middle:
 		rotation = -1 * start_rotation
+	else:
+		rotation = start_rotation
 	last_rotation = rotation
 
 func _rotate():
