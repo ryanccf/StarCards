@@ -58,7 +58,7 @@ func _get_number(name):
 		name += "I"
 	
 	while not name.ends_with(" "):
-		roman_chars.push_back(str(name.substr(len(name) - 1, 1)))
+		roman_chars.push_front(str(name.substr(len(name) - 1, 1)))
 		name = name.substr(0, len(name) - 1)
 
 	for character in roman_chars:

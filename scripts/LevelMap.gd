@@ -12,7 +12,7 @@ var player = GamePiece.instance()
 var locations = []
 var target_location
 
-const QUEST_COUNT = 10
+const QUEST_COUNT = 30
 
 func _ready():
 	rng.randomize()
@@ -79,19 +79,18 @@ func generate_level():
 func generate_location_positions():
 	var positions = []
 	var offset 
-	var modifier = Vector2(rng.randf_range(150, 200), rng.randf_range(150, 200))
-	
-	for i in range(10):
+	var cursor_position = START_POSITION + Vector2.ZERO
+	var cursor_rotation = 0
+	var j = 0
+
+	# (190 - 10) / 3 = 60 positions generated
+	for i in range(10, 190 ,3):
 		offset = Vector2(Vector2(rng.randf_range(-25, 25), rng.randf_range(-25, 25)))
-		var t = float(i) / 20.0 * PI
-		var dx = (1 + 5 * t) * cos(t)
-		var dy = (1 + 5 * t) * sin(t)
-		positions.push_back(START_POSITION + (Vector2(dx, dy) * modifier) + offset)
-		dx *= -1
-		dy *= -1
-		offset = Vector2(Vector2(rng.randf_range(-25, 25), rng.randf_range(-25, 25)))
-		positions.push_back(START_POSITION + (Vector2(dx, dy) * modifier) + offset)
-	
+		cursor_rotation += 1.03498025
+		j += 3
+		cursor_position = cursor_position + Vector2((i + j) * 6, 0).rotated(cursor_rotation)
+		positions.push_back(cursor_position + offset)
+
 	Global.set_player_position(positions[-1])
 	Global.set_target_position(positions[-1])
 	return positions
