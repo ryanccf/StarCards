@@ -9,6 +9,8 @@ var BlockerCard = preload("res://Cards/BlockerCard.tscn")
 var DefenderCard = preload("res://Cards/DefenderCard.tscn")
 var HomingMissileCard = preload("res://Cards/HomingMissileCard.tscn")
 var WarriorCard = preload("res://Cards/WarriorCard.tscn")
+var WedgeCard = preload("res://Cards/WedgeCard.tscn")
+
 var DirectAttackCard = preload("res://Cards/DirectAttackCard.tscn")
 var RepairCard = preload("res://Cards/RepairCard.tscn")
 
@@ -19,6 +21,7 @@ var BarbarianCardListing = preload("res://CardListings/BarbarianCardListing.tscn
 var BlockerCardListing = preload("res://CardListings/BlockerCardListing.tscn")
 var DefenderCardListing = preload("res://CardListings/DefenderCardListing.tscn")
 var HomingMissileCardListing = preload("res://CardListings/HomingMissileCardListing.tscn")
+var WedgeCardListing = preload("res://CardListings/WedgeCardListing.tscn")
 var DirectAttackCardListing = preload("res://CardListings/DirectAttackCardListing.tscn")
 var RepairCardListing = preload("res://CardListings/RepairCardListing.tscn")
 
@@ -53,6 +56,10 @@ var canonicalCardMap = {
 	"Warrior" : {
 		"card" : WarriorCard,
 		"card_listing" : CardListing
+	},
+	"Wedge" : {
+		"card" : WedgeCard,
+		"card_listing" : WedgeCardListing
 	},
 	"DirectAttack" : {
 		"card" : DirectAttackCard,
@@ -123,6 +130,7 @@ func initialize():
 	new_decklist.add_card("Warrior")
 	new_decklist.add_card("HomingMissile")
 	new_decklist.add_card("Blocker")
+	new_decklist.add_card("Wedge")
 	decks.push_back(new_decklist)
 	cards.add_card("Repair")
 	cards.add_card("DirectAttack")
@@ -135,6 +143,7 @@ func initialize():
 	cards.add_card("Warrior")
 	cards.add_card("HomingMissile")
 	cards.add_card("Blocker")
+	cards.add_card("Wedge")
 
 func _ready():
 	initialize()

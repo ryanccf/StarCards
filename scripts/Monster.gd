@@ -87,9 +87,12 @@ func update_hp():
 
 func _check_death():
 	if currentHP <= 0:
-		if(get_parent()):
-			get_parent().remove_child(self)
-		queue_free()
+		seppuku()
+
+func seppuku():
+	if(get_parent()):
+		get_parent().remove_child(self)
+	queue_free()
 
 func _check_lasers(delta):
 	if laser_charge <= laser_max:

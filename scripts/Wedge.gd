@@ -1,5 +1,5 @@
 extends "res://scripts/Monster.gd"
-var graphic = load("res://images/station_A.png")
+var graphic = load("res://images/Ship_C.png")
 var RayCastDown = load("$StabilizedAnchor/RayCastDown")
 var RayCastUp = load("$StabilizedAnchor/RayCastUp")
 var last_y_target
@@ -38,23 +38,21 @@ func _initialize_spawn_point_marker():
 func _point_to_locked_target():
 	var x
 	var y
-	
-	if out_of_bounds():
-		if position.y < :
-			y = 0
-		else:
-			y = 9000
-		last_y_target = y
+	x = 9000
+	if friendly:
+		set_target(Vector2(1200, global_position.y))
 	else:
-		y = last_y_target
+		set_target(Vector2(0, global_position.y))
 
+func move(delta):
+	var collision = $KinematicBody2D.move_and_collide(speed * delta * Vector2(cos(rotation), sin(rotation)))
+	global_position = $KinematicBody2D.global_position
+	$KinematicBody2D.position = Vector2(0, 0)
 
-	x = global_position.x#$SpawnPointMarker.global_position.x
-	set_target(Vector2(x, y))
+func _avoid_obstacles():
+	pass
 
-func _check_death():
-	if currentHP <= 0:
-		if(get_parent()):
-			get_parent().remove_child(self)
-			#get_parent().remove_child($SpawnPointMarker)
-		queue_free()
+func check_death():
+	_check_death()
+	if out_of_bounds():
+		seppuku()

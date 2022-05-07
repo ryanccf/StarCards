@@ -1,5 +1,5 @@
 extends "res://scripts/card.gd"
-const Blocker = preload("res://monsters/Blocker.tscn")
+const Wedge = preload("res://monsters/Wedge.tscn")
 
 func reset_monster():
-	monster = Blocker.instance()
+	monster = Wedge.instance()

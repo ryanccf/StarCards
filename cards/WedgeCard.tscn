@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Cards/Card.tscn" type="PackedScene" id=1]
-[ext_resource path="res://images/station_A.png" type="Texture" id=2]
+[ext_resource path="res://images/ship_C.png" type="Texture" id=2]
 [ext_resource path="res://scripts/BlockerCard.gd" type="Script" id=3]
 
 [node name="Wedge" instance=ExtResource( 1 )]
@@ -9,8 +9,9 @@ position = Vector2( -1.65161, -1.65167 )
 script = ExtResource( 3 )
 
 [node name="Graphic" parent="Area2D/Icon" index="1"]
-modulate = Color( 0.32549, 0.905882, 0.431373, 1 )
+modulate = Color( 1, 0.423529, 0.2, 1 )
+position = Vector2( -2.33008, 3.49518 )
 texture = ExtResource( 2 )
 
 [node name="Title" parent="Header" index="0"]
-text = "Blocker"
+text = "Wedge"
