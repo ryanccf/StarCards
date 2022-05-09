@@ -56,3 +56,6 @@ func _check_death():
 	._check_death()
 	if out_of_bounds():
 		seppuku()
+
+func _should_move():
+	return true
