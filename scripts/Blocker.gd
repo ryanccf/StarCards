@@ -38,17 +38,14 @@ func _initialize_spawn_point_marker():
 func _point_to_locked_target():
 	var x
 	var y
-	
 	if out_of_bounds():
-		if position.y < :
+		if position.y > middle:
 			y = 0
 		else:
 			y = 9000
 		last_y_target = y
 	else:
 		y = last_y_target
-
-
 	x = global_position.x#$SpawnPointMarker.global_position.x
 	set_target(Vector2(x, y))
 

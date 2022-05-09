@@ -52,7 +52,10 @@ func move(delta):
 func _avoid_obstacles():
 	pass
 
-func check_death():
-	_check_death()
+func _check_death():
+	._check_death()
 	if out_of_bounds():
 		seppuku()
+
+func _should_move():
+	return true
