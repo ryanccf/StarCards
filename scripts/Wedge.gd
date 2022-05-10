@@ -4,7 +4,7 @@ var graphic = load("res://images/Ship_C.png")
 func _ready():
 	._ready()
 	maxHP = 100
-	speed = 40
+	speed = 40 * 100
 	currentHP = maxHP
 	update_hp()
 	update_graphic(graphic)
@@ -16,8 +16,9 @@ func _point_to_locked_target():
 		set_target(Vector2(0, global_position.y))
 
 func move(delta):
+	$RigidShipBody.set_velocity(speed * delta * Vector2(cos(rotation), sin(rotation)))
 	$RigidShipBody.gravity_scale = 0
-	$RigidShipBody.apply_impulse(Vector2.ZERO, speed * delta * Vector2(cos(rotation), sin(rotation)) )#* 0.0001)#cos(rotation), sin(rotation)))
+#	$RigidShipBody.apply_impulse(Vector2.ZERO, speed * delta * Vector2(cos(rotation), sin(rotation)) )#* 0.0001)#cos(rotation), sin(rotation)))
 	global_position = $RigidShipBody.global_position
 	$RigidShipBody.position = Vector2(0, 0)
 #	rotation += $RigidShipBody.rotation 

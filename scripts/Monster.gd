@@ -5,7 +5,7 @@ var currentHP = maxHP
 var monster_name = "base";
 var monster_type;
 var friendly = false
-var speed = 55
+var speed = 55 * 100
 var current_target
 var enemy_base
 var bounds
@@ -57,8 +57,9 @@ func _avoid_obstacles():
 		rotation += path_rotation
 
 func move(delta):
+	$RigidShipBody.set_velocity(speed * delta * Vector2(cos(rotation), sin(rotation)))
 	$RigidShipBody.gravity_scale = 0
-	$RigidShipBody.apply_impulse(Vector2.ZERO, speed * delta * Vector2(cos(rotation), sin(rotation)))#* 0.0001)#cos(rotation), sin(rotation)))
+#	$RigidShipBody.apply_impulse(Vector2.ZERO, speed * delta * Vector2(cos(rotation), sin(rotation)))#* 0.0001)#cos(rotation), sin(rotation)))
 	global_position = $RigidShipBody.global_position
 	$RigidShipBody.position = Vector2(0, 0)
 	rotation += $RigidShipBody.rotation 
