@@ -6,7 +6,7 @@ var last_rotation = start_rotation
 
 func _ready():
 	._ready()
-	$RigidBody2D.connect("body_entered", self, "handle_collision")
+	$RigidShipBody.connect("body_entered", self, "handle_collision")
 	update_graphic(graphic)
 	if position.y > middle:
 		rotation = start_rotation
@@ -51,12 +51,12 @@ func move(delta):
 	#$KinematicBody2D.position = Vector2(0, 0)
 	#$KinematicBody2D.rotation = 0
 	
-	$RigidBody2D.gravity_scale = 0
-	$RigidBody2D.apply_impulse(Vector2.ZERO, speed * delta * Vector2(cos(rotation), sin(rotation)) )#* 0.0001)#cos(rotation), sin(rotation)))
-	global_position = $RigidBody2D.global_position
-	$RigidBody2D.position = Vector2(0, 0)
-	rotation += $RigidBody2D.rotation 
-	$RigidBody2D.rotation = 0
+	$RigidShipBody.gravity_scale = 0
+	$RigidShipBody.apply_impulse(Vector2.ZERO, speed * delta * Vector2(cos(rotation), sin(rotation)) )#* 0.0001)#cos(rotation), sin(rotation)))
+	global_position = $RigidShipBody.global_position
+	$RigidShipBody.position = Vector2(0, 0)
+	rotation += $RigidShipBody.rotation 
+	$RigidShipBody.rotation = 0
 
 func _handle_collision(body):
 	_bounce()

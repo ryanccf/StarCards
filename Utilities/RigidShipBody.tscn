@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scripts/RigidShipBody.gd" type="Script" id=1]
+
+[sub_resource type="CapsuleShape2D" id=4]
+radius = 30.0025
+height = 53.5302
+
+[node name="RigidShipBody" type="RigidBody2D"]
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+modulate = Color( 1, 0, 0, 1 )
+self_modulate = Color( 1, 0, 0, 1 )
+rotation = 1.5708
+shape = SubResource( 4 )

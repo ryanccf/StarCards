@@ -19,9 +19,9 @@ func move(delta):
 	#global_position = $KinematicBody2D.global_position
 	#$KinematicBody2D.position = Vector2(0, 0)
 	#$KinematicBody2D.rotation = 0
-	$RigidBody2D.gravity_scale = 0
-	$RigidBody2D.apply_impulse(Vector2.ZERO, speed * delta * Vector2(cos(rotation), sin(rotation)) )#* 0.0001)#cos(rotation), sin(rotation)))
-	global_position = $RigidBody2D.global_position
-	$RigidBody2D.position = Vector2(0, 0)
-	rotation += $RigidBody2D.rotation 
-	$RigidBody2D.rotation = 0
+	$RigidShipBody.gravity_scale = 0
+	$RigidShipBody.apply_impulse(Vector2.ZERO, speed * delta * Vector2(cos(rotation), sin(rotation)) )#* 0.0001)#cos(rotation), sin(rotation)))
+	global_position = $RigidShipBody.global_position
+	$RigidShipBody.position = Vector2(0, 0)
+	rotation += $RigidShipBody.rotation 
+	$RigidShipBody.rotation = 0

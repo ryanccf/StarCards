@@ -55,12 +55,12 @@ func _avoid_obstacles():
 		rotation += path_rotation
 
 func move(delta):
-	$RigidBody2D.gravity_scale = 0
-	$RigidBody2D.apply_impulse(Vector2.ZERO, speed * delta * Vector2(cos(rotation), sin(rotation)))#* 0.0001)#cos(rotation), sin(rotation)))
-	global_position = $RigidBody2D.global_position
-	$RigidBody2D.position = Vector2(0, 0)
-	rotation += $RigidBody2D.rotation 
-	$RigidBody2D.rotation = 0
+	$RigidShipBody.gravity_scale = 0
+	$RigidShipBody.apply_impulse(Vector2.ZERO, speed * delta * Vector2(cos(rotation), sin(rotation)))#* 0.0001)#cos(rotation), sin(rotation)))
+	global_position = $RigidShipBody.global_position
+	$RigidShipBody.position = Vector2(0, 0)
+	rotation += $RigidShipBody.rotation 
+	$RigidShipBody.rotation = 0
 
 	#collision = $KinematicBody2D.move_and_collide(speed * delta * Vector2(cos(rotation), sin(rotation)))
 	#var collision = $KinematicBody2D.move_and_collide(speed * delta * Vector2(cos(rotation), sin(rotation)))
@@ -68,6 +68,8 @@ func move(delta):
 	#$KinematicBody2D.position = Vector2(0, 0)
 	#rotation += $KinematicBody2D.rotation 
 	#$KinematicBody2D.rotation = 0
+	
+
 
 func set_friendly(friendliness = true):
 	friendly = friendliness
