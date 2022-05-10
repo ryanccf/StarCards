@@ -30,6 +30,8 @@ func _physics_process(delta):
 	if _should_move():
 		_avoid_obstacles()
 		move(delta)
+#	else:
+#		$RigidShipBody.stop()
 	_check_lasers(delta)
 	_stabilize_health_bar()
 

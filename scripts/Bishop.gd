@@ -36,6 +36,7 @@ func _bounce():
 	else:
 		rotation = start_rotation
 	last_rotation = rotation
+	$RigidShipBody.stop()
 
 func _rotate():
 	_point_to_locked_target()
