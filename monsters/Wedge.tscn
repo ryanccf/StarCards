@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Monsters/Monster.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scripts/RigidShipBody.gd" type="Script" id=2]
 [ext_resource path="res://scripts/SensingZone.gd" type="Script" id=3]
 [ext_resource path="res://scripts/Wedge.gd" type="Script" id=4]
 [ext_resource path="res://images/ship_C.png" type="Texture" id=5]
@@ -18,6 +17,9 @@ script = ExtResource( 4 )
 [node name="Sprite" parent="." index="0"]
 rotation = 1.5708
 texture = ExtResource( 5 )
+
+[node name="HitZone" parent="." index="3"]
+visible = false
 
 [node name="CollisionShape2D" parent="HitZone" index="0"]
 position = Vector2( -0.664001, 0.00714111 )
@@ -59,13 +61,10 @@ visible = false
 
 [node name="SpawnPointMarker" type="Node2D" parent="." index="9"]
 
-[node name="RigidShipBody" parent="." index="10"]
-script = ExtResource( 2 )
-
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidShipBody" index="0"]
 position = Vector2( -0.663999, 0.00714111 )
 rotation = -3.14104
-scale = Vector2( 0.183987, 0.197761 )
+scale = Vector2( 0.35, 0.35 )
 polygon = PoolVector2Array( 16.4789, 0.00714111, 33.6217, 48.5786, 0, 48.5714, -32.0926, 0.00714111, 0, -48.5714, 33.6217, -48.5643 )
 
 [connection signal="area_entered" from="ShootingZone/SensingZone" to="ShootingZone/SensingZone" method="_on_SensingZone_area_entered"]

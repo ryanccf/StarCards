@@ -16,7 +16,8 @@ rotation = 1.5708
 texture = ExtResource( 3 )
 
 [node name="ShootingZone" parent="." index="4"]
-scale = Vector2( 4, 4 )
+visible = false
+scale = Vector2( 1.2, 1.2 )
 
 [node name="SensingZone" type="Area2D" parent="ShootingZone" index="0"]
 script = ExtResource( 2 )
@@ -25,13 +26,23 @@ script = ExtResource( 2 )
 shape = SubResource( 1 )
 
 [node name="SensingZone" parent="." index="5"]
-scale = Vector2( 3, 3 )
+visible = false
+scale = Vector2( 1, 1 )
 
 [node name="SensingZone" type="Area2D" parent="SensingZone" index="0"]
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SensingZone/SensingZone" index="0"]
 shape = SubResource( 1 )
+
+[node name="ObstacleAvoider" parent="." index="8"]
+visible = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidShipBody" index="0"]
+position = Vector2( -0.663999, 0.00714111 )
+rotation = -3.14104
+scale = Vector2( 0.549336, -0.112173 )
+polygon = PoolVector2Array( 19.2324, 53.4994, 30.1547, 53.5289, 30.1497, 98.1028, 19.2214, 151.562, 0, 48.5714, -32.0926, 0.00714111, 0, -48.5714, 19.2556, -151.541, 30.1718, -98.0223, 30.1668, -53.4484, 19.2445, -53.478 )
 
 [connection signal="area_entered" from="ShootingZone/SensingZone" to="ShootingZone/SensingZone" method="_on_SensingZone_area_entered"]
 [connection signal="area_exited" from="ShootingZone/SensingZone" to="ShootingZone/SensingZone" method="_on_SensingZone_area_exited"]

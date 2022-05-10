@@ -17,12 +17,12 @@ height = 53.5302
 
 [node name="Monster" type="Node2D"]
 position = Vector2( 2.2324, 13.9975 )
-scale = Vector2( 0.35, 0.35 )
 script = ExtResource( 5 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( -0.2324, 0.00249958 )
 rotation = -1.57079
+scale = Vector2( 0.35, 0.35 )
 texture = ExtResource( 7 )
 
 [node name="HP" type="Label" parent="."]
@@ -39,21 +39,24 @@ wait_time = 2.0
 autostart = true
 
 [node name="HitZone" type="Area2D" parent="."]
+scale = Vector2( 0.35, 0.35 )
 script = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitZone"]
 modulate = Color( 1, 0, 0, 1 )
 self_modulate = Color( 1, 0, 0, 1 )
 rotation = 1.5708
+scale = Vector2( 0.35, 0.35 )
 shape = SubResource( 4 )
 
 [node name="ShootingZone" parent="." instance=ExtResource( 4 )]
-scale = Vector2( 2, 2 )
+scale = Vector2( 0.35, 0.35 )
 
 [node name="SensingZone" parent="." instance=ExtResource( 4 )]
-scale = Vector2( 2.667, 2.667 )
+scale = Vector2( 0.75, 0.75 )
 
 [node name="StabilizedAnchor" type="Node2D" parent="."]
+scale = Vector2( 0.35, 0.35 )
 
 [node name="HealthBar" type="ColorRect" parent="StabilizedAnchor"]
 margin_left = -34.2324
@@ -64,6 +67,7 @@ rect_scale = Vector2( 0.5, 0.5 )
 color = Color( 0.72549, 0.0823529, 0.0823529, 1 )
 
 [node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+scale = Vector2( 0.35, 0.35 )
 collision_layer = 0
 collision_mask = 0
 
@@ -71,8 +75,10 @@ collision_mask = 0
 modulate = Color( 1, 0, 0, 1 )
 self_modulate = Color( 1, 0, 0, 1 )
 rotation = 1.5708
+scale = Vector2( 0.35, 0.35 )
 shape = SubResource( 4 )
 
 [node name="ObstacleAvoider" parent="." instance=ExtResource( 2 )]
+scale = Vector2( 0.35, 0.35 )
 
 [node name="RigidShipBody" parent="." instance=ExtResource( 3 )]

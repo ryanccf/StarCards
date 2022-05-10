@@ -2,7 +2,7 @@ extends "res://scripts/Monster.gd"
 var graphic = load("res://images/ship_L.png")
 
 func _ready():
-	speed = 45
+	speed = 45 * 100
 	laser_max = 8000 
 	update_graphic(graphic)
 

@@ -1,10 +1,34 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Monsters/Monster.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/Barbarian.gd" type="Script" id=2]
+[ext_resource path="res://scripts/RigidShipBody.gd" type="Script" id=3]
+[ext_resource path="res://images/ship_K.png" type="Texture" id=4]
 
 [node name="Barbarian" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
 [node name="Sprite" parent="." index="0"]
 rotation = 1.5708
+texture = ExtResource( 4 )
+
+[node name="HitZone" parent="." index="3"]
+visible = false
+
+[node name="ShootingZone" parent="." index="4"]
+visible = false
+
+[node name="SensingZone" parent="." index="5"]
+visible = false
+
+[node name="ObstacleAvoider" parent="." index="8"]
+visible = false
+
+[node name="RigidShipBody" parent="." index="9"]
+script = ExtResource( 3 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidShipBody" index="0"]
+position = Vector2( -0.663999, 0.00714111 )
+rotation = -3.14104
+scale = Vector2( 0.549336, -0.112173 )
+polygon = PoolVector2Array( 30.1497, 98.1028, -32.0926, 0.00714111, 30.1718, -98.0223, 19.2385, 0.0106812 )

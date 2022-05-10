@@ -1,10 +1,37 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Monsters/Monster.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/HomingMissile.gd" type="Script" id=2]
+[ext_resource path="res://scripts/RigidShipBody.gd" type="Script" id=3]
+[ext_resource path="res://images/enemy_B.png" type="Texture" id=4]
+
+[sub_resource type="CapsuleShape2D" id=4]
+radius = 8.0
+height = 0.0
 
 [node name="HomingMissile" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 4 )
+
 [node name="ShootingZone" parent="." index="4"]
 scale = Vector2( 0.90517, 0.619113 )
+
+[node name="ObstacleAvoider" parent="." index="8"]
+visible = false
+
+[node name="RigidShipBody" parent="." index="9"]
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidShipBody" index="0"]
+modulate = Color( 1, 0, 0, 1 )
+self_modulate = Color( 1, 0, 0, 1 )
+rotation = 1.5708
+shape = SubResource( 4 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidShipBody" index="1"]
+position = Vector2( -0.663999, 0.00714111 )
+rotation = -3.14104
+scale = Vector2( 0.549336, -0.112173 )
+polygon = PoolVector2Array( 10.1255, 98.0486, -0.802769, 151.508, -11.719, 97.9895, -2.61208, 53.4403, -2.61007, 35.6107, -20.8149, 44.4762, -29.9117, -0.122322, -20.8048, -44.6716, -2.60202, -35.7075, -2.60001, -53.5371, -11.6969, -98.1356, -0.768569, -151.595, 10.1477, -98.0765, 2.86112, -53.5223, 2.85911, -35.6928, 28.3404, 0.0353088, 1.03069, 35.6205, 1.02867, 53.4501 )

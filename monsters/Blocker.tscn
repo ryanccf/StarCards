@@ -1,15 +1,20 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Monsters/Monster.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Monsters/Utilities/EnemyHitBoxTracker.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scripts/SensingZone.gd" type="Script" id=3]
 [ext_resource path="res://scripts/Blocker.gd" type="Script" id=4]
+[ext_resource path="res://scripts/RigidShipBody.gd" type="Script" id=5]
+[ext_resource path="res://images/station_A.png" type="Texture" id=6]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 100.125
 
 [node name="Blocker" instance=ExtResource( 1 )]
 script = ExtResource( 4 )
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 6 )
 
 [node name="ShootingZone" parent="." index="4"]
 visible = false
@@ -39,6 +44,15 @@ visible = false
 visible = false
 
 [node name="SpawnPointMarker" type="Node2D" parent="." index="10"]
+
+[node name="RigidShipBody" parent="." index="11"]
+script = ExtResource( 5 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidShipBody" index="0"]
+position = Vector2( -0.663999, 0.00714111 )
+rotation = -3.14104
+scale = Vector2( 0.549336, -0.112173 )
+polygon = PoolVector2Array( 26.5049, 133.752, 17.401, 151.557, 10.1235, 115.878, 10.1286, 71.3043, 8.30918, 62.3846, -0.794722, 80.1895, -9.8946, 62.3353, -11.716, 71.2452, -11.721, 115.819, -19.0065, 151.458, -28.1064, 133.604, -31.7421, 89.0205, -24.4566, 53.3811, -15.3547, 53.4058, -13.5323, 35.5811, -15.3487, -0.0829163, -13.5233, -44.6519, -15.3427, -53.5716, -26.2649, -53.6011, -31.721, -98.1898, -28.0762, -133.839, -20.7927, -151.649, -11.6939, -124.88, -11.6999, -71.3913, -9.88052, -62.4716, -0.777622, -71.3617, 8.32326, -62.4223, 10.1446, -71.3322, 10.1497, -115.906, 17.4352, -151.545, 26.5351, -133.691, 30.1708, -89.1075, 24.7057, -53.4632, 15.6038, -53.4878, 11.962, -44.5829, 15.5977, 0.000831604, 11.9519, 44.5649, 13.7713, 53.4846, 22.8732, 53.5092, 30.1497, 98.1028 )
 
 [connection signal="area_entered" from="ShootingZone/SensingZone" to="ShootingZone/SensingZone" method="_on_SensingZone_area_entered"]
 [connection signal="area_exited" from="ShootingZone/SensingZone" to="ShootingZone/SensingZone" method="_on_SensingZone_area_exited"]
