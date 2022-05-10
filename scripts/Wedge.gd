@@ -8,6 +8,7 @@ func _ready():
 	currentHP = maxHP
 	update_hp()
 	update_graphic(graphic)
+	$RigidShipBody.set_mass(10)
 
 func _point_to_locked_target():
 	if friendly:
