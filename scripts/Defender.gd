@@ -6,7 +6,7 @@ func _ready():
 	._ready()
 	update_graphic(graphic)
 	maxHP = 100
-	speed = 40
+	speed = 40 * 100
 	currentHP = maxHP
 	update_hp()
 	update_graphic(defenderGraphic)
