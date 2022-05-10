@@ -5,7 +5,7 @@ signal boom(position)
 func _ready():
 	._ready()
 	update_graphic(graphic)
-	speed = 80
+	speed = 80 * 100
 	laser_max = 12000
 	maxHP = 2
 

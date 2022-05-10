@@ -11,24 +11,14 @@ func _ready():
 	$StabilizedAnchor/RayCastDown.collide_with_bodies = true;
 	._ready()
 	maxHP = 100
-	speed = 40
+	speed = 40 * 100
 	currentHP = maxHP
 	update_hp()
 	update_graphic(graphic)
 	_initialize_spawn_point_marker()
 
-func _physics_process(delta):
-	._physics_process(delta)
-	_check_raycast()
-
 func _check_lasers(delta):
 	pass
-
-func _check_raycast():
-	$StabilizedAnchor/RayCastDown.force_raycast_update()
-	$StabilizedAnchor/RayCastUp.force_raycast_update()
-	if ($StabilizedAnchor/RayCastDown.is_colliding()):
-		$StabilizedAnchor/RayCastDown.get_collider()
 
 func _initialize_spawn_point_marker():
 	remove_child($SpawnPointMarker)

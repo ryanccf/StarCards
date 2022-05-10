@@ -24,11 +24,12 @@ func _physics_process(delta):
 		move(delta)
 	else:
 		look_at(get_target())
+		$RigidShipBody.stop()
 	_check_lasers(delta)
 	_stabilize_health_bar()
 	if out_of_bounds():
 		_bounce()
-	
+	sync_body()
 
 func _bounce():
 	if position.y > middle:
@@ -36,7 +37,7 @@ func _bounce():
 	else:
 		rotation = start_rotation
 	last_rotation = rotation
-	$RigidShipBody.stop()
+#	$RigidShipBody.stop()
 
 func _rotate():
 	_point_to_locked_target()

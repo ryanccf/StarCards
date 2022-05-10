@@ -6,7 +6,7 @@ func _has_target():
 
 func _ready():
 	update_graphic(graphic)
-	speed = 80
+	speed = 80 * 100
 	laser_max = 12000
 	maxHP = 3
 

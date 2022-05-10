@@ -30,10 +30,11 @@ func _physics_process(delta):
 	if _should_move():
 		_avoid_obstacles()
 		move(delta)
-#	else:
-#		$RigidShipBody.stop()
+	else:
+		$RigidShipBody.stop()
 	_check_lasers(delta)
 	_stabilize_health_bar()
+	sync_body()
 
 func set_target(target):
 	current_target = target
@@ -64,6 +65,13 @@ func move(delta):
 	$RigidShipBody.position = Vector2(0, 0)
 	rotation += $RigidShipBody.rotation 
 	$RigidShipBody.rotation = 0
+
+func sync_body():
+	global_position = $RigidShipBody.global_position
+	$RigidShipBody.position = Vector2(0, 0)
+	rotation += $RigidShipBody.rotation 
+	$RigidShipBody.rotation = 0
+	
 
 	#collision = $KinematicBody2D.move_and_collide(speed * delta * Vector2(cos(rotation), sin(rotation)))
 	#var collision = $KinematicBody2D.move_and_collide(speed * delta * Vector2(cos(rotation), sin(rotation)))

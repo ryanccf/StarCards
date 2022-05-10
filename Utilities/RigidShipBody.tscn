@@ -3,8 +3,8 @@
 [ext_resource path="res://scripts/RigidShipBody.gd" type="Script" id=1]
 
 [sub_resource type="CapsuleShape2D" id=4]
-radius = 30.0025
-height = 53.5302
+radius = 8.0
+height = 0.0
 
 [node name="RigidShipBody" type="RigidBody2D"]
 script = ExtResource( 1 )
