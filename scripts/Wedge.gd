@@ -16,9 +16,16 @@ func _point_to_locked_target():
 		set_target(Vector2(0, global_position.y))
 
 func move(delta):
-	var collision = $KinematicBody2D.move_and_collide(speed * delta * Vector2(cos(rotation), sin(rotation)))
-	global_position = $KinematicBody2D.global_position
-	$KinematicBody2D.position = Vector2(0, 0)
+	$RigidBody2D.gravity_scale = 0
+	$RigidBody2D.apply_impulse(Vector2.ZERO, speed * delta * Vector2(cos(rotation), sin(rotation)) )#* 0.0001)#cos(rotation), sin(rotation)))
+	global_position = $RigidBody2D.global_position
+	$RigidBody2D.position = Vector2(0, 0)
+#	rotation += $RigidBody2D.rotation 
+	$RigidBody2D.rotation = 0
+	
+#	var collision = $KinematicBody2D.move_and_collide(speed * delta * Vector2(cos(rotation), sin(rotation)))
+#	global_position = $KinematicBody2D.global_position
+#	$KinematicBody2D.position = Vector2(0, 0)
 
 func _check_death():
 	._check_death()

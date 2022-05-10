@@ -6,6 +6,7 @@ var last_rotation = start_rotation
 
 func _ready():
 	._ready()
+	$RigidBody2D.connect("body_entered", self, "handle_collision")
 	update_graphic(graphic)
 	if position.y > middle:
 		rotation = start_rotation
@@ -43,12 +44,22 @@ func _avoid_obstacles():
 	pass
 
 func move(delta):
-	var collision = $KinematicBody2D.move_and_collide(speed * delta * Vector2(cos(rotation), sin(rotation)))
-	if collision:
-		_bounce()
-	global_position = $KinematicBody2D.global_position
-	$KinematicBody2D.position = Vector2(0, 0)
-	$KinematicBody2D.rotation = 0
+	#var collision = $KinematicBody2D.move_and_collide(speed * delta * Vector2(cos(rotation), sin(rotation)))
+	#if collision:
+	#	_bounce()
+	#global_position = $KinematicBody2D.global_position
+	#$KinematicBody2D.position = Vector2(0, 0)
+	#$KinematicBody2D.rotation = 0
+	
+	$RigidBody2D.gravity_scale = 0
+	$RigidBody2D.apply_impulse(Vector2.ZERO, speed * delta * Vector2(cos(rotation), sin(rotation)) )#* 0.0001)#cos(rotation), sin(rotation)))
+	global_position = $RigidBody2D.global_position
+	$RigidBody2D.position = Vector2(0, 0)
+	rotation += $RigidBody2D.rotation 
+	$RigidBody2D.rotation = 0
+
+func _handle_collision(body):
+	_bounce()
 
 func point_vertically_if_past_enemy_base():
 	if weakref(enemy_base).get_ref() and past_enemy_base():
