@@ -37,9 +37,6 @@ func _point_to_locked_target():
 	else:
 		y = last_y_target
 	x = global_position.x#$SpawnPointMarker.global_position.x
-	print("position: " + str(position))
-	print("target: " + str(Vector2(x, y)))
-	print($RigidShipBody.linear_velocity)
 	set_target(Vector2(x, y))
 
 func _check_death():
