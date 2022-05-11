@@ -1,5 +1,5 @@
 extends "res://scripts/Monster.gd"
-var graphic = load("res://images/Ship_C.png")
+#var graphic = load("res://images/Ship_C.png")
 
 func _ready():
 	._ready()
@@ -7,7 +7,7 @@ func _ready():
 	speed = 40 * 100
 	currentHP = maxHP
 	update_hp()
-	update_graphic(graphic)
+#	update_graphic(graphic)
 	$RigidShipBody.set_mass(10)
 
 func _point_to_locked_target():

@@ -1,0 +1,70 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Monsters/Monster.tscn" type="PackedScene" id=1]
+[ext_resource path="res://images/scoop.png" type="Texture" id=2]
+[ext_resource path="res://scripts/SensingZone.gd" type="Script" id=3]
+[ext_resource path="res://scripts/Wedge.gd" type="Script" id=4]
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 100.125
+
+[node name="Scoop" instance=ExtResource( 1 )]
+position = Vector2( 3, 14 )
+script = ExtResource( 4 )
+
+[node name="Sprite" parent="." index="0"]
+rotation = 1.5708
+texture = ExtResource( 2 )
+
+[node name="HitZone" parent="." index="3"]
+visible = false
+
+[node name="CollisionShape2D" parent="HitZone" index="0"]
+position = Vector2( -0.664001, 0.00714111 )
+scale = Vector2( -0.743026, -0.368246 )
+shape = SubResource( 2 )
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="HitZone" index="1"]
+position = Vector2( -0.664, 0.00714493 )
+rotation = 3.14159
+polygon = PoolVector2Array( 16.4789, 0.00714111, 33.6217, 48.5786, 0, 48.5714, -32.0926, 0.00714111, 0, -48.5714, 33.6217, -48.5643 )
+
+[node name="ShootingZone" parent="." index="4"]
+visible = false
+scale = Vector2( 1.5, 1.5 )
+
+[node name="SensingZone" type="Area2D" parent="ShootingZone" index="0"]
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShootingZone/SensingZone" index="0"]
+shape = SubResource( 1 )
+
+[node name="SensingZone" parent="." index="5"]
+visible = false
+
+[node name="KinematicBody2D" parent="." index="7"]
+visible = false
+
+[node name="CollisionShape2D" parent="KinematicBody2D" index="0"]
+visible = false
+position = Vector2( -3.52114, 0.00714111 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="KinematicBody2D" index="1"]
+visible = false
+position = Vector2( -0.664, 0.00714111 )
+polygon = PoolVector2Array( 16.4789, 0.00714111, 33.6217, 48.5786, 0, 48.5714, -32.0926, 0.00714111, 0, -48.5714, 33.6217, -48.5643 )
+
+[node name="ObstacleAvoider" parent="." index="8"]
+visible = false
+
+[node name="SpawnPointMarker" type="Node2D" parent="." index="9"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidShipBody" index="0"]
+position = Vector2( -0.663999, 0.00714111 )
+scale = Vector2( 0.35, 0.35 )
+polygon = PoolVector2Array( 16.4789, 0.00714111, 33.6217, 48.5786, 0, 48.5714, -32.0926, 0.00714111, 0, -48.5714, 33.6217, -48.5643 )
+
+[connection signal="area_entered" from="ShootingZone/SensingZone" to="ShootingZone/SensingZone" method="_on_SensingZone_area_entered"]
+[connection signal="area_exited" from="ShootingZone/SensingZone" to="ShootingZone/SensingZone" method="_on_SensingZone_area_exited"]
