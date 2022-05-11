@@ -4,11 +4,13 @@
 [ext_resource path="res://Monsters/Utilities/EnemyHitBoxTracker.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scripts/SensingZone.gd" type="Script" id=3]
 [ext_resource path="res://scripts/Defender.gd" type="Script" id=4]
-[ext_resource path="res://scripts/RigidShipBody.gd" type="Script" id=5]
 [ext_resource path="res://images/station_C.png" type="Texture" id=6]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 100.125
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 10.1882, 10.3389 )
 
 [node name="Defender" instance=ExtResource( 1 )]
 script = ExtResource( 4 )
@@ -36,14 +38,17 @@ scale = Vector2( 0.8, 0.8 )
 [node name="DefendingZone" parent="." index="9" instance=ExtResource( 2 )]
 visible = false
 
-[node name="RigidShipBody" parent="." index="10"]
-script = ExtResource( 5 )
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="RigidShipBody" index="1"]
+position = Vector2( 0.2676, 0.00249958 )
+rotation = 0.785398
+scale = Vector2( 0.936958, 2.08598 )
+shape = SubResource( 2 )
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidShipBody" index="0"]
-position = Vector2( -0.663999, 0.00714111 )
-rotation = -3.14104
-scale = Vector2( 0.549336, -0.112173 )
-polygon = PoolVector2Array( 37.4342, 71.3782, 15.5766, 187.211, 6.47874, 151.527, 15.5867, 98.0634, 11.9479, 80.224, -0.796733, 98.0191, -11.716, 71.2452, -17.1801, 97.9747, -8.08327, 142.573, -17.1902, 187.122, -39.0227, 80.0861, -31.7361, 35.5319, -20.8189, 80.1353, -15.3547, 53.4058, -20.8088, -9.01247, -15.3427, -53.5716, -20.8008, -80.3307, -31.7281, -35.7864, -39.0056, -71.4652, -15.3276, -187.293, -8.05008, -151.614, -17.158, -98.1504, -11.6999, -71.3913, -0.774604, -98.1061, 11.966, -80.242, 17.4292, -98.0568, 6.51294, -151.575, 13.7985, -187.214, 37.4503, -71.2583, 30.1658, -44.5336, 21.0679, -80.2174, 15.6038, -53.4878, 19.2375, 8.92545, 15.5907, 62.4043, 19.2294, 80.2437, 30.1567, 35.6993 )
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="RigidShipBody" index="2"]
+position = Vector2( 0.2676, 0.00249958 )
+rotation = -0.785398
+scale = Vector2( 0.936958, 2.08598 )
+shape = SubResource( 2 )
 
 [connection signal="area_entered" from="ShootingZone/SensingZone" to="ShootingZone/SensingZone" method="_on_SensingZone_area_entered"]
 [connection signal="area_exited" from="ShootingZone/SensingZone" to="ShootingZone/SensingZone" method="_on_SensingZone_area_exited"]

@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Monsters/Monster.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/Barbarian.gd" type="Script" id=2]
-[ext_resource path="res://scripts/RigidShipBody.gd" type="Script" id=3]
 [ext_resource path="res://images/ship_K.png" type="Texture" id=4]
 
 [node name="Barbarian" instance=ExtResource( 1 )]
@@ -23,9 +22,6 @@ visible = false
 
 [node name="ObstacleAvoider" parent="." index="8"]
 visible = false
-
-[node name="RigidShipBody" parent="." index="9"]
-script = ExtResource( 3 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidShipBody" index="0"]
 position = Vector2( -0.663999, 0.00714111 )
