@@ -1,4 +1,5 @@
 extends "res://scripts/Monster.gd"
+signal boom(position)
 #var graphic = load("res://images/Ship_C.png")
 
 func _ready():
@@ -32,6 +33,7 @@ func move(delta):
 func _check_death():
 	._check_death()
 	if out_of_bounds():
+		emit_signal("boom", position)
 		seppuku()
 
 func _should_move():

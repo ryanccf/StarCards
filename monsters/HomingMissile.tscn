@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Monsters/Monster.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/HomingMissile.gd" type="Script" id=2]
-[ext_resource path="res://scripts/RigidShipBody.gd" type="Script" id=3]
 [ext_resource path="res://images/enemy_B.png" type="Texture" id=4]
 
 [sub_resource type="CapsuleShape2D" id=4]
@@ -20,9 +19,6 @@ scale = Vector2( 0.90517, 0.619113 )
 
 [node name="ObstacleAvoider" parent="." index="8"]
 visible = false
-
-[node name="RigidShipBody" parent="." index="9"]
-script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidShipBody" index="0"]
 modulate = Color( 1, 0, 0, 1 )

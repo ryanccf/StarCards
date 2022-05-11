@@ -48,18 +48,11 @@ visible = false
 
 [node name="SpawnPointMarker" type="Node2D" parent="." index="10"]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidShipBody" index="0"]
-visible = false
-position = Vector2( -0.663999, 0.00714111 )
-rotation = -3.14104
-scale = Vector2( 0.549336, -0.112173 )
-polygon = PoolVector2Array( 26.5039, 142.667, 17.401, 151.557, 10.1235, 115.878, 10.1286, 71.3043, 8.30918, 62.3846, -0.794722, 80.1895, -9.8946, 62.3353, -11.716, 71.2452, -11.721, 115.819, -19.0065, 151.458, -28.1064, 133.604, -31.7421, 89.0205, -24.4566, 53.3811, -15.3547, 53.4058, -13.5323, 35.5811, -15.3487, -0.0829163, -13.5233, -44.6519, -15.3427, -53.5716, -26.2649, -53.6011, -31.721, -98.1898, -28.0762, -133.839, -20.7927, -151.649, -11.6939, -124.88, -11.6999, -71.3913, -9.88052, -62.4716, -0.777622, -71.3617, 8.32326, -62.4223, 10.1446, -71.3322, 10.1497, -115.906, 17.4352, -151.545, 26.5351, -133.691, 30.1708, -89.1075, 24.7057, -53.4632, 15.6038, -53.4878, 11.962, -44.5829, 15.5977, 0.000831604, 11.9519, 44.5649, 13.7713, 53.4846, 22.8732, 53.5092, 30.1497, 98.1028 )
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="RigidShipBody" index="2"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="RigidShipBody" index="1"]
 rotation = 0.785398
 shape = SubResource( 2 )
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="RigidShipBody" index="3"]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="RigidShipBody" index="2"]
 rotation = -0.785398
 shape = SubResource( 2 )
 
