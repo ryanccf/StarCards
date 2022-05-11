@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Monsters/Monster.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/Warrior.gd" type="Script" id=2]
-[ext_resource path="res://scripts/RigidShipBody.gd" type="Script" id=3]
 [ext_resource path="res://images/ship_E.png" type="Texture" id=4]
 
 [node name="Warrior" instance=ExtResource( 1 )]
@@ -12,8 +11,11 @@ script = ExtResource( 2 )
 rotation = 1.5708
 texture = ExtResource( 4 )
 
-[node name="RigidShipBody" parent="." index="9"]
-script = ExtResource( 3 )
+[node name="ShootingZone" parent="." index="4"]
+scale = Vector2( 0.5, 0.5 )
+
+[node name="SensingZone" parent="." index="5"]
+scale = Vector2( 1, 1 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidShipBody" index="0"]
 position = Vector2( -0.663999, 0.00714111 )

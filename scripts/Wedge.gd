@@ -12,9 +12,9 @@ func _ready():
 
 func _point_to_locked_target():
 	if friendly:
-		set_target(Vector2(1200, global_position.y))
+		set_target(Vector2(1200 + 300, global_position.y))
 	else:
-		set_target(Vector2(0, global_position.y))
+		set_target(Vector2(0 - 300, global_position.y))
 
 func move(delta):
 	$RigidShipBody.set_velocity(speed * delta * Vector2(cos(rotation), sin(rotation)))

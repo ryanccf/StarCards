@@ -1,10 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Monsters/Monster.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Monsters/Utilities/EnemyHitBoxTracker.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scripts/SensingZone.gd" type="Script" id=3]
 [ext_resource path="res://scripts/Blocker.gd" type="Script" id=4]
-[ext_resource path="res://scripts/RigidShipBody.gd" type="Script" id=5]
 [ext_resource path="res://images/station_A.png" type="Texture" id=6]
 
 [sub_resource type="CircleShape2D" id=1]
@@ -44,9 +43,6 @@ visible = false
 visible = false
 
 [node name="SpawnPointMarker" type="Node2D" parent="." index="10"]
-
-[node name="RigidShipBody" parent="." index="11"]
-script = ExtResource( 5 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidShipBody" index="0"]
 position = Vector2( -0.663999, 0.00714111 )
