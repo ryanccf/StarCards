@@ -22,7 +22,7 @@ func _ready():
 	$StabilizedAnchor/HealthBar.rect_position.y -= 45
 	$HitZone.connect("damage_taken", self, "take_damage")
 	$HitZone.set_friendly(is_friendly())
-	$ObstacleAvoider.add_exception($KinematicBody2D)
+	$ObstacleAvoider.add_exception($RigidShipBody)
 
 func _physics_process(delta):
 	_check_death()
