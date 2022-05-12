@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Cards/Card.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scripts/AmplifyDamageCard.gd" type="Script" id=2]
+[ext_resource path="res://images/star_medium.png" type="Texture" id=3]
+
+[node name="DirectAttack" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="Graphic" parent="Area2D/Icon" index="1"]
+modulate = Color( 0.945098, 0, 1, 1 )
+rotation = 0.791029
+texture = ExtResource( 3 )
+
+[node name="Title" parent="Header" index="0"]
+margin_left = -108.0
+margin_top = -342.0
+margin_right = 113.0
+margin_bottom = -123.0
+text = "Amplify
+Damage
+"
+align = 1

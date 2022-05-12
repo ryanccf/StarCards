@@ -1,10 +1,14 @@
 extends Node2D
 var speed = 110
+var _damage = 1
 var _target
 var _target_to_right
 var _target_below
 var _friendly = false
 signal target_reached
+
+func set_damage(x):
+	_damage = x
 
 func set_target(position):
 	_target = position
@@ -43,4 +47,4 @@ func _out_of_left_bounds():
 
 func _on_Area2D_area_entered(area):
 	if area.has_method("take_damage") and not is_aligned_with(area):
-		area.take_damage(1)
+		area.take_damage(_damage)

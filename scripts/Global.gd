@@ -12,6 +12,7 @@ var WarriorCard = preload("res://Cards/WarriorCard.tscn")
 var WedgeCard = preload("res://Cards/WedgeCard.tscn")
 var ScoopCard = preload("res://Cards/ScoopCard.tscn")
 
+var AmplifyDamageCard = preload("res://Cards/AmplifyDamageCard.tscn")
 var DirectAttackCard = preload("res://Cards/DirectAttackCard.tscn")
 var RepairCard = preload("res://Cards/RepairCard.tscn")
 
@@ -24,6 +25,8 @@ var DefenderCardListing = preload("res://CardListings/DefenderCardListing.tscn")
 var HomingMissileCardListing = preload("res://CardListings/HomingMissileCardListing.tscn")
 var WedgeCardListing = preload("res://CardListings/WedgeCardListing.tscn")
 var ScoopCardListing = preload("res://CardListings/ScoopCardListing.tscn")
+
+var AmplifyDamageCardListing = preload("res://CardListings/AmplifyDamageCardListing.tscn")
 var DirectAttackCardListing = preload("res://CardListings/DirectAttackCardListing.tscn")
 var RepairCardListing = preload("res://CardListings/RepairCardListing.tscn")
 
@@ -66,6 +69,10 @@ var canonicalCardMap = {
 	"Scoop" : {
 		"card" : ScoopCard,
 		"card_listing" : ScoopCardListing
+	},
+	"AmplifyDamage" : {
+		"card" : AmplifyDamageCard,
+		"card_listing" : AmplifyDamageCardListing
 	},
 	"DirectAttack" : {
 		"card" : DirectAttackCard,
@@ -138,8 +145,10 @@ func initialize():
 	new_decklist.add_card("Blocker")
 	new_decklist.add_card("Wedge")
 	new_decklist.add_card("Scoop")
+	new_decklist.add_card("AmplifyDamage")
 	decks.push_back(new_decklist)
 	cards.add_card("Repair")
+	cards.add_card("AmplifyDamage")
 	cards.add_card("DirectAttack")
 	cards.add_card("Warrior")
 	cards.add_card("Defender")

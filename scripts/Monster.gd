@@ -11,6 +11,7 @@ var enemy_base
 var bounds
 var laser_charge = 0
 var laser_max = 10000
+var laser_damage = 1
 onready var sensing_zone = $SensingZone
 onready var shooting_zone = $ShootingZone
 var middle
@@ -79,8 +80,12 @@ func sync_body():
 	#$KinematicBody2D.position = Vector2(0, 0)
 	#rotation += $KinematicBody2D.rotation 
 	#$KinematicBody2D.rotation = 0
-	
 
+func get_laser_damage():
+	laser_damage
+
+func set_laser_damage(x):
+	laser_damage = x;
 
 func set_friendly(friendliness = true):
 	friendly = friendliness
@@ -117,7 +122,7 @@ func _check_lasers(delta):
 		laser_charge += 100 * delta * 80
 	elif $ShootingZone.has_target():
 		laser_charge = float(int(laser_charge) % int(100 * delta * 80))
-		emit_signal("spawn_laser", position, rotation, current_target, friendly)
+		emit_signal("spawn_laser", position, rotation, current_target, friendly, laser_damage)
 
 func update_health_bar_size():
 	$StabilizedAnchor/HealthBar.rect_size.x = float(float(currentHP)/float(maxHP) * 100)

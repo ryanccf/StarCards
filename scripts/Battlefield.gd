@@ -76,12 +76,13 @@ func add_monster(monster, position):
 	monster.connect("boom", self, "_handle_boom")
 	$Field.add_child(monster)
 	
-func _handle_laser_spawn(laser_position, laser_rotation, laser_target, is_friendly):
+func _handle_laser_spawn(laser_position, laser_rotation, laser_target, is_friendly, damage):
 	var laser = Laser.instance()
 	laser.position = laser_position
 	laser.rotation = laser_rotation
 	laser.set_target(laser_target)
 	laser.set_friendly(is_friendly)
+	laser.set_damage(damage)
 	$Field.add_child(laser)
 
 func _handle_boom(position):
