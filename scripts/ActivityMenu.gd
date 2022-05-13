@@ -79,7 +79,6 @@ func _erase_reward(origin_name):
 	emit_signal("save_map")
 	_rerender()
 	get_tree().change_scene("res://Screens/QuestReward.tscn")
-	
 
 func _on_Node2D_about_to_show():
 	var y_offset = 0

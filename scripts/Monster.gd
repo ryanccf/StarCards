@@ -82,7 +82,7 @@ func sync_body():
 	#$KinematicBody2D.rotation = 0
 
 func get_laser_damage():
-	laser_damage
+	return laser_damage
 
 func set_laser_damage(x):
 	laser_damage = x;
