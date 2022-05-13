@@ -7,6 +7,8 @@ var base
 var player_base
 var spawn_point
 var Warrior = preload("res://monsters/Warrior.tscn")
+var Defender = preload("res://monsters/Defender.tscn")
+var Archer = preload("res://monsters/Archer.tscn")
 var monsters = []
 var monster_slots = 0
 signal spawn_monster(monster, position)
@@ -48,6 +50,29 @@ func spawn_monster():
 	monster_slots += 1
 	try_to_spawn()
 
+func spawn_one_ship():
+	var monster = Warrior.instance()
+	monster_slots -= 1
+	monster.set_target(player_base)
+	monster.set_enemy_base(player_base)
+	monster.set_color(Color(20,0,0))
+	determine_spawn_point()
+	emit_signal("spawn_monster", monster, spawn_point)
+
+func spawn_two_ships():
+	var monster1 = Archer.instance()
+	var monster2 = Defender.instance()
+	monster_slots -= 2
+	monster1.set_target(player_base)
+	monster2.set_target(player_base)
+	monster1.set_enemy_base(player_base)
+	monster2.set_enemy_base(player_base)
+	monster1.set_color(Color(20,0,0))
+	monster2.set_color(Color(20,0,0))
+	determine_spawn_point()
+	emit_signal("spawn_monster", monster1, spawn_point)
+	emit_signal("spawn_monster", monster2, spawn_point)
+
 func try_to_spawn():
 	var monster = Warrior.instance()
 	match(decide_to_wait()):
@@ -56,22 +81,10 @@ func try_to_spawn():
 			pass
 		"one":
 			print("one")
-			monster_slots -= 1
-			monster.set_target(player_base)
-			monster.set_enemy_base(player_base)
-			monster.set_color(Color(20,0,0))
-			determine_spawn_point()
-			emit_signal("spawn_monster", monster, spawn_point)
+			spawn_one_ship()
 		"all":
-			print("all")
-			for i in range(monster_slots):
-				print(i)
-				monster.set_target(player_base)
-				monster.set_enemy_base(player_base)
-				monster.set_color(Color(20,0,0))
-				determine_spawn_point()
-				emit_signal("spawn_monster", monster, spawn_point)
-			monster_slots = 0
+			print("two")
+			spawn_two_ships()
 
 func decide_to_wait():
 	match (rng.randi_range(0, 3)):
