@@ -17,7 +17,7 @@ func _process(delta):
 	elif second_tick:
 		for area in $Area2D.get_overlapping_areas():
 			if area.has_method("set_laser_damage"):
-				area.set_laser_damage(area.get_laser_damage() * 2)
+				area.set_laser_damage(area.get_laser_damage() + 1)
 		second_tick = false
 
 func _on_Timer_timeout():
