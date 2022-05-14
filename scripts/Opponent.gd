@@ -17,18 +17,12 @@ var base_defending_location_generator = funcref(self, "get_base_position")
 signal spawn_monster(monster, position)
 
 var monster_group_configurations = [
+	{},
+	{},
 	{
-		"monsters" : []
-	},
-	{
-		"monsters" : []
-	},
-	{
-		"location_generator" : random_location_generator,
 		"monsters" : [
 			{
-				"constructor"  : Warrior,
-				"location" : Vector2.ZERO
+				"constructor"  : Warrior
 			}
 		]
 	},
@@ -36,21 +30,17 @@ var monster_group_configurations = [
 		"location_generator" : base_defending_location_generator,
 		"monsters" : [
 			{
-				"constructor"  : Defender,
-				"location" : Vector2.ZERO
+				"constructor"  : Defender
 			},
 			{
-				"constructor"  : Archer,
-				"location" : Vector2.ZERO
+				"constructor"  : Archer
 			}
 		]
 	},
 	{
-		#"location_generator" : random_location_generator,
 		"monsters" : [
 			{
-				"constructor"  : Barbarian,
-				"location" : Vector2.ZERO
+				"constructor"  : Barbarian
 			},
 			{
 				"constructor"  : Barbarian,
@@ -98,45 +88,31 @@ func manage_monster_spawning(delta):
 		#spawn_monster()
 		choose_group_to_place(monster_group_configurations)
 
-#func spawn_monster():
-#	monster_slots += 1
-#	try_to_spawn()
-
-#func spawn_one_ship():
-#	var monster = Warrior.instance()
-#	monster_slots -= 1
-#	monster.set_target(player_base)
-#	monster.set_enemy_base(player_base)
-#	monster.set_color(Color(20,0,0))
-#	determine_spawn_point()
-#	emit_signal("spawn_monster", monster, spawn_point)
-
-#func spawn_two_ships():
-#	var monster1 = Archer.instance()
-#	var monster2 = Defender.instance()
-#	monster_slots -= 2
-#	monster1.set_target(player_base)
-#	monster2.set_target(player_base)
-#	monster1.set_enemy_base(player_base)
-#	monster1.set_color(Color(20,0,0))
-#	monster2.set_color(Color(20,0,0))
-#	determine_spawn_point()
-#	emit_signal("spawn_monster", monster1, spawn_point)
-#	emit_signal("spawn_monster", monster2, spawn_point)
-
 func choose_group_to_place(monster_group_configurations):
 	monster_slots += 1
 	var valid_groups = []
 	for group in monster_group_configurations:
-		if group.monsters.size() <= monster_slots:
+		if not group.has("monsters"):
+			valid_groups.push_back([])
+		elif group.monsters.size() <= monster_slots:
 			valid_groups.push_back(group)
 	if valid_groups.size() > 0:
 		place_monsters(valid_groups[rng.randi_range(0, valid_groups.size() - 1)])
 
 func place_monsters(monster_group_configuration):
-	var location_offset = generate_location_offset(monster_group_configuration.location_generator) if monster_group_configuration.has("location_generator") else determine_spawn_point()
-	for monster_configuration in monster_group_configuration.monsters:
-		place_monster(monster_configuration.constructor, monster_configuration.location + location_offset)
+	var group_offset = get_group_location_offset(monster_group_configuration)
+	for monster_configuration in get_monsters(monster_group_configuration):
+		var location = group_offset + get_monster_location_offset(monster_configuration)
+		place_monster(monster_configuration.constructor, location)
+
+func get_group_location_offset(monster_group_configuration):
+	return generate_location_offset(monster_group_configuration.location_generator) if monster_group_configuration.has("location_generator") else determine_spawn_point()
+
+func get_monsters(monster_group_configuration):
+	return monster_group_configuration.monsters if monster_group_configuration.has("monsters") else []
+
+func get_monster_location_offset(monster_configuration):
+	return monster_configuration.location if monster_configuration.has("locaiton") else Vector2.ZERO
 
 func generate_location_offset(location_generator):
 	return location_generator.call_func() if location_generator and location_generator.has_method("is_valid") and location_generator.is_valid() else 0
@@ -148,30 +124,6 @@ func place_monster(MonsterClass, location):
 	monster.set_enemy_base(player_base)
 	monster.set_color(Color(20,0,0))
 	emit_signal("spawn_monster", monster, location)
-
-#func try_to_spawn():
-#	var monster = Warrior.instance()
-#	match(decide_to_wait()):
-#		"":
-#			print("wait")
-#			pass
-#		"one":
-#			print("one")
-#			spawn_one_ship()
-#		"all":
-#			print("two")
-#			spawn_two_ships()
-
-#func decide_to_wait():
-#	match (rng.randi_range(0, 3)):
-#		0:
-#			return ""
-#		1:
-#			return ""
-#		2:
-#			return "one"
-#		3:
-#			return "all"
 
 func determine_spawn_point():
 	set_spawn(monsters[0].position)
@@ -204,3 +156,53 @@ func get_base_position():
 
 func set_enemy_base(enemy_base):
 	player_base = enemy_base
+
+#func spawn_monster():
+#	monster_slots += 1
+#	try_to_spawn()
+
+#func spawn_one_ship():
+#	var monster = Warrior.instance()
+#	monster_slots -= 1
+#	monster.set_target(player_base)
+#	monster.set_enemy_base(player_base)
+#	monster.set_color(Color(20,0,0))
+#	determine_spawn_point()
+#	emit_signal("spawn_monster", monster, spawn_point)
+
+#func spawn_two_ships():
+#	var monster1 = Archer.instance()
+#	var monster2 = Defender.instance()
+#	monster_slots -= 2
+#	monster1.set_target(player_base)
+#	monster2.set_target(player_base)
+#	monster1.set_enemy_base(player_base)
+#	monster1.set_color(Color(20,0,0))
+#	monster2.set_color(Color(20,0,0))
+#	determine_spawn_point()
+#	emit_signal("spawn_monster", monster1, spawn_point)
+#	emit_signal("spawn_monster", monster2, spawn_point)
+
+#func try_to_spawn():
+#	var monster = Warrior.instance()
+#	match(decide_to_wait()):
+#		"":
+#			print("wait")
+#			pass
+#		"one":
+#			print("one")
+#			spawn_one_ship()
+#		"all":
+#			print("two")
+#			spawn_two_ships()
+
+#func decide_to_wait():
+#	match (rng.randi_range(0, 3)):
+#		0:
+#			return ""
+#		1:
+#			return ""
+#		2:
+#			return "one"
+#		3:
+#			return "all"
