@@ -10,13 +10,17 @@ var Warrior = preload("res://monsters/Warrior.tscn")
 var Defender = preload("res://monsters/Defender.tscn")
 var Archer = preload("res://monsters/Archer.tscn")
 var Barbarian = preload("res://monsters/Barbarian.tscn")
+var Wedge = preload("res://monsters/Wedge.tscn")
+var Scoop = preload("res://monsters/Scoop.tscn")
 var monsters = []
 var monster_slots = 0
 var random_location_generator = funcref(self, "determine_spawn_point")
-var base_defending_location_generator = funcref(self, "get_base_position")
+var base_defending_location_generator = funcref(self, "get_defensive_position")
 signal spawn_monster(monster, position)
 
 var monster_group_configurations = [
+	{},
+	{},
 	{},
 	{},
 	{
@@ -49,6 +53,50 @@ var monster_group_configurations = [
 			{
 				"constructor"  : Barbarian,
 				"location" : Vector2(60, 30)
+			}
+		]
+	},
+	{
+		"monsters" : [
+			{
+				"constructor"  : Wedge
+			}
+		]
+	},
+	{
+		"monsters" : [
+			{
+				"constructor"  : Scoop
+			}
+		]
+	},
+	{
+		"monsters" : [
+			{
+				"constructor"  : Barbarian
+			}
+		]
+	},
+	{
+		"monsters" : [
+			{
+				"constructor"  : Warrior
+			},
+			{
+				"constructor"  : Warrior,
+				"location" : Vector2(60, -30)
+			},
+			{
+				"constructor"  : Warrior,
+				"location" : Vector2(60, 30)
+			},
+			{
+				"constructor"  : Warrior,
+				"location" : Vector2(120, -60)
+			},
+			{
+				"constructor"  : Warrior,
+				"location" : Vector2(120, 60)
 			}
 		]
 	}
@@ -150,8 +198,8 @@ func get_base():
 		if weakref(monster).get_ref() and monster.monster_type == "base":
 			return monster
 
-func get_base_position():
-	return get_base().position if get_base() else Vector2(1100, 0)
+func get_defensive_position():
+	return get_base().position - Vector2(200, 0) if get_base() else Vector2(1100, 0)
 	
 
 func set_enemy_base(enemy_base):

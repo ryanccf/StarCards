@@ -2,4 +2,4 @@ extends "res://scripts/CardListing.gd"
 
 func _ready():
 	._ready()
-	card_name = "Amplify Damage"
+	card_name = "AmplifyDamage"
