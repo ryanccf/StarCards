@@ -1,12 +1,16 @@
 extends Control
 
 func _ready():
+	initialize()
+
+func initialize():
 	get_tree().paused = false
 	randomize()
 	$ContentAnchor/CardMat.initialize()
 	$ContentAnchor/Battlefield.connect("deploy_zone_input", self, "_on_DeployZone_input")
 	$ContentAnchor/Battlefield.connect("zone_of_influence_input", self, "_on_ZoneOfInfluence_input")
 	$ContentAnchor/Battlefield.connect("turn_complete", $ContentAnchor/CardMat, "attempt_draw")
+	$ContentAnchor/Battlefield.initialize()
 
 func _on_DeployZone_input(event):
 	if $ContentAnchor/CardMat.is_utility_card_ready(event):

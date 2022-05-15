@@ -3,7 +3,7 @@ var Laser = preload("res://Actions/Laser.tscn")
 var DirectAttack = preload("res://Actions/DirectAttack.tscn")
 var playerOneGraphic = load("res://images/ship_H.png")
 var PlayerCharacter = preload("res://Battles/Utilities/PlayerCharacter.tscn")
-var opponent = preload("res://Opponents/Opponent.tscn").instance()
+var opponent
 var player = PlayerCharacter.instance()
 var game_over = false
 var monsters = []
@@ -13,7 +13,9 @@ signal zone_of_influence_input(event)
 signal turn_complete
 
 func set_opponent(new_opponent):
+	print("setting opponent to " + str(new_opponent))
 	opponent = new_opponent
+	print(opponent)
 
 func _process(delta):
 	check_battle_end()
@@ -27,7 +29,15 @@ func check_battle_end():
 	elif game_over:
 		get_tree().change_scene("res://Screens/Defeat.tscn")
 
-func _ready():
+#func _ready():
+#	initialize_player()
+#	initialize_opponent()
+
+func initialize():
+	print(opponent)
+	if opponent == null:
+		print("adding default opponent")
+		opponent = preload("res://Opponents/Opponent.tscn").instance()
 	initialize_player()
 	initialize_opponent()
 
