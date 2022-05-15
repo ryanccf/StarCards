@@ -189,7 +189,6 @@ func get_save_data():
 	var decks_data = []
 	for deck in decks:
 		decks_data.push_back(deck.get_cards())
-	
 	return {
 		"player_name" : player_name,
 		"player_color" : player_color,
@@ -206,7 +205,7 @@ func load_save_data(data):
 	set_player_position(data.player_position)
 	set_target_position(data.target_position)
 	set_map(data.map)
-	
+
 	cards = Decklist.instance()
 	for card_name in data.cards:
 		cards.add_card(card_name)
@@ -216,6 +215,8 @@ func load_save_data(data):
 		for card_name in deck:
 			decklist.add_card(card_name)
 		decks.push_back(decklist)
+
+	store_save_data()
 	
 func get_clean_save_data():
 	load_save_data({

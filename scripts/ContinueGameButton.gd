@@ -13,8 +13,6 @@ func _on_ContinueGameButton_pressed():
 	var cards = Global.cards
 	Global.set_save_index(save_index)
 	Global.load_game()
-	Global.decks = decks
-	Global.cards = cards
 	get_tree().change_scene("res://Screens/LevelMap.tscn")
 
 func _on_TextureButton_pressed():
