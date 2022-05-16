@@ -12,7 +12,7 @@ var player = GamePiece.instance()
 var locations = []
 var target_location
 
-const QUEST_COUNT = 3#0
+const QUEST_COUNT = 30
 
 func _ready():
 	rng.randomize()
@@ -128,22 +128,6 @@ func rotate_around(center, current_position, current_rotation, angle):
 	var next_position = center + Vector2(next_x, next_y)
 	var next_rotation = current_rotation
 
-	
-
-#	print("BEGIN ROTATE AROUND")
-#	print(center)
-#	print(current_position)
-#	print(angle)
-#	print(current_x)
-#	print(current_y)
-#	print(hypotenuse)
-#	print(current_angle)
-#	print(next_angle)
-#	print(next_y)
-#	print(next_x)
-#	print(next_position)
-#	print("END ROTATE AROUND")
-	
 	return next_position
 	
 func adjust_rotation(center, current_position, current_rotation, angle):
@@ -151,7 +135,6 @@ func adjust_rotation(center, current_position, current_rotation, angle):
 	var current_y = current_position.y - center.y
 	var hypotenuse = sqrt((current_x*current_x) + (current_y*current_y))
 	var current_angle = asin(current_y / hypotenuse)
-	#var current_angle = atan(current_y / current_y)
 	var next_angle = current_angle - angle
 	var next_y = hypotenuse * sin(next_angle)
 	var next_x = hypotenuse * cos(next_angle)
@@ -160,6 +143,7 @@ func adjust_rotation(center, current_position, current_rotation, angle):
 	var p1Angle = atan(current_x / current_y)
 	var p2Angle = atan(next_x / next_y)
 	var offset = p2Angle - p1Angle
+	
 	return current_rotation - offset
 	
 
