@@ -12,7 +12,7 @@ var player = GamePiece.instance()
 var locations = []
 var target_location
 
-const QUEST_COUNT = 30
+const QUEST_COUNT = 3#0
 
 func _ready():
 	rng.randomize()
@@ -81,22 +81,87 @@ func generate_location_positions():
 	var offset 
 	var cursor_position = START_POSITION + Vector2.ZERO
 	var cursor_rotation = 0
-	var j = 0
+#	var j = 0
+	var k = 0
 	var SOLAR_SYSTEM_COUNT = 60
-	var START = 10
-	var STEP = 3
-	var END = SOLAR_SYSTEM_COUNT * STEP + START
+	var SYSTEMS_PER_ARM = SOLAR_SYSTEM_COUNT / 6
+	var START = 1
+	var STEP = 1
+	var END = SYSTEMS_PER_ARM * STEP + START
 
+#	for i in range(START, END, STEP):
+#		offset = Vector2(Vector2(rng.randf_range(-25, 25), rng.randf_range(-25, 25)))
+#		cursor_rotation += 1.03498025
+#		#j += 3
+#		cursor_position = cursor_position + Vector2((10) * 6, 0).rotated(cursor_rotation)
+#		positions.push_back(cursor_position)# + offset)
+
+	var EDGE_DISTANCE = 160
+	var Y_OFFSET = -0.44 * EDGE_DISTANCE / cos(PI / 3)
+	var X_OFFSET = EDGE_DISTANCE / 2#/ 2
+	cursor_position += Vector2(X_OFFSET, Y_OFFSET)
+	var cursor_info
+	
 	for i in range(START, END, STEP):
 		offset = Vector2(Vector2(rng.randf_range(-25, 25), rng.randf_range(-25, 25)))
-		cursor_rotation += 1.03498025
-		j += 3
-		cursor_position = cursor_position + Vector2((i + j) * 6, 0).rotated(cursor_rotation)
-		positions.push_back(cursor_position + offset)
+		for j in range(6):
+			cursor_rotation += PI / 3
+			cursor_position = cursor_position + Vector2(EDGE_DISTANCE * i, 0).rotated(cursor_rotation)
+			positions.push_back(cursor_position + offset)
+		cursor_position = cursor_position + Vector2(X_OFFSET, Y_OFFSET)
+		cursor_rotation = adjust_rotation(START_POSITION, cursor_position, cursor_rotation, 0.03)
+		cursor_position = rotate_around(START_POSITION, cursor_position, cursor_rotation, 0.03)#PI / 9)
 
 	Global.set_player_position(positions[-1])
 	Global.set_target_position(positions[-1])
 	return positions
+
+func rotate_around(center, current_position, current_rotation, angle):
+	var current_x = current_position.x - center.x
+	var current_y = current_position.y - center.y
+	var hypotenuse = sqrt((current_x*current_x) + (current_y*current_y))
+	var current_angle = asin(current_y / hypotenuse)
+	#var current_angle = atan(current_y / current_y)
+	var next_angle = current_angle - angle
+	var next_y = hypotenuse * sin(next_angle)
+	var next_x = hypotenuse * cos(next_angle)
+	var next_position = center + Vector2(next_x, next_y)
+	var next_rotation = current_rotation
+
+	
+
+#	print("BEGIN ROTATE AROUND")
+#	print(center)
+#	print(current_position)
+#	print(angle)
+#	print(current_x)
+#	print(current_y)
+#	print(hypotenuse)
+#	print(current_angle)
+#	print(next_angle)
+#	print(next_y)
+#	print(next_x)
+#	print(next_position)
+#	print("END ROTATE AROUND")
+	
+	return next_position
+	
+func adjust_rotation(center, current_position, current_rotation, angle):
+	var current_x = current_position.x - center.x
+	var current_y = current_position.y - center.y
+	var hypotenuse = sqrt((current_x*current_x) + (current_y*current_y))
+	var current_angle = asin(current_y / hypotenuse)
+	#var current_angle = atan(current_y / current_y)
+	var next_angle = current_angle - angle
+	var next_y = hypotenuse * sin(next_angle)
+	var next_x = hypotenuse * cos(next_angle)
+	var next_position = center + Vector2(next_x, next_y)
+	
+	var p1Angle = atan(current_x / current_y)
+	var p2Angle = atan(next_x / next_y)
+	var offset = p2Angle - p1Angle
+	return current_rotation - offset
+	
 
 func add_location(location):
 	add_child(location)
