@@ -12,6 +12,7 @@ var Archer = preload("res://monsters/Archer.tscn")
 var Barbarian = preload("res://monsters/Barbarian.tscn")
 var Wedge = preload("res://monsters/Wedge.tscn")
 var Scoop = preload("res://monsters/Scoop.tscn")
+var StartingMonsterClass = Warrior
 var monsters = []
 var monster_slots = 0
 var random_location_generator = funcref(self, "determine_spawn_point")
@@ -114,9 +115,12 @@ func _process(delta):
 	update_battle_arrays()
 	manage_monster_spawning(delta)
 
+func set_starting_monster_class(Constructor):
+	StartingMonsterClass = Constructor
+
 func initialize_monsters():
 	monsters.append(Warrior.instance())
-	monsters.append(Warrior.instance())
+	monsters.append(StartingMonsterClass.instance())
 	monsters[0].position = Vector2(950, 200)
 	monsters[1].position = Vector2(1100, 401)
 	monsters[0].set_monster_type("base")
