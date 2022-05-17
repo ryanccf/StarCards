@@ -2,7 +2,7 @@ extends ColorRect
 var ActivityButton = preload("res://Utilities/ActivityButton.tscn")
 var Binder = preload("res://Utilities/Binder.tscn")
 var activities = []
-var battle_path = "res://Battles/Battle.tscn"
+var battle_path = "res://Battles/NormalBattle.tscn"
 var destination_name
 var system_name
 const BUTTON_SPACING = 20

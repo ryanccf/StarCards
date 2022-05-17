@@ -1,7 +1,7 @@
 extends Control
 
-func _ready():
-	initialize()
+#func _ready():
+#	initialize()
 
 func initialize():
 	get_tree().paused = false

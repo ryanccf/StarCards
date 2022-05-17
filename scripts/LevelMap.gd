@@ -153,7 +153,7 @@ func add_location(location):
 	locations.push_back(location)
 
 func _start_battle():
-	_exit("res://Battles/Battle.tscn")
+	_exit("res://Battles/NormalBattle.tscn")
 
 func _start_boss_battle():
 	_exit("res://Battles/BossBattle.tscn")
