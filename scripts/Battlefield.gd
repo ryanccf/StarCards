@@ -55,6 +55,7 @@ func initialize_opponent():
 	opponent.set_enemy_base(player)
 	opponent.connect("spawn_monster", self, "add_monster")
 	add_child(opponent)
+	opponent.initialize()
 
 func _broadcast_turn_complete():
 	emit_signal("turn_complete")

@@ -102,7 +102,11 @@ var monster_group_configurations = [
 	}
 ]
 
-func _ready():
+#func _ready():
+#	rng.randomize()
+#	initialize_monsters()
+
+func initialize():
 	rng.randomize()
 	initialize_monsters()
 
