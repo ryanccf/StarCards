@@ -30,7 +30,6 @@ func get_nearest_target():
 	for target in _targets:
 		if _get_distance(target) < _get_distance(_nearest_target):
 			_nearest_target = target
-
 	return _nearest_target
 
 func has_target():

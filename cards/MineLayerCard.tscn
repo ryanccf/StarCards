@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Cards/Card.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scripts/MineLayerCard.gd" type="Script" id=2]
+[ext_resource path="res://images/station_C.png" type="Texture" id=3]
+
+[node name="MineLayer" instance=ExtResource( 1 )]
+position = Vector2( -1.65161, -1.65167 )
+script = ExtResource( 2 )
+
+[node name="Graphic" parent="Area2D/Icon" index="1"]
+modulate = Color( 0.509804, 0.509804, 0.352941, 1 )
+position = Vector2( -0.34839, 0.65167 )
+texture = ExtResource( 3 )
+
+[node name="Title" parent="Header" index="0"]
+margin_left = -145.348
+margin_top = -344.348
+margin_right = 152.652
+margin_bottom = -125.348
+text = "Mine Layer
+
+"

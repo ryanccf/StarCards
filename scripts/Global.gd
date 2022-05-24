@@ -7,6 +7,7 @@ var BarbarianCard = preload("res://Cards/BarbarianCard.tscn")
 var BishopCard = preload("res://Cards/BishopCard.tscn")
 var BlockerCard = preload("res://Cards/BlockerCard.tscn")
 var DefenderCard = preload("res://Cards/DefenderCard.tscn")
+var MineLayerCard = preload("res://Cards/MineLayerCard.tscn")
 var HomingMissileCard = preload("res://Cards/HomingMissileCard.tscn")
 var WarriorCard = preload("res://Cards/WarriorCard.tscn")
 var WedgeCard = preload("res://Cards/WedgeCard.tscn")
@@ -22,6 +23,7 @@ var ArcherCardListing = preload("res://CardListings/ArcherCardListing.tscn")
 var BarbarianCardListing = preload("res://CardListings/BarbarianCardListing.tscn")
 var BlockerCardListing = preload("res://CardListings/BlockerCardListing.tscn")
 var DefenderCardListing = preload("res://CardListings/DefenderCardListing.tscn")
+var MineLayerCardListing = preload("res://CardListings/MineLayerCardListing.tscn")
 var HomingMissileCardListing = preload("res://CardListings/HomingMissileCardListing.tscn")
 var WedgeCardListing = preload("res://CardListings/WedgeCardListing.tscn")
 var ScoopCardListing = preload("res://CardListings/ScoopCardListing.tscn")
@@ -61,6 +63,10 @@ var canonicalCardMap = {
 	"Warrior" : {
 		"card" : WarriorCard,
 		"card_listing" : CardListing
+	},
+	"MineLayer" : {
+		"card" : MineLayerCard,
+		"card_listing" : MineLayerCardListing
 	},
 	"Wedge" : {
 		"card" : WedgeCard,
@@ -143,6 +149,11 @@ func initialize():
 	new_decklist.add_card("Warrior")
 	new_decklist.add_card("HomingMissile")
 	new_decklist.add_card("Blocker")
+	new_decklist.add_card("MineLayer")
+	new_decklist.add_card("MineLayer")
+	new_decklist.add_card("MineLayer")
+	new_decklist.add_card("MineLayer")
+	new_decklist.add_card("MineLayer")
 	new_decklist.add_card("Wedge")
 	new_decklist.add_card("Scoop")
 	new_decklist.add_card("AmplifyDamage")
@@ -157,6 +168,11 @@ func initialize():
 	cards.add_card("Warrior")
 	cards.add_card("Warrior")
 	cards.add_card("Warrior")
+	cards.add_card("MineLayer")
+	cards.add_card("MineLayer")
+	cards.add_card("MineLayer")
+	cards.add_card("MineLayer")
+	cards.add_card("MineLayer")
 	cards.add_card("HomingMissile")
 	cards.add_card("Blocker")
 	cards.add_card("Wedge")
