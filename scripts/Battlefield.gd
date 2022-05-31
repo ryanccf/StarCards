@@ -1,5 +1,6 @@
 extends Control
 var Laser = preload("res://Actions/Laser.tscn")
+var Mine = preload("res://Actions/Mine.tscn")
 var DirectAttack = preload("res://Actions/DirectAttack.tscn")
 var playerOneGraphic = load("res://images/ship_H.png")
 var PlayerCharacter = preload("res://Battles/Utilities/PlayerCharacter.tscn")
@@ -84,6 +85,7 @@ func add_monster(monster, position):
 	monster.set_position(position)
 	monster.set_bounds($Field/Bounds)
 	monster.connect("spawn_laser", self, "_handle_laser_spawn")
+	monster.connect("spawn_mine", self, "_handle_mine_spawn")
 	monster.connect("boom", self, "_handle_boom")
 	$Field.add_child(monster)
 	
@@ -95,6 +97,14 @@ func _handle_laser_spawn(laser_position, laser_rotation, laser_target, is_friend
 	laser.set_friendly(is_friendly)
 	laser.set_damage(damage)
 	$Field.add_child(laser)
+
+func _handle_mine_spawn(mine_position, is_friendly, damage):
+	var mine = Mine.instance()
+	mine.position = mine_position
+	mine.set_friendly(is_friendly)
+	mine.set_damage(damage)
+	mine.connect("boom", self, "_handle_boom")
+	$Field.add_child(mine)
 
 func _handle_boom(position):
 	for _i in 3:
