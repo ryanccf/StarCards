@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Cards/Card.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/MineLayerCard.gd" type="Script" id=2]
-[ext_resource path="res://images/station_C.png" type="Texture" id=3]
+[ext_resource path="res://images/ship_G.png" type="Texture" id=3]
 
 [node name="MineLayer" instance=ExtResource( 1 )]
 position = Vector2( -1.65161, -1.65167 )
