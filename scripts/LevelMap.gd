@@ -5,6 +5,7 @@ var START_POSITION = Vector2(120, screen_height / 2)
 var rng = RandomNumberGenerator.new()
 var name_generator = preload("res://Utilities/NameGenerator.tscn").instance()
 
+var StoryTeller = preload("res://Utilities/StoryTeller.tscn")
 var BlackHole = preload("res://Locations/BlackHole.tscn")
 var Location = preload("res://Locations/Location.tscn")
 var GamePiece = preload("res://Utilities/GamePiece.tscn") 
@@ -15,6 +16,7 @@ var target_location
 const QUEST_COUNT = 30
 
 func _ready():
+	add_child(StoryTeller.instance())
 	rng.randomize()
 	if Global.get_map() == null:
 		generate_level()
