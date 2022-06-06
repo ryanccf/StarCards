@@ -9,8 +9,6 @@ var StoryTeller = preload("res://Utilities/StoryTeller.tscn")
 var BlackHole = preload("res://Locations/BlackHole.tscn")
 var Location = preload("res://Locations/Location.tscn")
 var GamePiece = preload("res://Utilities/GamePiece.tscn") 
-var GameClock = preload("res://Utilities/GameClock.tscn")
-var game_clock
 var player = GamePiece.instance()
 var locations = []
 var target_location
@@ -20,8 +18,6 @@ const QUEST_COUNT = 30
 func _ready():
 	add_child(StoryTeller.instance())
 	rng.randomize()
-	game_clock = GameClock.instance()
-	add_child(game_clock)
 	if Global.get_map() == null:
 		generate_level()
 		place_black_hole()
@@ -180,7 +176,6 @@ func _on_beacon(locX, locY, location):
 
 func _process(delta):
 	$DeckButtonAnchor.position = player.position - Vector2(300, 0)
-	#print(game_clock.get_exact_time())
 
 func _exit(new_scene_path):
 	Global.set_player_position(player.position)

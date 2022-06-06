@@ -4,14 +4,16 @@ var time_elapsed = 0.0
 
 func _ready():
 	time_elapsed = Global.get_time()
-	pass
+	update_clock_face()
 
 func _process(delta):
 	add_time(delta)
 	Global.set_time(time_elapsed)
 	Global.store_save_data()
-	print(time_elapsed)
-	
+	update_clock_face()
+
+func update_clock_face():
+	$ClockFace.text = str(time_elapsed)
 
 func add_time(time):
 	time_elapsed += time
