@@ -99,6 +99,7 @@ var target_position
 var current_save_index = 0
 var save_slots = []
 var map = null
+var clock = 0
 
 func set_player_name(new_name):
 	player_name = new_name
@@ -205,6 +206,7 @@ func get_save_data():
 	var decks_data = []
 	for deck in decks:
 		decks_data.push_back(deck.get_cards())
+	print("Saving clock as " + str(clock))
 	return {
 		"player_name" : player_name,
 		"player_color" : player_color,
@@ -212,7 +214,8 @@ func get_save_data():
 		"target_position" : target_position,
 		"cards" : cards_data,
 		"decks" : decks_data,
-		"map" : map
+		"map" : map,
+		"clock": clock
 	}
 
 func load_save_data(data):
@@ -242,7 +245,8 @@ func get_clean_save_data():
 		"target_position" : target_position,
 		"cards" : [],
 		"decks" : [],
-		"map" : null
+		"map" : null,
+		"clock" : 0
 	})
 	initialize()
 
@@ -279,6 +283,19 @@ func delete_save():
 	file.open(save_path, file.WRITE)
 	file.store_var(save_slots)
 	file.close()
+
+func get_time():
+	#if "clock" in save_slots[current_save_index] and save_slots[current_save_index].clock != null:
+	print("Got time from Global: " + str(save_slots[current_save_index].clock))
+	return save_slots[current_save_index].clock
+
+func add_time(time):
+	clock += time
+	store_save_data()
+
+func set_time(time):
+	clock = time
+	store_save_data()
 
 func set_map(map_data):
 	map = map_data

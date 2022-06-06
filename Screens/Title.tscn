@@ -61,9 +61,9 @@ __meta__ = {
 [node name="Particles2D2" type="Particles2D" parent="."]
 position = Vector2( 933.492, 577.093 )
 rotation = -3.13216
-amount = 100
-lifetime = 100.0
-speed_scale = 7.88
+amount = 10
+lifetime = 80.0
+speed_scale = 10.0
 randomness = 0.28
 process_material = SubResource( 3 )
 texture = ExtResource( 3 )
@@ -71,9 +71,9 @@ texture = ExtResource( 3 )
 [node name="Particles2D" type="Particles2D" parent="."]
 position = Vector2( 1188.49, 581.49 )
 rotation = 0.153655
-amount = 100
-lifetime = 100.0
-speed_scale = 7.88
+amount = 10
+lifetime = 80.0
+speed_scale = 10.0
 randomness = 0.28
 process_material = SubResource( 3 )
 texture = ExtResource( 3 )
@@ -96,9 +96,6 @@ custom_fonts/font = SubResource( 5 )
 text = " CaRd StaRs"
 align = 1
 valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Cockpit" type="Sprite" parent="TextureStretcher"]
 position = Vector2( 602.75, 393.75 )
