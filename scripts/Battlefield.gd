@@ -14,9 +14,7 @@ signal zone_of_influence_input(event)
 signal turn_complete
 
 func set_opponent(new_opponent):
-	print("setting opponent to " + str(new_opponent))
 	opponent = new_opponent
-	print(opponent)
 
 func _process(delta):
 	check_battle_end()
@@ -37,7 +35,6 @@ func check_battle_end():
 func initialize():
 	print(opponent)
 	if opponent == null:
-		print("adding default opponent")
 		opponent = preload("res://Opponents/Opponent.tscn").instance()
 	initialize_player()
 	initialize_opponent()

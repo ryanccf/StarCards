@@ -180,7 +180,7 @@ func _on_beacon(locX, locY, location):
 
 func _process(delta):
 	$DeckButtonAnchor.position = player.position - Vector2(300, 0)
-	print(game_clock.get_exact_time())
+	#print(game_clock.get_exact_time())
 
 func _exit(new_scene_path):
 	Global.set_player_position(player.position)

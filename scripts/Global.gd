@@ -206,7 +206,6 @@ func get_save_data():
 	var decks_data = []
 	for deck in decks:
 		decks_data.push_back(deck.get_cards())
-	print("Saving clock as " + str(clock))
 	return {
 		"player_name" : player_name,
 		"player_color" : player_color,
@@ -224,6 +223,7 @@ func load_save_data(data):
 	set_player_position(data.player_position)
 	set_target_position(data.target_position)
 	set_map(data.map)
+	set_time(data.clock)
 
 	cards = Decklist.instance()
 	for card_name in data.cards:
@@ -249,6 +249,9 @@ func get_clean_save_data():
 		"clock" : 0
 	})
 	initialize()
+
+func set_time(time):
+	clock = time
 
 func store_save_data():
 	if save_slots.size() == current_save_index:
@@ -285,16 +288,10 @@ func delete_save():
 	file.close()
 
 func get_time():
-	#if "clock" in save_slots[current_save_index] and save_slots[current_save_index].clock != null:
-	print("Got time from Global: " + str(save_slots[current_save_index].clock))
 	return save_slots[current_save_index].clock
 
 func add_time(time):
 	clock += time
-	store_save_data()
-
-func set_time(time):
-	clock = time
 	store_save_data()
 
 func set_map(map_data):
