@@ -33,11 +33,8 @@ margin_right = 142.0
 margin_bottom = 271.0
 rect_scale = Vector2( 0.308676, 0.330686 )
 icon = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="GameClock" parent="DeckButtonAnchor" instance=ExtResource( 3 )]
-position = Vector2( 270, 153 )
+position = Vector2( 16, 198 )
 
 [connection signal="pressed" from="DeckButtonAnchor/Button" to="." method="_on_Button_pressed"]
