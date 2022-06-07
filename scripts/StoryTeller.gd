@@ -33,7 +33,7 @@ func _ready():
 func _process(delta):
 	if story_charge <= story_max:
 		story_charge += 100 * delta * 20
-	else:
+	elif current_branch:
 		story_charge = float(int(story_charge) % int(100 * delta * 80))
 		emit_signal("story_event", current_branch.activate_event())
 		current_branch = current_branch.get_random_branch()
