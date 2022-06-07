@@ -11,7 +11,8 @@ func set_save_index(index):
 func _on_ContinueGameButton_pressed():
 	var decks = Global.decks
 	var cards = Global.cards
-	Global.set_save_index(save_index)
+	var time = Global.clock
+	#Global.set_save_index(save_index)
 	Global.load_game()
 	get_tree().change_scene("res://Screens/LevelMap.tscn")
 

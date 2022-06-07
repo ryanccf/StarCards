@@ -36,7 +36,7 @@ rect_scale = Vector2( 0.308676, 0.330686 )
 icon = ExtResource( 2 )
 
 [node name="GameClock" parent="DeckButtonAnchor" instance=ExtResource( 3 )]
-position = Vector2( 270, 153 )
+position = Vector2( 16, 198 )
 
 [node name="StoryTeller" parent="DeckButtonAnchor" instance=ExtResource( 4 )]
 
