@@ -1,5 +1,5 @@
 extends Node
-signal sotry_event(return_value)
+signal story_event
 
 var StoryBranch = preload("res://Utilities/StoryBranch.tscn")
 var story_roots = []
@@ -31,7 +31,7 @@ func _process(_delta):
 		story_charge = float(int(story_charge) % int(100 * Global.get_time() * 5))
 		var event_output = current_branch.activate_event()
 		current_branch = current_branch.get_random_branch()
-		emit_signal("story_event", event_output)
+		emit_signal("story_event")#, event_output)
 
 func add_branch_get_child(parent, identifier):
 	return parent.add_branch(StoryBranch.instance().set_event(identifier, get_event(identifier)))
