@@ -28,7 +28,7 @@ func _process(_delta):
 	if story_charge <= story_max:
 		story_charge += 100 * Global.get_time() * 5
 	elif current_branch:
-		story_charge = float(int(story_charge) % int(100 * Global.get_time() * 80))
+		story_charge = float(int(story_charge) % int(100 * Global.get_time() * 5))
 		var event_output = current_branch.activate_event()
 		current_branch = current_branch.get_random_branch()
 		emit_signal("story_event", event_output)
