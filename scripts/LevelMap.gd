@@ -16,7 +16,7 @@ var target_location
 const QUEST_COUNT = 30
 
 func _ready():
-	add_child(StoryTeller.instance())
+	$DeckButtonAnchor/StoryTeller.connect("story_event", self, "_save_map")
 	rng.randomize()
 	if Global.get_map() == null:
 		generate_level()
@@ -183,13 +183,17 @@ func _exit(new_scene_path):
 	get_tree().change_scene(new_scene_path)
 
 func dehydrate():
-	var configuration = []
+	var configuration = {
+		"locations" : [],
+		"story_teller" : $DeckButtonAnchor/StoryTeller.dehydrate()
+	}
 	for location in locations:
-		configuration.push_back(location.dehydrate())
+		configuration.locations.push_back(location.dehydrate())
 	return configuration
 
 func rehydrate(configuration):
-	for location_configuration in configuration:
+	$DeckButtonAnchor/StoryTeller.rehydrate(configuration.story_teller)
+	for location_configuration in configuration.locations:
 		var location = Location.instance()
 		location.initialize()
 		location.rehydrate(location_configuration)

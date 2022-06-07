@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scripts/LevelMap.gd" type="Script" id=1]
 [ext_resource path="res://images/icons/cards_stack_high.png" type="Texture" id=2]
 [ext_resource path="res://Utilities/GameClock.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Utilities/StoryTeller.tscn" type="PackedScene" id=4]
 
 [node name="LevelMap" type="Node2D"]
 pause_mode = 2
@@ -33,11 +34,10 @@ margin_right = 142.0
 margin_bottom = 271.0
 rect_scale = Vector2( 0.308676, 0.330686 )
 icon = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="GameClock" parent="DeckButtonAnchor" instance=ExtResource( 3 )]
 position = Vector2( 270, 153 )
+
+[node name="StoryTeller" parent="DeckButtonAnchor" instance=ExtResource( 4 )]
 
 [connection signal="pressed" from="DeckButtonAnchor/Button" to="." method="_on_Button_pressed"]
