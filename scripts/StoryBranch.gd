@@ -8,14 +8,11 @@ func _ready():
 	randomize()
 
 func set_event(identifier, function_reference):
-	print(identifier)
-	print(function_reference)
 	event_identifier = identifier
 	story_event = function_reference
 	return self
 
 func activate_event(arguments = []):
-	print(story_event)
 	if story_event:
 		return story_event.call_funcv(arguments)
 
