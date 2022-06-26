@@ -1,5 +1,7 @@
 extends Node2D
 
+var DebugRect = preload("res://Utilities/DebugRect.tscn")
+
 var screen_height = OS.get_real_window_size().y
 var START_POSITION = Vector2(120, screen_height / 2)
 var rng = RandomNumberGenerator.new()
@@ -219,6 +221,15 @@ func _handle_player_arrival(position):
 func _handle_quest(origin_name, destination_name):
 	var destination = _get_location(destination_name)
 	destination.add_quest_marker(origin_name)
+	
+	var debug_rect = DebugRect.instance()
+	add_child(debug_rect)
+	debug_rect.position = _get_nearest_position_on_screen(player.position, destination.position)
+	
+	var debug_rect2 = DebugRect.instance()
+	add_child(debug_rect2)
+	debug_rect2.position = player.position
+	
 	print(_get_nearest_position_on_screen(player.position, destination.position))
 	_save_map()
 
