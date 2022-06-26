@@ -207,6 +207,7 @@ func _on_Button_pressed():
 
 func _pause_world():
 	get_tree().paused = true
+	print(_get_nearest_position_on_screen(player.position, player.position))
 
 func _unpause_world():
 	get_tree().paused = false
@@ -236,4 +237,30 @@ func _get_nearest_position_on_screen(player_position, target_position):
 	if window_area.has_point(target_position):
 		return target_position
 	else:
-		var angle = player_position.angle_to(target_position)
+		var point
+		var angle_to_target = player_position.angle_to(target_position)
+		var angle_to_lower_right_corner = player_position.angle_to(window_area.end)
+		var angle_to_lower_left_corner = player_position.angle_to(Vector2(window_area.position.x, window_area.end.y))
+		var angle_to_upper_left_corner = player_position.angle_to(window_area.position)
+		var angle_to_upper_right_corner = player_position.angle_to(Vector2(window_area.end.x, window_area.position.y))
+		if angle_to_target == angle_to_lower_right_corner:
+			point = window_area.end
+		elif angle_to_target == angle_to_lower_left_corner:
+			point = Vector2(window_area.position.x, window_area.position.y)
+		elif angle_to_target == angle_to_upper_left_corner:
+			point = window_area.position
+		elif angle_to_target == angle_to_upper_right_corner:
+			point = Vector2(window_area.end.x, window_area.position.y)
+		elif angle_to_target < angle_to_lower_right_corner or angle_to_target > angle_to_upper_right_corner:
+			#Right side of screen
+			point = Vector2(window_area.end.x, tan(angle_to_target) * (window_area.end.x - player_position.x))
+		elif angle_to_target < angle_to_lower_left_corner:
+			#Bottom of screen
+			point = Vector2(tan(angle_to_target) * (window_area.end.y - player_position.y), window_area.end.y)
+		elif angle_to_target < angle_to_upper_left_corner:
+			#Left side of screen
+			point = Vector2(window_area.position.x, tan(angle_to_target) * (player_position.x - window_area.position.x))
+		else:
+			#Top of screen
+			point = Vector2(tan(angle_to_target) * (player_position.y - window_area.position.y), window_area.position.y)
+		return point
