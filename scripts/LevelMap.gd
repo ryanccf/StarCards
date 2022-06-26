@@ -230,3 +230,10 @@ func _get_location(name):
 
 func _save_map():
 	Global.set_map(dehydrate())
+
+func _get_nearest_position_on_screen(player_position, target_position):
+	var window_area = OS.get_window_safe_area()
+	if window_area.has_point(target_position):
+		return target_position
+	else:
+		var angle = player_position.angle_to(target_position)
