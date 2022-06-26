@@ -219,6 +219,7 @@ func _handle_player_arrival(position):
 func _handle_quest(origin_name, destination_name):
 	var destination = _get_location(destination_name)
 	destination.add_quest_marker(origin_name)
+	print(_get_nearest_position_on_screen(player.position, destination.position))
 	_save_map()
 
 func _handle_reward():
