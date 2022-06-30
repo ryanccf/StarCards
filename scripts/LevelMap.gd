@@ -230,12 +230,13 @@ func _handle_quest(origin_name, destination_name):
 	
 	var debug_rect2 = DebugRect.instance()
 	add_child(debug_rect2)
-	#debug_rect2.modulate = Color(0, 0.5, 0.5)
+	debug_rect2.set_color(Color(0, 1, 0))
 	debug_rect2.position = player.position
 	
 	
 	var debug_rect3 = DebugRect.instance()
 	add_child(debug_rect3)
+	debug_rect3.set_color(Color(0, 0, 1))
 	debug_rect3.position = destination.position
 
 	
