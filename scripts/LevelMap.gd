@@ -256,10 +256,17 @@ func _save_map():
 
 func _get_nearest_position_on_screen(player_position, target_position):
 	var window_area = OS.get_window_safe_area()
+	window_area.position = player.position
+	window_area.size *= player.get_zoom()
+	window_area.position -= window_area.size / 2
 	var window_display_rect = DebugRect.instance()
 	window_display_rect.set_color(Color(1, 0, 1))
 	add_child(window_display_rect)
 	window_display_rect.mimic(window_area)
+	#window_display_rect.position = player.position
+	#window_display_rect.scale *= player.get_zoom()
+	#window_display_rect.position -= window_area.size * player.get_zoom() / 2
+	
 	#var window_display_rect = ColorRect()
 	#add_child(window_display_rect)
 	#window_display_rect.position = window_area.position

@@ -58,6 +58,9 @@ func zoom_out():
 func zoom_in():
 	$Camera2D.zoom += Vector2(0.1, 0.1)
 
+func get_zoom():
+	return $Camera2D.zoom
+
 func _unhandled_input(event):
 	if "button_index" in event and event.button_index == BUTTON_LEFT and event.pressed:
 		var target = get_global_mouse_position()
