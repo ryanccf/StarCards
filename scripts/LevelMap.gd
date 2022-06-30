@@ -17,6 +17,8 @@ var target_location
 
 const QUEST_COUNT = 30
 
+#var screen_rect = ColorRect()
+
 func _ready():
 	$DeckButtonAnchor/StoryTeller.connect("story_event", self, "_save_map")
 	rng.randomize()
@@ -209,7 +211,7 @@ func _on_Button_pressed():
 
 func _pause_world():
 	get_tree().paused = true
-	print(_get_nearest_position_on_screen(player.position, player.position))
+	#print(_get_nearest_position_on_screen(player.position, player.position))
 
 func _unpause_world():
 	get_tree().paused = false
@@ -228,9 +230,16 @@ func _handle_quest(origin_name, destination_name):
 	
 	var debug_rect2 = DebugRect.instance()
 	add_child(debug_rect2)
+	#debug_rect2.modulate = Color(0, 0.5, 0.5)
 	debug_rect2.position = player.position
 	
-	print(_get_nearest_position_on_screen(player.position, destination.position))
+	
+	var debug_rect3 = DebugRect.instance()
+	add_child(debug_rect3)
+	debug_rect3.position = destination.position
+
+	
+	#print(_get_nearest_position_on_screen(player.position, destination.position))
 	_save_map()
 
 func _handle_reward():
@@ -246,9 +255,16 @@ func _save_map():
 
 func _get_nearest_position_on_screen(player_position, target_position):
 	var window_area = OS.get_window_safe_area()
+	#var window_display_rect = ColorRect()
+	#add_child(window_display_rect)
+	#window_display_rect.position = window_area.position
+	#window_display_rect.end = window_area.end
+	
 	if window_area.has_point(target_position):
+		print("HAS POINT")
 		return target_position
 	else:
+		print("DESTINATION SHOULD BE OUTSIDE OF SCREEN")
 		var point
 		var angle_to_target = player_position.angle_to(target_position)
 		var angle_to_lower_right_corner = player_position.angle_to(window_area.end)
