@@ -5,5 +5,5 @@ func set_color(color):
 
 func mimic(rectangle):
 	position = Vector2.ZERO
-	$ColorRect.position = rectangle.position
-	$ColorRect.end = rectangle.end
+	$ColorRect.rect_position = rectangle.position
+	$ColorRect.rect_size = rectangle.size

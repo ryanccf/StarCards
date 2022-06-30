@@ -256,6 +256,10 @@ func _save_map():
 
 func _get_nearest_position_on_screen(player_position, target_position):
 	var window_area = OS.get_window_safe_area()
+	var window_display_rect = DebugRect.instance()
+	window_display_rect.set_color(Color(1, 0, 1))
+	add_child(window_display_rect)
+	window_display_rect.mimic(window_area)
 	#var window_display_rect = ColorRect()
 	#add_child(window_display_rect)
 	#window_display_rect.position = window_area.position
