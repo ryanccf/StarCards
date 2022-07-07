@@ -266,14 +266,7 @@ func _get_nearest_position_on_screen(player_position, target_position):
 	window_display_rect.set_color(Color(1, 0, 1))
 	add_child(window_display_rect)
 	window_display_rect.mimic(window_area)
-	#window_display_rect.position = player.position
-	#window_display_rect.scale *= player.get_zoom()
-	#window_display_rect.position -= window_area.size * player.get_zoom() / 2
-	
-	#var window_display_rect = ColorRect()
-	#add_child(window_display_rect)
-	#window_display_rect.position = window_area.position
-	#window_display_rect.end = window_area.end
+	#window_display_rect.toggle_border()
 	
 	if window_area.has_point(target_position):
 		print("HAS POINT")
@@ -286,6 +279,11 @@ func _get_nearest_position_on_screen(player_position, target_position):
 		var angle_to_lower_left_corner = player_position.angle_to(Vector2(window_area.position.x, window_area.end.y))
 		var angle_to_upper_left_corner = player_position.angle_to(window_area.position)
 		var angle_to_upper_right_corner = player_position.angle_to(Vector2(window_area.end.x, window_area.position.y))
+
+		print("angle_to_lower_left_corner: " + str(angle_to_lower_left_corner))
+		print("angle_to_lower_right_corner: " + str(angle_to_lower_right_corner))
+		print("angle_to_upper_left_corner: " + str(angle_to_upper_left_corner))
+		print("angle_to_upper_right_corner: " + str(angle_to_upper_right_corner))
 		if angle_to_target == angle_to_lower_right_corner:
 			point = window_area.end
 		elif angle_to_target == angle_to_lower_left_corner:
@@ -294,16 +292,24 @@ func _get_nearest_position_on_screen(player_position, target_position):
 			point = window_area.position
 		elif angle_to_target == angle_to_upper_right_corner:
 			point = Vector2(window_area.end.x, window_area.position.y)
+
 		elif angle_to_target < angle_to_lower_right_corner or angle_to_target > angle_to_upper_right_corner:
-			#Right side of screen
+			print("Right side of screen")
 			point = Vector2(window_area.end.x, tan(angle_to_target) * (window_area.end.x - player_position.x))
 		elif angle_to_target < angle_to_lower_left_corner:
-			#Bottom of screen
+			print("Bottom of screen")
 			point = Vector2(tan(angle_to_target) * (window_area.end.y - player_position.y), window_area.end.y)
 		elif angle_to_target < angle_to_upper_left_corner:
-			#Left side of screen
+			print("Left side of screen")
 			point = Vector2(window_area.position.x, tan(angle_to_target) * (player_position.x - window_area.position.x))
 		else:
-			#Top of screen
+			print("Top of screen")
 			point = Vector2(tan(angle_to_target) * (player_position.y - window_area.position.y), window_area.position.y)
+		print("angle_to_target: " + str(angle_to_target))
+		print("tan(angle_to_target): " + str(tan(angle_to_target)))
+		print("window_area.position: " + str(window_area.position))
+		print("window_area.end: " + str(window_area.end))
+		print("player.position: " + str(player.position))
+		print("target_position: " + str(target_position))
 		return point
+
