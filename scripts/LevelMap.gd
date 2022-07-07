@@ -257,7 +257,10 @@ func _save_map():
 func _get_nearest_position_on_screen(player_position, target_position):
 	var window_area = OS.get_window_safe_area()
 	window_area.position = player.position
+	print("WINDOW SIZE BEFORE ZOOM MULTIPLICATION: " + str(window_area.size))
 	window_area.size *= player.get_zoom()
+	print("WINDOW SIZE AFTER ZOOM MULTIPLICATION: " + str(window_area.size))
+	print("ZOOM MULTIPLIER: " + str(player.get_zoom()))
 	window_area.position -= window_area.size / 2
 	var window_display_rect = DebugRect.instance()
 	window_display_rect.set_color(Color(1, 0, 1))
