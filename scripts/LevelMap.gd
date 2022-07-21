@@ -1,6 +1,7 @@
 extends Node2D
 
 var DebugRect = preload("res://Utilities/DebugRect.tscn")
+var Binder = preload("res://Utilities/Binder.tscn")
 
 var screen_height = OS.get_real_window_size().y
 var START_POSITION = Vector2(120, screen_height / 2)
@@ -200,7 +201,9 @@ func rehydrate(configuration):
 	for location_configuration in configuration.locations:
 		var location = Location.instance()
 		location.initialize()
-		location.rehydrate(location_configuration)
+		var binder = Binder.instance()
+		binder.bind(funcref(self, "_get_nearest_position_on_screen"), [location_configuration.position])
+		location.rehydrate(location_configuration, funcref(binder, "_call"))
 		add_location(location)
 		location.connect("quest", self, "_handle_quest")
 		location.connect("reward", self, "_handle_reward")
@@ -211,7 +214,6 @@ func _on_Button_pressed():
 
 func _pause_world():
 	get_tree().paused = true
-	#print(_get_nearest_position_on_screen(player.position, player.position))
 
 func _unpause_world():
 	get_tree().paused = false
@@ -221,26 +223,10 @@ func _handle_player_arrival(position):
 	_activate_location_menu(position)
 
 func _handle_quest(origin_name, destination_name):
+	var binder = Binder.instance()
 	var destination = _get_location(destination_name)
-	destination.add_quest_marker(origin_name)
-	
-	var debug_rect = DebugRect.instance()
-	add_child(debug_rect)
-	debug_rect.position = _get_nearest_position_on_screen(player.position, destination.position)
-	
-	var debug_rect2 = DebugRect.instance()
-	add_child(debug_rect2)
-	debug_rect2.set_color(Color(0, 1, 0))
-	debug_rect2.position = player.position
-	
-	
-	var debug_rect3 = DebugRect.instance()
-	add_child(debug_rect3)
-	debug_rect3.set_color(Color(0, 0, 1))
-	debug_rect3.position = destination.position
-
-	
-	#print(_get_nearest_position_on_screen(player.position, destination.position))
+	binder.bind(funcref(self, "_get_nearest_position_on_screen"), [destination.position])
+	destination.add_quest_marker(origin_name, funcref(binder, "_call"))
 	_save_map()
 
 func _handle_reward():
@@ -254,25 +240,16 @@ func _get_location(name):
 func _save_map():
 	Global.set_map(dehydrate())
 
-func _get_nearest_position_on_screen(player_position, target_position):
+func _get_nearest_position_on_screen(target_position):
+	var player_position = player.position
 	var window_area = OS.get_window_safe_area()
 	window_area.position = player.position
-	print("WINDOW SIZE BEFORE ZOOM MULTIPLICATION: " + str(window_area.size))
 	window_area.size *= player.get_zoom()
-	print("WINDOW SIZE AFTER ZOOM MULTIPLICATION: " + str(window_area.size))
-	print("ZOOM MULTIPLIER: " + str(player.get_zoom()))
 	window_area.position -= window_area.size / 2
-	var window_display_rect = DebugRect.instance()
-	window_display_rect.set_color(Color(1, 0, 1))
-	add_child(window_display_rect)
-	window_display_rect.mimic(window_area)
-	#window_display_rect.toggle_border()
 	
 	if window_area.has_point(target_position):
-		print("HAS POINT")
 		return target_position
 	else:
-		print("DESTINATION SHOULD BE OUTSIDE OF SCREEN")
 		var point
 		var angle_to_target = player_position.angle_to_point(target_position)
 		var angle_to_lower_right_corner = player_position.angle_to_point(window_area.end)
@@ -280,10 +257,6 @@ func _get_nearest_position_on_screen(player_position, target_position):
 		var angle_to_upper_left_corner = player_position.angle_to_point(window_area.position)
 		var angle_to_upper_right_corner = player_position.angle_to_point(Vector2(window_area.end.x, window_area.position.y))
 
-		print("angle_to_lower_left_corner: " + str(angle_to_lower_left_corner))
-		print("angle_to_lower_right_corner: " + str(angle_to_lower_right_corner))
-		print("angle_to_upper_left_corner: " + str(angle_to_upper_left_corner))
-		print("angle_to_upper_right_corner: " + str(angle_to_upper_right_corner))
 		if angle_to_target == angle_to_lower_right_corner:
 			point = window_area.end
 		elif angle_to_target == angle_to_lower_left_corner:
@@ -294,7 +267,6 @@ func _get_nearest_position_on_screen(player_position, target_position):
 			point = Vector2(window_area.end.x, window_area.position.y)
 
 		elif angle_to_target < angle_to_lower_right_corner or angle_to_target > angle_to_upper_right_corner:
-			print("Right side of screen")
 			var small_adjacent = window_area.end.x - player_position.x
 			var big_adjacent = target_position.x - player_position.x
 			var ratio = small_adjacent / big_adjacent
@@ -302,7 +274,6 @@ func _get_nearest_position_on_screen(player_position, target_position):
 			var y = player_position.y + (ratio * big_opposite)
 			point = Vector2(window_area.end.x, y)
 		elif angle_to_target < angle_to_lower_left_corner:
-			print("Bottom of screen")
 			var small_adjacent = window_area.end.y - player_position.y
 			var big_adjacent = target_position.y - player_position.y
 			var ratio = small_adjacent / big_adjacent
@@ -310,7 +281,6 @@ func _get_nearest_position_on_screen(player_position, target_position):
 			var x = player_position.x + (ratio * big_opposite)
 			point = Vector2(x, window_area.end.y)
 		elif angle_to_target < angle_to_upper_left_corner:
-			print("Left side of screen")
 			var small_adjacent = window_area.position.x - player_position.x
 			var big_adjacent = target_position.x - player_position.x
 			var ratio = small_adjacent / big_adjacent
@@ -318,19 +288,10 @@ func _get_nearest_position_on_screen(player_position, target_position):
 			var y = player_position.y + (ratio * big_opposite)
 			point = Vector2(window_area.position.x, y)
 		else:
-			print("Top of screen")
 			var small_adjacent = window_area.position.y - player_position.y
 			var big_adjacent = target_position.y - player_position.y
 			var ratio = small_adjacent / big_adjacent
 			var big_opposite = target_position.x - player_position.x
 			var x = player_position.x + (ratio * big_opposite)
 			point = Vector2(x, window_area.position.y)
-		print("angle_to_target: " + str(angle_to_target))
-		print("tan(angle_to_target): " + str(tan(angle_to_target)))
-		print("window_area.position: " + str(window_area.position))
-		print("window_area.end: " + str(window_area.end))
-		print("player.position: " + str(player.position))
-		print("target_position: " + str(target_position))
-		print("point: " + str(point))
 		return point
-

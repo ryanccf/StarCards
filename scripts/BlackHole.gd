@@ -28,10 +28,10 @@ func dehydrate():
 		"name" : get_name()
 	}
 
-func rehydrate(configuration):
+func rehydrate(configuration, get_nearest_position):
 	position = configuration.position
 	$Aura.rehydrate(configuration.solar_system)
-	$ActivityMenu.rehydrate(configuration.activities)
+	$ActivityMenu.rehydrate(configuration.activities, get_nearest_position)
 	
 func initialize():
 	menu = ActivityMenu.instance()

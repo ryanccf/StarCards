@@ -56,11 +56,11 @@ func dehydrate():
 		"activities" : menu.dehydrate()
 	}
 
-func rehydrate(configuration):
+func rehydrate(configuration, get_current_position):
 	$Label.text = configuration.name
 	position = configuration.position
 	$SolarSystem.rehydrate(configuration.solar_system)
-	menu.rehydrate(configuration.activities)
+	menu.rehydrate(configuration.activities, get_current_position)
 	
 
 func initialize():
@@ -78,11 +78,11 @@ func _save_map():
 func initialize_solar_system():
 	$SolarSystem.initialize()
 
-func add_quest_marker(origin_name):
-	var quest_marker = QuestMarker.instance()
-	$QuestMarkers.add_child(quest_marker)
+func add_quest_marker(origin_name, get_current_position):
+	rehydrate_quest_marker(origin_name, get_current_position)
 	menu.add_quest_destination(origin_name)
 
-func rehydrate_quest_marker(origin_name):
+func rehydrate_quest_marker(origin_name, get_current_position):
 	var quest_marker = QuestMarker.instance()
+	quest_marker.set_position_getter(get_current_position)
 	$QuestMarkers.add_child(quest_marker)

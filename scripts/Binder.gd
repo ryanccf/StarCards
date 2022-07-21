@@ -9,4 +9,4 @@ func bind(new_function_reference, values = []):
 	return funcref(self, "_call")
 
 func _call():
-	function_reference.call_funcv(bound_values)
+	return function_reference.call_funcv(bound_values)

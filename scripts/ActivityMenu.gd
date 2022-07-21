@@ -5,6 +5,7 @@ var activities = []
 var battle_path = "res://Battles/NormalBattle.tscn"
 var destination_name
 var system_name
+var get_current_position
 const BUTTON_SPACING = 20
 signal quest(destination_name)
 signal rehydrate_reward(origin_name)
@@ -106,7 +107,8 @@ func dehydrate():
 				dehydrated_activities.push_back({"origin_name" : activity.origin_name, "type" : "reward"})
 	return dehydrated_activities
 
-func rehydrate(dehydrated_activities):
+func rehydrate(dehydrated_activities, get_current_position):
+	get_current_position = get_current_position
 	for activity in dehydrated_activities:
 		match activity.type:
 			"battle" :
@@ -119,12 +121,12 @@ func rehydrate(dehydrated_activities):
 				add_quest(activity.destination_name)
 			"reward" :
 				add_quest_destination(activity.origin_name)
-				emit_signal("rehydrate_reward", activity.origin_name)
+				emit_signal("rehydrate_reward", activity.origin_name, get_current_position)
 
 func _rerender():
 	var dehydrated_activities = dehydrate()
 	activities = []
 	for child in $Box.get_children():
 		child.queue_free()
-	rehydrate(dehydrated_activities)
+	rehydrate(dehydrated_activities, get_current_position)
 	emit_signal("save_map")
