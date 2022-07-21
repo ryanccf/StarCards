@@ -274,11 +274,11 @@ func _get_nearest_position_on_screen(player_position, target_position):
 	else:
 		print("DESTINATION SHOULD BE OUTSIDE OF SCREEN")
 		var point
-		var angle_to_target = player_position.angle_to(target_position)
-		var angle_to_lower_right_corner = player_position.angle_to(window_area.end)
-		var angle_to_lower_left_corner = player_position.angle_to(Vector2(window_area.position.x, window_area.end.y))
-		var angle_to_upper_left_corner = player_position.angle_to(window_area.position)
-		var angle_to_upper_right_corner = player_position.angle_to(Vector2(window_area.end.x, window_area.position.y))
+		var angle_to_target = player_position.angle_to_point(target_position)
+		var angle_to_lower_right_corner = player_position.angle_to_point(window_area.end)
+		var angle_to_lower_left_corner = player_position.angle_to_point(Vector2(window_area.position.x, window_area.end.y))
+		var angle_to_upper_left_corner = player_position.angle_to_point(window_area.position)
+		var angle_to_upper_right_corner = player_position.angle_to_point(Vector2(window_area.end.x, window_area.position.y))
 
 		print("angle_to_lower_left_corner: " + str(angle_to_lower_left_corner))
 		print("angle_to_lower_right_corner: " + str(angle_to_lower_right_corner))
@@ -311,5 +311,6 @@ func _get_nearest_position_on_screen(player_position, target_position):
 		print("window_area.end: " + str(window_area.end))
 		print("player.position: " + str(player.position))
 		print("target_position: " + str(target_position))
+		print("point: " + str(point))
 		return point
 
