@@ -295,16 +295,36 @@ func _get_nearest_position_on_screen(player_position, target_position):
 
 		elif angle_to_target < angle_to_lower_right_corner or angle_to_target > angle_to_upper_right_corner:
 			print("Right side of screen")
-			point = Vector2(window_area.end.x, tan(angle_to_target) * (window_area.end.x - player_position.x))
+			var small_adjacent = window_area.end.x - player_position.x
+			var big_adjacent = target_position.x - player_position.x
+			var ratio = small_adjacent / big_adjacent
+			var big_opposite = target_position.y - player_position.y
+			var y = player_position.y + (ratio * big_opposite)
+			point = Vector2(window_area.end.x, y)
 		elif angle_to_target < angle_to_lower_left_corner:
 			print("Bottom of screen")
-			point = Vector2(tan(angle_to_target) * (window_area.end.y - player_position.y), window_area.end.y)
+			var small_adjacent = window_area.end.y - player_position.y
+			var big_adjacent = target_position.y - player_position.y
+			var ratio = small_adjacent / big_adjacent
+			var big_opposite = target_position.x - player_position.x
+			var x = player_position.x + (ratio * big_opposite)
+			point = Vector2(x, window_area.end.y)
 		elif angle_to_target < angle_to_upper_left_corner:
 			print("Left side of screen")
-			point = Vector2(window_area.position.x, tan(angle_to_target) * (player_position.x - window_area.position.x))
+			var small_adjacent = window_area.position.x - player_position.x
+			var big_adjacent = target_position.x - player_position.x
+			var ratio = small_adjacent / big_adjacent
+			var big_opposite = target_position.y - player_position.y
+			var y = player_position.y + (ratio * big_opposite)
+			point = Vector2(window_area.position.x, y)
 		else:
 			print("Top of screen")
-			point = Vector2(tan(angle_to_target) * (player_position.y - window_area.position.y), window_area.position.y)
+			var small_adjacent = window_area.position.y - player_position.y
+			var big_adjacent = target_position.y - player_position.y
+			var ratio = small_adjacent / big_adjacent
+			var big_opposite = target_position.x - player_position.x
+			var x = player_position.x + (ratio * big_opposite)
+			point = Vector2(x, window_area.position.y)
 		print("angle_to_target: " + str(angle_to_target))
 		print("tan(angle_to_target): " + str(tan(angle_to_target)))
 		print("window_area.position: " + str(window_area.position))
