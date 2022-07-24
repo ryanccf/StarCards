@@ -76,7 +76,7 @@ func _erase_reward(origin_name):
 		index += 1
 	for activity in activities:
 		if activity.type == "reward":
-			emit_signal("reward")
+			emit_signal("reward", activity.origin_name)
 	emit_signal("save_map")
 	_rerender()
 	get_tree().change_scene("res://Screens/QuestReward.tscn")

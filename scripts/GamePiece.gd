@@ -8,6 +8,8 @@ var moving = false
 
 signal player_arrival
 signal player_departure
+signal position_change(position)
+signal zoom_change(zoom)
 
 func set_color(new_color):
 	$Sprite.modulate = new_color
@@ -29,6 +31,8 @@ func _process(delta):
 		zoom_out()
 	elif Input.is_action_just_released("mouse_wheel_down"):
 		zoom_in()
+	if moving == true:
+		emit_signal("position_change", position)
 	if target_point.distance_to(position) > 1:
 		if moving == false:
 			emit_signal("player_departure")
@@ -54,9 +58,11 @@ func turn_camera_on():
 
 func zoom_out():
 	$Camera2D.zoom -= Vector2(0.1, 0.1)
+	emit_signal("zoom_change", get_zoom())
 
 func zoom_in():
 	$Camera2D.zoom += Vector2(0.1, 0.1)
+	emit_signal("zoom_change", get_zoom())
 
 func get_zoom():
 	return $Camera2D.zoom

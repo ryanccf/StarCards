@@ -35,8 +35,9 @@ func add_quest(destination_name):
 func _broadcast_quest(destination_name):
 	emit_signal("quest", get_name(), destination_name)
 
-func _broadcast_reward():
-	emit_signal("reward")
+func _broadcast_reward(origin_name):
+	var destination_name = location_name
+	emit_signal("reward", origin_name, destination_name)
 
 func set_battle_path(battle_path):
 	menu.set_battle_path(battle_path)
@@ -78,11 +79,11 @@ func _save_map():
 func initialize_solar_system():
 	$SolarSystem.initialize()
 
-func add_quest_marker(origin_name, get_current_position):
-	rehydrate_quest_marker(origin_name, get_current_position)
+func add_reward(origin_name):
+	#rehydrate_quest_marker(origin_name, get_current_position)
 	menu.add_quest_destination(origin_name)
 
-func rehydrate_quest_marker(origin_name, get_current_position):
-	var quest_marker = QuestMarker.instance()
-	quest_marker.set_position_getter(get_current_position)
-	$QuestMarkers.add_child(quest_marker)
+#func rehydrate_quest_marker(origin_name, get_current_position):
+#	var quest_marker = QuestMarker.instance()
+#	quest_marker.set_position_getter(get_current_position)
+#	$QuestMarkers.add_child(quest_marker)

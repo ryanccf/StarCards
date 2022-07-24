@@ -21,6 +21,8 @@ const QUEST_COUNT = 30
 #var screen_rect = ColorRect()
 
 func _ready():
+	$QuestArrowAnchor.set_zoom(player.get_zoom())
+	$QuestArrowAnchor.set_player_position(player.position)
 	$DeckButtonAnchor/StoryTeller.connect("story_event", self, "_save_map")
 	rng.randomize()
 	if Global.get_map() == null:
@@ -47,6 +49,8 @@ func place_player():
 	player.set_target_location(Global.get_target_position())
 	player.connect("player_departure", self, "_unpause_world")
 	player.connect("player_arrival", self, "_handle_player_arrival")
+	player.connect("position_change", $QuestArrowAnchor, "set_player_position")
+	player.connect("zoom_change", $QuestArrowANchor, "set_zoom")
 
 func place_black_hole():
 	var black_hole = BlackHole.instance()
@@ -223,13 +227,14 @@ func _handle_player_arrival(position):
 	_activate_location_menu(position)
 
 func _handle_quest(origin_name, destination_name):
-	var binder = Binder.instance()
+	#var binder = Binder.instance()
 	var destination = _get_location(destination_name)
-	binder.bind(funcref(self, "_get_nearest_position_on_screen"), [destination.position])
-	destination.add_quest_marker(origin_name, funcref(binder, "_call"))
+	#binder.bind(funcref(self, "_get_nearest_position_on_screen"), [destination.position])
+	destination.add_reward(origin_name)#, funcref(binder, "_call"))
+	$QuestArrowAnchor.add_arrow(destination.position, origin_name + " to " + destination_name)
 	_save_map()
 
-func _handle_reward():
+func _handle_reward(origin_name, destination_name):
 	_save_map()
 
 func _get_location(name):
@@ -246,6 +251,9 @@ func _get_nearest_position_on_screen(target_position):
 	window_area.position = player.position
 	window_area.size *= player.get_zoom()
 	window_area.position -= window_area.size / 2
+	
+	#window_area.position += window_area.size * 0.2
+	#window_area.end -= window_area.size * 0.2
 	
 	if window_area.has_point(target_position):
 		return target_position
