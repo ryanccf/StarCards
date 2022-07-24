@@ -102,11 +102,4 @@ color = Color( 1, 0, 0, 1 )
 
 [node name="QuestArrowAnchor" parent="." instance=ExtResource( 5 )]
 
-[node name="ColorRect" type="ColorRect" parent="QuestArrowAnchor"]
-margin_left = 88.0
-margin_top = 641.0
-margin_right = 128.0
-margin_bottom = 681.0
-rect_scale = Vector2( 25.4577, 2.10326 )
-
 [connection signal="pressed" from="DeckButtonAnchor/Button" to="." method="_on_Button_pressed"]

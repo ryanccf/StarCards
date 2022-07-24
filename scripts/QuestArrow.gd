@@ -4,6 +4,7 @@ var destination_position
 var player_position
 var zoom
 var arrow_id
+const DebugRect = preload("res://Utilities/DebugRect.tscn")
 
 func set_destination_position(position):
 	destination_position = position
@@ -20,13 +21,19 @@ func set_name(arrow_name):
 func get_name():
 	return arrow_id
 
+func _ready():
+	var debug_rect = DebugRect.instance()
+	add_child(debug_rect)
+	#_get_nearest_position_on_screen(true)
+	
 func _process(_delta):
 	#position = get_current_position.call_func() - get_parent().get_parent().position
 	#position = _get_nearest_position_on_screen()
-	rect_position = get_parent().to_local(_get_nearest_position_on_screen())
+	var level_map = get_parent().get_parent().get_parent()
+	rect_position = get_parent().to_local(level_map.to_global(_get_nearest_position_on_screen()))
 	pass 
 
-func _get_nearest_position_on_screen():
+func _get_nearest_position_on_screen(should_draw = false):
 	var target_position = destination_position
 	var window_area = OS.get_window_safe_area()
 	window_area.position = player_position
@@ -35,6 +42,11 @@ func _get_nearest_position_on_screen():
 	
 	#window_area.position += window_area.size * 0.2
 	#window_area.end -= window_area.size * 0.2
+	if should_draw:
+		var debug_rect = DebugRect.instance()
+		debug_rect.mimic(window_area)
+		debug_rect.set_color(Color(1, 0, 1, 0.5))
+		get_parent().get_parent().get_parent().add_child(debug_rect)
 	
 	if window_area.has_point(target_position):
 		return target_position

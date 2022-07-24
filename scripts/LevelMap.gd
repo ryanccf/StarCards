@@ -50,7 +50,7 @@ func place_player():
 	player.connect("player_departure", self, "_unpause_world")
 	player.connect("player_arrival", self, "_handle_player_arrival")
 	player.connect("position_change", $QuestArrowAnchor, "set_player_position")
-	player.connect("zoom_change", $QuestArrowANchor, "set_zoom")
+	player.connect("zoom_change", $QuestArrowAnchor, "set_zoom")
 
 func place_black_hole():
 	var black_hole = BlackHole.instance()
