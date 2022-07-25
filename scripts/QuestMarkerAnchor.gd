@@ -5,9 +5,13 @@ var zoom
 var quest_arrows = []
 const QuestArrow = preload("res://Utilities/QuestArrow.tscn")
 
-func _process(_delta):
+#func _process(_delta):
 	#print($Node2D.to_local(get_parent().to_global(player_position)))
-	print($Node2D.to_local($Node2D.to_global($Node2D/ColorRect.rect_position)))
+	#print($Node2D.to_local($Node2D.to_global($Node2D/ColorRect.rect_position)))
+	#print($Node2D.to_global($Node2D/ColorRect.rect_position))
+	#print(get_parent().make_canvas_position_local($Node2D/ColorRect.get_global_rect().position))
+#	print($Node2D.to_local())
+	
 
 func add_arrow(destination_position, name):
 	var quest_arrow = QuestArrow.instance()
