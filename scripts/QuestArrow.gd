@@ -28,21 +28,8 @@ func get_name():
 	return arrow_id
 	
 func _process(_delta):
-	#position = get_current_position.call_func() - get_parent().get_parent().position
-	#position = _get_nearest_position_on_screen()
-	#var level_map = get_parent().get_parent().get_parent()
-	#rect_position = get_parent().to_local(level_map.to_global(_get_nearest_position_on_screen()))
-	#print(get_parent().make_canvas_position_local(level_map.to_global(_get_nearest_position_on_screen())))
-	#rect_position = get_parent().make_canvas_position_local(level_map.to_global)
-	#var global_position_example = level_map.to_global(_get_nearest_position_on_screen())
 	target.position = _get_nearest_position_on_screen()
-	var target_position = target.get_global_transform_with_canvas().origin
-	set_global_position(target_position)
-	#print(get_parent().to_local(global_position_example))
-	#print("parent name: " + str(get_parent().name))
-	#print("great grandparent name: " + str(get_parent().get_parent().get_parent().name))
-	
-	pass 
+	set_global_position(target.get_global_transform_with_canvas().origin)
 
 func _get_nearest_position_on_screen(should_draw = false):
 	var target_position = destination_position
