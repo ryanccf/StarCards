@@ -12,7 +12,7 @@ margin_bottom = -798.0
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 220, -2 )
-scale = Vector2( 2, 2 )
+position = Vector2( 84, -2 )
+scale = Vector2( 1.057, 1.057 )
 texture = ExtResource( 2 )
 flip_h = true

@@ -8,9 +8,10 @@ const DebugRect = preload("res://Utilities/DebugRect.tscn")
 var target = DebugRect.instance()
 
 func _ready():
+	target.hide()
 	get_parent().get_parent().get_parent().add_child(target)
-	var debug_rect = DebugRect.instance()
-	add_child(debug_rect)
+#	var debug_rect = DebugRect.instance()
+#	add_child(debug_rect)
 
 func set_destination_position(position):
 	destination_position = position
@@ -30,6 +31,13 @@ func get_name():
 func _process(_delta):
 	target.position = _get_nearest_position_on_screen()
 	set_global_position(target.get_global_transform_with_canvas().origin)
+	rect_rotation = _get_angle()
+	print(rect_rotation)
+	
+
+func _get_angle():
+	#return target.position.angle_to_point(player_position)
+	return rad2deg(player_position.angle_to_point(target.position))
 
 func _get_nearest_position_on_screen(should_draw = false):
 	var target_position = destination_position

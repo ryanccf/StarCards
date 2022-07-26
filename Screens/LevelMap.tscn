@@ -101,5 +101,6 @@ size_flags_vertical = 3
 color = Color( 1, 0, 0, 1 )
 
 [node name="QuestArrowAnchor" parent="." instance=ExtResource( 5 )]
+layer = 0
 
 [connection signal="pressed" from="DeckButtonAnchor/Button" to="." method="_on_Button_pressed"]
